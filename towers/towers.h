@@ -7,6 +7,7 @@
 
 #ifndef TOWERS_H
 #define TOWERS_H
+#include "../Critter/critter.h"
 #include <cmath>
 #include <iostream>
 #include <string>
@@ -14,59 +15,6 @@
 #include <vector>
 // This is a temporary critter class that will be use as a dummy class for the
 // moment when we get the actual version from teamate we will integrate theres
-
-enum CritterSize {
-  SMALL,
-  MEDIUM,
-  LARGE,
-};
-// This is a dummy critter class for creating the towers classes as some of the
-// methods need a critter as an argument.
-class Critter {
-public:
-  Critter(int x_val, int y_val)
-      : health(10), cid(NextCID++), speed(1.0), size(SMALL), x(x_val),
-        y(y_val) {
-    std::cout << "Critter with CID " << cid << " created " << std::endl;
-  }
-
-  Critter(int hlt_val, int spd_val, CritterSize sz_val)
-      : health(hlt_val), speed(spd_val), size(sz_val) {}
-
-  int getCID() { return cid; }
-  void setHealth(int hlt_val) {
-    health = hlt_val;
-    return;
-  }
-
-  // These are the getters for the coordinates of the object.
-  int getX() { return x; }
-  int getY() { return y; }
-
-  // These are setters for the coordinates of the critter class.
-  void setX(int x_val) { x = x_val; }
-  void setY(int y_val) { y = y_val; }
-
-  void checkHealth();
-  int getHealth() { return health; }
-  void showCritterInfo();
-  void applySlow(int);
-
-  CritterSize getSize() { return size; }
-  void setSize(CritterSize sze_val) { size = sze_val; }
-
-  void setSpeed(double spd_val) { speed = spd_val; }
-  double getSpeed() { return speed; }
-
-private:
-  int health;
-  static int NextCID; // Applications/Adobe Acrobat DC/Adobe Acrobat.app/
-  int cid;
-  double speed;
-  CritterSize size;
-  int x;
-  int y;
-};
 
 class Tower {
 public:

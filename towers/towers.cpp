@@ -4,6 +4,7 @@
  * declared in the towers.h file
  */
 #include "towers.h"
+#include "../Critter/critter.h"
 #include <cmath>
 #include <iostream>
 #include <vector>
@@ -14,31 +15,12 @@ int Tower::nextId = 100;
 
 // This will be the number of the id for the towers that we create each tower
 // gets unique identifier.
-int Critter::NextCID = 100;
 
 // Dummy placeholder that we will use for the bomb tower attack, but the game
 // should hold a list of all of the critters that are currently in the game
 std::vector<Critter *> allCritters;
 
 // This function shows the basic info about a critter.
-void Critter::showCritterInfo() {
-  std::cout << "Critter has " << health << " health\n"
-            << "Critter has speed " << speed << std::endl;
-}
-
-// This function applies the slow effect from a tower onto a critter.
-// This function checks the health of the critter then it will delete the
-// critter if it has 0 or less health.
-void Critter::checkHealth() {
-  if (health <= 0) {
-    std::cout << "critter " << cid << " is dead" << std::endl;
-    std::cout << "deleting critter" << std::endl;
-    delete this;
-  } else {
-    std::cout << "Critter " << cid << " has " << health << " health"
-              << std::endl;
-  }
-}
 // The atttack function for the tower, takes a pointer to a critter
 // then it lowers the critters health, critter then checks if it has died and
 // deletes itself if it is.
@@ -67,7 +49,6 @@ Critter *Tower::inRange(std::vector<Critter *> &critters) {
       return c;
     }
   }
-
   // If there are no critters in range we enter this part of the
   return nullptr;
 }
@@ -89,14 +70,12 @@ void Tower::showTowerInfo() {
 // The cost will not be included here we will make the cost be paid before the
 // function gets called.
 void Tower::levelUp() {
-
   if (getLevel() < 5) {
     setFireRate(getFireRate() + 1);
     setDamage(getDamage() + 1);
     setLevel(getLevel() + 1);
     std::cout << "Tower " << getId() << " has leveled up to " << getLevel()
               << std::endl;
-
   } else {
     std::cout << "Cannot level up the tower " << getId() << std::endl;
   }

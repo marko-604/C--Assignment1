@@ -1,43 +1,48 @@
 #ifndef MAP_H
 #define MAP_H
 
+#include <iomanip>
 #include <iostream>
-#include <vector>
 #include <queue>
 #include <stack>
-#include <iomanip>
+#include <vector>
 
 class Map {
 private:
-    enum CellType { SCENERY, PATH };
+  enum CellType { SCENERY, PATH, OCCUPIED, CRITTER_OCCUPIED };
 
-    struct Cell {
-        CellType type;
-        bool isEntry = false;
-        bool isExit = false;
-    };
+  struct Cell {
+    CellType type;
+    bool isEntry = false;
+    bool isExit = false;
+  };
 
-    int width, height;
-    std::vector<std::vector<Cell>> grid;
-    std::pair<int, int> entryPoint = {-1, -1};
-    std::pair<int, int> exitPoint = {-1, -1};
+  int width, height;
+  std::vector<std::vector<Cell>> grid;
+  std::pair<int, int> entryPoint = {-1, -1};
+  std::pair<int, int> exitPoint = {-1, -1};
 
-    std::vector<std::pair<int, int>> entityPath;
+  std::vector<std::pair<int, int>> entityPath;
 
-    bool isValidCoordinate(int x, int y);
-    bool bfsFindPath();
+  bool bfsFindPath();
 
 public:
-    Map(int w, int h);
+  Map(int w, int h);
 
-    void setCellToPath(int x, int y);
-    void setCellToScenery(int x, int y);
-    void setEntryPoint(int x, int y);
-    void setExitPoint(int x, int y);
+  bool isValidCoordinate(int x, int y);
+  bool isPathCell(int x, int y);
+  bool isCloserToExit(int x0, int x1, int y0, int y1);
+  void setCellToPath(int x, int y);
+  void setCellToScenery(int x, int y);
+  void setCellToOccupied(int x, int y);
+  void setEntryPoint(int x, int y);
+  void setExitPoint(int x, int y);
+  void setCellToCritterCell(int x, int y);
 
-    bool validateMap();
-    void displayMap();
-    void displayEntityPath();
+  bool isSceneryCell(int x_val, int y_val);
+  bool validateMap();
+  void displayMap();
+  void displayEntityPath();
 };
 
 #endif // MAP_H
