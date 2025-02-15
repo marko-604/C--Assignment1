@@ -9,7 +9,8 @@
 class Critter {
 public:
   Critter(int spd_val, int hlt_val, int str_val, int x_val, int y_val)
-      : speed(spd_val), health(hlt_val), strength(str_val), cid(NextCID++) {};
+      : tck_accumulator(0), cid(NextCID++), speed(spd_val), health(hlt_val),
+        strength(str_val), x(x_val), y(y_val) {};
 
   int getSpeed() { return speed; }
   int getHealth() { return health; }
@@ -19,23 +20,26 @@ public:
   void setHealth(int hlt_val) { health = hlt_val; }
   void setSpeed(int spd_val) { speed = spd_val; }
   void setStrength(int str_val) { strength = str_val; }
+  void setAccumulator(int val) { tck_accumulator = val; }
 
+  void incrementAccumulator() { tck_accumulator += 1; }
   void displayInfo();
   int getX() { return x; }
   int getY() { return y; }
 
   void move(Map *gameMap); // We will use the argument of the move function to
                            // be the game map
-  void checkHealth();
+  bool isDead();
 
 private:
-  static int NextCID;
+  int tck_accumulator;
   int cid;
   int speed;
   int health;
   int strength;
   int x;
   int y;
+  static int NextCID;
 };
 
 class Squirrel : public Critter {

@@ -1,8 +1,10 @@
 #include "../Critter/critter.h"
 #include "../towers/towers.h"
 #include "Map.h"
+#include <chrono>
 #include <cstddef>
 #include <iostream>
+#include <thread>
 
 using namespace std;
 
@@ -44,91 +46,211 @@ int main() {
     cout << "Map is valid!" << endl;
     gameMap.displayEntityPath();
 
-    // TODO create towers.
-    cout << "Enter coordinates where you want to place a tower (Enter "
-            "-1 to exit): ";
-    int x_val, y_val;
-    cin >> x_val >> y_val;
-
-    Tower *t1;
-    if (gameMap.isValidCoordinate(x_val, y_val) &&
-        gameMap.isSceneryCell(x_val, y_val)) {
-      t1 = new Tower(x_val, y_val);
-      gameMap.setCellToOccupied(x_val, y_val);
-      t1->showTowerInfo();
-      gameMap.displayMap();
-    } else {
-      t1 = nullptr;
-      cerr << "Cannot place tower in non-secnery cell" << endl;
-    }
-
-    cout << "Enter coordinates where you want to place a Sniper Tower: ";
-    cin >> x_val >> y_val;
-
-    SniperTower *t2;
-    if (gameMap.isValidCoordinate(x_val, y_val) &&
-        gameMap.isSceneryCell(x_val, y_val)) {
-      t2 = new SniperTower(x_val, y_val);
-      gameMap.setCellToOccupied(x_val, y_val);
-      t2->showTowerInfo();
-      gameMap.displayMap();
-    } else {
-      t2 = nullptr;
-      cerr << "Cannot place tower in non-secnery cell" << endl;
-    }
-
-    BombTower *t3;
-    cout << "Enter coordinates where you want to place a Bomb Tower: ";
-    cin >> x_val >> y_val;
-    if (gameMap.isValidCoordinate(x_val, y_val) &&
-        gameMap.isSceneryCell(x_val, y_val)) {
-      t3 = new BombTower(x_val, y_val);
-      gameMap.setCellToOccupied(x_val, y_val);
-      t3->showTowerInfo();
-      gameMap.displayMap();
-    } else {
-      t3 = nullptr;
-      cerr << "Cannot place tower in non-secnery cell" << endl;
-    }
-
-    cout << "Enter coordinates where you want to place a Freezing Tower: ";
-    cin >> x_val >> y_val;
-
-    FreezingTower *t4;
-    if (gameMap.isValidCoordinate(x_val, y_val) &&
-        gameMap.isSceneryCell(x_val, y_val)) {
-      t4 = new FreezingTower(x_val, y_val);
-      gameMap.setCellToOccupied(x_val, y_val);
-      t4->showTowerInfo();
-      gameMap.displayMap();
-    } else {
-      t4 = nullptr;
-      cerr << "Cannot place tower in non-secnery cell" << endl;
-    }
-
-    // TODO stuff with the pointer.
-
-    if (t4 != nullptr) {
-      delete t4;
-    }
-
-    if (t3 != nullptr) {
-      delete t3;
-    }
-
-    if (t2 != nullptr) {
-      delete t2;
-    }
-
-    if (t1 != nullptr) {
-      delete t1;
-    }
-
     // TODO do stuff with the towers to show how they work.
     // Need for there to be a critter in range to show how the attacking works
     // and how the tower will acquire a target.
 
-    //  TODO create critters and test them.
+    std::vector<Tower *> gameTowers;
+    std::vector<Critter *> gameCritters;
+
+    int points = 300;
+    while (points >= 100) {
+      cout << "Current number of points: " << 300 << std::endl;
+      cout << "1. Regular(100)" << "\n2. Sniper(150)"
+           << "\n3. Bomb(175)\n4. Freezing(200)" << "\n5. Exit" << std::endl;
+
+      int choice;
+      cin >> choice;
+      if (choice == 1) {
+        cout << "Select coordinates to place tower: ";
+        char row;
+        int col;
+        cin >> row >> col;
+
+        while (1) {
+          if (!gameMap.isValidCoordinate(row - 'A', col) ||
+              gameMap.isPathCell(row - 'A', col)) {
+            cout << "Coordinates are not valid please re-enter them: ";
+            cin >> row >> col;
+
+          } else {
+            break;
+          }
+        }
+
+        Tower *t = new Tower(row - 'A', col);
+
+        if (t->getCost() <= points) {
+          points -= t->getCost();
+          cout << points << " left to spend" << std::endl;
+          gameMap.setCellToOccupied(row - 'A', col);
+          gameTowers.push_back(t);
+        } else {
+          cout << "Not enough points!" << std::endl;
+          delete t;
+        }
+
+      } else if (choice == 2) {
+        cout << "Select coordinates to place tower: ";
+        char row;
+        int col;
+        cin >> row >> col;
+
+        while (1) {
+          if (!gameMap.isValidCoordinate(row - 'A', col) ||
+              gameMap.isPathCell(row - 'A', col)) {
+            cout << "Coordinates are not valid please re-enter them: ";
+            cin >> row >> col;
+
+          } else {
+            break;
+          }
+        }
+
+        Tower *t = new SniperTower(row - 'A', col);
+
+        if (t->getCost() <= points) {
+
+          points -= t->getCost();
+          cout << points << " left to spend" << std::endl;
+          gameMap.setCellToOccupied(row - 'A', col);
+          gameTowers.push_back(t);
+        } else {
+          cout << "Not enough points!" << std::endl;
+          delete t;
+        }
+
+      } else if (choice == 3) {
+
+        cout << "Select coordinates to place tower: ";
+        char row;
+        int col;
+        cin >> row >> col;
+
+        while (1) {
+          if (!gameMap.isValidCoordinate(row - 'A', col) ||
+              gameMap.isPathCell(row - 'A', col)) {
+            cout << "Coordinates are not valid please re-enter them: ";
+            cin >> row >> col;
+
+          } else {
+            break;
+          }
+        }
+
+        Tower *t = new BombTower(row - 'A', col);
+
+        if (t->getCost() <= points) {
+          points -= t->getCost();
+          cout << points << " left to spend" << std::endl;
+          gameMap.setCellToOccupied(row - 'A', col);
+          gameTowers.push_back(t);
+        } else {
+          cout << "Not enough points!" << std::endl;
+          delete t;
+        }
+      } else if (choice == 4) {
+
+        cout << "Select coordinates to place tower: ";
+        char row;
+        int col;
+        cin >> row >> col;
+
+        while (1) {
+          if (!gameMap.isValidCoordinate(row - 'A', col) ||
+              gameMap.isPathCell(row - 'A', col)) {
+            cout << "Coordinates are not valid please re-enter them: ";
+            cin >> row >> col;
+
+          } else {
+            break;
+          }
+        }
+
+        Tower *t = new FreezingTower(row - 'A', col);
+
+        if (t->getCost() <= points) {
+          points -= t->getCost();
+          cout << points << " left to spend" << std::endl;
+          gameMap.setCellToOccupied(row - 'A', col);
+          gameTowers.push_back(t);
+        } else {
+          cout << "Not enough points!" << std::endl;
+          delete t;
+        }
+      } else {
+        break;
+      }
+    }
+
+    // How do we go from here to complete this code?
+
+    int tick_interval = 1;
+    int tick_count = 0;
+    int total_tick_count = 60;
+
+    int playerHealth = 500;
+    while (tick_count <= total_tick_count) {
+      cout << "Tick " << tick_count << std::endl;
+      std::this_thread::sleep_for(std::chrono::seconds(tick_interval));
+      tick_count += 1;
+
+      if (tick_count % 2 == 0) {
+        Squirrel *c = new Squirrel(gameMap.getEntryPoint().first,
+                                   gameMap.getEntryPoint().second);
+
+        gameCritters.push_back(c);
+      }
+
+      if (tick_count % 3 == 0 && tick_count % 2 != 0) {
+        Wolf *c = new Wolf(gameMap.getEntryPoint().first,
+                           gameMap.getEntryPoint().second);
+
+        gameCritters.push_back(c);
+      }
+
+      if (tick_count % 5 && tick_count % 2 != 0 && tick_count % 3 != 0) {
+        Bear *c = new Bear(gameMap.getEntryPoint().first,
+                           gameMap.getEntryPoint().second);
+
+        gameCritters.push_back(c);
+      }
+
+      for (Critter *c : gameCritters) {
+        if (c->getX() == gameMap.getExitPoint().first &&
+            c->getY() == gameMap.getExitPoint().second) {
+          playerHealth = playerHealth - c->getStrength();
+          cout << "Player has " << playerHealth << std::endl;
+
+        } else {
+          c->move(&gameMap);
+        }
+      }
+
+      for (Tower *t : gameTowers) {
+        Critter *c = t->inRange(gameCritters);
+        if (c == nullptr) {
+          continue;
+        } else {
+          // We attack the target.
+          t->attack(c);
+          if (c->isDead()) {
+
+            // Get the position of the critter in the vector than erase it from
+            // the vector.
+            auto it = std::find(gameCritters.begin(), gameCritters.end(), c);
+            if (it != gameCritters.end()) {
+              // Delete the critter memory:
+              delete *it;
+              // Remove the pointer from the vector:
+              gameCritters.erase(it);
+            }
+          }
+        }
+      }
+
+      gameMap.displayMap();
+    }
 
   } else {
     cout << "Map is invalid!" << endl;

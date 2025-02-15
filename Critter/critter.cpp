@@ -15,7 +15,9 @@ void Critter::move(Map *gameMap) {
     gameMap->setCellToPath(x, y);
     x = testX;
     y = testY;
-    gameMap->setCellToOccupied(x, y);
+
+    std::cout << "Critter " << cid << " has moved to (" << x << "," << y
+              << ")\n";
 
     return;
   }
@@ -29,7 +31,8 @@ void Critter::move(Map *gameMap) {
     gameMap->setCellToPath(x, y);
     x = testX;
     y = testY;
-    gameMap->setCellToOccupied(x, y);
+    std::cout << "Critter " << cid << " has moved to (" << x << "," << y
+              << ")\n";
     return;
   }
 
@@ -42,7 +45,8 @@ void Critter::move(Map *gameMap) {
     gameMap->setCellToPath(x, y);
     x = testX;
     y = testY;
-    gameMap->setCellToOccupied(x, y);
+    std::cout << "Critter " << cid << " has moved to (" << x << "," << y
+              << ")\n";
     return;
   }
 
@@ -55,7 +59,8 @@ void Critter::move(Map *gameMap) {
     gameMap->setCellToPath(x, y);
     x = testX;
     y = testY;
-    gameMap->setCellToOccupied(x, y);
+    std::cout << "Critter " << cid << " has moved to (" << x << "," << y
+              << ")\n";
     return;
   }
 }
@@ -66,11 +71,13 @@ void Critter::displayInfo() {
             << std::endl;
 }
 
-void Critter::checkHealth() {
+bool Critter::isDead() {
   if (health <= 0) {
     std::cout << "Critter " << cid << " has died" << std::endl;
-    delete this;
+    return true;
+
   } else {
-    std::cout << "Critter now has health " << health << std::endl;
+    std::cout << "Critter " << cid << " now has health " << health << std::endl;
+    return false;
   }
 }

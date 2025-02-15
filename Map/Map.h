@@ -29,6 +29,12 @@ private:
 public:
   Map(int w, int h);
 
+  std::pair<int, int> getEntryPoint() { return entryPoint; }
+  std::pair<int, int> getExitPoint() { return exitPoint; }
+
+  int getHeight() { return height; }
+  int getWidth() { return width; }
+
   bool isValidCoordinate(int x, int y);
   bool isPathCell(int x, int y);
   bool isCloserToExit(int x0, int x1, int y0, int y1);

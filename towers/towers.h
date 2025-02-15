@@ -60,6 +60,8 @@ public:
   void setLevel(int lvl) { level = lvl; }
   void setDamage(double dmg) { damage = dmg; }
   void setRange(int rng) { range = rng; }
+  void increment_accumulator() { tick_accumulator += 1; }
+  void setAccumulator(int val) { tick_accumulator = val; }
 
   // int get_target() const; This function will acquire a critter, the tower
   // must first check that the critter is in range than it will return the
@@ -77,6 +79,7 @@ public:
   virtual void attack(Critter *target);
 
 private:
+  int tick_accumulator;
   int x;             // The x-coordinate of the tower.
   int y;             // The y-coordinate of the tower.
   double hitRate;    // The hit rate of the tower.

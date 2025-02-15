@@ -155,7 +155,7 @@ bool Map::isCloserToExit(int x0, int x1, int y0, int y1) {
   int exitX = exitPoint.first;
   int exitY = exitPoint.second;
   if ((std::abs(exitX - x1) < std::abs(exitX - x0)) ||
-      (std::abs(exitY - y0) < std::abs(exitY - y1))) {
+      (std::abs(exitY - y1) < std::abs(exitY - y0))) {
     return true;
   } else {
     return false;

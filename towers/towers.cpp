@@ -27,7 +27,6 @@ std::vector<Critter *> allCritters;
 void Tower::attack(Critter *target) {
   std::cout << "Tower attacking critter " << target->getCID() << std::endl;
   target->setHealth(target->getHealth() - getDamage());
-  target->checkHealth();
 }
 
 // This function checks if there is a critter that is in range, it then returns
@@ -103,7 +102,6 @@ void SniperTower::showTowerInfo() {
 void SniperTower::attack(Critter *target) {
   std::cout << "Attacking critter " << target->getCID() << std::endl;
   target->setHealth(target->getHealth() - getDamage());
-  target->checkHealth();
 }
 
 // This will increase the range and the damage of the sniper tower.
@@ -127,7 +125,6 @@ void BombTower::attack(Critter *target) {
             << target->getCID() << std::endl;
 
   target->setHealth(target->getHealth() - getDamage());
-  target->checkHealth();
 
   for (Critter *c : allCritters) {
     int cx = c->getX();
@@ -145,7 +142,6 @@ void BombTower::attack(Critter *target) {
     // bomb
     if (aoeArea >= distance && target->getCID() != c->getCID()) {
       c->setHealth(c->getHealth() - getDamage() / 2);
-      c->checkHealth();
     }
   }
 
@@ -215,7 +211,6 @@ void FreezingTower::attack(Critter *target) {
             << std::endl;
   // We should also be applying a slow to the target
   target->setHealth(target->getHealth() - getDamage());
-  target->checkHealth();
 
   // We apply a permanent slowing to the critter.
   std::cout << "Slowing critter " << target->getCID() << "by 30%" << std::endl;
