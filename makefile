@@ -14,7 +14,7 @@ crittertest:
 
 
 maptest:
-	$(COMPILER) $(CFLAGS) Map/Map.cpp towers/towers.cpp Critter/critter.cpp  Map/main.cpp -o mapdriver
+	$(COMPILER) $(CFLAGS) Map/Map.cpp towers/towers.cpp Critter/critter.cpp  main.cpp -o mapdriver
 	@./mapdriver
 	@rm mapdriver
 

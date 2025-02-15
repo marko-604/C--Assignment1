@@ -1,6 +1,6 @@
-#include "../Critter/critter.h"
-#include "../towers/towers.h"
-#include "Map.h"
+#include "Critter/critter.h"
+#include "Map/Map.h"
+#include "towers/towers.h"
 #include <chrono>
 #include <cstddef>
 #include <iostream>
