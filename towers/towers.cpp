@@ -68,18 +68,18 @@ void Tower::showTowerInfo() {
 // When we level up a basic tower we increase the damage and the fire rate.
 // The cost will not be included here we will make the cost be paid before the
 // function gets called.
-void Tower::levelUp() {
+int Tower::levelUp() {
   if (getLevel() < 5) {
-    setFireRate(getFireRate() + 1);
+    setRange(getRange() + 1);
     setDamage(getDamage() + 1);
     setLevel(getLevel() + 1);
     std::cout << "Tower " << getId() << " has leveled up to " << getLevel()
               << std::endl;
+    return getResale();
   } else {
     std::cout << "Cannot level up the tower " << getId() << std::endl;
+    return 0;
   }
-
-  return;
 }
 
 // This is the SniperTower implementation of the showTowerInfo() method
@@ -105,7 +105,7 @@ void SniperTower::attack(Critter *target) {
 }
 
 // This will increase the range and the damage of the sniper tower.
-void SniperTower::levelUp() {
+int SniperTower::levelUp() {
   if (getLevel() < 5) {
     setRange(getRange() + 1);
     setDamage(getDamage() + 1);
@@ -113,9 +113,12 @@ void SniperTower::levelUp() {
     std::cout << "Sniper Tower " << getId() << " has leveled up to "
               << getLevel() << std::endl;
 
+    return getResale();
+
   } else {
     std::cout << "Sniper Tower " << getId() << "could not level up!"
               << std::endl;
+    return 0;
   }
 }
 
@@ -150,16 +153,17 @@ void BombTower::attack(Critter *target) {
 }
 
 // This is the levelUp method override for the BombTower class implementation
-void BombTower::levelUp() {
+int BombTower::levelUp() {
   if (getLevel() < 5) {
     setAoE(getAoE() + 1);
     setDamage(getDamage() + 1);
     setLevel(getLevel() + 1);
     std::cout << "Bomb Tower " << getId() << " has leveled up to " << getLevel()
               << std::endl;
-    return;
+    return getResale();
   } else {
     std::cout << "Bomb Tower " << getId() << "could not level up!" << std::endl;
+    return 0;
   }
 }
 
@@ -193,16 +197,19 @@ void FreezingTower::showTowerInfo() {
   std::cout << "Freezing rate: " << slowRate << std::endl;
 }
 
-void FreezingTower::levelUp() {
+int FreezingTower::levelUp() {
   if (getLevel() < 5) {
-    setSlowRate(getSlowRate() * 0.8);
+
+    setSlowRate(getSlowRate() + 1);
     setDamage(getDamage() + 1);
     setLevel(getLevel() + 1);
 
     std::cout << "Freezing tower " << getId() << " has leveled up to "
               << getLevel() << std::endl;
+    return getResale();
   } else {
     std::cout << "Could not level up freezing tower " << getId() << std::endl;
+    return 0;
   }
 }
 

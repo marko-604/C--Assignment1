@@ -23,7 +23,7 @@ void Map::setCellToPath(int x, int y) {
 
 void Map::setCellToOccupied(int x, int y) {
   if (isValidCoordinate(x, y)) {
-    grid[x][y].type = OCCUPIED;
+    grid[x][y].type = TOWER;
   } else {
     cerr << "Invalid coordinate" << endl;
   }
@@ -145,7 +145,7 @@ bool Map::isPathCell(int x, int y) {
 
 void Map::setCellToCritterCell(int x, int y) {
   if (isValidCoordinate(x, y)) {
-    grid[x][y].type = CRITTER_OCCUPIED;
+    grid[x][y].type = CRITTER;
   }
   return;
 }
@@ -178,9 +178,9 @@ void Map::displayMap() {
         cout << " X ";
       } else if (grid[i][j].type == PATH) {
         cout << " P ";
-      } else if (grid[i][j].type == OCCUPIED) {
+      } else if (grid[i][j].type == TOWER) {
         cout << " T ";
-      } else if (grid[i][j].type == CRITTER_OCCUPIED) {
+      } else if (grid[i][j].type == CRITTER) {
         cout << " C ";
       } else {
         cout << " S ";

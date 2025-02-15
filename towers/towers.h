@@ -21,19 +21,20 @@ public:
   virtual ~Tower() {}
 
   Tower(int x_val, int y_val)
-      : x(x_val), y(y_val), hitRate(0.75), fireRate(1.50), range(1), level(1),
-        cost(100), resaleValue(50), damage(2.0), tid(nextId++) {
+      : levelUpCost(50), x(x_val), y(y_val), hitRate(0.75), fireRate(1),
+        range(2), level(1), cost(100), resaleValue(50), damage(2.0),
+        tid(nextId++) {
     std::cout << "Tower placed at coordinates x: " << x << " and y: " << y
               << std::endl;
   }
 
   Critter *inRange(std::vector<Critter *> &critters);
 
-  Tower(int x_val, int y_val, double hr_val, double fr_val, double rng_val,
-        double dmg_val, int cost_val, int resale_val)
-      : x(x_val), y(y_val), hitRate(hr_val), fireRate(fr_val), range(rng_val),
-        level(1), cost(cost_val), resaleValue(resale_val), damage(dmg_val),
-        tid(nextId++) {
+  Tower(int lvl_cost_val, int x_val, int y_val, double hr_val, double fr_val,
+        double rng_val, double dmg_val, int cost_val, int resale_val)
+      : levelUpCost(lvl_cost_val), x(x_val), y(y_val), hitRate(hr_val),
+        fireRate(fr_val), range(rng_val), level(1), cost(cost_val),
+        resaleValue(resale_val), damage(dmg_val), tid(nextId++) {
     std::cout << "Tower placed at coordinates x: " << x << " and y: " << y
               << std::endl;
   }
@@ -53,6 +54,8 @@ public:
   int getResale() const { return resaleValue; }
   int getRange() const { return range; }
   int getId() const { return tid; }
+  int getAccumulator() { return tick_accumulator; }
+  int getLevelUpCost() { return levelUpCost; }
 
   // Setter functions.
   void setHitRate(double hr) { hitRate = hr; }
@@ -73,12 +76,13 @@ public:
 
   // This function will be used to level up the tower, what this will do is
   // change some stats of the tower.
-  virtual void levelUp();
+  virtual int levelUp();
 
   // Virtual function to attack critters.
   virtual void attack(Critter *target);
 
 private:
+  int levelUpCost;
   int tick_accumulator;
   int x;             // The x-coordinate of the tower.
   int y;             // The y-coordinate of the tower.
@@ -100,7 +104,7 @@ class SniperTower : public Tower {
 public:
   // The constructor for a sniper tower uses the Tower constructor.
   SniperTower(int x_val, int y_val)
-      : Tower(x_val, y_val, 1.0, 1.0, 3, 5.0, 150, 75) {
+      : Tower(75, x_val, y_val, 1.0, 1.0, 5, 5.0, 150, 75) {
     // Since x and y are now private in Tower, use the getter functions.
     std::cout << "Sniper Tower created at coordinates x: " << getX()
               << " y: " << getY() << std::endl;
@@ -108,7 +112,7 @@ public:
 
   void showTowerInfo() override;
   void attack(Critter *target) override;
-  void levelUp() override;
+  int levelUp() override;
 }; // END SNIPERTOWER class
 
 // This is the BombTower class this does area damage rather than damage to a
@@ -117,7 +121,7 @@ public:
 class BombTower : public Tower {
 public:
   BombTower(int x_val, int y_val)
-      : Tower(x_val, y_val, 0.75, 1.5, 2, 2, 175, 100), aoeArea(2) {
+      : Tower(100, x_val, y_val, 0.75, 3, 2, 2, 175, 100), aoeArea(2) {
     std::cout << "Bomb Tower created at coordinates (" << getX() << ", "
               << getY() << ")" << std::endl;
   }
@@ -130,7 +134,7 @@ public:
 
   void showTowerInfo() override;
   void attack(Critter *target) override;
-  void levelUp() override;
+  int levelUp() override;
 
   int getAoE() { return aoeArea; }
 
@@ -145,7 +149,7 @@ class FreezingTower : public Tower {
 
 public:
   FreezingTower(int x_val, int y_val)
-      : Tower(x_val, y_val, 0.75, 1.5, 2, 2, 200, 125), slowRate(0.3) {
+      : Tower(100, x_val, y_val, 0.75, 2, 2, 2, 200, 125), slowRate(0.3) {
     std::cout << "Created freezing tower at coordinates (" << getX() << ", "
               << getY() << ")" << std::endl;
   }
@@ -154,7 +158,7 @@ public:
   void setSlowRate(int slow_val) { slowRate = slow_val; }
   void showTowerInfo() override;
   void attack(Critter *target) override;
-  void levelUp() override;
+  int levelUp() override;
 
 private:
   double slowRate;

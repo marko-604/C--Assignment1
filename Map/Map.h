@@ -9,7 +9,7 @@
 
 class Map {
 private:
-  enum CellType { SCENERY, PATH, OCCUPIED, CRITTER_OCCUPIED };
+  enum CellType { SCENERY, PATH, TOWER, CRITTER };
 
   struct Cell {
     CellType type;

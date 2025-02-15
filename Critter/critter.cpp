@@ -15,6 +15,7 @@ void Critter::move(Map *gameMap) {
     gameMap->setCellToPath(x, y);
     x = testX;
     y = testY;
+    gameMap->setCellToCritterCell(x, y);
 
     std::cout << "Critter " << cid << " has moved to (" << x << "," << y
               << ")\n";
@@ -31,6 +32,7 @@ void Critter::move(Map *gameMap) {
     gameMap->setCellToPath(x, y);
     x = testX;
     y = testY;
+    gameMap->setCellToCritterCell(x, y);
     std::cout << "Critter " << cid << " has moved to (" << x << "," << y
               << ")\n";
     return;
@@ -45,6 +47,7 @@ void Critter::move(Map *gameMap) {
     gameMap->setCellToPath(x, y);
     x = testX;
     y = testY;
+    gameMap->setCellToCritterCell(x, y);
     std::cout << "Critter " << cid << " has moved to (" << x << "," << y
               << ")\n";
     return;
@@ -59,6 +62,7 @@ void Critter::move(Map *gameMap) {
     gameMap->setCellToPath(x, y);
     x = testX;
     y = testY;
+    gameMap->setCellToCritterCell(x, y);
     std::cout << "Critter " << cid << " has moved to (" << x << "," << y
               << ")\n";
     return;

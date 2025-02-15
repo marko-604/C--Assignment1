@@ -8,14 +8,16 @@
 
 class Critter {
 public:
-  Critter(int spd_val, int hlt_val, int str_val, int x_val, int y_val)
-      : tck_accumulator(0), cid(NextCID++), speed(spd_val), health(hlt_val),
-        strength(str_val), x(x_val), y(y_val) {};
+  Critter(int val, int spd_val, int hlt_val, int str_val, int x_val, int y_val)
+      : value(val), tck_accumulator(0), cid(NextCID++), speed(spd_val),
+        health(hlt_val), strength(str_val), x(x_val), y(y_val) {};
 
   int getSpeed() { return speed; }
   int getHealth() { return health; }
   int getStrength() { return strength; }
   int getCID() { return cid; }
+  int getValue() { return value; }
+  int getAccumulator() { return tck_accumulator; }
 
   void setHealth(int hlt_val) { health = hlt_val; }
   void setSpeed(int spd_val) { speed = spd_val; }
@@ -32,6 +34,7 @@ public:
   bool isDead();
 
 private:
+  int value;
   int tck_accumulator;
   int cid;
   int speed;
@@ -44,17 +47,17 @@ private:
 
 class Squirrel : public Critter {
 public:
-  Squirrel(int x_val, int y_val) : Critter(4, 5, 2, x_val, y_val) {}
+  Squirrel(int x_val, int y_val) : Critter(25, 4, 5, 2, x_val, y_val) {}
 };
 
 class Wolf : public Critter {
 public:
-  Wolf(int x_val, int y_val) : Critter(2, 10, 5, x_val, y_val) {}
+  Wolf(int x_val, int y_val) : Critter(75, 2, 10, 5, x_val, y_val) {}
 };
 
 class Bear : public Critter {
 public:
-  Bear(int x_val, int y_val) : Critter(1, 20, 5, x_val, y_val) {}
+  Bear(int x_val, int y_val) : Critter(100, 1, 20, 5, x_val, y_val) {}
 };
 
 #endif
