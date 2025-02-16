@@ -1,0 +1,170 @@
+\doxysection{towers.\+h}
+\hypertarget{towers_8h_source}{}\label{towers_8h_source}\index{towers/towers.h@{towers/towers.h}}
+\mbox{\hyperlink{towers_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#ifndef\ TOWERS\_H}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#define\ TOWERS\_H}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{critter_8h}{../Critter/critter.h}}"{}}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#include\ <tuple>}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00036\ \textcolor{keyword}{extern}\ std::vector<Critter\ *>\ \mbox{\hyperlink{main_8cpp_a6e2876acbdfbf2564fbb56e774546a10}{gameCritters}};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00044\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_tower_a70f9d8aa215543cc16c550f98a39b476}{Tower}}\ \{}
+\DoxyCodeLine{00045\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00049\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_tower_ac42ebf24f6aedbd4591fe3371f364600}{\string~Tower}}()\ \{\}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00056\ \ \ \mbox{\hyperlink{class_tower_a70f9d8aa215543cc16c550f98a39b476}{Tower}}(\textcolor{keywordtype}{int}\ x\_val,\ \textcolor{keywordtype}{int}\ y\_val)}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ :\ levelUpCost(50),\ x(x\_val),\ y(y\_val),\ hitRate(0.75),\ fireRate(1),}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ range(2),\ level(1),\ cost(100),\ resaleValue(50),\ damage(2.0),}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ tid(nextId++)\ \{}
+\DoxyCodeLine{00060\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Tower\ placed\ at\ coordinates\ x:\ "{}}\ <<\ x\ <<\ \textcolor{stringliteral}{"{}\ and\ y:\ "{}}\ <<\ y}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ std::endl;}
+\DoxyCodeLine{00062\ \ \ \}}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00076\ \ \ \mbox{\hyperlink{class_tower_a940d34d4ab3f0eef584203ebfa27fdca}{Tower}}(\textcolor{keywordtype}{int}\ lvl\_cost\_val,\ \textcolor{keywordtype}{int}\ x\_val,\ \textcolor{keywordtype}{int}\ y\_val,\ \textcolor{keywordtype}{double}\ hr\_val,\ \textcolor{keywordtype}{double}\ fr\_val,}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ rng\_val,\ \textcolor{keywordtype}{double}\ dmg\_val,\ \textcolor{keywordtype}{int}\ cost\_val,\ \textcolor{keywordtype}{int}\ resale\_val)}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ :\ levelUpCost(lvl\_cost\_val),\ x(x\_val),\ y(y\_val),\ hitRate(hr\_val),}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ fireRate(fr\_val),\ range(rng\_val),\ level(1),\ cost(cost\_val),}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ resaleValue(resale\_val),\ damage(dmg\_val),\ tid(nextId++)\ \{}
+\DoxyCodeLine{00081\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Tower\ placed\ at\ coordinates\ x:\ "{}}\ <<\ x\ <<\ \textcolor{stringliteral}{"{}\ and\ y:\ "{}}\ <<\ y}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ std::endl;}
+\DoxyCodeLine{00083\ \ \ \}}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00091\ \ \ \mbox{\hyperlink{class_critter}{Critter}}\ *\mbox{\hyperlink{class_tower_a3b1115649e8fe3285e997bab0f2dd006}{inRange}}(std::vector<Critter\ *>\ \&critters);}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \ \textcolor{comment}{//\ Getter\ functions.}}
+\DoxyCodeLine{00098\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_tower_ac5c9e76603f3ae1290b86796578ed69f}{getX}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ x;\ \}}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00104\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_tower_a8efdcbaa1b0dc9866eb753ba3871c533}{getY}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ y;\ \}}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00110\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_tower_afdeee427b1a0053205a5c63e56f3365f}{getHitRate}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ hitRate;\ \}}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00116\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_tower_a7b804f7a98be259cb696ec9b2667c410}{getFireRate}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ fireRate;\ \}}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00122\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_tower_a4a69796c3c65aeae2d42ef631d69eb6c}{getLevel}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ level;\ \}}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00128\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_tower_a0e003f2b4fd235ac335db4803b1d3e4b}{getCost}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ cost;\ \}}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00134\ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_tower_a56c9eb101a430b8d0dd7e42014dc8f58}{getDamage}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ damage;\ \}}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00140\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_tower_a77a842abf2bb563c3c549fc605721d24}{getResale}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ resaleValue;\ \}}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00146\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_tower_aec46f3ace5aa79591e33b8b7355539c1}{getRange}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ range;\ \}}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00152\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_tower_ad89c2abd0769070bdb77e2e5dc07b134}{getId}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ tid;\ \}}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00158\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_tower_adc5c54b329d8bda0eb0f851e0be04065}{getAccumulator}}()\ \{\ \textcolor{keywordflow}{return}\ tick\_accumulator;\ \}}
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00164\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_tower_a04daf2efb52ebc28c0b2839e51910e26}{getLevelUpCost}}()\ \{\ \textcolor{keywordflow}{return}\ levelUpCost;\ \}}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00166\ \ \ \textcolor{comment}{//\ Setter\ functions.}}
+\DoxyCodeLine{00171\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tower_a179d23ecff04009709d6ed0d2f64e4f0}{setHitRate}}(\textcolor{keywordtype}{double}\ hr)\ \{\ hitRate\ =\ hr;\ \}}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00177\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tower_a547844447d53a134f0868faedd8da894}{setFireRate}}(\textcolor{keywordtype}{double}\ fr)\ \{\ fireRate\ =\ fr;\ \}}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00183\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tower_af2396c645d62dea416578d13c82192ba}{setLevel}}(\textcolor{keywordtype}{int}\ lvl)\ \{\ level\ =\ lvl;\ \}}
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00189\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tower_a3d7b582cec3948ff2813104e33ec5225}{setDamage}}(\textcolor{keywordtype}{double}\ dmg)\ \{\ damage\ =\ dmg;\ \}}
+\DoxyCodeLine{00190\ }
+\DoxyCodeLine{00195\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tower_a970d9b3ca129db21bf4b5fc3a2dac261}{setRange}}(\textcolor{keywordtype}{int}\ rng)\ \{\ range\ =\ rng;\ \}}
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00200\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tower_a20eefbfaad051059b0010f50199ae253}{increment\_accumulator}}()\ \{\ tick\_accumulator\ +=\ 1;\ \}}
+\DoxyCodeLine{00201\ }
+\DoxyCodeLine{00206\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tower_ae72e9126e2470bd9a890265e8b1c8b9e}{setAccumulator}}(\textcolor{keywordtype}{int}\ val)\ \{\ tick\_accumulator\ =\ val;\ \}}
+\DoxyCodeLine{00207\ }
+\DoxyCodeLine{00214\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tower_a8cc806b5270a95c6837393a64300857d}{showTowerInfo}}();}
+\DoxyCodeLine{00215\ }
+\DoxyCodeLine{00226\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_tower_a53053c65a5e30f3136e87c6f26ecb993}{levelUp}}();}
+\DoxyCodeLine{00227\ }
+\DoxyCodeLine{00236\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tower_aa0ab9d64910f77c8fccebed1bd4e854c}{attack}}(\mbox{\hyperlink{class_critter}{Critter}}\ *target);}
+\DoxyCodeLine{00237\ }
+\DoxyCodeLine{00238\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00239\ \ \ \textcolor{keywordtype}{int}\ levelUpCost;\ \ \ \ \ \ }
+\DoxyCodeLine{00240\ \ \ \textcolor{keywordtype}{int}\ tick\_accumulator;\ }
+\DoxyCodeLine{00241\ \ \ \textcolor{keywordtype}{int}\ x;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00242\ \ \ \textcolor{keywordtype}{int}\ y;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00243\ \ \ \textcolor{keywordtype}{double}\ hitRate;\ \ \ \ \ \ \ }
+\DoxyCodeLine{00244\ \ \ \textcolor{keywordtype}{double}\ fireRate;\ \ \ \ \ \ }
+\DoxyCodeLine{00245\ \ \ \textcolor{keywordtype}{int}\ range;\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00246\ \ \ \textcolor{keywordtype}{int}\ level;\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00247\ \ \ \textcolor{keywordtype}{int}\ cost;\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00248\ \ \ \textcolor{keywordtype}{int}\ resaleValue;\ \ \ \ \ \ }
+\DoxyCodeLine{00249\ \ \ \textcolor{keywordtype}{double}\ damage;\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00250\ \ \ \textcolor{keywordtype}{int}\ tid;\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00251\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ nextId;\ }
+\DoxyCodeLine{00252\ \};\ \textcolor{comment}{//\ END\ TOWER\ class}}
+\DoxyCodeLine{00253\ }
+\DoxyCodeLine{00260\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_sniper_tower_a6086362b58962e7e2993b658b35bb91e}{SniperTower}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_tower_a70f9d8aa215543cc16c550f98a39b476}{Tower}}\ \{}
+\DoxyCodeLine{00261\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00267\ \ \ \mbox{\hyperlink{class_sniper_tower_a6086362b58962e7e2993b658b35bb91e}{SniperTower}}(\textcolor{keywordtype}{int}\ x\_val,\ \textcolor{keywordtype}{int}\ y\_val)}
+\DoxyCodeLine{00268\ \ \ \ \ \ \ :\ \mbox{\hyperlink{class_tower_a70f9d8aa215543cc16c550f98a39b476}{Tower}}(75,\ x\_val,\ y\_val,\ 1.0,\ 1.0,\ 5,\ 5.0,\ 150,\ 75)\ \{}
+\DoxyCodeLine{00269\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Sniper\ Tower\ created\ at\ coordinates\ x:\ "{}}\ <<\ \mbox{\hyperlink{class_tower_ac5c9e76603f3ae1290b86796578ed69f}{getX}}()}
+\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}\ y:\ "{}}\ <<\ \mbox{\hyperlink{class_tower_a8efdcbaa1b0dc9866eb753ba3871c533}{getY}}()\ <<\ std::endl;}
+\DoxyCodeLine{00271\ \ \ \}}
+\DoxyCodeLine{00272\ }
+\DoxyCodeLine{00276\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_sniper_tower_ab681bec21c8adc5c56096de685327fbf}{showTowerInfo}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00277\ }
+\DoxyCodeLine{00282\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_sniper_tower_a16dc94c8a43dac77c231727df38f38f3}{attack}}(\mbox{\hyperlink{class_critter}{Critter}}\ *target)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00283\ }
+\DoxyCodeLine{00288\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_sniper_tower_aed61a75c9b03ab38de9277c8522c3d2f}{levelUp}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00289\ \};\ \textcolor{comment}{//\ END\ SNIPERTOWER\ class}}
+\DoxyCodeLine{00290\ }
+\DoxyCodeLine{00297\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_bomb_tower_a916decc9f73393a6562bc7aa474aa9f7}{BombTower}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_tower_a70f9d8aa215543cc16c550f98a39b476}{Tower}}\ \{}
+\DoxyCodeLine{00298\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00304\ \ \ \mbox{\hyperlink{class_bomb_tower_a916decc9f73393a6562bc7aa474aa9f7}{BombTower}}(\textcolor{keywordtype}{int}\ x\_val,\ \textcolor{keywordtype}{int}\ y\_val)}
+\DoxyCodeLine{00305\ \ \ \ \ \ \ :\ \mbox{\hyperlink{class_tower_a70f9d8aa215543cc16c550f98a39b476}{Tower}}(100,\ x\_val,\ y\_val,\ 0.75,\ 3,\ 2,\ 2,\ 175,\ 100),\ aoeArea(2)\ \{}
+\DoxyCodeLine{00306\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Bomb\ Tower\ created\ at\ coordinates\ ("{}}\ <<\ \mbox{\hyperlink{class_tower_ac5c9e76603f3ae1290b86796578ed69f}{getX}}()\ <<\ \textcolor{stringliteral}{"{},\ "{}}}
+\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \mbox{\hyperlink{class_tower_a8efdcbaa1b0dc9866eb753ba3871c533}{getY}}()\ <<\ \textcolor{stringliteral}{"{})"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00308\ \ \ \}}
+\DoxyCodeLine{00309\ }
+\DoxyCodeLine{00314\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_bomb_tower_ab990af5f28c7417e4f547110c9a0b52a}{getAoE}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ aoeArea;\ \}}
+\DoxyCodeLine{00315\ }
+\DoxyCodeLine{00320\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_bomb_tower_aca75cb18699745570487588f1fef0e55}{setAoE}}(\textcolor{keywordtype}{int}\ aoe\_val)\ \{}
+\DoxyCodeLine{00321\ \ \ \ \ aoeArea\ =\ aoe\_val;}
+\DoxyCodeLine{00322\ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00323\ \ \ \}}
+\DoxyCodeLine{00324\ }
+\DoxyCodeLine{00328\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_bomb_tower_aebdfb2435579aa0d1f94910fd0d694e6}{showTowerInfo}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00329\ }
+\DoxyCodeLine{00338\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_bomb_tower_a9e3daf3bf6c1e194255ce7de834868d8}{attack}}(\mbox{\hyperlink{class_critter}{Critter}}\ *target)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00339\ }
+\DoxyCodeLine{00344\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_bomb_tower_acf6014ddab877c9206bd1425c3741052}{levelUp}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00345\ }
+\DoxyCodeLine{00350\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_bomb_tower_a86a7c35c18fd48a4bd50565d497bd682}{getAoE}}()\ \{\ \textcolor{keywordflow}{return}\ aoeArea;\ \}}
+\DoxyCodeLine{00351\ }
+\DoxyCodeLine{00352\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00353\ \ \ \textcolor{keywordtype}{int}\ aoeArea;\ }
+\DoxyCodeLine{00355\ \};\ \textcolor{comment}{//\ END\ BOMBTOWER\ class}}
+\DoxyCodeLine{00356\ }
+\DoxyCodeLine{00363\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_freezing_tower_a43578bf31aaae0838ba47cac50e490b3}{FreezingTower}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_tower_a70f9d8aa215543cc16c550f98a39b476}{Tower}}\ \{}
+\DoxyCodeLine{00364\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00370\ \ \ \mbox{\hyperlink{class_freezing_tower_a43578bf31aaae0838ba47cac50e490b3}{FreezingTower}}(\textcolor{keywordtype}{int}\ x\_val,\ \textcolor{keywordtype}{int}\ y\_val)}
+\DoxyCodeLine{00371\ \ \ \ \ \ \ :\ \mbox{\hyperlink{class_tower_a70f9d8aa215543cc16c550f98a39b476}{Tower}}(100,\ x\_val,\ y\_val,\ 0.75,\ 2,\ 2,\ 2,\ 200,\ 125),\ slowRate(0.3)\ \{}
+\DoxyCodeLine{00372\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Created\ freezing\ tower\ at\ coordinates\ ("{}}\ <<\ \mbox{\hyperlink{class_tower_ac5c9e76603f3ae1290b86796578ed69f}{getX}}()\ <<\ \textcolor{stringliteral}{"{},\ "{}}}
+\DoxyCodeLine{00373\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \mbox{\hyperlink{class_tower_a8efdcbaa1b0dc9866eb753ba3871c533}{getY}}()\ <<\ \textcolor{stringliteral}{"{})"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00374\ \ \ \}}
+\DoxyCodeLine{00375\ }
+\DoxyCodeLine{00380\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_freezing_tower_aa68a619ef460492187aeaac06f304592}{getSlowRate}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ slowRate;\ \}}
+\DoxyCodeLine{00381\ }
+\DoxyCodeLine{00386\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_freezing_tower_a3e855a05a9ac4795e2fa8ac8876201cb}{setSlowRate}}(\textcolor{keywordtype}{int}\ slow\_val)\ \{\ slowRate\ =\ slow\_val;\ \}}
+\DoxyCodeLine{00387\ }
+\DoxyCodeLine{00391\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_freezing_tower_abcc42204e85a4ba5364a60add808bd80}{showTowerInfo}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00392\ }
+\DoxyCodeLine{00398\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_freezing_tower_ad7b7737699c5300d48c927e5b0d4208a}{attack}}(\mbox{\hyperlink{class_critter}{Critter}}\ *target)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00399\ }
+\DoxyCodeLine{00404\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_freezing_tower_aad157f86c64fa995fdfd948483df1b06}{levelUp}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00405\ }
+\DoxyCodeLine{00406\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00407\ \ \ \textcolor{keywordtype}{double}\ slowRate;\ }
+\DoxyCodeLine{00408\ \};}
+\DoxyCodeLine{00409\ }
+\DoxyCodeLine{00410\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ TOWERS\_H}}
+
+\end{DoxyCode}

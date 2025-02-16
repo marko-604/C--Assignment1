@@ -1,0 +1,97 @@
+\doxysection{critter.\+h}
+\hypertarget{critter_8h_source}{}\label{critter_8h_source}\index{Critter/critter.h@{Critter/critter.h}}
+\mbox{\hyperlink{critter_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#ifndef\ CRITTER\_H}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ CRITTER\_H}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_map_8h}{../Map/Map.h}}"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_critter_a907e5fe7154e73d198e1db66567f7026}{Critter}}\ \{}
+\DoxyCodeLine{00026\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00037\ \ \ \mbox{\hyperlink{class_critter_a907e5fe7154e73d198e1db66567f7026}{Critter}}(\textcolor{keywordtype}{int}\ val,\ \textcolor{keywordtype}{int}\ spd\_val,\ \textcolor{keywordtype}{int}\ hlt\_val,\ \textcolor{keywordtype}{int}\ str\_val,\ \textcolor{keywordtype}{int}\ x\_val,\ \textcolor{keywordtype}{int}\ y\_val)}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ :\ value(val),\ tck\_accumulator(0),\ cid(NextCID++),\ speed(spd\_val),}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ health(hlt\_val),\ strength(str\_val),\ x(x\_val),\ y(y\_val)\ \{\};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00045\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_critter_a447e8f593e515c070c5e352a79902f2b}{getSpeed}}()\ \{\ \textcolor{keywordflow}{return}\ speed;\ \}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00051\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_critter_a90694c3e77d0d0670da61be2ac467611}{getHealth}}()\ \{\ \textcolor{keywordflow}{return}\ health;\ \}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00057\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_critter_a12aa2a4b8d89a0c41b0520a8cc2be4a7}{getStrength}}()\ \{\ \textcolor{keywordflow}{return}\ strength;\ \}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00063\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_critter_a288777f1bfb094406045e5cc9c4c325e}{getCID}}()\ \{\ \textcolor{keywordflow}{return}\ cid;\ \}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00069\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_critter_ad223d2b9970e5cb68d165aaa32ef5c0f}{getValue}}()\ \{\ \textcolor{keywordflow}{return}\ value;\ \}}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00075\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_critter_a20133d728c9aaaa5706bfe2e4911e683}{getAccumulator}}()\ \{\ \textcolor{keywordflow}{return}\ tck\_accumulator;\ \}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00081\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_critter_aeab99b389fb0256c6f62926fb61354ea}{setHealth}}(\textcolor{keywordtype}{int}\ hlt\_val)\ \{\ health\ =\ hlt\_val;\ \}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00087\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_critter_a17acd2cb93c264e6616e4d1299a5de54}{setSpeed}}(\textcolor{keywordtype}{int}\ spd\_val)\ \{\ speed\ =\ spd\_val;\ \}}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00093\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_critter_a36c795ad9af488d0bd4c00a6ca954a8c}{setStrength}}(\textcolor{keywordtype}{int}\ str\_val)\ \{\ strength\ =\ str\_val;\ \}}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00099\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_critter_a265301679e2793490bd97eb2d3820643}{setAccumulator}}(\textcolor{keywordtype}{int}\ val)\ \{\ tck\_accumulator\ =\ val;\ \}}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00104\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_critter_af8db07832472824b5c9de0a07f71aae9}{incrementAccumulator}}()\ \{\ tck\_accumulator\ +=\ 1;\ \}}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00109\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_critter_a6380d40ed4e8b5cef8fde6c35365a4ee}{displayInfo}}();}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00115\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_critter_af0260aaa37e6550701029c389a8768dd}{getX}}()\ \{\ \textcolor{keywordflow}{return}\ x;\ \}}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00121\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_critter_aa7993ea01e57a9aebc7958f74f2181fe}{getY}}()\ \{\ \textcolor{keywordflow}{return}\ y;\ \}}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00130\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_critter_aff30fd4419f52e3fad7ed4c9eb764d36}{move}}(\mbox{\hyperlink{class_map}{Map}}\ *gameMap);}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00139\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_critter_a36d086dad8f154348fa53def629f679f}{isDead}}();}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00141\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00142\ \ \ \textcolor{keywordtype}{int}\ value;\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00143\ \ \ \textcolor{keywordtype}{int}\ tck\_accumulator;\ \ \ }
+\DoxyCodeLine{00144\ \ \ \textcolor{keywordtype}{int}\ cid;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00145\ \ \ \textcolor{keywordtype}{int}\ speed;\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00146\ \ \ \textcolor{keywordtype}{int}\ health;\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00147\ \ \ \textcolor{keywordtype}{int}\ strength;\ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00148\ \ \ \textcolor{keywordtype}{int}\ x;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00149\ \ \ \textcolor{keywordtype}{int}\ y;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00150\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ NextCID;\ \ \ \ }
+\DoxyCodeLine{00151\ \};}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00159\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_squirrel_a7b864e4e0854bb91c7fe2010d8f75e99}{Squirrel}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_critter_a907e5fe7154e73d198e1db66567f7026}{Critter}}\ \{}
+\DoxyCodeLine{00160\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00166\ \ \ \mbox{\hyperlink{class_squirrel_a7b864e4e0854bb91c7fe2010d8f75e99}{Squirrel}}(\textcolor{keywordtype}{int}\ x\_val,\ \textcolor{keywordtype}{int}\ y\_val)\ :\ \mbox{\hyperlink{class_critter_a907e5fe7154e73d198e1db66567f7026}{Critter}}(25,\ 1,\ 5,\ 2,\ x\_val,\ y\_val)\ \{\}}
+\DoxyCodeLine{00167\ \};}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00175\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_wolf_a61ab2417ec660d16a97c89f996be55bf}{Wolf}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_critter_a907e5fe7154e73d198e1db66567f7026}{Critter}}\ \{}
+\DoxyCodeLine{00176\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00182\ \ \ \mbox{\hyperlink{class_wolf_a61ab2417ec660d16a97c89f996be55bf}{Wolf}}(\textcolor{keywordtype}{int}\ x\_val,\ \textcolor{keywordtype}{int}\ y\_val)\ :\ \mbox{\hyperlink{class_critter_a907e5fe7154e73d198e1db66567f7026}{Critter}}(75,\ 2,\ 10,\ 5,\ x\_val,\ y\_val)\ \{\}}
+\DoxyCodeLine{00183\ \};}
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00191\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_bear_ae67d5d5352dc800b8d13cf8b54294fad}{Bear}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_critter_a907e5fe7154e73d198e1db66567f7026}{Critter}}\ \{}
+\DoxyCodeLine{00192\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00198\ \ \ \mbox{\hyperlink{class_bear_ae67d5d5352dc800b8d13cf8b54294fad}{Bear}}(\textcolor{keywordtype}{int}\ x\_val,\ \textcolor{keywordtype}{int}\ y\_val)\ :\ \mbox{\hyperlink{class_critter_a907e5fe7154e73d198e1db66567f7026}{Critter}}(100,\ 4,\ 20,\ 5,\ x\_val,\ y\_val)\ \{\}}
+\DoxyCodeLine{00199\ \};}
+\DoxyCodeLine{00200\ }
+\DoxyCodeLine{00208\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_critter_wave_generator_ad025eaba0c0730d84b4d449f0133a8ea}{CritterWaveGenerator}}\ \{}
+\DoxyCodeLine{00209\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00217\ \ \ \mbox{\hyperlink{class_critter_wave_generator_ad025eaba0c0730d84b4d449f0133a8ea}{CritterWaveGenerator}}(\textcolor{keywordtype}{int}\ waveNumber,\ \textcolor{keywordtype}{int}\ startX,\ \textcolor{keywordtype}{int}\ startY)}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ :\ waveNumber(waveNumber),\ startX(startX),\ startY(startY)\ \{\}}
+\DoxyCodeLine{00219\ }
+\DoxyCodeLine{00228\ \ \ std::vector<Critter\ *>\ \mbox{\hyperlink{class_critter_wave_generator_aa55c1b5cfd490a7dfe4dfea1f05cf63d}{generateWave}}();}
+\DoxyCodeLine{00229\ }
+\DoxyCodeLine{00235\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_critter_wave_generator_a888afdb215851603071b11107140febb}{incrementWaveNumber}}()\ \{\ waveNumber\ +=\ 1;\ \}}
+\DoxyCodeLine{00236\ }
+\DoxyCodeLine{00237\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00238\ \ \ \textcolor{keywordtype}{int}\ waveNumber;\ }
+\DoxyCodeLine{00239\ \ \ \textcolor{keywordtype}{int}\ startX;\ \ \ \ \ }
+\DoxyCodeLine{00240\ \ \ \textcolor{keywordtype}{int}\ startY;\ \ \ \ \ }
+\DoxyCodeLine{00241\ \};}
+\DoxyCodeLine{00242\ }
+\DoxyCodeLine{00243\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

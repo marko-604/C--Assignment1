@@ -1,0 +1,321 @@
+\doxysection{Critter Class Reference}
+\hypertarget{class_critter}{}\label{class_critter}\index{Critter@{Critter}}
+
+
+Represents a moving enemy in the \doxylink{class_tower}{Tower} Defense game.  
+
+
+
+
+{\ttfamily \#include $<$critter.\+h$>$}
+
+Inheritance diagram for Critter\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_critter}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_critter_a907e5fe7154e73d198e1db66567f7026}{Critter}} (int val, int spd\+\_\+val, int hlt\+\_\+val, int str\+\_\+val, int x\+\_\+val, int y\+\_\+val)
+\begin{DoxyCompactList}\small\item\em Constructs a new \doxylink{class_critter}{Critter} object with the specified parameters. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_critter_a447e8f593e515c070c5e352a79902f2b}{get\+Speed}} ()
+\begin{DoxyCompactList}\small\item\em Retrieves the speed of the critter. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_critter_a90694c3e77d0d0670da61be2ac467611}{get\+Health}} ()
+\begin{DoxyCompactList}\small\item\em Retrieves the current health of the critter. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_critter_a12aa2a4b8d89a0c41b0520a8cc2be4a7}{get\+Strength}} ()
+\begin{DoxyCompactList}\small\item\em Retrieves the strength of the critter. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_critter_a288777f1bfb094406045e5cc9c4c325e}{get\+CID}} ()
+\begin{DoxyCompactList}\small\item\em Retrieves the unique identifier of the critter. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_critter_ad223d2b9970e5cb68d165aaa32ef5c0f}{get\+Value}} ()
+\begin{DoxyCompactList}\small\item\em Retrieves the reward value of the critter. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_critter_a20133d728c9aaaa5706bfe2e4911e683}{get\+Accumulator}} ()
+\begin{DoxyCompactList}\small\item\em Retrieves the tick accumulator value. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_critter_aeab99b389fb0256c6f62926fb61354ea}{set\+Health}} (int hlt\+\_\+val)
+\begin{DoxyCompactList}\small\item\em Sets the critter\textquotesingle{}s health. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_critter_a17acd2cb93c264e6616e4d1299a5de54}{set\+Speed}} (int spd\+\_\+val)
+\begin{DoxyCompactList}\small\item\em Sets the critter\textquotesingle{}s speed. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_critter_a36c795ad9af488d0bd4c00a6ca954a8c}{set\+Strength}} (int str\+\_\+val)
+\begin{DoxyCompactList}\small\item\em Sets the critter\textquotesingle{}s strength. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_critter_a265301679e2793490bd97eb2d3820643}{set\+Accumulator}} (int val)
+\begin{DoxyCompactList}\small\item\em Sets the tick accumulator value. \end{DoxyCompactList}\item 
+\Hypertarget{class_critter_af8db07832472824b5c9de0a07f71aae9}\label{class_critter_af8db07832472824b5c9de0a07f71aae9} 
+void {\bfseries increment\+Accumulator} ()
+\begin{DoxyCompactList}\small\item\em Increments the tick accumulator by 1. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_critter_a6380d40ed4e8b5cef8fde6c35365a4ee}{display\+Info}} ()
+\begin{DoxyCompactList}\small\item\em Displays information about the critter. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_critter_af0260aaa37e6550701029c389a8768dd}{getX}} ()
+\begin{DoxyCompactList}\small\item\em Retrieves the current x-\/coordinate of the critter. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_critter_aa7993ea01e57a9aebc7958f74f2181fe}{getY}} ()
+\begin{DoxyCompactList}\small\item\em Retrieves the current y-\/coordinate of the critter. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_critter_aff30fd4419f52e3fad7ed4c9eb764d36}{move}} (\mbox{\hyperlink{class_map}{Map}} \texorpdfstring{$\ast$}{*}game\+Map)
+\begin{DoxyCompactList}\small\item\em Moves the critter on the provided game map. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_critter_a36d086dad8f154348fa53def629f679f}{is\+Dead}} ()
+\begin{DoxyCompactList}\small\item\em Checks whether the critter is dead. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a moving enemy in the \doxylink{class_tower}{Tower} Defense game. 
+
+A \doxylink{class_critter}{Critter} has attributes such as reward value, speed, health, strength, and position. It also has a unique identifier assigned automatically. Methods allow manipulation of its state, movement on the map, and checking its status. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_critter_a907e5fe7154e73d198e1db66567f7026}\index{Critter@{Critter}!Critter@{Critter}}
+\index{Critter@{Critter}!Critter@{Critter}}
+\doxysubsubsection{\texorpdfstring{Critter()}{Critter()}}
+{\footnotesize\ttfamily \label{class_critter_a907e5fe7154e73d198e1db66567f7026} 
+Critter\+::\+Critter (\begin{DoxyParamCaption}\item[{int}]{val}{, }\item[{int}]{spd\+\_\+val}{, }\item[{int}]{hlt\+\_\+val}{, }\item[{int}]{str\+\_\+val}{, }\item[{int}]{x\+\_\+val}{, }\item[{int}]{y\+\_\+val}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a new \doxylink{class_critter}{Critter} object with the specified parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & Reward value for defeating this critter. \\
+\hline
+{\em spd\+\_\+val} & Speed of the critter. \\
+\hline
+{\em hlt\+\_\+val} & Initial health of the critter. \\
+\hline
+{\em str\+\_\+val} & Strength (damage value) of the critter. \\
+\hline
+{\em x\+\_\+val} & Starting x-\/coordinate. \\
+\hline
+{\em y\+\_\+val} & Starting y-\/coordinate. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_critter_a6380d40ed4e8b5cef8fde6c35365a4ee}\index{Critter@{Critter}!displayInfo@{displayInfo}}
+\index{displayInfo@{displayInfo}!Critter@{Critter}}
+\doxysubsubsection{\texorpdfstring{displayInfo()}{displayInfo()}}
+{\footnotesize\ttfamily \label{class_critter_a6380d40ed4e8b5cef8fde6c35365a4ee} 
+void Critter\+::display\+Info (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Displays information about the critter. 
+
+Displays the critter\textquotesingle{}s information.
+
+Outputs the critter\textquotesingle{}s unique identifier, speed, strength, and health. \Hypertarget{class_critter_a20133d728c9aaaa5706bfe2e4911e683}\index{Critter@{Critter}!getAccumulator@{getAccumulator}}
+\index{getAccumulator@{getAccumulator}!Critter@{Critter}}
+\doxysubsubsection{\texorpdfstring{getAccumulator()}{getAccumulator()}}
+{\footnotesize\ttfamily \label{class_critter_a20133d728c9aaaa5706bfe2e4911e683} 
+int Critter\+::get\+Accumulator (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Retrieves the tick accumulator value. 
+
+\begin{DoxyReturn}{Returns}
+The current tick accumulator. 
+\end{DoxyReturn}
+\Hypertarget{class_critter_a288777f1bfb094406045e5cc9c4c325e}\index{Critter@{Critter}!getCID@{getCID}}
+\index{getCID@{getCID}!Critter@{Critter}}
+\doxysubsubsection{\texorpdfstring{getCID()}{getCID()}}
+{\footnotesize\ttfamily \label{class_critter_a288777f1bfb094406045e5cc9c4c325e} 
+int Critter\+::get\+CID (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Retrieves the unique identifier of the critter. 
+
+\begin{DoxyReturn}{Returns}
+The critter\textquotesingle{}s unique ID. 
+\end{DoxyReturn}
+\Hypertarget{class_critter_a90694c3e77d0d0670da61be2ac467611}\index{Critter@{Critter}!getHealth@{getHealth}}
+\index{getHealth@{getHealth}!Critter@{Critter}}
+\doxysubsubsection{\texorpdfstring{getHealth()}{getHealth()}}
+{\footnotesize\ttfamily \label{class_critter_a90694c3e77d0d0670da61be2ac467611} 
+int Critter\+::get\+Health (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Retrieves the current health of the critter. 
+
+\begin{DoxyReturn}{Returns}
+The critter\textquotesingle{}s health. 
+\end{DoxyReturn}
+\Hypertarget{class_critter_a447e8f593e515c070c5e352a79902f2b}\index{Critter@{Critter}!getSpeed@{getSpeed}}
+\index{getSpeed@{getSpeed}!Critter@{Critter}}
+\doxysubsubsection{\texorpdfstring{getSpeed()}{getSpeed()}}
+{\footnotesize\ttfamily \label{class_critter_a447e8f593e515c070c5e352a79902f2b} 
+int Critter\+::get\+Speed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Retrieves the speed of the critter. 
+
+\begin{DoxyReturn}{Returns}
+The critter\textquotesingle{}s speed. 
+\end{DoxyReturn}
+\Hypertarget{class_critter_a12aa2a4b8d89a0c41b0520a8cc2be4a7}\index{Critter@{Critter}!getStrength@{getStrength}}
+\index{getStrength@{getStrength}!Critter@{Critter}}
+\doxysubsubsection{\texorpdfstring{getStrength()}{getStrength()}}
+{\footnotesize\ttfamily \label{class_critter_a12aa2a4b8d89a0c41b0520a8cc2be4a7} 
+int Critter\+::get\+Strength (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Retrieves the strength of the critter. 
+
+\begin{DoxyReturn}{Returns}
+The critter\textquotesingle{}s strength. 
+\end{DoxyReturn}
+\Hypertarget{class_critter_ad223d2b9970e5cb68d165aaa32ef5c0f}\index{Critter@{Critter}!getValue@{getValue}}
+\index{getValue@{getValue}!Critter@{Critter}}
+\doxysubsubsection{\texorpdfstring{getValue()}{getValue()}}
+{\footnotesize\ttfamily \label{class_critter_ad223d2b9970e5cb68d165aaa32ef5c0f} 
+int Critter\+::get\+Value (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Retrieves the reward value of the critter. 
+
+\begin{DoxyReturn}{Returns}
+The reward value. 
+\end{DoxyReturn}
+\Hypertarget{class_critter_af0260aaa37e6550701029c389a8768dd}\index{Critter@{Critter}!getX@{getX}}
+\index{getX@{getX}!Critter@{Critter}}
+\doxysubsubsection{\texorpdfstring{getX()}{getX()}}
+{\footnotesize\ttfamily \label{class_critter_af0260aaa37e6550701029c389a8768dd} 
+int Critter\+::getX (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Retrieves the current x-\/coordinate of the critter. 
+
+\begin{DoxyReturn}{Returns}
+The x-\/coordinate. 
+\end{DoxyReturn}
+\Hypertarget{class_critter_aa7993ea01e57a9aebc7958f74f2181fe}\index{Critter@{Critter}!getY@{getY}}
+\index{getY@{getY}!Critter@{Critter}}
+\doxysubsubsection{\texorpdfstring{getY()}{getY()}}
+{\footnotesize\ttfamily \label{class_critter_aa7993ea01e57a9aebc7958f74f2181fe} 
+int Critter\+::getY (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Retrieves the current y-\/coordinate of the critter. 
+
+\begin{DoxyReturn}{Returns}
+The y-\/coordinate. 
+\end{DoxyReturn}
+\Hypertarget{class_critter_a36d086dad8f154348fa53def629f679f}\index{Critter@{Critter}!isDead@{isDead}}
+\index{isDead@{isDead}!Critter@{Critter}}
+\doxysubsubsection{\texorpdfstring{isDead()}{isDead()}}
+{\footnotesize\ttfamily \label{class_critter_a36d086dad8f154348fa53def629f679f} 
+bool Critter\+::is\+Dead (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Checks whether the critter is dead. 
+
+Checks if the critter is dead.
+
+A critter is considered dead if its health is less than or equal to zero.
+
+\begin{DoxyReturn}{Returns}
+true if the critter is dead; false otherwise.
+\end{DoxyReturn}
+The critter is considered dead if its health is less than or equal to zero. Outputs the critter\textquotesingle{}s status and returns a boolean value accordingly.
+
+\begin{DoxyReturn}{Returns}
+true if the critter\textquotesingle{}s health is 0 or less; false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_critter_aff30fd4419f52e3fad7ed4c9eb764d36}\index{Critter@{Critter}!move@{move}}
+\index{move@{move}!Critter@{Critter}}
+\doxysubsubsection{\texorpdfstring{move()}{move()}}
+{\footnotesize\ttfamily \label{class_critter_aff30fd4419f52e3fad7ed4c9eb764d36} 
+void Critter\+::move (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_map}{Map}} \texorpdfstring{$\ast$}{*}}]{game\+Map}{}\end{DoxyParamCaption})}
+
+
+
+Moves the critter on the provided game map. 
+
+Moves the critter to an adjacent cell that brings it closer to the exit.
+
+This function determines the next position for the critter based on its speed and the map layout.
+
+
+\begin{DoxyParams}{Parameters}
+{\em game\+Map} & Pointer to the \doxylink{class_map}{Map} object.\\
+\hline
+\end{DoxyParams}
+The function attempts to move the critter one cell at a time by checking cells in the order left, right, up, and down. For each direction, it uses the map\textquotesingle{}s is\+Closer\+To\+Exit() and is\+Path\+Cell() functions to determine if the new position is valid. If a valid move is found, the critter\textquotesingle{}s current cell is reset to a path cell, the critter\textquotesingle{}s coordinates are updated, and the new cell is marked as a critter cell.
+
+
+\begin{DoxyParams}{Parameters}
+{\em game\+Map} & Pointer to the \doxylink{class_map}{Map} object representing the game grid. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_critter_a265301679e2793490bd97eb2d3820643}\index{Critter@{Critter}!setAccumulator@{setAccumulator}}
+\index{setAccumulator@{setAccumulator}!Critter@{Critter}}
+\doxysubsubsection{\texorpdfstring{setAccumulator()}{setAccumulator()}}
+{\footnotesize\ttfamily \label{class_critter_a265301679e2793490bd97eb2d3820643} 
+void Critter\+::set\+Accumulator (\begin{DoxyParamCaption}\item[{int}]{val}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the tick accumulator value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & New accumulator value. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_critter_aeab99b389fb0256c6f62926fb61354ea}\index{Critter@{Critter}!setHealth@{setHealth}}
+\index{setHealth@{setHealth}!Critter@{Critter}}
+\doxysubsubsection{\texorpdfstring{setHealth()}{setHealth()}}
+{\footnotesize\ttfamily \label{class_critter_aeab99b389fb0256c6f62926fb61354ea} 
+void Critter\+::set\+Health (\begin{DoxyParamCaption}\item[{int}]{hlt\+\_\+val}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the critter\textquotesingle{}s health. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hlt\+\_\+val} & New health value. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_critter_a17acd2cb93c264e6616e4d1299a5de54}\index{Critter@{Critter}!setSpeed@{setSpeed}}
+\index{setSpeed@{setSpeed}!Critter@{Critter}}
+\doxysubsubsection{\texorpdfstring{setSpeed()}{setSpeed()}}
+{\footnotesize\ttfamily \label{class_critter_a17acd2cb93c264e6616e4d1299a5de54} 
+void Critter\+::set\+Speed (\begin{DoxyParamCaption}\item[{int}]{spd\+\_\+val}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the critter\textquotesingle{}s speed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em spd\+\_\+val} & New speed value. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_critter_a36c795ad9af488d0bd4c00a6ca954a8c}\index{Critter@{Critter}!setStrength@{setStrength}}
+\index{setStrength@{setStrength}!Critter@{Critter}}
+\doxysubsubsection{\texorpdfstring{setStrength()}{setStrength()}}
+{\footnotesize\ttfamily \label{class_critter_a36c795ad9af488d0bd4c00a6ca954a8c} 
+void Critter\+::set\+Strength (\begin{DoxyParamCaption}\item[{int}]{str\+\_\+val}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the critter\textquotesingle{}s strength. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str\+\_\+val} & New strength value. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Critter/\mbox{\hyperlink{critter_8h}{critter.\+h}}\item 
+Critter/\mbox{\hyperlink{critter_8cpp}{critter.\+cpp}}\end{DoxyCompactItemize}

@@ -2,7 +2,7 @@
 \hypertarget{main_8cpp}{}\label{main_8cpp}\index{main.cpp@{main.cpp}}
 
 
-Main driver for the Tower Defense game.  
+Main driver for the \doxylink{class_tower}{Tower} Defense game.  
 
 
 {\ttfamily \#include "{}Critter/critter.\+h"{}}\newline
@@ -17,17 +17,16 @@ Main driver for the Tower Defense game.
 \begin{DoxyCompactItemize}
 \item 
 int \mbox{\hyperlink{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
-\begin{DoxyCompactList}\small\item\em Main function that runs the Tower Defense game. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Main function that runs the \doxylink{class_tower}{Tower} Defense game. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-\Hypertarget{main_8cpp_a6e2876acbdfbf2564fbb56e774546a10}\label{main_8cpp_a6e2876acbdfbf2564fbb56e774546a10} 
-std\+::vector$<$ Critter \texorpdfstring{$\ast$}{*} $>$ {\bfseries game\+Critters}
+std\+::vector$<$ \mbox{\hyperlink{class_critter}{Critter}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{main_8cpp_a6e2876acbdfbf2564fbb56e774546a10}{game\+Critters}}
 \begin{DoxyCompactList}\small\item\em Global vector containing pointers to critters currently active in the game. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Main driver for the Tower Defense game. 
+Main driver for the \doxylink{class_tower}{Tower} Defense game. 
 
 This file handles the initialization of the game map, tower placement, and the main game loop. It reads user input for map configuration and tower placement, spawns critters via a wave generator, and processes critter movement and tower attacks during game ticks.
 
@@ -55,7 +54,7 @@ int main (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
 
 
-Main function that runs the Tower Defense game. 
+Main function that runs the \doxylink{class_tower}{Tower} Defense game. 
 
 The function performs the following steps\+:
 \begin{DoxyItemize}
@@ -65,7 +64,7 @@ The function performs the following steps\+:
 \item Allows the user to place towers until points run out.
 \item Enters the main game loop where\+:
 \begin{DoxyItemize}
-\item Critter waves are generated periodically.
+\item \doxylink{class_critter}{Critter} waves are generated periodically.
 \item Each tick, critters move and are checked for reaching the exit (affecting player health).
 \item Towers check for critters in range and attack them.
 \item The map is updated and displayed.
@@ -77,3 +76,17 @@ The game loop ends when the tick count exceeds a predefined limit or the player\
 \begin{DoxyReturn}{Returns}
 int 0 if the game ends normally, or 0 if the player dies. 
 \end{DoxyReturn}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{main_8cpp_a6e2876acbdfbf2564fbb56e774546a10}\index{main.cpp@{main.cpp}!gameCritters@{gameCritters}}
+\index{gameCritters@{gameCritters}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{gameCritters}{gameCritters}}
+{\footnotesize\ttfamily \label{main_8cpp_a6e2876acbdfbf2564fbb56e774546a10} 
+std\+::vector$<$\mbox{\hyperlink{class_critter}{Critter}} \texorpdfstring{$\ast$}{*}$>$ game\+Critters}
+
+
+
+Global vector containing pointers to critters currently active in the game. 
+
+Global vector of pointers to active critters. 

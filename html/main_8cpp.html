@@ -109,11 +109,11 @@ $(function(){initNavTree('main_8cpp.html',''); initResizable(true); });
 </div><!--header-->
 <div class="contents">
 
-<p>Main driver for the Tower Defense game.  
+<p>Main driver for the <a class="el" href="class_tower.html" title="Base class representing a generic tower in the game.">Tower</a> Defense game.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;Critter/critter.h&quot;</code><br />
-<code>#include &quot;Map/Map.h&quot;</code><br />
-<code>#include &quot;towers/towers.h&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="critter_8h_source.html">Critter/critter.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_map_8h_source.html">Map/Map.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="towers_8h_source.html">towers/towers.h</a>&quot;</code><br />
 <code>#include &lt;chrono&gt;</code><br />
 <code>#include &lt;cstddef&gt;</code><br />
 <code>#include &lt;iostream&gt;</code><br />
@@ -123,18 +123,17 @@ $(function(){initNavTree('main_8cpp.html',''); initResizable(true); });
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:ae66f6b31b5ad750f1fe042a706a4e3d4" id="r_ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> ()</td></tr>
-<tr class="memdesc:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main function that runs the Tower Defense game.  <br /></td></tr>
+<tr class="memdesc:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main function that runs the <a class="el" href="class_tower.html" title="Base class representing a generic tower in the game.">Tower</a> Defense game.  <br /></td></tr>
 <tr class="separator:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:a6e2876acbdfbf2564fbb56e774546a10" id="r_a6e2876acbdfbf2564fbb56e774546a10"><td class="memItemLeft" align="right" valign="top"><a id="a6e2876acbdfbf2564fbb56e774546a10" name="a6e2876acbdfbf2564fbb56e774546a10"></a>
-std::vector&lt; Critter * &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>gameCritters</b></td></tr>
-<tr class="memdesc:a6e2876acbdfbf2564fbb56e774546a10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Global vector containing pointers to critters currently active in the game. <br /></td></tr>
+<tr class="memitem:a6e2876acbdfbf2564fbb56e774546a10" id="r_a6e2876acbdfbf2564fbb56e774546a10"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_critter.html">Critter</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6e2876acbdfbf2564fbb56e774546a10">gameCritters</a></td></tr>
+<tr class="memdesc:a6e2876acbdfbf2564fbb56e774546a10"><td class="mdescLeft">&#160;</td><td class="mdescRight">Global vector containing pointers to critters currently active in the game.  <br /></td></tr>
 <tr class="separator:a6e2876acbdfbf2564fbb56e774546a10"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Main driver for the Tower Defense game. </p>
+<div class="textblock"><p>Main driver for the <a class="el" href="class_tower.html" title="Base class representing a generic tower in the game.">Tower</a> Defense game. </p>
 <p>This file handles the initialization of the game map, tower placement, and the main game loop. It reads user input for map configuration and tower placement, spawns critters via a wave generator, and processes critter movement and tower attacks during game ticks.</p>
 <p>Demonstrates the functionality of the game, the way that the game works is that there is a global tick that occurs every tick_interval seconds, critters will move based on the ticks and towers will fire on creatures based on critters being in range and the tick counter.</p>
 <p>Global variable:</p><ul>
@@ -158,14 +157,14 @@ std::vector&lt; Critter * &gt;&#160;</td><td class="memItemRight" valign="bottom
       </table>
 </div><div class="memdoc">
 
-<p>Main function that runs the Tower Defense game. </p>
+<p>Main function that runs the <a class="el" href="class_tower.html" title="Base class representing a generic tower in the game.">Tower</a> Defense game. </p>
 <p>The function performs the following steps:</p><ul>
 <li>Prompts the user for the map dimensions.</li>
 <li>Configures the map by reading a series of coordinates to create a path, then setting the entry and exit points.</li>
 <li>Validates the configured map.</li>
 <li>Allows the user to place towers until points run out.</li>
 <li>Enters the main game loop where:<ul>
-<li>Critter waves are generated periodically.</li>
+<li><a class="el" href="class_critter.html" title="Represents a moving enemy in the Tower Defense game.">Critter</a> waves are generated periodically.</li>
 <li>Each tick, critters move and are checked for reaching the exit (affecting player health).</li>
 <li>Towers check for critters in range and attack them.</li>
 <li>The map is updated and displayed.</li>
@@ -174,6 +173,24 @@ std::vector&lt; Critter * &gt;&#160;</td><td class="memItemRight" valign="bottom
 </ul>
 <p>The game loop ends when the tick count exceeds a predefined limit or the player's health reaches zero.</p>
 <dl class="section return"><dt>Returns</dt><dd>int 0 if the game ends normally, or 0 if the player dies. </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="a6e2876acbdfbf2564fbb56e774546a10" name="a6e2876acbdfbf2564fbb56e774546a10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e2876acbdfbf2564fbb56e774546a10">&#9670;&#160;</a></span>gameCritters</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="class_critter.html">Critter</a> *&gt; gameCritters</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Global vector containing pointers to critters currently active in the game. </p>
+<p>Global vector of pointers to active critters. </p>
 
 </div>
 </div>

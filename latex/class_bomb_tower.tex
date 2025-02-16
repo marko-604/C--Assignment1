@@ -1,0 +1,228 @@
+\doxysection{Bomb\+Tower Class Reference}
+\hypertarget{class_bomb_tower}{}\label{class_bomb_tower}\index{BombTower@{BombTower}}
+
+
+Derived class representing a Bomb \doxylink{class_tower}{Tower}.  
+
+
+
+
+{\ttfamily \#include $<$towers.\+h$>$}
+
+Inheritance diagram for Bomb\+Tower\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_bomb_tower}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_bomb_tower_a916decc9f73393a6562bc7aa474aa9f7}{Bomb\+Tower}} (int x\+\_\+val, int y\+\_\+val)
+\begin{DoxyCompactList}\small\item\em Constructs a new Bomb \doxylink{class_tower}{Tower}. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_bomb_tower_ab990af5f28c7417e4f547110c9a0b52a}{get\+AoE}} () const
+\begin{DoxyCompactList}\small\item\em Gets the area-\/of-\/effect (AoE) range of the Bomb \doxylink{class_tower}{Tower}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_bomb_tower_aca75cb18699745570487588f1fef0e55}{set\+AoE}} (int aoe\+\_\+val)
+\begin{DoxyCompactList}\small\item\em Sets the area-\/of-\/effect (AoE) range of the Bomb \doxylink{class_tower}{Tower}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_bomb_tower_aebdfb2435579aa0d1f94910fd0d694e6}{show\+Tower\+Info}} () override
+\begin{DoxyCompactList}\small\item\em Displays the bomb tower\textquotesingle{}s information. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_bomb_tower_a9e3daf3bf6c1e194255ce7de834868d8}{attack}} (\mbox{\hyperlink{class_critter}{Critter}} \texorpdfstring{$\ast$}{*}target) override
+\begin{DoxyCompactList}\small\item\em Attacks a target critter with area-\/of-\/effect damage. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_bomb_tower_acf6014ddab877c9206bd1425c3741052}{level\+Up}} () override
+\begin{DoxyCompactList}\small\item\em Levels up the bomb tower, increasing its AoE and damage. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_bomb_tower_a86a7c35c18fd48a4bd50565d497bd682}{get\+AoE}} ()
+\begin{DoxyCompactList}\small\item\em Gets the area-\/of-\/effect range (duplicate getter). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_tower}{Tower}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual {\bfseries \texorpdfstring{$\sim$}{\string~}\+Tower} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor for proper cleanup of derived classes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_tower_a70f9d8aa215543cc16c550f98a39b476}{Tower}} (int x\+\_\+val, int y\+\_\+val)
+\begin{DoxyCompactList}\small\item\em Constructs a new \doxylink{class_tower}{Tower} object with default stats. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_tower_a940d34d4ab3f0eef584203ebfa27fdca}{Tower}} (int lvl\+\_\+cost\+\_\+val, int x\+\_\+val, int y\+\_\+val, double hr\+\_\+val, double fr\+\_\+val, double rng\+\_\+val, double dmg\+\_\+val, int cost\+\_\+val, int resale\+\_\+val)
+\begin{DoxyCompactList}\small\item\em Constructs a new \doxylink{class_tower}{Tower} object with custom parameters. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_critter}{Critter}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_tower_a3b1115649e8fe3285e997bab0f2dd006}{in\+Range}} (std\+::vector$<$ \mbox{\hyperlink{class_critter}{Critter}} \texorpdfstring{$\ast$}{*} $>$ \&critters)
+\begin{DoxyCompactList}\small\item\em Checks for a critter within the tower\textquotesingle{}s range. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_tower_ac5c9e76603f3ae1290b86796578ed69f}{getX}} () const
+\begin{DoxyCompactList}\small\item\em Gets the x-\/coordinate of the tower. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_tower_a8efdcbaa1b0dc9866eb753ba3871c533}{getY}} () const
+\begin{DoxyCompactList}\small\item\em Gets the y-\/coordinate of the tower. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_tower_afdeee427b1a0053205a5c63e56f3365f}{get\+Hit\+Rate}} () const
+\begin{DoxyCompactList}\small\item\em Gets the hit rate of the tower. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_tower_a7b804f7a98be259cb696ec9b2667c410}{get\+Fire\+Rate}} () const
+\begin{DoxyCompactList}\small\item\em Gets the fire rate (shots per second) of the tower. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_tower_a4a69796c3c65aeae2d42ef631d69eb6c}{get\+Level}} () const
+\begin{DoxyCompactList}\small\item\em Gets the current level of the tower. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_tower_a0e003f2b4fd235ac335db4803b1d3e4b}{get\+Cost}} () const
+\begin{DoxyCompactList}\small\item\em Gets the initial cost of the tower. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_tower_a56c9eb101a430b8d0dd7e42014dc8f58}{get\+Damage}} () const
+\begin{DoxyCompactList}\small\item\em Gets the damage inflicted by the tower. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_tower_a77a842abf2bb563c3c549fc605721d24}{get\+Resale}} () const
+\begin{DoxyCompactList}\small\item\em Gets the resale value of the tower. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_tower_aec46f3ace5aa79591e33b8b7355539c1}{get\+Range}} () const
+\begin{DoxyCompactList}\small\item\em Gets the firing range of the tower. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_tower_ad89c2abd0769070bdb77e2e5dc07b134}{get\+Id}} () const
+\begin{DoxyCompactList}\small\item\em Gets the unique identifier of the tower. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_tower_adc5c54b329d8bda0eb0f851e0be04065}{get\+Accumulator}} ()
+\begin{DoxyCompactList}\small\item\em Gets the current tick accumulator of the tower. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_tower_a04daf2efb52ebc28c0b2839e51910e26}{get\+Level\+Up\+Cost}} ()
+\begin{DoxyCompactList}\small\item\em Gets the cost required to level up the tower. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_tower_a179d23ecff04009709d6ed0d2f64e4f0}{set\+Hit\+Rate}} (double hr)
+\begin{DoxyCompactList}\small\item\em Sets the hit rate of the tower. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_tower_a547844447d53a134f0868faedd8da894}{set\+Fire\+Rate}} (double fr)
+\begin{DoxyCompactList}\small\item\em Sets the fire rate of the tower. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_tower_af2396c645d62dea416578d13c82192ba}{set\+Level}} (int lvl)
+\begin{DoxyCompactList}\small\item\em Sets the current level of the tower. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_tower_a3d7b582cec3948ff2813104e33ec5225}{set\+Damage}} (double dmg)
+\begin{DoxyCompactList}\small\item\em Sets the damage value for the tower. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_tower_a970d9b3ca129db21bf4b5fc3a2dac261}{set\+Range}} (int rng)
+\begin{DoxyCompactList}\small\item\em Sets the firing range of the tower. \end{DoxyCompactList}\item 
+void {\bfseries increment\+\_\+accumulator} ()
+\begin{DoxyCompactList}\small\item\em Increments the tick accumulator by one. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_tower_ae72e9126e2470bd9a890265e8b1c8b9e}{set\+Accumulator}} (int val)
+\begin{DoxyCompactList}\small\item\em Sets the tick accumulator to a specific value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Derived class representing a Bomb \doxylink{class_tower}{Tower}. 
+
+The \doxylink{class_bomb_tower}{Bomb\+Tower} inflicts area-\/of-\/effect (AoE) damage, affecting multiple critters near the primary target. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_bomb_tower_a916decc9f73393a6562bc7aa474aa9f7}\index{BombTower@{BombTower}!BombTower@{BombTower}}
+\index{BombTower@{BombTower}!BombTower@{BombTower}}
+\doxysubsubsection{\texorpdfstring{BombTower()}{BombTower()}}
+{\footnotesize\ttfamily \label{class_bomb_tower_a916decc9f73393a6562bc7aa474aa9f7} 
+Bomb\+Tower\+::\+Bomb\+Tower (\begin{DoxyParamCaption}\item[{int}]{x\+\_\+val}{, }\item[{int}]{y\+\_\+val}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a new Bomb \doxylink{class_tower}{Tower}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+\_\+val} & The x-\/coordinate where the tower is placed. \\
+\hline
+{\em y\+\_\+val} & The y-\/coordinate where the tower is placed. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_bomb_tower_a9e3daf3bf6c1e194255ce7de834868d8}\index{BombTower@{BombTower}!attack@{attack}}
+\index{attack@{attack}!BombTower@{BombTower}}
+\doxysubsubsection{\texorpdfstring{attack()}{attack()}}
+{\footnotesize\ttfamily \label{class_bomb_tower_a9e3daf3bf6c1e194255ce7de834868d8} 
+void Bomb\+Tower\+::attack (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_critter}{Critter}} \texorpdfstring{$\ast$}{*}}]{target}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Attacks a target critter with area-\/of-\/effect damage. 
+
+Attacks a target critter with the Bomb \doxylink{class_tower}{Tower}\textquotesingle{}s area-\/of-\/effect damage.
+
+The attack function damages the primary target and any other critters within the AoE.
+
+
+\begin{DoxyParams}{Parameters}
+{\em target} & Pointer to the primary critter to attack.\\
+\hline
+\end{DoxyParams}
+The Bomb \doxylink{class_tower}{Tower} first applies full damage to the target and then iterates over the global game\+Critters vector to apply half damage to any other critters within its AoE.
+
+
+\begin{DoxyParams}{Parameters}
+{\em target} & Pointer to the primary critter to be attacked. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_tower_aa0ab9d64910f77c8fccebed1bd4e854c}{Tower}}.
+
+\Hypertarget{class_bomb_tower_a86a7c35c18fd48a4bd50565d497bd682}\index{BombTower@{BombTower}!getAoE@{getAoE}}
+\index{getAoE@{getAoE}!BombTower@{BombTower}}
+\doxysubsubsection{\texorpdfstring{getAoE()}{getAoE()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_bomb_tower_a86a7c35c18fd48a4bd50565d497bd682} 
+int Bomb\+Tower\+::get\+AoE (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the area-\/of-\/effect range (duplicate getter). 
+
+\begin{DoxyReturn}{Returns}
+The AoE range. 
+\end{DoxyReturn}
+\Hypertarget{class_bomb_tower_ab990af5f28c7417e4f547110c9a0b52a}\index{BombTower@{BombTower}!getAoE@{getAoE}}
+\index{getAoE@{getAoE}!BombTower@{BombTower}}
+\doxysubsubsection{\texorpdfstring{getAoE()}{getAoE()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_bomb_tower_ab990af5f28c7417e4f547110c9a0b52a} 
+int Bomb\+Tower\+::get\+AoE (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the area-\/of-\/effect (AoE) range of the Bomb \doxylink{class_tower}{Tower}. 
+
+\begin{DoxyReturn}{Returns}
+The AoE range. 
+\end{DoxyReturn}
+\Hypertarget{class_bomb_tower_acf6014ddab877c9206bd1425c3741052}\index{BombTower@{BombTower}!levelUp@{levelUp}}
+\index{levelUp@{levelUp}!BombTower@{BombTower}}
+\doxysubsubsection{\texorpdfstring{levelUp()}{levelUp()}}
+{\footnotesize\ttfamily \label{class_bomb_tower_acf6014ddab877c9206bd1425c3741052} 
+int Bomb\+Tower\+::level\+Up (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Levels up the bomb tower, increasing its AoE and damage. 
+
+Levels up the Bomb \doxylink{class_tower}{Tower}, increasing its AoE and damage.
+
+\begin{DoxyReturn}{Returns}
+The new resale value after leveling up.
+\end{DoxyReturn}
+If the tower is not at max level, its AoE and damage are increased by 1, the level is incremented, and the new level is output.
+
+\begin{DoxyReturn}{Returns}
+The new resale value after leveling up; returns 0 if the tower is at max level. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{class_tower_a53053c65a5e30f3136e87c6f26ecb993}{Tower}}.
+
+\Hypertarget{class_bomb_tower_aca75cb18699745570487588f1fef0e55}\index{BombTower@{BombTower}!setAoE@{setAoE}}
+\index{setAoE@{setAoE}!BombTower@{BombTower}}
+\doxysubsubsection{\texorpdfstring{setAoE()}{setAoE()}}
+{\footnotesize\ttfamily \label{class_bomb_tower_aca75cb18699745570487588f1fef0e55} 
+void Bomb\+Tower\+::set\+AoE (\begin{DoxyParamCaption}\item[{int}]{aoe\+\_\+val}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the area-\/of-\/effect (AoE) range of the Bomb \doxylink{class_tower}{Tower}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em aoe\+\_\+val} & The new AoE range. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_bomb_tower_aebdfb2435579aa0d1f94910fd0d694e6}\index{BombTower@{BombTower}!showTowerInfo@{showTowerInfo}}
+\index{showTowerInfo@{showTowerInfo}!BombTower@{BombTower}}
+\doxysubsubsection{\texorpdfstring{showTowerInfo()}{showTowerInfo()}}
+{\footnotesize\ttfamily \label{class_bomb_tower_aebdfb2435579aa0d1f94910fd0d694e6} 
+void Bomb\+Tower\+::show\+Tower\+Info (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Displays the bomb tower\textquotesingle{}s information. 
+
+Displays detailed information about the Bomb \doxylink{class_tower}{Tower}.
+
+Outputs the Bomb \doxylink{class_tower}{Tower}\textquotesingle{}s coordinates, damage, range, level, fire rate, hit rate, cost, resale value, area-\/of-\/effect range, and unique identifier. 
+
+Reimplemented from \mbox{\hyperlink{class_tower_a8cc806b5270a95c6837393a64300857d}{Tower}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+towers/\mbox{\hyperlink{towers_8h}{towers.\+h}}\item 
+towers/\mbox{\hyperlink{towers_8cpp}{towers.\+cpp}}\end{DoxyCompactItemize}

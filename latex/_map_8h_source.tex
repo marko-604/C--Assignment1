@@ -1,0 +1,77 @@
+\doxysection{Map.\+h}
+\hypertarget{_map_8h_source}{}\label{_map_8h_source}\index{Map/Map.h@{Map/Map.h}}
+\mbox{\hyperlink{_map_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#ifndef\ MAP\_H}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#define\ MAP\_H}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <iomanip>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <queue>}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <stack>}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_map_a478170370c0898722f10ec4925327628}{Map}}\ \{}
+\DoxyCodeLine{00034\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00036\ \ \ \textcolor{keyword}{enum}\ CellType\ \{\ SCENERY,\ PATH,\ TOWER,\ CRITTER\ \};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00044\ \ \ \textcolor{keyword}{struct\ }Cell\ \{}
+\DoxyCodeLine{00045\ \ \ \ \ CellType\ type;\ \ \ \ \ \ }
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{bool}\ isEntry\ =\ \textcolor{keyword}{false};\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{bool}\ isExit\ =\ \textcolor{keyword}{false};\ \ }
+\DoxyCodeLine{00048\ \ \ \};}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \textcolor{keywordtype}{int}\ width,\ height;\ \ }
+\DoxyCodeLine{00051\ \ \ std::vector<std::vector<Cell>>\ grid;\ }
+\DoxyCodeLine{00052\ \ \ std::pair<int,\ int>\ entryPoint\ =\ \{-\/1,\ -\/1\};\ }
+\DoxyCodeLine{00053\ \ \ std::pair<int,\ int>\ exitPoint\ =\ \{-\/1,\ -\/1\};\ \ }
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ std::vector<std::pair<int,\ int>>\ entityPath;\ }
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00064\ \ \ \textcolor{keywordtype}{bool}\ bfsFindPath();}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00075\ \ \ \mbox{\hyperlink{class_map_a478170370c0898722f10ec4925327628}{Map}}(\textcolor{keywordtype}{int}\ w,\ \textcolor{keywordtype}{int}\ h);}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00082\ \ \ std::pair<int,\ int>\ \mbox{\hyperlink{class_map_ac4abc9ad0091a5ef5b3d53514f7e3203}{getEntryPoint}}()\ \{\ \textcolor{keywordflow}{return}\ entryPoint;\ \}}
+\DoxyCodeLine{00083\ \ \ }
+\DoxyCodeLine{00089\ \ \ std::pair<int,\ int>\ \mbox{\hyperlink{class_map_a945429898c78817e9cfa0c8f7c23c9d9}{getExitPoint}}()\ \{\ \textcolor{keywordflow}{return}\ exitPoint;\ \}}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00096\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_map_a2b09c8875af2efb711fc3a022e70427d}{getHeight}}()\ \{\ \textcolor{keywordflow}{return}\ height;\ \}}
+\DoxyCodeLine{00097\ \ \ }
+\DoxyCodeLine{00103\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_map_afd34d12227676b3cebeed9f5fae2508f}{getWidth}}()\ \{\ \textcolor{keywordflow}{return}\ width;\ \}}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00112\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_map_af89f6011d39541d20c7f1f21d12cd91c}{isCritterCell}}(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y);}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00121\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_map_a300b40300c14c4b05d50bf34a6a764e4}{isValidCoordinate}}(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y);}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00130\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_map_ace3de4b483d981195347d407dbc7376f}{isPathCell}}(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y);}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00141\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_map_af17d1bba2142490692184d3e168aac4a}{isCloserToExit}}(\textcolor{keywordtype}{int}\ x0,\ \textcolor{keywordtype}{int}\ x1,\ \textcolor{keywordtype}{int}\ y0,\ \textcolor{keywordtype}{int}\ y1);}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00149\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_map_ac6a9e6293797daf8d207f2a95de51df6}{setCellToPath}}(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y);}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00157\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_map_a9d8debc886c91dc125d07c304171b7ab}{setCellToScenery}}(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y);}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00165\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_map_a77b1bbad0e0d0672670d6643be930978}{setCellToOccupied}}(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y);}
+\DoxyCodeLine{00166\ }
+\DoxyCodeLine{00175\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_map_a1e7e947217937d0d7eb73b2e39a6a80a}{setEntryPoint}}(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y);}
+\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00185\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_map_ad1f7e2787ed10aca5a3c6148eae5e2d8}{setExitPoint}}(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y);}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00193\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_map_a2c4e0df0278b2a0e4ebbb8dada797548}{setCellToCritterCell}}(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y);}
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00202\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_map_a34c631d8fb54f9e16c16e7982a5e4523}{isSceneryCell}}(\textcolor{keywordtype}{int}\ x\_val,\ \textcolor{keywordtype}{int}\ y\_val);}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00211\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_map_a046e5c4ca6b8922b8b46b7e92757e56c}{validateMap}}();}
+\DoxyCodeLine{00212\ }
+\DoxyCodeLine{00218\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_map_ac5af28a5fed55d9ca5d1dab5cb9f3f9c}{displayMap}}();}
+\DoxyCodeLine{00219\ }
+\DoxyCodeLine{00223\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_map_af30aba7f416bf5d96fe2d4c064dbf855}{displayEntityPath}}();}
+\DoxyCodeLine{00224\ \};}
+\DoxyCodeLine{00225\ }
+\DoxyCodeLine{00226\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ MAP\_H}}
+
+\end{DoxyCode}

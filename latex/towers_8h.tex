@@ -1,0 +1,68 @@
+\doxysection{towers/towers.h File Reference}
+\hypertarget{towers_8h}{}\label{towers_8h}\index{towers/towers.h@{towers/towers.h}}
+
+
+Definitions of the \doxylink{class_tower}{Tower} classes used in the \doxylink{class_tower}{Tower} Defense game.  
+
+
+{\ttfamily \#include "{}../\+Critter/critter.\+h"{}}\newline
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$tuple$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_tower}{Tower}}
+\begin{DoxyCompactList}\small\item\em Base class representing a generic tower in the game. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_sniper_tower}{Sniper\+Tower}}
+\begin{DoxyCompactList}\small\item\em Derived class representing a Sniper \doxylink{class_tower}{Tower}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_bomb_tower}{Bomb\+Tower}}
+\begin{DoxyCompactList}\small\item\em Derived class representing a Bomb \doxylink{class_tower}{Tower}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{class_freezing_tower}{Freezing\+Tower}}
+\begin{DoxyCompactList}\small\item\em Derived class representing a Freezing \doxylink{class_tower}{Tower}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_critter}{Critter}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{towers_8h_a6e2876acbdfbf2564fbb56e774546a10}{game\+Critters}}
+\begin{DoxyCompactList}\small\item\em Global vector of pointers to active critters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Definitions of the \doxylink{class_tower}{Tower} classes used in the \doxylink{class_tower}{Tower} Defense game. 
+
+This file declares the base \doxylink{class_tower}{Tower} class and several derived classes\+:
+\begin{DoxyItemize}
+\item \doxylink{class_sniper_tower}{Sniper\+Tower}\+: A tower with high damage and long range.
+\item \doxylink{class_bomb_tower}{Bomb\+Tower}\+: A tower that inflicts area-\/of-\/effect damage.
+\item \doxylink{class_freezing_tower}{Freezing\+Tower}\+: A tower that slows critters.
+\end{DoxyItemize}
+
+It also declares an external global vector, {\ttfamily game\+Critters}, which holds pointers to active critters in the game.
+
+\begin{DoxyNote}{Note}
+The implementation of these classes is provided in \doxylink{towers_8cpp}{towers.\+cpp}.
+\end{DoxyNote}
+\begin{DoxyAuthor}{Author}
+
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+
+\end{DoxyDate}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{towers_8h_a6e2876acbdfbf2564fbb56e774546a10}\index{towers.h@{towers.h}!gameCritters@{gameCritters}}
+\index{gameCritters@{gameCritters}!towers.h@{towers.h}}
+\doxysubsubsection{\texorpdfstring{gameCritters}{gameCritters}}
+{\footnotesize\ttfamily \label{towers_8h_a6e2876acbdfbf2564fbb56e774546a10} 
+std\+::vector$<$\mbox{\hyperlink{class_critter}{Critter}} \texorpdfstring{$\ast$}{*}$>$ game\+Critters\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Global vector of pointers to active critters. 
+
+This vector is used by towers (e.\+g., \doxylink{class_bomb_tower}{Bomb\+Tower}) to check for critters in range.
+
+Global vector of pointers to active critters. 

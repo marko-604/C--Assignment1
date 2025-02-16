@@ -1,0 +1,88 @@
+\doxysection{Critter\+Wave\+Generator Class Reference}
+\hypertarget{class_critter_wave_generator}{}\label{class_critter_wave_generator}\index{CritterWaveGenerator@{CritterWaveGenerator}}
+
+
+Generates waves of critters for the game.  
+
+
+
+
+{\ttfamily \#include $<$critter.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_critter_wave_generator_ad025eaba0c0730d84b4d449f0133a8ea}{Critter\+Wave\+Generator}} (int wave\+Number, int startX, int startY)
+\begin{DoxyCompactList}\small\item\em Constructs a new \doxylink{class_critter_wave_generator}{Critter\+Wave\+Generator}. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{class_critter}{Critter}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{class_critter_wave_generator_aa55c1b5cfd490a7dfe4dfea1f05cf63d}{generate\+Wave}} ()
+\begin{DoxyCompactList}\small\item\em Generates a new wave of critters. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_critter_wave_generator_a888afdb215851603071b11107140febb}{increment\+Wave\+Number}} ()
+\begin{DoxyCompactList}\small\item\em Increments the current wave number. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Generates waves of critters for the game. 
+
+The \doxylink{class_critter_wave_generator}{Critter\+Wave\+Generator} class creates a vector of \doxylink{class_critter}{Critter} pointers based on the current wave number. The wave number can be incremented to scale the difficulty of subsequent waves. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_critter_wave_generator_ad025eaba0c0730d84b4d449f0133a8ea}\index{CritterWaveGenerator@{CritterWaveGenerator}!CritterWaveGenerator@{CritterWaveGenerator}}
+\index{CritterWaveGenerator@{CritterWaveGenerator}!CritterWaveGenerator@{CritterWaveGenerator}}
+\doxysubsubsection{\texorpdfstring{CritterWaveGenerator()}{CritterWaveGenerator()}}
+{\footnotesize\ttfamily \label{class_critter_wave_generator_ad025eaba0c0730d84b4d449f0133a8ea} 
+Critter\+Wave\+Generator\+::\+Critter\+Wave\+Generator (\begin{DoxyParamCaption}\item[{int}]{wave\+Number}{, }\item[{int}]{startX}{, }\item[{int}]{startY}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a new \doxylink{class_critter_wave_generator}{Critter\+Wave\+Generator}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em wave\+Number} & The starting wave number (used to scale difficulty). \\
+\hline
+{\em startX} & The starting x-\/coordinate for new critters (usually the map entry). \\
+\hline
+{\em startY} & The starting y-\/coordinate for new critters (usually the map entry). \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_critter_wave_generator_aa55c1b5cfd490a7dfe4dfea1f05cf63d}\index{CritterWaveGenerator@{CritterWaveGenerator}!generateWave@{generateWave}}
+\index{generateWave@{generateWave}!CritterWaveGenerator@{CritterWaveGenerator}}
+\doxysubsubsection{\texorpdfstring{generateWave()}{generateWave()}}
+{\footnotesize\ttfamily \label{class_critter_wave_generator_aa55c1b5cfd490a7dfe4dfea1f05cf63d} 
+std\+::vector$<$ \mbox{\hyperlink{class_critter}{Critter}} \texorpdfstring{$\ast$}{*} $>$ Critter\+Wave\+Generator\+::generate\+Wave (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Generates a new wave of critters. 
+
+Generates a wave of critters based on the current wave number.
+
+The method creates and returns a vector of \doxylink{class_critter}{Critter} pointers. The number and type of critters generated may depend on the current wave number.
+
+\begin{DoxyReturn}{Returns}
+A vector containing pointers to the newly generated critters.
+\end{DoxyReturn}
+Creates a vector of \doxylink{class_critter}{Critter} pointers where the number and type of critters depend on the current wave number. For each iteration, different critter types (\doxylink{class_squirrel}{Squirrel}, \doxylink{class_wolf}{Wolf}, \doxylink{class_bear}{Bear}) are added based on the remainder when dividing the loop counter by 2, 3, or 5.
+
+\begin{DoxyReturn}{Returns}
+A vector containing pointers to the newly generated critters. 
+\end{DoxyReturn}
+\Hypertarget{class_critter_wave_generator_a888afdb215851603071b11107140febb}\index{CritterWaveGenerator@{CritterWaveGenerator}!incrementWaveNumber@{incrementWaveNumber}}
+\index{incrementWaveNumber@{incrementWaveNumber}!CritterWaveGenerator@{CritterWaveGenerator}}
+\doxysubsubsection{\texorpdfstring{incrementWaveNumber()}{incrementWaveNumber()}}
+{\footnotesize\ttfamily \label{class_critter_wave_generator_a888afdb215851603071b11107140febb} 
+void Critter\+Wave\+Generator\+::increment\+Wave\+Number (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Increments the current wave number. 
+
+This method is used to scale the difficulty for subsequent waves. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Critter/\mbox{\hyperlink{critter_8h}{critter.\+h}}\item 
+Critter/\mbox{\hyperlink{critter_8cpp}{critter.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,537 @@
+\doxysection{Map Class Reference}
+\hypertarget{class_map}{}\label{class_map}\index{Map@{Map}}
+
+
+Represents a grid-\/based map used in the \doxylink{class_tower}{Tower} Defense game.  
+
+
+
+
+{\ttfamily \#include $<$Map.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_map_a478170370c0898722f10ec4925327628}{Map}} (int w, int h)
+\begin{DoxyCompactList}\small\item\em Constructs a new \doxylink{class_map}{Map} object. \end{DoxyCompactList}\item 
+std\+::pair$<$ int, int $>$ \mbox{\hyperlink{class_map_ac4abc9ad0091a5ef5b3d53514f7e3203}{get\+Entry\+Point}} ()
+\begin{DoxyCompactList}\small\item\em Retrieves the entry point of the map. \end{DoxyCompactList}\item 
+std\+::pair$<$ int, int $>$ \mbox{\hyperlink{class_map_a945429898c78817e9cfa0c8f7c23c9d9}{get\+Exit\+Point}} ()
+\begin{DoxyCompactList}\small\item\em Retrieves the exit point of the map. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_map_a2b09c8875af2efb711fc3a022e70427d}{get\+Height}} ()
+\begin{DoxyCompactList}\small\item\em Retrieves the height of the map. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_map_afd34d12227676b3cebeed9f5fae2508f}{get\+Width}} ()
+\begin{DoxyCompactList}\small\item\em Retrieves the width of the map. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_map_af89f6011d39541d20c7f1f21d12cd91c}{is\+Critter\+Cell}} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Determines if the cell at (x, y) is a critter cell. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_map_a300b40300c14c4b05d50bf34a6a764e4}{is\+Valid\+Coordinate}} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Checks if the coordinate (x, y) is within the bounds of the map. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_map_ace3de4b483d981195347d407dbc7376f}{is\+Path\+Cell}} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Checks if the cell at (x, y) is a path cell. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_map_af17d1bba2142490692184d3e168aac4a}{is\+Closer\+To\+Exit}} (int x0, int x1, int y0, int y1)
+\begin{DoxyCompactList}\small\item\em Determines if moving from (x0, y0) to (x1, y1) brings you closer to the exit. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_map_ac6a9e6293797daf8d207f2a95de51df6}{set\+Cell\+To\+Path}} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Sets the cell at (x, y) to be a path cell. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_map_a9d8debc886c91dc125d07c304171b7ab}{set\+Cell\+To\+Scenery}} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Sets the cell at (x, y) to be a scenery cell. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_map_a77b1bbad0e0d0672670d6643be930978}{set\+Cell\+To\+Occupied}} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Sets the cell at (x, y) to be occupied by a tower. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_map_a1e7e947217937d0d7eb73b2e39a6a80a}{set\+Entry\+Point}} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Sets the entry point of the map. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_map_ad1f7e2787ed10aca5a3c6148eae5e2d8}{set\+Exit\+Point}} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Sets the exit point of the map. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_map_a2c4e0df0278b2a0e4ebbb8dada797548}{set\+Cell\+To\+Critter\+Cell}} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Sets the cell at (x, y) to be a critter cell. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_map_a34c631d8fb54f9e16c16e7982a5e4523}{is\+Scenery\+Cell}} (int x\+\_\+val, int y\+\_\+val)
+\begin{DoxyCompactList}\small\item\em Checks if the cell at (x\+\_\+val, y\+\_\+val) is a scenery cell. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_map_a046e5c4ca6b8922b8b46b7e92757e56c}{validate\+Map}} ()
+\begin{DoxyCompactList}\small\item\em Validates the map configuration. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_map_ac5af28a5fed55d9ca5d1dab5cb9f3f9c}{display\+Map}} ()
+\begin{DoxyCompactList}\small\item\em Displays the map on the console. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_map_af30aba7f416bf5d96fe2d4c064dbf855}{display\+Entity\+Path}} ()
+\begin{DoxyCompactList}\small\item\em Displays the calculated entity path from the entry to the exit. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a grid-\/based map used in the \doxylink{class_tower}{Tower} Defense game. 
+
+The \doxylink{class_map}{Map} class maintains a 2D grid of cells. Each cell has a type (SCENERY, PATH, TOWER, or CRITTER) and flags to indicate if it is the entry or exit point. The class supports setting cell types, defining entry/exit points, validating the connectivity of the map using BFS, and displaying the map and the path from entry to exit. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_map_a478170370c0898722f10ec4925327628}\index{Map@{Map}!Map@{Map}}
+\index{Map@{Map}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{Map()}{Map()}}
+{\footnotesize\ttfamily \label{class_map_a478170370c0898722f10ec4925327628} 
+Map\+::\+Map (\begin{DoxyParamCaption}\item[{int}]{w}{, }\item[{int}]{h}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a new \doxylink{class_map}{Map} object. 
+
+Initializes the map grid with the specified dimensions and sets all cells to SCENERY.
+
+
+\begin{DoxyParams}{Parameters}
+{\em w} & The width (number of columns) of the map. \\
+\hline
+{\em h} & The height (number of rows) of the map.\\
+\hline
+\end{DoxyParams}
+Initializes a grid with the given width and height, setting all cells to SCENERY.
+
+
+\begin{DoxyParams}{Parameters}
+{\em w} & The width (number of columns) of the map. \\
+\hline
+{\em h} & The height (number of rows) of the map. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_map_af30aba7f416bf5d96fe2d4c064dbf855}\index{Map@{Map}!displayEntityPath@{displayEntityPath}}
+\index{displayEntityPath@{displayEntityPath}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{displayEntityPath()}{displayEntityPath()}}
+{\footnotesize\ttfamily \label{class_map_af30aba7f416bf5d96fe2d4c064dbf855} 
+void Map\+::display\+Entity\+Path (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Displays the calculated entity path from the entry to the exit. 
+
+If a valid path has been stored, the function prints the path in order from the entry (using letter-\/number notation) to the exit. Otherwise, it notifies that no valid path was stored. \Hypertarget{class_map_ac5af28a5fed55d9ca5d1dab5cb9f3f9c}\index{Map@{Map}!displayMap@{displayMap}}
+\index{displayMap@{displayMap}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{displayMap()}{displayMap()}}
+{\footnotesize\ttfamily \label{class_map_ac5af28a5fed55d9ca5d1dab5cb9f3f9c} 
+void Map\+::display\+Map (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Displays the map on the console. 
+
+Displays the current state of the map.
+
+The map is displayed with row labels (letters) and column labels (digits).
+
+The map is printed with row labels (letters) and column labels (digits). The cell types are\+:
+\begin{DoxyItemize}
+\item E\+: Entry
+\item X\+: Exit
+\item P\+: Path
+\item T\+: \doxylink{class_tower}{Tower}
+\item C\+: \doxylink{class_critter}{Critter}
+\item S\+: Scenery 
+\end{DoxyItemize}\Hypertarget{class_map_ac4abc9ad0091a5ef5b3d53514f7e3203}\index{Map@{Map}!getEntryPoint@{getEntryPoint}}
+\index{getEntryPoint@{getEntryPoint}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{getEntryPoint()}{getEntryPoint()}}
+{\footnotesize\ttfamily \label{class_map_ac4abc9ad0091a5ef5b3d53514f7e3203} 
+std\+::pair$<$ int, int $>$ Map\+::get\+Entry\+Point (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Retrieves the entry point of the map. 
+
+\begin{DoxyReturn}{Returns}
+A pair containing the row and column indices of the entry point. 
+\end{DoxyReturn}
+\Hypertarget{class_map_a945429898c78817e9cfa0c8f7c23c9d9}\index{Map@{Map}!getExitPoint@{getExitPoint}}
+\index{getExitPoint@{getExitPoint}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{getExitPoint()}{getExitPoint()}}
+{\footnotesize\ttfamily \label{class_map_a945429898c78817e9cfa0c8f7c23c9d9} 
+std\+::pair$<$ int, int $>$ Map\+::get\+Exit\+Point (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Retrieves the exit point of the map. 
+
+\begin{DoxyReturn}{Returns}
+A pair containing the row and column indices of the exit point. 
+\end{DoxyReturn}
+\Hypertarget{class_map_a2b09c8875af2efb711fc3a022e70427d}\index{Map@{Map}!getHeight@{getHeight}}
+\index{getHeight@{getHeight}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{getHeight()}{getHeight()}}
+{\footnotesize\ttfamily \label{class_map_a2b09c8875af2efb711fc3a022e70427d} 
+int Map\+::get\+Height (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Retrieves the height of the map. 
+
+\begin{DoxyReturn}{Returns}
+The number of rows in the map. 
+\end{DoxyReturn}
+\Hypertarget{class_map_afd34d12227676b3cebeed9f5fae2508f}\index{Map@{Map}!getWidth@{getWidth}}
+\index{getWidth@{getWidth}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{getWidth()}{getWidth()}}
+{\footnotesize\ttfamily \label{class_map_afd34d12227676b3cebeed9f5fae2508f} 
+int Map\+::get\+Width (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Retrieves the width of the map. 
+
+\begin{DoxyReturn}{Returns}
+The number of columns in the map. 
+\end{DoxyReturn}
+\Hypertarget{class_map_af17d1bba2142490692184d3e168aac4a}\index{Map@{Map}!isCloserToExit@{isCloserToExit}}
+\index{isCloserToExit@{isCloserToExit}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{isCloserToExit()}{isCloserToExit()}}
+{\footnotesize\ttfamily \label{class_map_af17d1bba2142490692184d3e168aac4a} 
+bool Map\+::is\+Closer\+To\+Exit (\begin{DoxyParamCaption}\item[{int}]{x0}{, }\item[{int}]{x1}{, }\item[{int}]{y0}{, }\item[{int}]{y1}{}\end{DoxyParamCaption})}
+
+
+
+Determines if moving from (x0, y0) to (x1, y1) brings you closer to the exit. 
+
+Determines if moving from (x0, y0) to (x1, y1) brings one closer to the exit.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x0} & The current x-\/coordinate. \\
+\hline
+{\em x1} & The new x-\/coordinate. \\
+\hline
+{\em y0} & The current y-\/coordinate. \\
+\hline
+{\em y1} & The new y-\/coordinate. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the new position is closer to the exit, false otherwise.
+\end{DoxyReturn}
+Uses the Manhattan distance to compare the two positions relative to the exit point.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x0} & The current x-\/coordinate. \\
+\hline
+{\em x1} & The new x-\/coordinate. \\
+\hline
+{\em y0} & The current y-\/coordinate. \\
+\hline
+{\em y1} & The new y-\/coordinate. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the new coordinate is closer to the exit; false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_map_af89f6011d39541d20c7f1f21d12cd91c}\index{Map@{Map}!isCritterCell@{isCritterCell}}
+\index{isCritterCell@{isCritterCell}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{isCritterCell()}{isCritterCell()}}
+{\footnotesize\ttfamily \label{class_map_af89f6011d39541d20c7f1f21d12cd91c} 
+bool Map\+::is\+Critter\+Cell (\begin{DoxyParamCaption}\item[{int}]{x}{, }\item[{int}]{y}{}\end{DoxyParamCaption})}
+
+
+
+Determines if the cell at (x, y) is a critter cell. 
+
+Checks if the cell at (x, y) is a critter cell.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The row index. \\
+\hline
+{\em y} & The column index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the cell is of type CRITTER, false otherwise.
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The row index. \\
+\hline
+{\em y} & The column index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the cell is of type CRITTER and within bounds; false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_map_ace3de4b483d981195347d407dbc7376f}\index{Map@{Map}!isPathCell@{isPathCell}}
+\index{isPathCell@{isPathCell}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{isPathCell()}{isPathCell()}}
+{\footnotesize\ttfamily \label{class_map_ace3de4b483d981195347d407dbc7376f} 
+bool Map\+::is\+Path\+Cell (\begin{DoxyParamCaption}\item[{int}]{x}{, }\item[{int}]{y}{}\end{DoxyParamCaption})}
+
+
+
+Checks if the cell at (x, y) is a path cell. 
+
+Checks if the cell at (x, y) is either a PATH cell or a CRITTER cell.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The row index. \\
+\hline
+{\em y} & The column index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the cell is a PATH cell, false otherwise.
+\end{DoxyReturn}
+This is used to determine if a cell is valid for critter movement.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The row index. \\
+\hline
+{\em y} & The column index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the cell is PATH or CRITTER; false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_map_a34c631d8fb54f9e16c16e7982a5e4523}\index{Map@{Map}!isSceneryCell@{isSceneryCell}}
+\index{isSceneryCell@{isSceneryCell}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{isSceneryCell()}{isSceneryCell()}}
+{\footnotesize\ttfamily \label{class_map_a34c631d8fb54f9e16c16e7982a5e4523} 
+bool Map\+::is\+Scenery\+Cell (\begin{DoxyParamCaption}\item[{int}]{x\+\_\+val}{, }\item[{int}]{y\+\_\+val}{}\end{DoxyParamCaption})}
+
+
+
+Checks if the cell at (x\+\_\+val, y\+\_\+val) is a scenery cell. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+\_\+val} & The row index. \\
+\hline
+{\em y\+\_\+val} & The column index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the cell is a SCENERY cell; false otherwise.
+\end{DoxyReturn}
+First checks if the coordinates are within bounds, then verifies if the cell\textquotesingle{}s type is SCENERY.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+\_\+val} & The row index. \\
+\hline
+{\em y\+\_\+val} & The column index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the cell is SCENERY; false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_map_a300b40300c14c4b05d50bf34a6a764e4}\index{Map@{Map}!isValidCoordinate@{isValidCoordinate}}
+\index{isValidCoordinate@{isValidCoordinate}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{isValidCoordinate()}{isValidCoordinate()}}
+{\footnotesize\ttfamily \label{class_map_a300b40300c14c4b05d50bf34a6a764e4} 
+bool Map\+::is\+Valid\+Coordinate (\begin{DoxyParamCaption}\item[{int}]{x}{, }\item[{int}]{y}{}\end{DoxyParamCaption})}
+
+
+
+Checks if the coordinate (x, y) is within the bounds of the map. 
+
+Checks if the coordinate (x, y) is within the map bounds.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The row index. \\
+\hline
+{\em y} & The column index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the coordinate is valid, false otherwise.
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The row index. \\
+\hline
+{\em y} & The column index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if (x, y) is within bounds; false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_map_a2c4e0df0278b2a0e4ebbb8dada797548}\index{Map@{Map}!setCellToCritterCell@{setCellToCritterCell}}
+\index{setCellToCritterCell@{setCellToCritterCell}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{setCellToCritterCell()}{setCellToCritterCell()}}
+{\footnotesize\ttfamily \label{class_map_a2c4e0df0278b2a0e4ebbb8dada797548} 
+void Map\+::set\+Cell\+To\+Critter\+Cell (\begin{DoxyParamCaption}\item[{int}]{x}{, }\item[{int}]{y}{}\end{DoxyParamCaption})}
+
+
+
+Sets the cell at (x, y) to be a critter cell. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The row index. \\
+\hline
+{\em y} & The column index.\\
+\hline
+\end{DoxyParams}
+If the coordinate is valid, updates the cell\textquotesingle{}s type to CRITTER.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The row index. \\
+\hline
+{\em y} & The column index. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_map_a77b1bbad0e0d0672670d6643be930978}\index{Map@{Map}!setCellToOccupied@{setCellToOccupied}}
+\index{setCellToOccupied@{setCellToOccupied}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{setCellToOccupied()}{setCellToOccupied()}}
+{\footnotesize\ttfamily \label{class_map_a77b1bbad0e0d0672670d6643be930978} 
+void Map\+::set\+Cell\+To\+Occupied (\begin{DoxyParamCaption}\item[{int}]{x}{, }\item[{int}]{y}{}\end{DoxyParamCaption})}
+
+
+
+Sets the cell at (x, y) to be occupied by a tower. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The row index. \\
+\hline
+{\em y} & The column index.\\
+\hline
+\end{DoxyParams}
+If the coordinate is valid, updates the cell\textquotesingle{}s type to TOWER. Otherwise, prints an error.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The row index. \\
+\hline
+{\em y} & The column index. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_map_ac6a9e6293797daf8d207f2a95de51df6}\index{Map@{Map}!setCellToPath@{setCellToPath}}
+\index{setCellToPath@{setCellToPath}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{setCellToPath()}{setCellToPath()}}
+{\footnotesize\ttfamily \label{class_map_ac6a9e6293797daf8d207f2a95de51df6} 
+void Map\+::set\+Cell\+To\+Path (\begin{DoxyParamCaption}\item[{int}]{x}{, }\item[{int}]{y}{}\end{DoxyParamCaption})}
+
+
+
+Sets the cell at (x, y) to be a path cell. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The row index. \\
+\hline
+{\em y} & The column index.\\
+\hline
+\end{DoxyParams}
+If the coordinate is valid, updates the cell\textquotesingle{}s type to PATH. Otherwise, prints an error.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The row index. \\
+\hline
+{\em y} & The column index. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_map_a9d8debc886c91dc125d07c304171b7ab}\index{Map@{Map}!setCellToScenery@{setCellToScenery}}
+\index{setCellToScenery@{setCellToScenery}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{setCellToScenery()}{setCellToScenery()}}
+{\footnotesize\ttfamily \label{class_map_a9d8debc886c91dc125d07c304171b7ab} 
+void Map\+::set\+Cell\+To\+Scenery (\begin{DoxyParamCaption}\item[{int}]{x}{, }\item[{int}]{y}{}\end{DoxyParamCaption})}
+
+
+
+Sets the cell at (x, y) to be a scenery cell. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The row index. \\
+\hline
+{\em y} & The column index.\\
+\hline
+\end{DoxyParams}
+If the coordinate is valid, updates the cell\textquotesingle{}s type to SCENERY. Otherwise, prints an error.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The row index. \\
+\hline
+{\em y} & The column index. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_map_a1e7e947217937d0d7eb73b2e39a6a80a}\index{Map@{Map}!setEntryPoint@{setEntryPoint}}
+\index{setEntryPoint@{setEntryPoint}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{setEntryPoint()}{setEntryPoint()}}
+{\footnotesize\ttfamily \label{class_map_a1e7e947217937d0d7eb73b2e39a6a80a} 
+void Map\+::set\+Entry\+Point (\begin{DoxyParamCaption}\item[{int}]{x}{, }\item[{int}]{y}{}\end{DoxyParamCaption})}
+
+
+
+Sets the entry point of the map. 
+
+Sets the entry point for the map.
+
+The entry point must be on a valid PATH cell.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The row index for the entry. \\
+\hline
+{\em y} & The column index for the entry.\\
+\hline
+\end{DoxyParams}
+The entry point must be a valid coordinate and its cell type must be PATH. Marks the cell as an entry cell.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The row index for the entry. \\
+\hline
+{\em y} & The column index for the entry. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_map_ad1f7e2787ed10aca5a3c6148eae5e2d8}\index{Map@{Map}!setExitPoint@{setExitPoint}}
+\index{setExitPoint@{setExitPoint}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{setExitPoint()}{setExitPoint()}}
+{\footnotesize\ttfamily \label{class_map_ad1f7e2787ed10aca5a3c6148eae5e2d8} 
+void Map\+::set\+Exit\+Point (\begin{DoxyParamCaption}\item[{int}]{x}{, }\item[{int}]{y}{}\end{DoxyParamCaption})}
+
+
+
+Sets the exit point of the map. 
+
+Sets the exit point for the map.
+
+The exit point must be on a valid PATH cell.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The row index for the exit. \\
+\hline
+{\em y} & The column index for the exit.\\
+\hline
+\end{DoxyParams}
+The exit point must be a valid coordinate and its cell type must be PATH. Marks the cell as an exit cell.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The row index for the exit. \\
+\hline
+{\em y} & The column index for the exit. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_map_a046e5c4ca6b8922b8b46b7e92757e56c}\index{Map@{Map}!validateMap@{validateMap}}
+\index{validateMap@{validateMap}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{validateMap()}{validateMap()}}
+{\footnotesize\ttfamily \label{class_map_a046e5c4ca6b8922b8b46b7e92757e56c} 
+bool Map\+::validate\+Map (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Validates the map configuration. 
+
+Ensures that the entry and exit points are set and valid, and that a path exists between them.
+
+\begin{DoxyReturn}{Returns}
+true if the map is valid; false otherwise.
+\end{DoxyReturn}
+Checks that the entry and exit points have been set, verifies that their respective flags are set, and confirms that there is a valid path connecting the entry and exit.
+
+\begin{DoxyReturn}{Returns}
+true if the map is valid; false otherwise. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Map/\mbox{\hyperlink{_map_8h}{Map.\+h}}\item 
+Map/\mbox{\hyperlink{_map_8cpp}{Map.\+cpp}}\end{DoxyCompactItemize}

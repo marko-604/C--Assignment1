@@ -1,0 +1,89 @@
+\doxysection{Squirrel Class Reference}
+\hypertarget{class_squirrel}{}\label{class_squirrel}\index{Squirrel@{Squirrel}}
+
+
+A basic critter type with lower attributes.  
+
+
+
+
+{\ttfamily \#include $<$critter.\+h$>$}
+
+Inheritance diagram for Squirrel\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_squirrel}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_squirrel_a7b864e4e0854bb91c7fe2010d8f75e99}{Squirrel}} (int x\+\_\+val, int y\+\_\+val)
+\begin{DoxyCompactList}\small\item\em Constructs a new \doxylink{class_squirrel}{Squirrel} critter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_critter}{Critter}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_critter_a907e5fe7154e73d198e1db66567f7026}{Critter}} (int val, int spd\+\_\+val, int hlt\+\_\+val, int str\+\_\+val, int x\+\_\+val, int y\+\_\+val)
+\begin{DoxyCompactList}\small\item\em Constructs a new \doxylink{class_critter}{Critter} object with the specified parameters. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_critter_a447e8f593e515c070c5e352a79902f2b}{get\+Speed}} ()
+\begin{DoxyCompactList}\small\item\em Retrieves the speed of the critter. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_critter_a90694c3e77d0d0670da61be2ac467611}{get\+Health}} ()
+\begin{DoxyCompactList}\small\item\em Retrieves the current health of the critter. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_critter_a12aa2a4b8d89a0c41b0520a8cc2be4a7}{get\+Strength}} ()
+\begin{DoxyCompactList}\small\item\em Retrieves the strength of the critter. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_critter_a288777f1bfb094406045e5cc9c4c325e}{get\+CID}} ()
+\begin{DoxyCompactList}\small\item\em Retrieves the unique identifier of the critter. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_critter_ad223d2b9970e5cb68d165aaa32ef5c0f}{get\+Value}} ()
+\begin{DoxyCompactList}\small\item\em Retrieves the reward value of the critter. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_critter_a20133d728c9aaaa5706bfe2e4911e683}{get\+Accumulator}} ()
+\begin{DoxyCompactList}\small\item\em Retrieves the tick accumulator value. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_critter_aeab99b389fb0256c6f62926fb61354ea}{set\+Health}} (int hlt\+\_\+val)
+\begin{DoxyCompactList}\small\item\em Sets the critter\textquotesingle{}s health. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_critter_a17acd2cb93c264e6616e4d1299a5de54}{set\+Speed}} (int spd\+\_\+val)
+\begin{DoxyCompactList}\small\item\em Sets the critter\textquotesingle{}s speed. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_critter_a36c795ad9af488d0bd4c00a6ca954a8c}{set\+Strength}} (int str\+\_\+val)
+\begin{DoxyCompactList}\small\item\em Sets the critter\textquotesingle{}s strength. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_critter_a265301679e2793490bd97eb2d3820643}{set\+Accumulator}} (int val)
+\begin{DoxyCompactList}\small\item\em Sets the tick accumulator value. \end{DoxyCompactList}\item 
+void {\bfseries increment\+Accumulator} ()
+\begin{DoxyCompactList}\small\item\em Increments the tick accumulator by 1. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_critter_a6380d40ed4e8b5cef8fde6c35365a4ee}{display\+Info}} ()
+\begin{DoxyCompactList}\small\item\em Displays information about the critter. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_critter_af0260aaa37e6550701029c389a8768dd}{getX}} ()
+\begin{DoxyCompactList}\small\item\em Retrieves the current x-\/coordinate of the critter. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_critter_aa7993ea01e57a9aebc7958f74f2181fe}{getY}} ()
+\begin{DoxyCompactList}\small\item\em Retrieves the current y-\/coordinate of the critter. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_critter_aff30fd4419f52e3fad7ed4c9eb764d36}{move}} (\mbox{\hyperlink{class_map}{Map}} \texorpdfstring{$\ast$}{*}game\+Map)
+\begin{DoxyCompactList}\small\item\em Moves the critter on the provided game map. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_critter_a36d086dad8f154348fa53def629f679f}{is\+Dead}} ()
+\begin{DoxyCompactList}\small\item\em Checks whether the critter is dead. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A basic critter type with lower attributes. 
+
+The \doxylink{class_squirrel}{Squirrel} represents an easy enemy with predefined attributes. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_squirrel_a7b864e4e0854bb91c7fe2010d8f75e99}\index{Squirrel@{Squirrel}!Squirrel@{Squirrel}}
+\index{Squirrel@{Squirrel}!Squirrel@{Squirrel}}
+\doxysubsubsection{\texorpdfstring{Squirrel()}{Squirrel()}}
+{\footnotesize\ttfamily \label{class_squirrel_a7b864e4e0854bb91c7fe2010d8f75e99} 
+Squirrel\+::\+Squirrel (\begin{DoxyParamCaption}\item[{int}]{x\+\_\+val}{, }\item[{int}]{y\+\_\+val}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a new \doxylink{class_squirrel}{Squirrel} critter. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+\_\+val} & Starting x-\/coordinate. \\
+\hline
+{\em y\+\_\+val} & Starting y-\/coordinate. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Critter/\mbox{\hyperlink{critter_8h}{critter.\+h}}\end{DoxyCompactItemize}

@@ -241,6 +241,174 @@ int main() {
         generator->incrementWaveNumber();
       }
 
+      if (tick_count % 20 == 0) {
+        while (points >= 100) {
+          cout << "Current number of points: " << points << endl;
+          cout << "1. Regular(100)" << "\n2. Sniper(150)"
+               << "\n3. Bomb(175)\n4. Freezing(200)" << "\n5. Sell Tower"
+               << "\n6. Level Up Tower" << "\n7. Exit" << endl;
+
+          int choice;
+          cin >> choice;
+          if (choice == 1) {
+            cout << "Select coordinates to place tower: ";
+            char row;
+            int col;
+            cin >> row >> col;
+            while (true) {
+              if (!gameMap.isValidCoordinate(row - 'A', col) ||
+                  gameMap.isPathCell(row - 'A', col)) {
+                cout << "Coordinates are not valid please re-enter them: ";
+                cin >> row >> col;
+              } else {
+                break;
+              }
+            }
+            Tower *t = new Tower(row - 'A', col);
+            if (t->getCost() <= points) {
+              points -= t->getCost();
+              cout << points << " left to spend" << endl;
+              gameMap.setCellToOccupied(row - 'A', col);
+              gameTowers.push_back(t);
+            } else {
+              cout << "Not enough points!" << endl;
+              delete t;
+            }
+            gameMap.displayMap();
+          } else if (choice == 2) {
+            cout << "Select coordinates to place tower: ";
+            char row;
+            int col;
+            cin >> row >> col;
+            while (true) {
+              if (!gameMap.isValidCoordinate(row - 'A', col) ||
+                  gameMap.isPathCell(row - 'A', col)) {
+                cout << "Coordinates are not valid please re-enter them: ";
+                cin >> row >> col;
+              } else {
+                break;
+              }
+            }
+            Tower *t = new SniperTower(row - 'A', col);
+            if (t->getCost() <= points) {
+              points -= t->getCost();
+              cout << points << " left to spend" << endl;
+              gameMap.setCellToOccupied(row - 'A', col);
+              gameTowers.push_back(t);
+            } else {
+              cout << "Not enough points!" << endl;
+              delete t;
+            }
+            gameMap.displayMap();
+          } else if (choice == 3) {
+            cout << "Select coordinates to place tower: ";
+            char row;
+            int col;
+            cin >> row >> col;
+            while (true) {
+              if (!gameMap.isValidCoordinate(row - 'A', col) ||
+                  gameMap.isPathCell(row - 'A', col)) {
+                cout << "Coordinates are not valid please re-enter them: ";
+                cin >> row >> col;
+              } else {
+                break;
+              }
+            }
+            Tower *t = new BombTower(row - 'A', col);
+            if (t->getCost() <= points) {
+              points -= t->getCost();
+              cout << points << " left to spend" << endl;
+              gameMap.setCellToOccupied(row - 'A', col);
+              gameTowers.push_back(t);
+            } else {
+              cout << "Not enough points!" << endl;
+              delete t;
+            }
+            gameMap.displayMap();
+          } else if (choice == 4) {
+            cout << "Select coordinates to place tower: ";
+            char row;
+            int col;
+            cin >> row >> col;
+            while (true) {
+              if (!gameMap.isValidCoordinate(row - 'A', col) ||
+                  gameMap.isPathCell(row - 'A', col)) {
+                cout << "Coordinates are not valid please re-enter them: ";
+                cin >> row >> col;
+              } else {
+                break;
+              }
+            }
+            Tower *t = new FreezingTower(row - 'A', col);
+            if (t->getCost() <= points) {
+              points -= t->getCost();
+              cout << points << " left to spend" << endl;
+              gameMap.setCellToOccupied(row - 'A', col);
+              gameTowers.push_back(t);
+            } else {
+              cout << "Not enough points!" << endl;
+              delete t;
+            }
+            gameMap.displayMap();
+          } else if (choice == 5) {
+            // Delete a Tower
+
+            for (Tower *t : gameTowers) {
+              cout << "Tower ID" << t->getId() << " Located on cell ("
+                   << t->getX() << ", " << t->getY() << "): i" << endl;
+            }
+
+            int delete_choice;
+
+            cout << "Enter the ID of the tower that you want deleted: ";
+            cin >> delete_choice;
+
+            for (Tower *t : gameTowers) {
+              if (t->getId() == delete_choice) {
+                // we need to delete the tower and get the refund value.
+                points += t->getResale();
+
+                // We delelete the tower.
+                auto it = std::find(gameTowers.begin(), gameTowers.end(), t);
+                if (it != gameTowers.end()) {
+                  delete *it;
+                  gameTowers.erase(it);
+                  break;
+                }
+              }
+            }
+
+          } else if (choice == 6) {
+
+            for (Tower *t : gameTowers) {
+              cout << "Tower ID: " << t->getId()
+                   << "\t has level: " << t->getLevel()
+                   << "\t Tower level up will cost: " << t->getCost() << endl;
+            }
+
+            int level_up_choice;
+
+            cout << "Enter the Id of the tower you want to level up: ";
+            cin >> level_up_choice;
+
+            for (Tower *t : gameTowers) {
+              if (t->getId() == level_up_choice) {
+                if (points >= t->getLevelUpCost()) {
+                  points -= t->getLevelUpCost();
+                  t->levelUp();
+                  cout << "Leveled up Tower " << t->getId()
+                       << " points left: " << points << endl;
+                  break;
+                }
+              }
+            }
+
+          } else {
+            break;
+          }
+        }
+      }
+
       // Process movement for each critter.
       for (Critter *c : gameCritters) {
         c->incrementAccumulator();
