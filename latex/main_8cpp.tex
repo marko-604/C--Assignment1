@@ -1,0 +1,79 @@
+\doxysection{main.\+cpp File Reference}
+\hypertarget{main_8cpp}{}\label{main_8cpp}\index{main.cpp@{main.cpp}}
+
+
+Main driver for the Tower Defense game.  
+
+
+{\ttfamily \#include "{}Critter/critter.\+h"{}}\newline
+{\ttfamily \#include "{}Map/\+Map.\+h"{}}\newline
+{\ttfamily \#include "{}towers/towers.\+h"{}}\newline
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include $<$cstddef$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$thread$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\begin{DoxyCompactList}\small\item\em Main function that runs the Tower Defense game. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{main_8cpp_a6e2876acbdfbf2564fbb56e774546a10}\label{main_8cpp_a6e2876acbdfbf2564fbb56e774546a10} 
+std\+::vector$<$ Critter \texorpdfstring{$\ast$}{*} $>$ {\bfseries game\+Critters}
+\begin{DoxyCompactList}\small\item\em Global vector containing pointers to critters currently active in the game. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Main driver for the Tower Defense game. 
+
+This file handles the initialization of the game map, tower placement, and the main game loop. It reads user input for map configuration and tower placement, spawns critters via a wave generator, and processes critter movement and tower attacks during game ticks.
+
+Demonstrates the functionality of the game, the way that the game works is that there is a global tick that occurs every tick\+\_\+interval seconds, critters will move based on the ticks and towers will fire on creatures based on critters being in range and the tick counter.
+
+Global variable\+:
+\begin{DoxyItemize}
+\item game\+Critters\+: A global vector containing pointers to the critters currently in the game.
+\end{DoxyItemize}
+
+\begin{DoxyAuthor}{Author}
+
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+
+\end{DoxyDate}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}\index{main.cpp@{main.cpp}!main@{main}}
+\index{main@{main}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+int main (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Main function that runs the Tower Defense game. 
+
+The function performs the following steps\+:
+\begin{DoxyItemize}
+\item Prompts the user for the map dimensions.
+\item Configures the map by reading a series of coordinates to create a path, then setting the entry and exit points.
+\item Validates the configured map.
+\item Allows the user to place towers until points run out.
+\item Enters the main game loop where\+:
+\begin{DoxyItemize}
+\item Critter waves are generated periodically.
+\item Each tick, critters move and are checked for reaching the exit (affecting player health).
+\item Towers check for critters in range and attack them.
+\item The map is updated and displayed.
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+The game loop ends when the tick count exceeds a predefined limit or the player\textquotesingle{}s health reaches zero.
+
+\begin{DoxyReturn}{Returns}
+int 0 if the game ends normally, or 0 if the player dies. 
+\end{DoxyReturn}
