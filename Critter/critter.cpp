@@ -85,3 +85,27 @@ bool Critter::isDead() {
     return false;
   }
 }
+
+// This function returns a wave size based on the wave number
+std::vector<Critter *> CritterWaveGenerator::generateWave() {
+  std::vector<Critter *> wave;
+
+  for (int i = 0; i < 10 * waveNumber; i++) {
+    if (i % 2 == 0) {
+      Squirrel *t = new Squirrel(startX, startY);
+      wave.push_back(t);
+    }
+
+    if (i % 3 == 0) {
+      Wolf *w = new Wolf(startX, startY);
+      wave.push_back(w);
+    }
+
+    if (i % 5 == 0) {
+      Bear *b = new Bear(startX, startY);
+      wave.push_back(b);
+    }
+  }
+
+  return wave;
+}

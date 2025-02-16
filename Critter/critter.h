@@ -47,7 +47,7 @@ private:
 
 class Squirrel : public Critter {
 public:
-  Squirrel(int x_val, int y_val) : Critter(25, 4, 5, 2, x_val, y_val) {}
+  Squirrel(int x_val, int y_val) : Critter(25, 1, 5, 2, x_val, y_val) {}
 };
 
 class Wolf : public Critter {
@@ -57,7 +57,21 @@ public:
 
 class Bear : public Critter {
 public:
-  Bear(int x_val, int y_val) : Critter(100, 1, 20, 5, x_val, y_val) {}
+  Bear(int x_val, int y_val) : Critter(100, 4, 20, 5, x_val, y_val) {}
+};
+
+class CritterWaveGenerator {
+public:
+  CritterWaveGenerator(int waveNumber, int startX, int startY)
+      : waveNumber(waveNumber), startX(startX), startY(startY) {}
+  std::vector<Critter *> generateWave();
+
+  void incrementWaveNumber() { waveNumber += 1; }
+
+private:
+  int waveNumber;
+  int startX;
+  int startY;
 };
 
 #endif

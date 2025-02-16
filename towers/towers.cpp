@@ -18,7 +18,6 @@ int Tower::nextId = 100;
 
 // Dummy placeholder that we will use for the bomb tower attack, but the game
 // should hold a list of all of the critters that are currently in the game
-std::vector<Critter *> allCritters;
 
 // This function shows the basic info about a critter.
 // The atttack function for the tower, takes a pointer to a critter
@@ -129,7 +128,7 @@ void BombTower::attack(Critter *target) {
 
   target->setHealth(target->getHealth() - getDamage());
 
-  for (Critter *c : allCritters) {
+  for (Critter *c : gameCritters) {
     int cx = c->getX();
     int cy = c->getY();
 
@@ -145,6 +144,24 @@ void BombTower::attack(Critter *target) {
     // bomb
     if (aoeArea >= distance && target->getCID() != c->getCID()) {
       c->setHealth(c->getHealth() - getDamage() / 2);
+
+      std::cout << "Bomb Tower " << getId() << " has AoE attacked critter "
+                << c->getCID() << std::endl;
+      std::cout << "Critter c has " << c->getHealth() << " left" << std::endl;
+
+      if (c->isDead()) {
+        std::cout << "Critter " << c->getCID()
+                  << " has died removing the critter from the game"
+                  << std::endl;
+        // We need to delete it from the vector.
+        auto it = std::find(gameCritters.begin(), gameCritters.end(), c);
+        if (it != gameCritters.end()) {
+          // Delete the critter memory:
+          delete *it;
+          // Remove the pointer from the vector:
+          gameCritters.erase(it);
+        }
+      }
     }
   }
 
@@ -220,6 +237,5 @@ void FreezingTower::attack(Critter *target) {
   target->setHealth(target->getHealth() - getDamage());
 
   // We apply a permanent slowing to the critter.
-  std::cout << "Slowing critter " << target->getCID() << "by 30%" << std::endl;
   target->setSpeed(target->getSpeed() * slowRate);
 }

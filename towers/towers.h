@@ -16,6 +16,7 @@
 // This is a temporary critter class that will be use as a dummy class for the
 // moment when we get the actual version from teamate we will integrate theres
 
+extern std::vector<Critter *> gameCritters;
 class Tower {
 public:
   virtual ~Tower() {}

@@ -5,6 +5,16 @@
 
 using namespace std;
 
+bool Map::isCritterCell(int x, int y) {
+  if (isValidCoordinate(x, y)) {
+    if (grid[x][y].type == CRITTER) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 Map::Map(int w, int h) : width(w), height(h) {
   grid.resize(height, vector<Cell>(width, {SCENERY}));
 }
@@ -137,10 +147,12 @@ bool Map::validateMap() {
 }
 
 bool Map::isPathCell(int x, int y) {
-  if (grid[x][y].type == PATH)
-    return true;
-  else
-    return false;
+  if (isValidCoordinate(x, y)) {
+    if (grid[x][y].type == PATH || grid[x][y].type == CRITTER)
+      return true;
+  }
+
+  return false;
 }
 
 void Map::setCellToCritterCell(int x, int y) {
@@ -151,15 +163,11 @@ void Map::setCellToCritterCell(int x, int y) {
 }
 
 bool Map::isCloserToExit(int x0, int x1, int y0, int y1) {
-
   int exitX = exitPoint.first;
   int exitY = exitPoint.second;
-  if ((std::abs(exitX - x1) < std::abs(exitX - x0)) ||
-      (std::abs(exitY - y1) < std::abs(exitY - y0))) {
-    return true;
-  } else {
-    return false;
-  }
+  int d0 = std::abs(exitX - x0) + std::abs(exitY - y0); // Manhattan distance
+  int d1 = std::abs(exitX - x1) + std::abs(exitY - y1);
+  return d1 < d0;
 }
 
 void Map::displayMap() {

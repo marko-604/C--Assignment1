@@ -35,6 +35,7 @@ public:
   int getHeight() { return height; }
   int getWidth() { return width; }
 
+  bool isCritterCell(int x, int y);
   bool isValidCoordinate(int x, int y);
   bool isPathCell(int x, int y);
   bool isCloserToExit(int x0, int x1, int y0, int y1);

@@ -5,9 +5,11 @@
 #include <cstddef>
 #include <iostream>
 #include <thread>
+#include <vector>
 
 using namespace std;
 
+std::vector<Critter *> gameCritters;
 int main() {
   // -------------------------------------------------------------------------------------------
   //                                         MAP
@@ -24,7 +26,9 @@ int main() {
 
   char row;
   int col;
-  cout << "Set path using coordinates (enter Z -1 to stop):\n";
+  cout << "Enter a set of coordinates in the format \"A0 A1 B1\" ... enter in "
+          "exactly this format  (enter Z "
+          "-1 to stop):\n";
   while (true) {
     cin >> row >> col;
     if (row == 'Z' && col == -1)
@@ -51,7 +55,6 @@ int main() {
     // and how the tower will acquire a target.
 
     std::vector<Tower *> gameTowers;
-    std::vector<Critter *> gameCritters;
 
     int points = 300;
     while (points >= 100) {
@@ -193,235 +196,18 @@ int main() {
     int tick_count = 0;
     int total_tick_count = 60;
 
+    CritterWaveGenerator *generator = new CritterWaveGenerator(
+        1, gameMap.getEntryPoint().first, gameMap.getEntryPoint().second);
+
     int playerHealth = 500;
     while (tick_count <= total_tick_count) {
-
-      if (tick_count % 20 == 0) {
-        while (points >= 100) {
-          cout << "Current number of points: " << points << std::endl;
-          cout << "1. Regular(100)" << "\n2. Sniper(150)"
-               << "\n3. Bomb(175)\n4. Freezing(200)" << "\n5. Sell Tower"
-               << "\n6. Level Up Tower" << "\n7. Exit" << std::endl;
-
-          int choice;
-          cin >> choice;
-          if (choice == 1) {
-            cout << "Select coordinates to place tower: ";
-            char row;
-            int col;
-            cin >> row >> col;
-
-            while (1) {
-              if (!gameMap.isValidCoordinate(row - 'A', col) ||
-                  gameMap.isPathCell(row - 'A', col)) {
-                cout << "Coordinates are not valid please re-enter them: ";
-                cin >> row >> col;
-
-              } else {
-                break;
-              }
-            }
-
-            Tower *t = new Tower(row - 'A', col);
-
-            if (t->getCost() <= points) {
-              points -= t->getCost();
-              cout << points << " left to spend" << std::endl;
-              gameMap.setCellToOccupied(row - 'A', col);
-              gameTowers.push_back(t);
-            } else {
-              cout << "Not enough points!" << std::endl;
-              delete t;
-            }
-
-            gameMap.displayMap();
-          } else if (choice == 2) {
-            cout << "Select coordinates to place tower: ";
-            char row;
-            int col;
-            cin >> row >> col;
-
-            while (1) {
-              if (!gameMap.isValidCoordinate(row - 'A', col) ||
-                  gameMap.isPathCell(row - 'A', col)) {
-                cout << "Coordinates are not valid please re-enter them: ";
-                cin >> row >> col;
-
-              } else {
-                break;
-              }
-            }
-
-            Tower *t = new SniperTower(row - 'A', col);
-
-            if (t->getCost() <= points) {
-
-              points -= t->getCost();
-              cout << points << " left to spend" << std::endl;
-              gameMap.setCellToOccupied(row - 'A', col);
-              gameTowers.push_back(t);
-            } else {
-              cout << "Not enough points!" << std::endl;
-              delete t;
-            }
-            gameMap.displayMap();
-
-          } else if (choice == 3) {
-
-            cout << "Select coordinates to place tower: ";
-            char row;
-            int col;
-            cin >> row >> col;
-
-            while (1) {
-              if (!gameMap.isValidCoordinate(row - 'A', col) ||
-                  gameMap.isPathCell(row - 'A', col)) {
-                cout << "Coordinates are not valid please re-enter them: ";
-                cin >> row >> col;
-
-              } else {
-                break;
-              }
-            }
-
-            Tower *t = new BombTower(row - 'A', col);
-
-            if (t->getCost() <= points) {
-              points -= t->getCost();
-              cout << points << " left to spend" << std::endl;
-              gameMap.setCellToOccupied(row - 'A', col);
-              gameTowers.push_back(t);
-            } else {
-              cout << "Not enough points!" << std::endl;
-              delete t;
-            }
-            gameMap.displayMap();
-          } else if (choice == 4) {
-
-            cout << "Select coordinates to place tower: ";
-            char row;
-            int col;
-            cin >> row >> col;
-
-            while (1) {
-              if (!gameMap.isValidCoordinate(row - 'A', col) ||
-                  gameMap.isPathCell(row - 'A', col)) {
-                cout << "Coordinates are not valid please re-enter them: ";
-                cin >> row >> col;
-
-              } else {
-                break;
-              }
-            }
-
-            Tower *t = new FreezingTower(row - 'A', col);
-
-            if (t->getCost() <= points) {
-              points -= t->getCost();
-              cout << points << " left to spend" << std::endl;
-              gameMap.setCellToOccupied(row - 'A', col);
-              gameTowers.push_back(t);
-            } else {
-              cout << "Not enough points!" << std::endl;
-              delete t;
-            }
-            gameMap.displayMap();
-          } else if (choice == 5) {
-
-            int i = 0;
-            for (Tower *t : gameTowers) {
-              cout << i << ". " << endl;
-              t->showTowerInfo();
-            }
-            i = 0;
-
-            int id;
-            cout << "Enter the tower id of the tower you wish to sell: ";
-            cin >> id;
-
-            Tower *temp = nullptr;
-            for (Tower *t : gameTowers) {
-              if (id == t->getId()) {
-                temp = t;
-                break;
-              }
-            }
-            if (temp == nullptr) {
-              cout << "Did not enter a valid id try again!\n";
-              continue;
-            }
-
-            else {
-              auto it = std::find(gameTowers.begin(), gameTowers.end(), temp);
-              if (it != gameTowers.end()) {
-                // Delete the critter memory:
-                delete *it;
-                // Remove the pointer from the vector:
-                gameTowers.erase(it);
-              }
-            }
-          } else if (choice == 6) {
-
-            int i = 0;
-
-            for (Tower *t : gameTowers) {
-              cout << i << ". " << endl;
-              t->showTowerInfo();
-            }
-
-            int id;
-
-            cout << "Enter the ID of the tower you want to level up: ";
-            cin >> id;
-
-            Tower *temp;
-
-            for (Tower *t : gameTowers) {
-              if (t->getId() == id) {
-                temp = t;
-                break;
-              }
-            }
-
-            if (temp == nullptr) {
-              cout << "Enter a valid id next time!" << endl;
-              continue;
-            }
-
-            if (points >= temp->getLevelUpCost()) {
-              points -= temp->levelUp();
-            } else {
-              cout << "Not enough points!" << endl;
-            }
-
-          } else {
-            break;
-          }
-        }
-      }
+      tick_count += 1;
       cout << "Tick " << tick_count << std::endl;
       std::this_thread::sleep_for(std::chrono::seconds(tick_interval));
-      tick_count += 1;
 
-      if (tick_count % 2 == 0) {
-        Squirrel *c = new Squirrel(gameMap.getEntryPoint().first,
-                                   gameMap.getEntryPoint().second);
-
-        gameCritters.push_back(c);
-      }
-
-      if (tick_count % 3 == 0 && tick_count % 2 != 0) {
-        Wolf *c = new Wolf(gameMap.getEntryPoint().first,
-                           gameMap.getEntryPoint().second);
-
-        gameCritters.push_back(c);
-      }
-
-      if (tick_count % 5 && tick_count % 2 != 0 && tick_count % 3 != 0) {
-        Bear *c = new Bear(gameMap.getEntryPoint().first,
-                           gameMap.getEntryPoint().second);
-
-        gameCritters.push_back(c);
+      if (tick_count % 10 == 0 || tick_count == 1) {
+        gameCritters = generator->generateWave();
+        generator->incrementWaveNumber();
       }
 
       for (Critter *c : gameCritters) {
@@ -442,10 +228,8 @@ int main() {
                 return 0;
               }
             }
-
-          } else {
-            c->move(&gameMap);
           }
+          c->move(&gameMap);
         }
       }
 
