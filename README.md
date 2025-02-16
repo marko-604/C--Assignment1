@@ -12,3 +12,5 @@ The way that the game works is that there is one global synchronized clock that 
 
 Critters move based on the ticks and towers attack based on the number of ticks that have occured. 
 
+The placement of tower can be seen as a T on the grid and the movements of the critters can be seen as C's on the grid.
+
