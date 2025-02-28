@@ -39,6 +39,8 @@ private:
   int strength;
   int row;
   int col;
+  int cid;
+  static int nextCID;
   std::vector<std::pair<int, int>> path;
   CritterType type;
 };

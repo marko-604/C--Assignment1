@@ -8,6 +8,20 @@
 class Critter;
 enum TowerType { REGULAR, SNIPER, BOMB, FREEZING };
 
+struct Projectile {
+  float x, y;   // current position in tile or pixel coordinates
+  float vx, vy; // velocity (pixels/sec or tiles/sec)
+  float speed;  // how fast the projectile moves
+  float damage; // how much damage it deals
+  bool active;  // whether it's still flying
+
+  // Optionally store a color, or towerType so you can draw different colors
+  Color color;
+
+  // If you want to track a target or keep the direction locked
+  Critter *target; // or std::weak_ptr<Critter> if using shared_ptr
+};
+
 // The Tower class
 class Tower {
 
@@ -16,11 +30,12 @@ public:
         float hit_rate_val, int range_val, TowerType type_val)
       : x(x_val), y(y_val), cost(cost_val), damage(damage_val),
         attack_rate(attack_rate_val), hit_rate(hit_rate_val), range(range_val),
-        type(type_val) {} // Incorrect order
+        type(type_val), tid(nextId++) {} // Incorrect order
 
   // Constructor with no arguments.
   Tower() : Tower(-1, -1, 100, 3, 3, 0.65, 1, REGULAR) {}
 
+  int getTid();
   int getX();
   int getY();
   int getCost();
@@ -41,7 +56,7 @@ public:
   void setRange(int range);
 
   virtual void levelUp();
-  virtual void attack(std::vector<Critter *> critters,
+  virtual bool attack(std::vector<Critter *> critters,
                       int tick_count); // The tower attacks.
 
 private:
@@ -54,6 +69,8 @@ private:
   int attack_rate;
   float hit_rate;
   int range;
+  int tid;
+  static int nextId;
 };
 
 // Same as regular tower but more damage and greater range.
@@ -61,7 +78,7 @@ class SniperTower : public Tower {
 public:
   SniperTower() : Tower(-1, -1, 150, 5, 3, 0.75, 3, SNIPER) {}
   void levelUp() override;
-  void attack(std::vector<Critter *> critters, int tick_count) override;
+  bool attack(std::vector<Critter *> critters, int tick_count) override;
 };
 
 // This is the bomb tower class
@@ -73,7 +90,7 @@ public:
   int getSplash();
   void setSplash(int x);
   void levelUp() override;
-  void attack(std::vector<Critter *> critters, int tick_count) override;
+  bool attack(std::vector<Critter *> critters, int tick_count) override;
 
 private:
   int splash_area;
@@ -85,7 +102,7 @@ public:
   FreezingTower(int slow_rate_val)
       : Tower(-1, -1, 200, 5, 3, 0.75, 1, FREEZING) {}
 
-  void attack(std::vector<Critter *> critters, int tick_count) override;
+  bool attack(std::vector<Critter *> critters, int tick_count) override;
   int getSlowRate();
   void setSlowRate(int x);
   void levelUp() override;

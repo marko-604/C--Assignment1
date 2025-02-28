@@ -6,6 +6,7 @@
 
 int main() {
 
+  std::vector<Projectile *> projectiles;
   std::vector<Critter *> critters;
   std::vector<Tower *> towers;
   int rows, cols;
@@ -30,7 +31,6 @@ int main() {
     int screenWidth = gameMap.gridWidth * gameMap.tileSize;
     int screenHeight = gameMap.gridHeight * gameMap.tileSize;
     std::vector<std::pair<int, int>> path = gameMap.getPath();
-
     generator->generateCritters(path);
     InitWindow(screenWidth, screenHeight, "Game");
     SetTargetFPS(60);
@@ -55,7 +55,7 @@ int main() {
           generator->levelUp(path);
         }
 
-        if (tick_count % 4 == 0 && !generator->isEmpty()) {
+        if (tick_count % 2 == 0 && !generator->isEmpty()) {
           std::cout << "Added a critter to the game..." << std::endl;
           critters.push_back(generator->getCritter());
         } else {

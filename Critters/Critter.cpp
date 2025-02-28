@@ -3,11 +3,13 @@
 #include <utility>
 #include <vector>
 
+// We create an id for each critter in the game.
+int Critter::nextCID = 100;
 Critter::Critter(int hlt_val, int spd_val, int str_val, int row_val,
                  int col_val, CritterType type_val,
                  std::vector<std::pair<int, int>> path_val)
     : health(hlt_val), speed(spd_val), strength(str_val), row(row_val),
-      col(col_val), type(type_val), path(path_val) {}
+      col(col_val), type(type_val), path(path_val), cid(nextCID++) {}
 
 CritterType Critter::getType() { return type; }
 

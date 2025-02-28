@@ -4,7 +4,10 @@
 #include <cmath>
 #include <vector>
 
+int Tower::nextId = 100;
 int Tower::getX() { return x; }
+
+int Tower::getTid() { return tid; }
 
 int Tower::getY() { return y; }
 
@@ -39,7 +42,7 @@ void Tower::setRange(int range_val) { range = range_val; }
 void Tower::setResale(int resale_val) { resale = resale_val; }
 
 // This function will be used to select and attack a critter that is in range.
-void Tower::attack(std::vector<Critter *> critters, int tick_count) {
+bool Tower::attack(std::vector<Critter *> critters, int tick_count) {
   if (tick_count % attack_rate == 0) {
     for (Critter *p : critters) {
       int row = p->getRow();
@@ -54,16 +57,18 @@ void Tower::attack(std::vector<Critter *> critters, int tick_count) {
       if (distance <= range) {
         // we can attack the critter and lower it's health by the damage.
         p->setHealth(p->getHealth() - damage);
-        return;
-      } else {
-        return;
+
+        std::cout << "Tower " << getTid() << " attacked critter..."
+                  << std::endl;
+        return true;
       }
     }
   }
+  return false;
   // We first need to check if there is a critter in range of the attack.
 }
 
-void SniperTower::attack(std::vector<Critter *> critters, int tick_count) {
+bool SniperTower::attack(std::vector<Critter *> critters, int tick_count) {
   if (tick_count % getAttaRate() == 0) {
     for (Critter *p : critters) {
       int row = p->getRow();
@@ -78,19 +83,20 @@ void SniperTower::attack(std::vector<Critter *> critters, int tick_count) {
       if (distance <= getRange()) {
         // we can attack the critter and lower it's health by the damage.
         p->setHealth(p->getHealth() - getDamage());
-        return;
-      } else {
-        return;
+        std::cout << "SniperTower " << getTid() << " attacked critter..."
+                  << std::endl;
+        return true;
       }
     }
   }
+  return false;
 }
 
 int BombTower::getSplash() { return splash_area; }
 
 void BombTower::setSplash(int x) { splash_area = x; }
 
-void BombTower::attack(std::vector<Critter *> critters, int tick_count) {
+bool BombTower::attack(std::vector<Critter *> critters, int tick_count) {
   if (tick_count % getAttaRate() == 0) {
     for (Critter *p : critters) {
       int row = p->getRow();
@@ -116,20 +122,22 @@ void BombTower::attack(std::vector<Critter *> critters, int tick_count) {
           if (splash_distance <= getSplash()) {
             p->setHealth(p->getHealth() - getDamage() / 2);
           }
-          return;
+
+          std::cout << "BombTower " << getTid() << " attacked critter..."
+                    << std::endl;
+          return true;
         }
-      } else {
-        return;
       }
     }
   }
+  return false;
 }
 
 int FreezingTower::getSlowRate() { return slow_rate; }
 
 void FreezingTower::setSlowRate(int x) { slow_rate = x; }
 
-void FreezingTower::attack(std::vector<Critter *> critters, int tick_count) {
+bool FreezingTower::attack(std::vector<Critter *> critters, int tick_count) {
 
   if (tick_count % getAttaRate()) {
     for (Critter *p : critters) {
@@ -146,12 +154,16 @@ void FreezingTower::attack(std::vector<Critter *> critters, int tick_count) {
         // we can attack the critter and lower it's health by the damage.
         p->setHealth(p->getHealth() - getDamage());
         p->setSpeed(p->getSpeed() + getSlowRate());
-        return;
+        return true;
+
+        std::cout << "FreezingTower " << getTid() << " attacked critter..."
+                  << std::endl;
       } else {
-        return;
+        return false;
       }
     }
   }
+  return false;
 }
 
 void Tower::levelUp() {
