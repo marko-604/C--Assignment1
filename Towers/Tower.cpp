@@ -28,21 +28,40 @@ int Tower::getDamage() { return damage; }
 
 TowerType Tower::getType() { return type; }
 
-void Tower::setX(int x_val) { x = x_val; }
+void Tower::setX(int x_val) {
+  x = x_val;
+  Notify();
+}
 
-void Tower::setY(int y_val) { y = y_val; }
+void Tower::setY(int y_val) {
+  y = y_val;
+  Notify();
+}
 
 void Tower::setAttackRate(int attack_rate_val) {
   attack_rate = attack_rate_val;
+  Notify();
 }
 
-void Tower::setCost(int cost_val) { cost = cost_val; }
+void Tower::setCost(int cost_val) {
+  cost = cost_val;
+  Notify();
+}
 
-void Tower::setDamage(int dmg_val) { damage = dmg_val; }
+void Tower::setDamage(int dmg_val) {
+  damage = dmg_val;
+  Notify();
+}
 
-void Tower::setRange(int range_val) { range = range_val; }
+void Tower::setRange(int range_val) {
+  range = range_val;
+  Notify();
+}
 
-void Tower::setResale(int resale_val) { resale = resale_val; }
+void Tower::setResale(int resale_val) {
+  resale = resale_val;
+  Notify();
+}
 
 // This function will be used to select and attack a critter that is in range.
 bool Tower::attack(std::vector<Critter *> &critters, int tick_count) {
@@ -183,14 +202,17 @@ void Tower::levelUp() {
 void BombTower::levelUp() {
   setSplash(getSplash() + 1);
   setDamage(getDamage() + 1);
+  Notify();
 }
 
 void SniperTower::levelUp() {
   setRange(getRange() + 1);
   setDamage(getDamage() + 1);
+  Notify();
 }
 
 void FreezingTower::levelUp() {
   setDamage(getDamage() + 1);
   setSlowRate(getSlowRate() + 1);
+  Notify();
 }

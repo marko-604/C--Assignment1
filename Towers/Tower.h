@@ -1,6 +1,6 @@
 #ifndef TOWERS_H
 #define TOWERS_H
-
+#include "../Observer/Subject.h"
 #include "raylib.h"
 #include <iostream>
 #include <vector>
@@ -23,7 +23,7 @@ struct Projectile {
 };
 
 // The Tower class
-class Tower {
+class Tower : public Subject {
 
 public:
   Tower(int x_val, int y_val, int cost_val, int damage_val, int attack_rate_val,
