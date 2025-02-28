@@ -38,9 +38,9 @@ int main() {
 
     float timeAccum = 0.0f;
 
-    SetWindowFocused();
     while (!WindowShouldClose()) {
 
+      SetWindowFocused();
       bool ticked = false;
       float dt = GetFrameTime();
       timeAccum += dt;

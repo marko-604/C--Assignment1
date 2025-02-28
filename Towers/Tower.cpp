@@ -12,6 +12,8 @@ int Tower::getTid() { return tid; }
 
 int Tower::getY() { return y; }
 
+int Tower::getLevel() { return level; };
+
 int Tower::getCost() { return cost; }
 
 int Tower::getAttaRate() { return attack_rate; }

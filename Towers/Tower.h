@@ -27,13 +27,13 @@ class Tower {
 
 public:
   Tower(int x_val, int y_val, int cost_val, int damage_val, int attack_rate_val,
-        float hit_rate_val, int range_val, TowerType type_val)
+        float hit_rate_val, int range_val, TowerType type_val, int level_val)
       : x(x_val), y(y_val), cost(cost_val), damage(damage_val),
         attack_rate(attack_rate_val), hit_rate(hit_rate_val), range(range_val),
-        type(type_val), tid(nextId++) {} // Incorrect order
+        type(type_val), tid(nextId++), level(level_val) {} // Incorrect order
 
   // Constructor with no arguments.
-  Tower() : Tower(-1, -1, 100, 3, 3, 0.65, 1, REGULAR) {}
+  Tower() : Tower(-1, -1, 100, 3, 3, 0.65, 1, REGULAR, 1) {}
 
   int getTid();
   int getX();
@@ -44,6 +44,7 @@ public:
   float getHitRate();
   int getRange();
   int getResale();
+  int getLevel();
   TowerType getType();
 
   void setX(int x_val);
@@ -71,12 +72,13 @@ private:
   int range;
   int tid;
   static int nextId;
+  int level;
 };
 
 // Same as regular tower but more damage and greater range.
 class SniperTower : public Tower {
 public:
-  SniperTower() : Tower(-1, -1, 150, 5, 3, 0.75, 3, SNIPER) {}
+  SniperTower() : Tower(-1, -1, 150, 5, 3, 0.75, 3, SNIPER, 1) {}
   void levelUp() override;
   bool attack(std::vector<Critter *> &critters, int tick_count) override;
 };
@@ -85,7 +87,7 @@ public:
 class BombTower : public Tower {
 public:
   BombTower(int splash_area_val)
-      : Tower(-1, -1, 200, 4, 3, 1, 1, BOMB), splash_area(splash_area_val) {}
+      : Tower(-1, -1, 200, 4, 3, 1, 1, BOMB, 1), splash_area(splash_area_val) {}
 
   int getSplash();
   void setSplash(int x);
@@ -100,7 +102,7 @@ private:
 class FreezingTower : public Tower {
 public:
   FreezingTower(int slow_rate_val)
-      : Tower(-1, -1, 200, 5, 3, 0.75, 1, FREEZING) {}
+      : Tower(-1, -1, 200, 5, 3, 0.75, 1, FREEZING, 1) {}
 
   bool attack(std::vector<Critter *> &critters, int tick_count) override;
   int getSlowRate();
