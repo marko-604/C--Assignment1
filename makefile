@@ -1,7 +1,24 @@
 COMPILER = g++
+CXXFLAGS = -Wall -std=c++20 -I/opt/homebrew/include
+LDFLAGS = -L/opt/homebrew/lib -lraylib -framework OpenGL -framework Cocoa -framework IOKit -framework CoreVideo
 
-CFLAGS = -Wall -Wextra -std=c++20
+SRCS = main.cpp Maps/Map.cpp Towers/Tower.cpp Critters/Critter.cpp 
 
-TARGET = app
+
+OBJS = $(SRCS:.cpp=.o)
+TARGET = game
+
+
+$(TARGET): $(OBJS)
+	$(CXX) $(OBJS) -o $(TARGET) $(LDFLAGS)
+
+# Run the executable
+run: $(TARGET)
+	./$(TARGET)
+
+# Clean up build files
+clean:
+	rm -f $(OBJS) $(TARGET)
+
 
 

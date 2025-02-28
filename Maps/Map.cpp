@@ -1,6 +1,10 @@
 
 #include "Map.h"
+#include "../Critters/Critter.h"
+#include "../Towers/Tower.h"
 #include <queue>
+#include <utility>
+#include <vector>
 
 Map::Map(int width, int height, int tileSize)
     : gridWidth(width), gridHeight(height), tileSize(tileSize), entryRow(-1),
@@ -43,13 +47,13 @@ void Map::Draw() {
       case BOMBTOWER:
         tileColor = PINK;
         break;
-      case SQUIRREL:
+      case SQUIRRELCRITTER:
         tileColor = BROWN;
         break;
-      case WOLF:
+      case WOLFCRITTER:
         tileColor = PURPLE;
         break;
-      case BEAR:
+      case BEARCRITTER:
         tileColor = BLACK;
         break;
       default:
@@ -61,6 +65,54 @@ void Map::Draw() {
                          tileRect.height, DARKGRAY);
     }
   }
+}
+
+void Map::ToggleCritter(Critter *critter, int row, int col) {
+  if (row < 0 || row >= gridHeight || col < 0 || col >= gridWidth) {
+    return;
+  }
+  if (grid[row][col] == ENTRY || grid[row][col] == EXIT ||
+      grid[row][col] == REGULARTOWER || grid[row][col] == FREEZINGTOWER ||
+      grid[row][col] == BOMBTOWER || grid[row][col] == SNIPERTOWER)
+    return;
+
+  if (critter->getType() == SQUIRREL)
+    grid[row][col] = SQUIRRELCRITTER;
+  else if (critter->getType() == WOLF)
+    grid[row][col] = WOLFCRITTER;
+  else
+    grid[row][col] = BEARCRITTER;
+}
+
+void Map::setToPath(int row, int col) {
+  if (row < 0 || row >= gridHeight || col < 0 || col >= gridWidth ||
+      grid[row][col] == ENTRY)
+    return;
+
+  grid[row][col] = PATH;
+}
+
+void Map::ToggleTower(Tower *tower, int row, int col) {
+
+  if (row < 0 || row >= gridHeight || col < 0 || col >= gridWidth) {
+    return;
+  }
+
+  if (grid[row][col] != EMPTY)
+    return;
+
+  if (tower->getType() == FREEZING)
+    grid[row][col] = FREEZINGTOWER;
+  else if (tower->getType() == REGULAR)
+    grid[row][col] = REGULARTOWER;
+  else if (tower->getType() == SNIPER)
+    grid[row][col] = SNIPERTOWER;
+  else
+    grid[row][col] = BOMBTOWER;
+
+  tower->setX(row);
+  tower->setY(col);
+  return;
 }
 
 void Map::TogglePath(int row, int col) {
@@ -214,13 +266,13 @@ bool Map::RunEditor() {
         case BOMBTOWER:
           tileColor = PINK;
           break;
-        case SQUIRREL:
+        case SQUIRRELCRITTER:
           tileColor = BROWN;
           break;
-        case WOLF:
+        case WOLFCRITTER:
           tileColor = PURPLE;
           break;
-        case BEAR:
+        case BEARCRITTER:
           tileColor = BLACK;
           break;
         default:
@@ -246,6 +298,83 @@ bool Map::RunEditor() {
   return mapConfirmed;
 }
 
+std::vector<std::pair<int, int>> Map::getPath() {
+  // If entry/exit are not set, return an empty path
+  if (entryRow == -1 || exitRow == -1) {
+    return {};
+  }
+
+  // BFS setup
+  std::vector<std::vector<bool>> visited(gridHeight,
+                                         std::vector<bool>(gridWidth, false));
+  // parent[r][c] will store the coordinates we came from to reach (r,c)
+  std::vector<std::vector<std::pair<int, int>>> parent(
+      gridHeight, std::vector<std::pair<int, int>>(gridWidth, {-1, -1}));
+
+  std::queue<std::pair<int, int>> q;
+  q.push({entryRow, entryCol});
+  visited[entryRow][entryCol] = true;
+
+  // We’ll break once we reach exit
+  bool foundExit = false;
+
+  // BFS directions (up, down, left, right)
+  int dr[4] = {-1, 1, 0, 0};
+  int dc[4] = {0, 0, -1, 1};
+
+  while (!q.empty() && !foundExit) {
+    auto [r, c] = q.front();
+    q.pop();
+
+    // If we reached the exit, stop BFS
+    if (r == exitRow && c == exitCol) {
+      foundExit = true;
+      break;
+    }
+
+    for (int i = 0; i < 4; i++) {
+      int nr = r + dr[i];
+      int nc = c + dc[i];
+
+      // Check boundaries and visited
+      if (nr >= 0 && nr < gridHeight && nc >= 0 && nc < gridWidth) {
+        // We can move if not visited and if tile is PATH, ENTRY, or EXIT
+        if (!visited[nr][nc] &&
+            (grid[nr][nc] == PATH || grid[nr][nc] == ENTRY ||
+             grid[nr][nc] == EXIT)) {
+          visited[nr][nc] = true;
+          parent[nr][nc] = {r, c}; // we came to (nr, nc) from (r, c)
+          q.push({nr, nc});
+        }
+      }
+    }
+  }
+
+  // If we didn’t find exit, return empty
+  if (!foundExit) {
+    return {};
+  }
+
+  // Otherwise, reconstruct the path
+  std::vector<std::pair<int, int>> path;
+  int rr = exitRow;
+  int cc = exitCol;
+
+  // backtrack from exit to entry
+  while (!(rr == entryRow && cc == entryCol)) {
+    path.push_back({rr, cc});
+    auto [pr, pc] = parent[rr][cc];
+    rr = pr;
+    cc = pc;
+  }
+  // finally push the entry cell
+  path.push_back({entryRow, entryCol});
+
+  // reverse the path so it goes from entry -> exit
+
+  return path;
+}
+// This will be the main game loop we will place this function in the
 void RunGame(Map &map) {
   // Calculate the window size based on the map's grid and tile size.
   int screenWidth = map.gridWidth * map.tileSize;

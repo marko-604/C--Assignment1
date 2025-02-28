@@ -1,62 +1,81 @@
+
 #ifndef CRITTER_H
 #define CRITTER_H
 
-#include "../Maps/Map.h"
-#include "raylib.h"
+#include <algorithm>
+#include <utility>
 #include <vector>
 
-// Base Critter class for continuous movement.
+class Map;
+enum CritterType { SQUIRREL, WOLF, BEAR };
 class Critter {
 public:
-  int health;         // Health points.
-  float speed;        // Movement speed in pixels per second.
-  int attackStrength; // Attack strength.
+  Critter(int hlt_val, int spd_val, int str_val, int row_val, int col_val,
+          CritterType type_val, std::vector<std::pair<int, int>> path_val);
 
-  // Current pixel position.
-  Vector2 position;
-  // Path: a series of grid positions (x = column, y = row) that will be
-  // converted to pixel centers.
-  std::vector<Vector2> path;
-  int currentPathIndex; // Index of the current target in the path.
+  CritterType getType();
+  int getRow();
+  int getCol();
+  int getSpeed();
+  int getStr();
+  int getHealth();
 
-  // Pointer to the Map (to access tile size, etc.)
-  Map *gameMap;
+  void setRow(int x);
+  void setCol(int y);
+  void setSpeed(int x);
+  void setStr(int s);
+  void setHealth(int h);
+  void setPath(std::vector<std::pair<int, int>> path_val);
 
-  // Constructor: starts at the given grid cell.
-  Critter(Map *map, int health, float speed, int attackStrength, int startRow,
-          int startCol);
-  virtual ~Critter();
+  std::vector<std::pair<int, int>> getPath();
 
-  // Set the path for the critter. The path is given in grid coordinates.
-  void SetPath(const std::vector<Vector2> &gridPath);
+  // Updates the position of the critter on the map
+  void Update(Map &map,
+              int tick_count); // This will move the position of the creature.
 
-  // Update position using continuous movement.
-  virtual void Update(float deltaTime);
-
-  // Draw the critter.
-  virtual void Draw();
+private:
+  int health;
+  int speed;
+  int strength;
+  int row;
+  int col;
+  std::vector<std::pair<int, int>> path;
+  CritterType type;
 };
 
-// Derived Critter classes.
+// We create 3 subclasses of critter that have different types and different
+// values for the speed attack and strength values.
 class Squirrel : public Critter {
-public:
-  Squirrel(Map *map, int startRow, int startCol);
-  void Update(float deltaTime) override;
-  void Draw() override;
-};
 
-class Bear : public Critter {
 public:
-  Bear(Map *map, int startRow, int startCol);
-  void Update(float deltaTime) override;
-  void Draw() override;
+  Squirrel(std::vector<std::pair<int, int>> path)
+      : Critter(5, 2, 2, -1, -1, SQUIRREL, path) {}
 };
 
 class Wolf : public Critter {
 public:
-  Wolf(Map *map, int startRow, int startCol);
-  void Update(float deltaTime) override;
-  void Draw() override;
+  Wolf(std::vector<std::pair<int, int>> path)
+      : Critter(8, 3, 4, -1, -1, WOLF, path) {}
 };
 
-#endif // CRITTER_H
+class Bear : public Critter {
+public:
+  Bear(std::vector<std::pair<int, int>> path)
+      : Critter(12, 5, 5, -1, -1, BEAR, path) {}
+};
+
+class CritterGenerator {
+private:
+  int level;
+  std::vector<Critter *> critters;
+
+public:
+  CritterGenerator();
+
+  bool isEmpty();
+  Critter *getCritter();
+  void levelUp(std::vector<std::pair<int, int>> path);
+  void generateCritters(std::vector<std::pair<int, int>> path);
+};
+
+#endif // !CRITTER_H

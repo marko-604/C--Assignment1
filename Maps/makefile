@@ -1,24 +1,32 @@
-# Simple Makefile for compiling main.cpp and Map.cpp
 
+# Compiler
 CXX = g++
 CXXFLAGS = -Wall -std=c++20 -I/opt/homebrew/include
 LDFLAGS = -L/opt/homebrew/lib -lraylib -framework OpenGL -framework Cocoa -framework IOKit -framework CoreVideo
 
+# Source and target definitions
+SRCS = main.cpp Map.cpp
+OBJS = $(SRCS:.cpp=.o)
 TARGET = game
 
+# Default target: compile the game
 all: $(TARGET)
 
-$(TARGET): main.o Map.o
-	$(CXX) main.o Map.o -o $(TARGET) $(LDFLAGS)
+# Link object files into the final executable
+$(TARGET): $(OBJS)
+	$(CXX) $(OBJS) -o $(TARGET) $(LDFLAGS)
 
-main.o: main.cpp Map.h
-	$(CXX) $(CXXFLAGS) -c main.cpp
+# Compile .cpp files to .o files
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-Map.o: Map.cpp Map.h
-	$(CXX) $(CXXFLAGS) -c Map.cpp
-
-clean:
-	rm -f *.o $(TARGET)
-
+# Run the executable
 run: $(TARGET)
 	./$(TARGET)
+
+# Clean up build files
+clean:
+	rm -f $(OBJS) $(TARGET)
+
+
+

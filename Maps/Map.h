@@ -2,8 +2,11 @@
 #define MAP_H
 
 #include "raylib.h"
+#include <utility>
 #include <vector>
 
+class Critter;
+class Tower;
 // Tile types for the grid.
 enum TileType {
   EMPTY,
@@ -14,9 +17,9 @@ enum TileType {
   SNIPERTOWER,
   BOMBTOWER,
   REGULARTOWER,
-  WOLF,
-  SQUIRREL,
-  BEAR
+  WOLFCRITTER,
+  SQUIRRELCRITTER,
+  BEARCRITTER
 };
 
 class Map {
@@ -26,12 +29,27 @@ public:
   int entryRow, entryCol;
   int exitRow, exitCol;
 
+  // This method will return a path that will be from the entry point to the
+  // exit point.
+  std::vector<std::pair<int, int>> getPath();
+
   // Constructor: initializes grid dimensions and sets entry/exit as unset.
   Map(int width, int height, int tileSize);
   ~Map(); // Destructor, if needed
 
   // Draws the grid and instructions.
   void Draw();
+
+  void setToPath(int row, int col);
+
+  void ToggleTower(Tower *tower, int row, int col);
+  void ToggleCritter(Critter *critter, int row, int col);
+
+  // Places a critter on the map
+  bool placeCritter(Critter &critter, int row, int col);
+
+  // Places a tower on the map.
+  bool PlaceTower(Tower &tower, int row, int col);
 
   // Toggles a cell's state between empty and path.
   void TogglePath(int row, int col);
@@ -50,5 +68,7 @@ public:
   bool RunEditor();
 };
 
+// This function will run the actual game later on we will place this function
+// in the game master file for the implementation.
 void RunGame(Map &map);
 #endif // MAP_H

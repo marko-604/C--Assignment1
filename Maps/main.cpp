@@ -26,3 +26,28 @@ int main() {
   }
   return 0;
 }
+
+#include "GameMaster.h"
+
+int main() {
+  // 1) Create a game master with a 10x6 map, tileSize=32
+  GameMaster gm(10, 6, 32);
+
+  // 2) Let the user draw the map (path, entry, exit)
+  if (!gm.SetupMap()) {
+    // If user canceled or invalid path, quit
+    return 0;
+  }
+
+  // 3) Spawn a tower at row=2, col=2
+  gm.SpawnTower(REGULAR, 2, 2);
+
+  // 4) Spawn a couple of critters
+  gm.SpawnCritter(SQUIRREL, 5, 0);
+  gm.SpawnCritter(WOLF, 5, 1);
+
+  // 5) Launch the main loop
+  gm.RunGameLoop();
+
+  return 0;
+}
