@@ -4,7 +4,7 @@
 #include "raylib.h"
 #include <iostream>
 #include <vector>
-
+class Map;
 class Critter;
 enum TowerType { REGULAR, SNIPER, BOMB, FREEZING };
 
@@ -56,7 +56,7 @@ public:
   void setRange(int range);
 
   virtual void levelUp();
-  virtual bool attack(std::vector<Critter *> critters,
+  virtual bool attack(std::vector<Critter *> &critters,
                       int tick_count); // The tower attacks.
 
 private:
@@ -78,7 +78,7 @@ class SniperTower : public Tower {
 public:
   SniperTower() : Tower(-1, -1, 150, 5, 3, 0.75, 3, SNIPER) {}
   void levelUp() override;
-  bool attack(std::vector<Critter *> critters, int tick_count) override;
+  bool attack(std::vector<Critter *> &critters, int tick_count) override;
 };
 
 // This is the bomb tower class
@@ -90,7 +90,7 @@ public:
   int getSplash();
   void setSplash(int x);
   void levelUp() override;
-  bool attack(std::vector<Critter *> critters, int tick_count) override;
+  bool attack(std::vector<Critter *> &critters, int tick_count) override;
 
 private:
   int splash_area;
@@ -102,7 +102,7 @@ public:
   FreezingTower(int slow_rate_val)
       : Tower(-1, -1, 200, 5, 3, 0.75, 1, FREEZING) {}
 
-  bool attack(std::vector<Critter *> critters, int tick_count) override;
+  bool attack(std::vector<Critter *> &critters, int tick_count) override;
   int getSlowRate();
   void setSlowRate(int x);
   void levelUp() override;

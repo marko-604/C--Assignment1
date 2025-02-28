@@ -13,6 +13,8 @@ public:
   Critter(int hlt_val, int spd_val, int str_val, int row_val, int col_val,
           CritterType type_val, std::vector<std::pair<int, int>> path_val);
 
+  virtual ~Critter() {}
+
   CritterType getType();
   int getRow();
   int getCol();

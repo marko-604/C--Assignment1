@@ -1,6 +1,7 @@
 #include "Critters/Critter.h"
 #include "Maps/Map.h"
 #include "Towers/Tower.h"
+#include <ostream>
 #include <utility>
 #include <vector>
 
@@ -37,6 +38,7 @@ int main() {
 
     float timeAccum = 0.0f;
 
+    SetWindowFocused();
     while (!WindowShouldClose()) {
 
       bool ticked = false;
@@ -61,12 +63,34 @@ int main() {
         } else {
         }
 
-        for (Critter *c : critters) {
-          c->Update(gameMap, tick_count);
-          gameMap.ToggleCritter(c, c->getRow(), c->getCol());
-        }
         for (Tower *t : towers) {
           t->attack(critters, tick_count);
+        }
+        for (auto it = critters.begin(); it != critters.end();) {
+          std::cout << "HERE1" << std::endl;
+          Critter *c = *it;
+          if (c->getHealth() <= 0) {
+            // revert tile
+            gameMap.setToPath(c->getRow(), c->getCol());
+
+            // free memory if you used 'new'
+
+            it = critters.erase(it);
+          } else if (c->getRow() == gameMap.exitRow &&
+                     c->getCol() == gameMap.exitCol) {
+
+            // Critter attacks the player.
+            player_health -= c->getStr();
+            std::cout << "Critter has done " << c->getStr()
+                      << " to the player, player now has " << player_health
+                      << " health left" << std::endl;
+
+          } else {
+            std::cout << "Updating critter location ..." << std::endl;
+            c->Update(gameMap, tick_count);
+            gameMap.ToggleCritter(c, c->getRow(), c->getCol());
+            ++it;
+          }
         }
       }
 
