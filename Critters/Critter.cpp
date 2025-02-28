@@ -44,6 +44,7 @@ void Critter::Update(Map &map, int tick_count) {
 
   if (!path.empty()) { // Ensure path is not empty before popping
     map.setToPath(row, col);
+    Notify();         //  --------------------------------------------------------ADDED NOTIFY after movement
     std::pair<int, int> new_tile = path.back(); // Get the last element
     path.pop_back();                            // Remove the last element
 
