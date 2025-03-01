@@ -348,7 +348,8 @@ std::vector<std::pair<int, int>> Map::getPath() {
         // We can move if not visited and if tile is PATH, ENTRY, or EXIT
         if (!visited[nr][nc] &&
             (grid[nr][nc] == PATH || grid[nr][nc] == ENTRY ||
-             grid[nr][nc] == EXIT)) {
+             grid[nr][nc] == EXIT || grid[nr][nc] == SQUIRRELCRITTER ||
+             grid[nr][nc] == WOLFCRITTER || grid[nr][nc] == BEARCRITTER)) {
           visited[nr][nc] = true;
           parent[nr][nc] = {r, c}; // we came to (nr, nc) from (r, c)
           q.push({nr, nc});

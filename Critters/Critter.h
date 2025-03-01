@@ -23,6 +23,8 @@ public:
   int getHealth();
   int getCID();
 
+  int getPathIndex();
+
   void setRow(int x);
   void setCol(int y);
   void setSpeed(int x);
@@ -36,6 +38,8 @@ public:
   void Update(Map &map,
               int tick_count); // This will move the position of the creature.
 
+  void move(Map &map, int row, int col);
+
 private:
   int health;
   int speed;
@@ -46,6 +50,7 @@ private:
   static int nextCID;
   std::vector<std::pair<int, int>> path;
   CritterType type;
+  int pathIndex;
 };
 
 // We create 3 subclasses of critter that have different types and different

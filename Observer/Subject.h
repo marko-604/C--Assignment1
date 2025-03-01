@@ -15,6 +15,7 @@ public:
   virtual ~Subject() {}
   void Attach(Observer *obs);
   void Detach(Observer *obs);
+  void DetachAll();
   void Notify();
 };
 

@@ -9,9 +9,12 @@ Critter::Critter(int hlt_val, int spd_val, int str_val, int row_val,
                  int col_val, CritterType type_val,
                  std::vector<std::pair<int, int>> path_val)
     : health(hlt_val), speed(spd_val), strength(str_val), row(row_val),
-      col(col_val), type(type_val), path(path_val), cid(nextCID++) {}
+      col(col_val), type(type_val), path(path_val), cid(nextCID++),
+      pathIndex(0) {}
 
 CritterType Critter::getType() { return type; }
+
+int Critter::getPathIndex() { return pathIndex; }
 
 int Critter::getRow() { return row; }
 
@@ -53,20 +56,69 @@ void Critter::setStr(int s) {
 }
 
 void Critter::Update(Map &map, int tick_count) {
+  // Only move once every `speed` ticks
   if (tick_count % speed != 0) {
-    return; // Do nothing
+    return; // do nothing this tick
   }
 
-  // If the path is empty this means that we have reached the end of the path
-  // eg. we are at the exit
-  if (!path.empty()) { // Ensure path is not empty before popping
+  // If the path is empty, we’re effectively at or past the exit
+  if (path.empty()) {
+    return;
+  }
+
+  // 1) If we are already standing on a tile that exists in `path`,
+  //    let’s pop all tiles behind us so we continue from the correct index.
+  //    Because your path is reversed (entry is at path.back(), exit at
+  //    path.front()), we search from the back for a match on (row,col). If
+  //    found, we pop everything behind that match so that `path.back()` becomes
+  //    the tile we want to move *to* next.
+  TileType currentTile = map.grid[row][col];
+  if (currentTile == PATH || currentTile == ENTRY) {
+    int foundIndex = -1;
+    for (int i = (int)path.size() - 1; i >= 0; i--) {
+      if (path[i].first == row && path[i].second == col) {
+        foundIndex = i;
+        break;
+      }
+    }
+    if (foundIndex != -1) {
+      // Pop all elements beyond `foundIndex`, so the next tile to move onto
+      // will be `path[foundIndex - 1]` (assuming foundIndex > 0).
+      while ((int)path.size() > foundIndex) {
+        path.pop_back();
+      }
+    }
+  }
+  if (row == map.exitRow && col == map.exitCol) {
+    return;
+  }
+
+  // 2) Now pick up the “next” tile in the path by popping back
+  //    and moving there. (This is the same logic you already had.)
+  if (!path.empty()) {
+    // Optionally mark our old tile back to PATH
     map.setToPath(row, col);
-    std::pair<int, int> new_tile = path.back(); // Get the last element
-    path.pop_back();                            // Remove the last element
+
+    // Move onto path.back()
+    std::pair<int, int> new_tile = path.back();
+    path.pop_back();
 
     row = new_tile.first;
     col = new_tile.second;
+
+    // Notify observers
     Notify();
+  }
+}
+
+void Critter::move(Map &map, int row, int col) {
+  // First we need to get the current tile that the critter is on.
+
+  bool current_found = false;
+  if (row == -1 && col == -1) {
+    row = map.entryRow;
+    col = map.entryCol;
+    return;
   }
 }
 

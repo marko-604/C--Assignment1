@@ -142,33 +142,33 @@ int main() {
       }
 
       if (IsKeyPressed(KEY_A)) {
-        std::cout << "HERE\n\n" << std::endl;
         for (Tower *t : towers) {
           t->attack(critters, 0);
         }
       }
       if (IsKeyPressed(KEY_M)) {
 
-        for (auto it = critters.begin(); it != critters.end();) {
+        // Good pattern
+        for (auto it = critters.begin(); it != critters.end();
+             /* no ++it here */) {
           Critter *c = *it;
           if (c->getHealth() <= 0) {
-            // revert tile
-            map->setToPath(c->getRow(), c->getCol());
-
-            // free memory if you used 'new'
-
+            // 1) Detach Observers, remove from the map, etc.
+            c->DetachAll();
+            // Unless we are at the exit tile
+            if (c->getCol() == map->exitCol && c->getRow() == map->exitRow) {
+              map->grid[c->getRow()][c->getCol()] = EXIT;
+            } else
+              map->setToPath(c->getRow(), c->getCol());
+            // 2) Delete the critter
+            delete c;
+            // 3) Erase the pointer from the vector
             it = critters.erase(it);
-          } else if (c->getRow() == map->exitRow &&
-                     c->getCol() == map->exitCol) {
-
-            // Critter attacks the player.
-
           } else {
-            std::cout << "Updating critter location ..." << std::endl;
             c->Update(*map, 0);
             map->ToggleCritter(c, c->getRow(), c->getCol());
+            ++it;
           }
-          ++it;
         }
       }
       if (IsKeyPressed(KEY_Q)) {

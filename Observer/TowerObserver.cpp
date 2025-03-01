@@ -16,7 +16,8 @@ void TowerObserver::Update(Subject *subject) {
             << " Damage=" << tower->getDamage() << "\n"
             << " Attack Rate=" << tower->getAttaRate() << "\n"
             << " Range=" << tower->getRange() << "\n"
-            << "Hit Rate = " << tower->getHitRate() << std::endl;
+            << " Hit Rate = " << tower->getHitRate() << std::endl;
+  std::cout << " Level = " << tower->getLevel() << std::endl;
 
   // If we need BombTower, FreezingTower, etc. we cast again
   switch (tower->getType()) {
