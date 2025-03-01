@@ -2,13 +2,13 @@
 #ifndef CRITTER_H
 #define CRITTER_H
 
+#include "../Observer/Subject.h"
 #include <algorithm>
 #include <utility>
 #include <vector>
-
 class Map;
 enum CritterType { SQUIRREL, WOLF, BEAR };
-class Critter {
+class Critter : public Subject {
 public:
   Critter(int hlt_val, int spd_val, int str_val, int row_val, int col_val,
           CritterType type_val, std::vector<std::pair<int, int>> path_val);
@@ -21,6 +21,7 @@ public:
   int getSpeed();
   int getStr();
   int getHealth();
+  int getCID();
 
   void setRow(int x);
   void setCol(int y);

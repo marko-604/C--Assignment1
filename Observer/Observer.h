@@ -4,7 +4,6 @@
 
 // Forward-declare Subject to avoid circular includes
 class Subject;
-
 /**
  * @brief The Observer interface.
  */

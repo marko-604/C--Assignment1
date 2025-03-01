@@ -11,21 +11,11 @@ protected:
   std::vector<Observer *> observers;
 
 public:
+  Subject() {}
   virtual ~Subject() {}
-
-  void Attach(Observer *obs) { observers.push_back(obs); }
-
-  void Detach(Observer *obs) {
-    // properly remove using erase–remove
-    observers.erase(std::remove(observers.begin(), observers.end(), obs),
-                    observers.end());
-  }
-
-  void Notify() {
-    for (Observer *obs : observers) {
-      obs->Update(this);
-    }
-  }
+  void Attach(Observer *obs);
+  void Detach(Observer *obs);
+  void Notify();
 };
 
 #endif

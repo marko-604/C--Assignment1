@@ -1,5 +1,9 @@
 #include "Critters/Critter.h"
 #include "Maps/Map.h"
+#include "Observer/CritterObserver.h"
+#include "Observer/MapObserver.h"
+#include "Observer/Subject.h"
+#include "Observer/TowerObserver.h"
 #include "Towers/Tower.h"
 #include <ostream>
 #include <utility>
@@ -19,9 +23,12 @@ int main() {
 
   Map gameMap(rows, cols, 80);
 
+  MapObserver *map_obs = new MapObserver();
+  gameMap.Attach(map_obs);
+
   bool isValidMap = gameMap.RunEditor();
 
-  int player_health = 1000;
+  int player_health = 100000;
   int points = 100000;
 
   int tick_count = 0;
@@ -59,7 +66,11 @@ int main() {
 
         if (tick_count % 2 == 0 && !generator->isEmpty()) {
           std::cout << "Added a critter to the game..." << std::endl;
-          critters.push_back(generator->getCritter());
+          Critter *c = generator->getCritter();
+          CritterObserver *c_obs = new CritterObserver();
+          c->Attach(c_obs);
+          critters.push_back(c);
+
         } else {
         }
 
@@ -67,7 +78,6 @@ int main() {
           t->attack(critters, tick_count);
         }
         for (auto it = critters.begin(); it != critters.end();) {
-          std::cout << "HERE1" << std::endl;
           Critter *c = *it;
           if (c->getHealth() <= 0) {
             // revert tile
@@ -103,6 +113,8 @@ int main() {
           Tower *t = new Tower();
           t->setX(row);
           t->setY(col);
+          TowerObserver *obs = new TowerObserver();
+          t->Attach(obs);
           towers.push_back(t);
           gameMap.ToggleTower(t, row, col);
         }
@@ -127,6 +139,9 @@ int main() {
           int col = position.x / gameMap.tileSize;
           int row = position.y / gameMap.tileSize;
           BombTower *t = new BombTower(1);
+
+          TowerObserver *obs = new TowerObserver();
+          t->Attach(obs);
           t->setX(row);
           t->setY(col);
           towers.push_back(t);
@@ -141,6 +156,9 @@ int main() {
           int col = position.x / gameMap.tileSize;
           int row = position.y / gameMap.tileSize;
           FreezingTower *t = new FreezingTower(1);
+
+          TowerObserver *obs = new TowerObserver();
+          t->Attach(obs);
           t->setX(row);
           t->setY(col);
           towers.push_back(t);
@@ -148,15 +166,7 @@ int main() {
         }
       }
 
-      if (IsKeyPressed(KEY_R)) {
-
-        Vector2 position = GetMousePosition();
-        int col = position.x / gameMap.tileSize;
-        int row = position.y / gameMap.tileSize;
-
-        // We will have to sell the tower in the game this can be simple or
-        // complicated.
-      }
+      // We will have to sell the tower in the game this can be simple or
       if (IsKeyPressed(KEY_Q)) {
         break;
       }

@@ -82,6 +82,7 @@ void Map::ToggleCritter(Critter *critter, int row, int col) {
     grid[row][col] = WOLFCRITTER;
   else
     grid[row][col] = BEARCRITTER;
+  Notify();
 }
 
 void Map::setToPath(int row, int col) {
@@ -90,8 +91,7 @@ void Map::setToPath(int row, int col) {
     return;
 
   grid[row][col] = PATH;
-    Notify(); //------------------------------------------ADDED NOTIFY
-
+  Notify(); //------------------------------------------ADDED NOTIFY
 }
 
 void Map::ToggleTower(Tower *tower, int row, int col) {
@@ -124,7 +124,7 @@ void Map::TogglePath(int row, int col) {
     if (grid[row][col] == ENTRY || grid[row][col] == EXIT)
       return;
     grid[row][col] = (grid[row][col] == EMPTY) ? PATH : EMPTY;
-   Notify(); //------------------------------------------ADDED NOTIFY
+    Notify(); //------------------------------------------ADDED NOTIFY
   }
 }
 
@@ -136,8 +136,7 @@ void Map::SetEntry(int row, int col) {
     grid[row][col] = ENTRY;
     entryRow = row;
     entryCol = col;
-   Notify(); //------------------------------------------ADDED NOTIFY
-
+    Notify(); //------------------------------------------ADDED NOTIFY
   }
 }
 
@@ -149,8 +148,7 @@ void Map::SetExit(int row, int col) {
     grid[row][col] = EXIT;
     exitRow = row;
     exitCol = col;
-   Notify(); //------------------------------------------ADDED NOTIFY
-
+    Notify(); //------------------------------------------ADDED NOTIFY
   }
 }
 

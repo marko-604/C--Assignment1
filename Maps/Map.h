@@ -1,6 +1,7 @@
 #ifndef MAP_H
 #define MAP_H
 
+#include "../Observer/Subject.h"
 #include "raylib.h"
 #include <utility>
 #include <vector>
@@ -22,7 +23,7 @@ enum TileType {
   BEARCRITTER
 };
 
-class Map {
+class Map : public Subject {
 public:
   int gridWidth, gridHeight, tileSize;
   std::vector<std::vector<TileType>> grid;

@@ -15,6 +15,8 @@ CritterType Critter::getType() { return type; }
 
 int Critter::getRow() { return row; }
 
+int Critter::getCID() { return cid; }
+
 int Critter::getCol() { return col; }
 
 int Critter::getHealth() { return health; }
@@ -25,31 +27,46 @@ int Critter::getStr() { return strength; }
 
 std::vector<std::pair<int, int>> Critter::getPath() { return path; }
 
-void Critter::setRow(int x) { row = x; }
+void Critter::setRow(int x) {
+  row = x;
+  Notify();
+}
 
-void Critter::setCol(int x) { col = x; }
+void Critter::setCol(int x) {
+  col = x;
+  Notify();
+}
 
-void Critter::setHealth(int x) { health = x; }
+void Critter::setHealth(int x) {
+  health = x;
+  Notify();
+}
 
-void Critter::setSpeed(int x) { speed = x; }
+void Critter::setSpeed(int x) {
+  speed = x;
+  Notify();
+}
 
-void Critter::setStr(int s) { strength = s; }
-
-// So simple!
+void Critter::setStr(int s) {
+  strength = s;
+  Notify();
+}
 
 void Critter::Update(Map &map, int tick_count) {
   if (tick_count % speed != 0) {
     return; // Do nothing
   }
 
+  // If the path is empty this means that we have reached the end of the path
+  // eg. we are at the exit
   if (!path.empty()) { // Ensure path is not empty before popping
     map.setToPath(row, col);
-    Notify();         //  --------------------------------------------------------ADDED NOTIFY after movement
     std::pair<int, int> new_tile = path.back(); // Get the last element
     path.pop_back();                            // Remove the last element
 
     row = new_tile.first;
     col = new_tile.second;
+    Notify();
   }
 }
 
