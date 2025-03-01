@@ -5,6 +5,8 @@
 #include "Observer/Subject.h"
 #include "Observer/TowerObserver.h"
 #include "Towers/Tower.h"
+#include <algorithm>
+#include <utility>
 #include <vector>
 
 int main() {
@@ -26,7 +28,9 @@ int main() {
     std::vector<Tower *> towers;
     std::vector<Critter *> critters;
 
+    std::vector<std::pair<int, int>> critter_path = map->getPath();
     while (!WindowShouldClose()) {
+
       if (IsKeyPressed(KEY_T)) {
         SetWindowFocused();
         Vector2 position = GetMousePosition();
@@ -41,7 +45,8 @@ int main() {
         t->setY(col);
         map->ToggleTower(t, row, col);
         towers.push_back(t);
-      } else if (IsKeyPressed(KEY_N)) {
+      }
+      if (IsKeyPressed(KEY_N)) {
         Vector2 position = GetMousePosition();
         SniperTower *t = new SniperTower();
         TowerObserver *obs = new TowerObserver();
@@ -54,7 +59,8 @@ int main() {
         t->setY(col);
         map->ToggleTower(t, row, col);
         towers.push_back(t);
-      } else if (IsKeyPressed(KEY_F)) {
+      }
+      if (IsKeyPressed(KEY_F)) {
         Vector2 position = GetMousePosition();
         FreezingTower *t = new FreezingTower(1);
         TowerObserver *obs = new TowerObserver();
@@ -67,7 +73,8 @@ int main() {
         t->setY(col);
         map->ToggleTower(t, row, col);
         towers.push_back(t);
-      } else if (IsKeyPressed(KEY_B)) {
+      }
+      if (IsKeyPressed(KEY_B)) {
         Vector2 position = GetMousePosition();
         BombTower *t = new BombTower(1);
         TowerObserver *obs = new TowerObserver();
@@ -80,8 +87,8 @@ int main() {
         t->setY(col);
         map->ToggleTower(t, row, col);
         towers.push_back(t);
-
-      } else if (IsKeyPressed(KEY_L)) {
+      }
+      if (IsKeyPressed(KEY_L)) {
         Vector2 position = GetMousePosition();
 
         int col = position.x / map->tileSize;
@@ -92,13 +99,13 @@ int main() {
             t->levelUp();
           }
         }
-
-      } else if (IsKeyPressed(KEY_C)) {
+      }
+      if (IsKeyPressed(KEY_C)) {
         Vector2 position = GetMousePosition();
         int col = position.x / map->tileSize;
         int row = position.y / map->tileSize;
 
-        Squirrel *s = new Squirrel(map->getPath());
+        Squirrel *s = new Squirrel(critter_path);
         CritterObserver *obs = new CritterObserver();
         s->Attach(obs);
 
@@ -111,7 +118,7 @@ int main() {
         int col = position.x / map->tileSize;
         int row = position.y / map->tileSize;
 
-        Wolf *w = new Wolf(map->getPath());
+        Wolf *w = new Wolf(critter_path);
         CritterObserver *obs = new CritterObserver();
         w->Attach(obs);
 
@@ -124,7 +131,7 @@ int main() {
         int col = position.x / map->tileSize;
         int row = position.y / map->tileSize;
 
-        Bear *w = new Bear(map->getPath());
+        Bear *w = new Bear(critter_path);
         CritterObserver *obs = new CritterObserver();
         w->Attach(obs);
 
@@ -134,12 +141,13 @@ int main() {
         critters.push_back(w);
       }
 
-      else if (IsKeyPressed(KEY_A)) {
+      if (IsKeyPressed(KEY_A)) {
         std::cout << "HERE\n\n" << std::endl;
         for (Tower *t : towers) {
           t->attack(critters, 0);
         }
-      } else if (IsKeyPressed(KEY_M)) {
+      }
+      if (IsKeyPressed(KEY_M)) {
 
         for (auto it = critters.begin(); it != critters.end();) {
           Critter *c = *it;
@@ -159,9 +167,12 @@ int main() {
             std::cout << "Updating critter location ..." << std::endl;
             c->Update(*map, 0);
             map->ToggleCritter(c, c->getRow(), c->getCol());
-            ++it;
           }
+          ++it;
         }
+      }
+      if (IsKeyPressed(KEY_Q)) {
+        break;
       }
       BeginDrawing();
       ClearBackground(RAYWHITE);

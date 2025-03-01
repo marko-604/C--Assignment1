@@ -103,6 +103,10 @@ int main() {
           }
         }
       }
+      SetWindowFocused();
+      if (IsKeyPressed(KEY_Q)) {
+        break;
+      }
 
       if (IsKeyPressed(KEY_T)) {
         if (points >= 100) {
