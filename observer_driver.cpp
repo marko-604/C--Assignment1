@@ -1,0 +1,177 @@
+#include "Critters/Critter.h"
+#include "Maps/Map.h"
+#include "Observer/CritterObserver.h"
+#include "Observer/MapObserver.h"
+#include "Observer/Subject.h"
+#include "Observer/TowerObserver.h"
+#include "Towers/Tower.h"
+#include <vector>
+
+int main() {
+
+  Map *map = new Map(10, 10, 80);
+  MapObserver *m_obs = new MapObserver();
+  map->Attach(m_obs);
+  bool isValidMap = map->RunEditor();
+
+  if (isValidMap) {
+    // Play the game loop.
+
+    int screenWidth = map->gridWidth * map->tileSize;
+    int screenHeight = map->gridHeight * map->tileSize;
+    std::vector<std::pair<int, int>> path = map->getPath();
+    InitWindow(screenWidth, screenHeight, "Game");
+    SetTargetFPS(60);
+
+    std::vector<Tower *> towers;
+    std::vector<Critter *> critters;
+
+    while (!WindowShouldClose()) {
+      if (IsKeyPressed(KEY_T)) {
+        SetWindowFocused();
+        Vector2 position = GetMousePosition();
+        Tower *t = new Tower();
+        TowerObserver *obs = new TowerObserver();
+        t->Attach(obs);
+
+        int col = position.x / map->tileSize;
+        int row = position.y / map->tileSize;
+
+        t->setX(row);
+        t->setY(col);
+        map->ToggleTower(t, row, col);
+        towers.push_back(t);
+      } else if (IsKeyPressed(KEY_N)) {
+        Vector2 position = GetMousePosition();
+        SniperTower *t = new SniperTower();
+        TowerObserver *obs = new TowerObserver();
+        t->Attach(obs);
+
+        int col = position.x / map->tileSize;
+        int row = position.y / map->tileSize;
+
+        t->setX(row);
+        t->setY(col);
+        map->ToggleTower(t, row, col);
+        towers.push_back(t);
+      } else if (IsKeyPressed(KEY_F)) {
+        Vector2 position = GetMousePosition();
+        FreezingTower *t = new FreezingTower(1);
+        TowerObserver *obs = new TowerObserver();
+        t->Attach(obs);
+
+        int col = position.x / map->tileSize;
+        int row = position.y / map->tileSize;
+
+        t->setX(row);
+        t->setY(col);
+        map->ToggleTower(t, row, col);
+        towers.push_back(t);
+      } else if (IsKeyPressed(KEY_B)) {
+        Vector2 position = GetMousePosition();
+        BombTower *t = new BombTower(1);
+        TowerObserver *obs = new TowerObserver();
+        t->Attach(obs);
+
+        int col = position.x / map->tileSize;
+        int row = position.y / map->tileSize;
+
+        t->setX(row);
+        t->setY(col);
+        map->ToggleTower(t, row, col);
+        towers.push_back(t);
+
+      } else if (IsKeyPressed(KEY_L)) {
+        Vector2 position = GetMousePosition();
+
+        int col = position.x / map->tileSize;
+        int row = position.y / map->tileSize;
+
+        for (Tower *t : towers) {
+          if (t->getX() == row && t->getY() == col) {
+            t->levelUp();
+          }
+        }
+
+      } else if (IsKeyPressed(KEY_C)) {
+        Vector2 position = GetMousePosition();
+        int col = position.x / map->tileSize;
+        int row = position.y / map->tileSize;
+
+        Squirrel *s = new Squirrel(map->getPath());
+        CritterObserver *obs = new CritterObserver();
+        s->Attach(obs);
+
+        s->setRow(row);
+        s->setCol(col);
+        map->ToggleCritter(s, row, col);
+        critters.push_back(s);
+      } else if (IsKeyPressed(KEY_W)) {
+        Vector2 position = GetMousePosition();
+        int col = position.x / map->tileSize;
+        int row = position.y / map->tileSize;
+
+        Wolf *w = new Wolf(map->getPath());
+        CritterObserver *obs = new CritterObserver();
+        w->Attach(obs);
+
+        w->setRow(row);
+        w->setCol(col);
+        map->ToggleCritter(w, row, col);
+        critters.push_back(w);
+      } else if (IsKeyPressed(KEY_R)) {
+        Vector2 position = GetMousePosition();
+        int col = position.x / map->tileSize;
+        int row = position.y / map->tileSize;
+
+        Bear *w = new Bear(map->getPath());
+        CritterObserver *obs = new CritterObserver();
+        w->Attach(obs);
+
+        w->setRow(row);
+        w->setCol(col);
+        map->ToggleCritter(w, row, col);
+        critters.push_back(w);
+      }
+
+      else if (IsKeyPressed(KEY_A)) {
+        std::cout << "HERE\n\n" << std::endl;
+        for (Tower *t : towers) {
+          t->attack(critters, 0);
+        }
+      } else if (IsKeyPressed(KEY_M)) {
+
+        for (auto it = critters.begin(); it != critters.end();) {
+          Critter *c = *it;
+          if (c->getHealth() <= 0) {
+            // revert tile
+            map->setToPath(c->getRow(), c->getCol());
+
+            // free memory if you used 'new'
+
+            it = critters.erase(it);
+          } else if (c->getRow() == map->exitRow &&
+                     c->getCol() == map->exitCol) {
+
+            // Critter attacks the player.
+
+          } else {
+            std::cout << "Updating critter location ..." << std::endl;
+            c->Update(*map, 0);
+            map->ToggleCritter(c, c->getRow(), c->getCol());
+            ++it;
+          }
+        }
+      }
+      BeginDrawing();
+      ClearBackground(RAYWHITE);
+      map->Draw();
+      EndDrawing();
+    }
+    CloseWindow();
+  } else {
+    std::cout << "INVALID MAP!!" << std::endl;
+  }
+
+  return 0;
+}
