@@ -28,6 +28,11 @@ int Tower::getDamage() { return damage; }
 
 TowerType Tower::getType() { return type; }
 
+void Tower::setLevel(int x) {
+  level = x;
+  Notify();
+}
+
 void Tower::setX(int x_val) {
   x = x_val;
   Notify();
@@ -195,23 +200,28 @@ bool FreezingTower::attack(std::vector<Critter *> &critters, int tick_count) {
 }
 
 void Tower::levelUp() {
+  level += 1;
   range += 1;
   damage += 1;
+  Notify();
 }
 
 void BombTower::levelUp() {
+  setLevel(getLevel() + 1);
   setSplash(getSplash() + 1);
   setDamage(getDamage() + 1);
   Notify();
 }
 
 void SniperTower::levelUp() {
+  setLevel(getLevel() + 1);
   setRange(getRange() + 1);
   setDamage(getDamage() + 1);
   Notify();
 }
 
 void FreezingTower::levelUp() {
+  setLevel(getLevel() + 1);
   setDamage(getDamage() + 1);
   setSlowRate(getSlowRate() + 1);
   Notify();

@@ -8,6 +8,9 @@
 void MapObserver::Update(Subject *subject) {
   Map *map = dynamic_cast<Map *>(subject);
 
+  std::cout << "------------------MAP OBSERVER----------------------\n\n"
+            << std::endl;
+
   std::cout << "Map dimensions = " << map->gridHeight << "x" << map->gridWidth
             << "\n";
 
@@ -45,16 +48,19 @@ void MapObserver::Update(Subject *subject) {
 
   std::cout << "\nCritters positions = [\n";
 
-  for (int i = 0; i < path.size(); i++) {
-    if (map->grid[path[i].first][path[i].second] == SQUIRRELCRITTER) {
-      std::cout << "(SQUIRREL, row = " << path[i].first
-                << ", col = " << path[i].second << ")\n";
-    } else if (map->grid[path[i].first][path[i].second] == WOLFCRITTER) {
-      std::cout << "(WOLF, row = " << path[i].first
-                << ", col = " << path[i].second << ")\n";
-    } else if (map->grid[path[i].first][path[i].second] == BEARCRITTER) {
-      std::cout << "(BEAR, row = " << path[i].first
-                << ", col = " << path[i].second << ")\n";
+  for (int i = 0; i < map->gridHeight; i++) {
+    for (int j = 0; j < map->gridWidth; j++) {
+      if (map->grid[i][j] == SQUIRRELCRITTER)
+        std::cout << "SQUIRREL, (" << i << ", " << j << ")" << std::endl;
+      else if (map->grid[i][j] == WOLFCRITTER)
+        std::cout << "WOLF, (" << i << ", " << j << ")" << std::endl;
+      else if (map->grid[i][j] == BEARCRITTER)
+        std::cout << "BEAR, (" << i << ", " << j << ")" << std::endl;
     }
   }
+
+  std::cout << "]" << std::endl;
+
+  std::cout << "------------------END MAP OBSERVER----------------------\n\n"
+            << std::endl;
 }

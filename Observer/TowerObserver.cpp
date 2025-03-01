@@ -3,11 +3,13 @@
 // The definition of the Update function for the tower observer class
 void TowerObserver::Update(Subject *subject) {
   // cast subject to Tower
-  std::cout << "HERE!!!" << std::endl;
   Tower *tower = dynamic_cast<Tower *>(subject);
   if (!tower)
     return; // safety check
 
+  std::cout
+      << "-----------------------TOWER OBSERVER----------------------------\n\n"
+      << std::endl;
   // Now we can see tower->getType(), tower->getDamage(), etc.
   std::cout << "[TowerObserver] Tower ID=" << tower->getTid() << "\n"
             << " Position=(" << tower->getX() << "," << tower->getY() << ")\n"
@@ -40,4 +42,8 @@ void TowerObserver::Update(Subject *subject) {
     break;
   }
   std::cout << std::endl;
+
+  std::cout << "------------------------------END TOWER "
+               "OBSERVER----------------------------\n\n"
+            << std::endl;
 }

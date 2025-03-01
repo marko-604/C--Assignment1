@@ -47,6 +47,7 @@ public:
   int getLevel();
   TowerType getType();
 
+  void setLevel(int x);
   void setX(int x_val);
   void setY(int y_val);
   void setCost(int cost_val);

@@ -4,6 +4,8 @@
 void CritterObserver::Update(Subject *subject) {
   Critter *critter = dynamic_cast<Critter *>(subject);
 
+  std::cout << "--------------------CRITTER OBSERVER----------------------\n\n"
+            << std::endl;
   std::cout << "Critter CID = " << critter->getCID() << "\n"
             << "Life = " << critter->getHealth()
             << "\nSpeed = " << critter->getSpeed()
@@ -17,4 +19,8 @@ void CritterObserver::Update(Subject *subject) {
   } else {
     std::cout << "Type = BEAR" << std::endl;
   }
+
+  std::cout
+      << "--------------------END CRITTER OBSERVER----------------------\n\n"
+      << std::endl;
 }
