@@ -43,6 +43,12 @@ void Critter::setCol(int x) {
 void Critter::setHealth(int x) {
   health = x;
   Notify();
+
+  if (health <= 0) {
+    std::cout << " Critter " << cid << " has died!\n";
+    Notify();  // Notify observer before removal
+    delete this;  
+  }
 }
 
 void Critter::setSpeed(int x) {
@@ -108,6 +114,10 @@ void Critter::Update(Map &map, int tick_count) {
 
     // Notify observers
     Notify();
+
+    if (row == map.exitRow && col == map.exitCol) {
+      std::cout << " Critter " << cid << " reached the exit!\n";
+      Notify();  //  Notify observer that critter has reached the goal
   }
 }
 
@@ -134,12 +144,19 @@ CritterGenerator::CritterGenerator() : level(1) {}
 void CritterGenerator::generateCritters(
     std ::vector<std::pair<int, int>> path) {
   for (int i = 0; i <= (level * 3); i++) {
+      Critter* newCritter = nullptr;
+
     if (i % 2 == 0)
       critters.push_back(new Squirrel(path));
     else if (i % 3 == 0)
       critters.push_back(new Wolf(path));
     else if (i % 5 == 0)
       critters.push_back(new Bear(path));
+
+      if (newCritter) {
+      critters.push_back(newCritter);
+      newCritter->Notify();  // Notify observer when a critter is added
+    }
   }
 }
 

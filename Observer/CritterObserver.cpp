@@ -19,6 +19,9 @@ void CritterObserver::Update(Subject *subject) {
   } else {
     std::cout << "Type = BEAR" << std::endl;
   }
+  if (critter->getHealth() <=0){
+    std::cout << "Critter" <<critter->getCID() << "has died!\n";
+  }
 
   std::cout
       << "--------------------END CRITTER OBSERVER----------------------\n\n"
