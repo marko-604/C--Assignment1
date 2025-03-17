@@ -5,140 +5,268 @@
 #include "Observer/Subject.h"
 #include "Observer/TowerObserver.h"
 #include "Towers/Tower.h"
+
+#include "raylib.h"
 #include <algorithm>
+#include <iostream>
+#include <sstream>
+#include <string>
 #include <utility>
 #include <vector>
 
-int main() {
+#ifdef _WIN32
+#include <windows.h>
+#endif
 
-  Map *map = new Map(10, 10, 80);
-  MapObserver *m_obs = new MapObserver();
+// Draws the legend in the top part of the side panel.
+void DrawLegend(int startX, int startY) {
+  int boxSize = 20;
+  int spacing = 30; // vertical spacing between items
+
+  DrawText("Legend", startX, startY, 20, BLACK);
+
+  // Map elements
+  DrawRectangle(startX, startY + spacing, boxSize, boxSize, LIGHTGRAY);
+  DrawText("Empty", startX + boxSize + 10, startY + spacing, 20, BLACK);
+
+  DrawRectangle(startX, startY + 2 * spacing, boxSize, boxSize, GREEN);
+  DrawText("Path", startX + boxSize + 10, startY + 2 * spacing, 20, BLACK);
+
+  DrawRectangle(startX, startY + 3 * spacing, boxSize, boxSize, BLUE);
+  DrawText("Entry", startX + boxSize + 10, startY + 3 * spacing, 20, BLACK);
+
+  DrawRectangle(startX, startY + 4 * spacing, boxSize, boxSize, RED);
+  DrawText("Exit", startX + boxSize + 10, startY + 4 * spacing, 20, BLACK);
+
+  // Towers
+  DrawRectangle(startX, startY + 5 * spacing, boxSize, boxSize, YELLOW);
+  DrawText("Regular Tower", startX + boxSize + 10, startY + 5 * spacing, 20,
+           BLACK);
+
+  DrawRectangle(startX, startY + 6 * spacing, boxSize, boxSize, GOLD);
+  DrawText("Freezing Tower", startX + boxSize + 10, startY + 6 * spacing, 20,
+           BLACK);
+
+  DrawRectangle(startX, startY + 7 * spacing, boxSize, boxSize, ORANGE);
+  DrawText("Sniper Tower", startX + boxSize + 10, startY + 7 * spacing, 20,
+           BLACK);
+
+  DrawRectangle(startX, startY + 8 * spacing, boxSize, boxSize, PINK);
+  DrawText("Bomb Tower", startX + boxSize + 10, startY + 8 * spacing, 20,
+           BLACK);
+
+  // Critters
+  DrawRectangle(startX, startY + 9 * spacing, boxSize, boxSize, BROWN);
+  DrawText("Squirrel Critter", startX + boxSize + 10, startY + 9 * spacing, 20,
+           BLACK);
+
+  DrawRectangle(startX, startY + 10 * spacing, boxSize, boxSize, PURPLE);
+  DrawText("Wolf Critter", startX + boxSize + 10, startY + 10 * spacing, 20,
+           BLACK);
+
+  DrawRectangle(startX, startY + 11 * spacing, boxSize, boxSize, BLACK);
+  DrawText("Bear Critter", startX + boxSize + 10, startY + 11 * spacing, 20,
+           BLACK);
+}
+
+// Draws the observer output inside a fixed, scrollable region.
+// The region is clipped so text cannot overflow, and a scrollOffset is applied.
+void DrawObserverOutputScrollable(int startX, int startY, int panelWidth,
+                                  int availableHeight,
+                                  const std::vector<std::string> &messages,
+                                  int scrollOffset) {
+  const int fontSize = 14;
+  const int lineSpacing = fontSize + 2; // spacing per line
+
+  // Draw a title above the scrolling region.
+  DrawText("Observer Output:", startX, startY, fontSize, BLACK);
+
+  // Define the rectangle for the scrollable area (below the title).
+  int regionY = startY + lineSpacing;
+  int regionHeight = availableHeight - lineSpacing;
+
+  // Set scissor mode to clip drawing within the observer output region.
+  BeginScissorMode(startX, regionY, panelWidth, regionHeight);
+
+  // Draw all messages with a vertical offset.
+  for (size_t i = 0; i < messages.size(); i++) {
+    int textY = regionY + i * lineSpacing - scrollOffset;
+    DrawText(messages[i].c_str(), startX, textY, fontSize, BLACK);
+  }
+
+  EndScissorMode();
+}
+
+int main() {
+  int rows, cols;
+  std::cout << "Enter the number of rows: ";
+  std::cin >> rows;
+  std::cout << "Enter the number of cols: ";
+  std::cin >> cols;
+
+  // Create the map. Note: Map(width, height, tileSize) where width = cols and
+  // height = rows.
+  Map *map = new Map(cols, rows, 80);
+
+  // Create a shared messages vector for observer updates.
+  std::vector<std::string> messages;
+  // Create and attach the MapObserver using a pointer to the messages vector.
+  MapObserver *m_obs = new MapObserver(&messages);
   map->Attach(m_obs);
+
   bool isValidMap = map->RunEditor();
 
   if (isValidMap) {
-    // Play the game loop.
+    int mapWidth = map->gridWidth * map->tileSize;
+    int mapHeight = map->gridHeight * map->tileSize;
 
-    int screenWidth = map->gridWidth * map->tileSize;
-    int screenHeight = map->gridHeight * map->tileSize;
-    std::vector<std::pair<int, int>> path = map->getPath();
+    // Define the side panel dimensions.
+    int sidePanelWidth = 300;
+    int screenWidth = mapWidth + sidePanelWidth;
+    int screenHeight = mapHeight;
+
     InitWindow(screenWidth, screenHeight, "Game");
+
+#ifdef _WIN32
+    // Force the window to be focused on Windows.
+    HWND handle = GetWindowHandle();
+    SetForegroundWindow(handle);
+#endif
+
     SetTargetFPS(60);
 
     std::vector<Tower *> towers;
     std::vector<Critter *> critters;
-
     std::vector<std::pair<int, int>> critter_path = map->getPath();
+
+    // Side panel layout:
+    int legendY = 10;
+    int legendHeight = 12 * 30; // fixed height for legend area
+    int observerOutputY = legendY + legendHeight + 20;
+    int observerPanelWidth = sidePanelWidth - 20;
+    int observerPanelX = mapWidth + 10;
+    int availableHeight = mapHeight - observerOutputY - 10;
+
+    // Scroll offset for observer output.
+    int scrollOffset = 0;
+
     while (!WindowShouldClose()) {
+      SetWindowFocused();
+      // --- Update Scroll Offset via Mouse Wheel ---
+      float wheelMove = GetMouseWheelMove(); // positive when scrolling up
+      scrollOffset -=
+          (int)(wheelMove * 20); // adjust sensitivity (20 pixels per notch)
+      if (scrollOffset < 0)
+        scrollOffset = 0;
 
-      if (IsKeyPressed(KEY_T)) {
-        SetWindowFocused();
-        Vector2 position = GetMousePosition();
-        Tower *t = new Tower();
-        TowerObserver *obs = new TowerObserver();
-        t->Attach(obs);
-
-        int col = position.x / map->tileSize;
-        int row = position.y / map->tileSize;
-
-        t->setX(row);
-        t->setY(col);
-        map->ToggleTower(t, row, col);
-        towers.push_back(t);
+      // Calculate total text height.
+      const int lineSpacing = 14 + 2;
+      int totalTextHeight = messages.size() * lineSpacing;
+      // Clamp scrollOffset so that we don't scroll past the bottom.
+      if (totalTextHeight > availableHeight) {
+        int maxScroll = totalTextHeight - availableHeight;
+        if (scrollOffset > maxScroll)
+          scrollOffset = maxScroll;
+      } else {
+        scrollOffset = 0;
       }
-      if (IsKeyPressed(KEY_N)) {
-        Vector2 position = GetMousePosition();
-        SniperTower *t = new SniperTower();
-        TowerObserver *obs = new TowerObserver();
-        t->Attach(obs);
 
-        int col = position.x / map->tileSize;
-        int row = position.y / map->tileSize;
-
-        t->setX(row);
-        t->setY(col);
-        map->ToggleTower(t, row, col);
-        towers.push_back(t);
-      }
-      if (IsKeyPressed(KEY_F)) {
-        Vector2 position = GetMousePosition();
-        FreezingTower *t = new FreezingTower(1);
-        TowerObserver *obs = new TowerObserver();
-        t->Attach(obs);
-
-        int col = position.x / map->tileSize;
-        int row = position.y / map->tileSize;
-
-        t->setX(row);
-        t->setY(col);
-        map->ToggleTower(t, row, col);
-        towers.push_back(t);
-      }
-      if (IsKeyPressed(KEY_B)) {
-        Vector2 position = GetMousePosition();
-        BombTower *t = new BombTower(1);
-        TowerObserver *obs = new TowerObserver();
-        t->Attach(obs);
-
-        int col = position.x / map->tileSize;
-        int row = position.y / map->tileSize;
-
-        t->setX(row);
-        t->setY(col);
-        map->ToggleTower(t, row, col);
-        towers.push_back(t);
-      }
-      if (IsKeyPressed(KEY_L)) {
-        Vector2 position = GetMousePosition();
-
-        int col = position.x / map->tileSize;
-        int row = position.y / map->tileSize;
-
-        for (Tower *t : towers) {
-          if (t->getX() == row && t->getY() == col) {
-            t->levelUp();
+      // --- Process Input for Map (only if mouse is in the map area) ---
+      if (GetMouseX() < mapWidth && GetMouseY() < mapHeight) {
+        if (IsKeyPressed(KEY_T)) {
+          Vector2 position = GetMousePosition();
+          Tower *t = new Tower();
+          TowerObserver *obs = new TowerObserver();
+          t->Attach(obs);
+          int col = position.x / map->tileSize;
+          int row = position.y / map->tileSize;
+          t->setX(row);
+          t->setY(col);
+          map->ToggleTower(t, row, col);
+          towers.push_back(t);
+        }
+        if (IsKeyPressed(KEY_N)) {
+          Vector2 position = GetMousePosition();
+          SniperTower *t = new SniperTower();
+          TowerObserver *obs = new TowerObserver();
+          t->Attach(obs);
+          int col = position.x / map->tileSize;
+          int row = position.y / map->tileSize;
+          t->setX(row);
+          t->setY(col);
+          map->ToggleTower(t, row, col);
+          towers.push_back(t);
+        }
+        if (IsKeyPressed(KEY_F)) {
+          Vector2 position = GetMousePosition();
+          FreezingTower *t = new FreezingTower(1);
+          TowerObserver *obs = new TowerObserver();
+          t->Attach(obs);
+          int col = position.x / map->tileSize;
+          int row = position.y / map->tileSize;
+          t->setX(row);
+          t->setY(col);
+          map->ToggleTower(t, row, col);
+          towers.push_back(t);
+        }
+        if (IsKeyPressed(KEY_B)) {
+          Vector2 position = GetMousePosition();
+          BombTower *t = new BombTower(1);
+          TowerObserver *obs = new TowerObserver();
+          t->Attach(obs);
+          int col = position.x / map->tileSize;
+          int row = position.y / map->tileSize;
+          t->setX(row);
+          t->setY(col);
+          map->ToggleTower(t, row, col);
+          towers.push_back(t);
+        }
+        if (IsKeyPressed(KEY_L)) {
+          Vector2 position = GetMousePosition();
+          int col = position.x / map->tileSize;
+          int row = position.y / map->tileSize;
+          for (Tower *t : towers) {
+            if (t->getX() == row && t->getY() == col) {
+              t->levelUp();
+            }
           }
         }
-      }
-      if (IsKeyPressed(KEY_C)) {
-        Vector2 position = GetMousePosition();
-        int col = position.x / map->tileSize;
-        int row = position.y / map->tileSize;
-
-        Squirrel *s = new Squirrel(critter_path);
-        CritterObserver *obs = new CritterObserver();
-        s->Attach(obs);
-
-        s->setRow(row);
-        s->setCol(col);
-        map->ToggleCritter(s, row, col);
-        critters.push_back(s);
-      } else if (IsKeyPressed(KEY_W)) {
-        Vector2 position = GetMousePosition();
-        int col = position.x / map->tileSize;
-        int row = position.y / map->tileSize;
-
-        Wolf *w = new Wolf(critter_path);
-        CritterObserver *obs = new CritterObserver();
-        w->Attach(obs);
-
-        w->setRow(row);
-        w->setCol(col);
-        map->ToggleCritter(w, row, col);
-        critters.push_back(w);
-      } else if (IsKeyPressed(KEY_R)) {
-        Vector2 position = GetMousePosition();
-        int col = position.x / map->tileSize;
-        int row = position.y / map->tileSize;
-
-        Bear *w = new Bear(critter_path);
-        CritterObserver *obs = new CritterObserver();
-        w->Attach(obs);
-
-        w->setRow(row);
-        w->setCol(col);
-        map->ToggleCritter(w, row, col);
-        critters.push_back(w);
+        if (IsKeyPressed(KEY_C)) {
+          Vector2 position = GetMousePosition();
+          int col = position.x / map->tileSize;
+          int row = position.y / map->tileSize;
+          Squirrel *s = new Squirrel(critter_path);
+          CritterObserver *obs = new CritterObserver();
+          s->Attach(obs);
+          s->setRow(row);
+          s->setCol(col);
+          map->ToggleCritter(s, row, col);
+          critters.push_back(s);
+        }
+        if (IsKeyPressed(KEY_W)) {
+          Vector2 position = GetMousePosition();
+          int col = position.x / map->tileSize;
+          int row = position.y / map->tileSize;
+          Wolf *w = new Wolf(critter_path);
+          CritterObserver *obs = new CritterObserver();
+          w->Attach(obs);
+          w->setRow(row);
+          w->setCol(col);
+          map->ToggleCritter(w, row, col);
+          critters.push_back(w);
+        }
+        if (IsKeyPressed(KEY_R)) {
+          Vector2 position = GetMousePosition();
+          int col = position.x / map->tileSize;
+          int row = position.y / map->tileSize;
+          Bear *b = new Bear(critter_path);
+          CritterObserver *obs = new CritterObserver();
+          b->Attach(obs);
+          b->setRow(row);
+          b->setCol(col);
+          map->ToggleCritter(b, row, col);
+          critters.push_back(b);
+        }
       }
 
       if (IsKeyPressed(KEY_A)) {
@@ -147,22 +275,16 @@ int main() {
         }
       }
       if (IsKeyPressed(KEY_M)) {
-
-        // Good pattern
-        for (auto it = critters.begin(); it != critters.end();
-             /* no ++it here */) {
+        for (auto it = critters.begin(); it != critters.end();) {
           Critter *c = *it;
           if (c->getHealth() <= 0) {
-            // 1) Detach Observers, remove from the map, etc.
             c->DetachAll();
-            // Unless we are at the exit tile
             if (c->getCol() == map->exitCol && c->getRow() == map->exitRow) {
               map->grid[c->getRow()][c->getCol()] = EXIT;
-            } else
+            } else {
               map->setToPath(c->getRow(), c->getCol());
-            // 2) Delete the critter
+            }
             delete c;
-            // 3) Erase the pointer from the vector
             it = critters.erase(it);
           } else {
             c->Update(*map, 0);
@@ -174,9 +296,24 @@ int main() {
       if (IsKeyPressed(KEY_Q)) {
         break;
       }
+
       BeginDrawing();
       ClearBackground(RAYWHITE);
+
+      // Draw the map in the left area.
       map->Draw();
+
+      // Draw the side panel background.
+      DrawRectangle(mapWidth, 0, sidePanelWidth, mapHeight, LIGHTGRAY);
+
+      // Draw the legend at the top of the side panel.
+      DrawLegend(mapWidth + 10, 10);
+
+      // Draw the scrollable observer output in the side panel.
+      DrawObserverOutputScrollable(mapWidth + 10, observerOutputY,
+                                   sidePanelWidth - 20, availableHeight,
+                                   messages, scrollOffset);
+
       EndDrawing();
     }
     CloseWindow();

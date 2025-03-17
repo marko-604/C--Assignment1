@@ -1,66 +1,87 @@
+
 #include "MapObserver.h"
 #include "../Maps/Map.h"
 #include "Subject.h"
-#include <iostream>
-#include <utility>
-#include <vector>
+#include <sstream>
 
 void MapObserver::Update(Subject *subject) {
+  // Clear the shared messages vector.
+  messages->clear();
+
   Map *map = dynamic_cast<Map *>(subject);
+  if (!map)
+    return;
 
-  std::cout << "------------------MAP OBSERVER----------------------\n\n"
-            << std::endl;
+  std::ostringstream oss;
 
-  std::cout << "Map dimensions = " << map->gridHeight << "x" << map->gridWidth
-            << "\n";
+  // Map dimensions
+  oss << "Map dimensions = " << map->gridHeight << "x" << map->gridWidth;
+  messages->push_back(oss.str());
+  oss.str(""); // Clear the string stream
 
+  // Entry point
+  oss << "Entry = (" << map->entryRow << ", " << map->entryCol << ")";
+  messages->push_back(oss.str());
+  oss.str("");
+
+  // Exit point
+  oss << "Exit = (" << map->exitRow << ", " << map->exitCol << ")";
+  messages->push_back(oss.str());
+  oss.str("");
+
+  // Path
   std::vector<std::pair<int, int>> path = map->getPath();
-
-  std::cout << "Entry = (" << map->entryRow << ", " << map->entryCol << ")"
-            << std::endl;
-
-  std::cout << "Exit = (" << map->exitRow << ", " << map->exitCol << ")"
-            << std::endl;
-
-  std::cout << "Path = [";
-  for (int i = 0; i < path.size(); i++) {
-    std::cout << "(" << path[i].first << ", " << path[i].second << ") ";
+  oss << "Path = [";
+  for (size_t i = 0; i < path.size(); i++) {
+    oss << "(" << path[i].first << ", " << path[i].second << ") ";
   }
+  oss << "]";
+  messages->push_back(oss.str());
+  oss.str("");
 
-  std::cout << "]";
-
-  std::cout << "\nTowers positions = [\n";
-
+  // Towers positions
+  messages->push_back("Towers positions = [");
   for (int i = 0; i < map->gridHeight; i++) {
-    for (int j = 0; j < map->gridHeight; j++) {
+    for (int j = 0; j < map->gridWidth; j++) {
       if (map->grid[i][j] == REGULARTOWER) {
-        std::cout << "(REGULARTOWER, row = " << i << ", col = " << j << ") \n";
+        oss << "(REGULARTOWER, row = " << i << ", col = " << j << ")";
+        messages->push_back(oss.str());
+        oss.str("");
       } else if (map->grid[i][j] == SNIPERTOWER) {
-        std::cout << "(SNIPERTOWER, row = " << i << ", col = " << j << ") \n";
+        oss << "(SNIPERTOWER, row = " << i << ", col = " << j << ")";
+        messages->push_back(oss.str());
+        oss.str("");
       } else if (map->grid[i][j] == BOMBTOWER) {
-        std::cout << "(BOMBTOWER, row = " << i << ", col = " << j << ") \n";
+        oss << "(BOMBTOWER, row = " << i << ", col = " << j << ")";
+        messages->push_back(oss.str());
+        oss.str("");
       } else if (map->grid[i][j] == FREEZINGTOWER) {
-        std::cout << "(FREEZINGTOWER, row = " << i << ", col = " << j << ") \n";
+        oss << "(FREEZINGTOWER, row = " << i << ", col = " << j << ")";
+        messages->push_back(oss.str());
+        oss.str("");
       }
     }
   }
-  std::cout << "]" << std::endl;
+  messages->push_back("]");
 
-  std::cout << "\nCritters positions = [\n";
-
+  // Critters positions
+  messages->push_back("Critters positions = [");
   for (int i = 0; i < map->gridHeight; i++) {
     for (int j = 0; j < map->gridWidth; j++) {
-      if (map->grid[i][j] == SQUIRRELCRITTER)
-        std::cout << "SQUIRREL, (" << i << ", " << j << ")" << std::endl;
-      else if (map->grid[i][j] == WOLFCRITTER)
-        std::cout << "WOLF, (" << i << ", " << j << ")" << std::endl;
-      else if (map->grid[i][j] == BEARCRITTER)
-        std::cout << "BEAR, (" << i << ", " << j << ")" << std::endl;
+      if (map->grid[i][j] == SQUIRRELCRITTER) {
+        oss << "SQUIRREL, (" << i << ", " << j << ")";
+        messages->push_back(oss.str());
+        oss.str("");
+      } else if (map->grid[i][j] == WOLFCRITTER) {
+        oss << "WOLF, (" << i << ", " << j << ")";
+        messages->push_back(oss.str());
+        oss.str("");
+      } else if (map->grid[i][j] == BEARCRITTER) {
+        oss << "BEAR, (" << i << ", " << j << ")";
+        messages->push_back(oss.str());
+        oss.str("");
+      }
     }
   }
-
-  std::cout << "]" << std::endl;
-
-  std::cout << "------------------END MAP OBSERVER----------------------\n\n"
-            << std::endl;
+  messages->push_back("]");
 }
