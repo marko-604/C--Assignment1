@@ -69,7 +69,8 @@ void Tower::setResale(int resale_val) {
 }
 
 // This function will be used to select and attack a critter that is in range.
-bool Tower::attack(std::vector<Critter *> &critters, int tick_count) {
+bool Tower::attack(std::vector<Critter *> &critters, int tick_count,
+                   int *player_points) {
   if (tick_count % attack_rate == 0) {
     for (Critter *p : critters) {
       int row = p->getRow();
@@ -89,7 +90,7 @@ bool Tower::attack(std::vector<Critter *> &critters, int tick_count) {
 
         if (p->getHealth() <= 0) {
           std::cout << "Critter eliminated!!" << std::endl;
-          std::cout << "HERE\n";
+          (*player_points) += p->getValue();
         }
         return true;
       }
@@ -99,7 +100,8 @@ bool Tower::attack(std::vector<Critter *> &critters, int tick_count) {
   // We first need to check if there is a critter in range of the attack.
 }
 
-bool SniperTower::attack(std::vector<Critter *> &critters, int tick_count) {
+bool SniperTower::attack(std::vector<Critter *> &critters, int tick_count,
+                         int *player_points) {
   if (tick_count % getAttaRate() == 0) {
     for (Critter *p : critters) {
       int row = p->getRow();
@@ -116,6 +118,10 @@ bool SniperTower::attack(std::vector<Critter *> &critters, int tick_count) {
         p->setHealth(p->getHealth() - getDamage());
         std::cout << "SniperTower " << getTid() << " attacked critter..."
                   << std::endl;
+        if (p->getHealth() <= 0) {
+          std::cout << "Critter eliminated!!" << std::endl;
+          (*player_points) += p->getValue();
+        }
         return true;
       }
     }
@@ -127,7 +133,8 @@ int BombTower::getSplash() { return splash_area; }
 
 void BombTower::setSplash(int x) { splash_area = x; }
 
-bool BombTower::attack(std::vector<Critter *> &critters, int tick_count) {
+bool BombTower::attack(std::vector<Critter *> &critters, int tick_count,
+                       int *player_points) {
   if (tick_count % getAttaRate() == 0) {
     for (Critter *p : critters) {
       int row = p->getRow();
@@ -142,6 +149,11 @@ bool BombTower::attack(std::vector<Critter *> &critters, int tick_count) {
       if (distance <= getRange()) {
         // we can attack the critter and lower it's health by the damage.
         p->setHealth(p->getHealth() - getDamage());
+        if (p->getHealth() <= 0) {
+
+          std::cout << "Critter eliminated!!" << std::endl;
+          (*player_points) += p->getValue();
+        }
 
         for (Critter *c : critters) {
           int splash_row = c->getRow();
@@ -151,13 +163,14 @@ bool BombTower::attack(std::vector<Critter *> &critters, int tick_count) {
                                      (splash_col - col) * (splash_col - col));
 
           if (splash_distance <= getSplash()) {
-            p->setHealth(p->getHealth() - getDamage() / 2);
+            c->setHealth(c->getHealth() - getDamage() / 2);
             std::cout << "BombTower has caused splash damage to critter ... "
                       << std::endl;
+            if (c->getHealth() <= 0) {
+              (*player_points) += c->getValue();
+            }
           }
 
-          std::cout << "BombTower " << getTid() << " attacked critter..."
-                    << std::endl;
           return true;
         }
       }
@@ -170,7 +183,8 @@ int FreezingTower::getSlowRate() { return slow_rate; }
 
 void FreezingTower::setSlowRate(int x) { slow_rate = x; }
 
-bool FreezingTower::attack(std::vector<Critter *> &critters, int tick_count) {
+bool FreezingTower::attack(std::vector<Critter *> &critters, int tick_count,
+                           int *player_points) {
   if (tick_count % getAttaRate()) {
     for (Critter *p : critters) {
       int row = p->getRow();
@@ -186,6 +200,9 @@ bool FreezingTower::attack(std::vector<Critter *> &critters, int tick_count) {
         // we can attack the critter and lower it's health by the damage.
         p->setHealth(p->getHealth() - getDamage());
         p->setSpeed(p->getSpeed() + getSlowRate());
+        if (p->getHealth() <= 0) {
+          (*player_points) += p->getValue();
+        }
 
         std::cout << "FreezingTower " << getTid() << " attacked critter..."
                   << std::endl;

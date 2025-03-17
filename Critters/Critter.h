@@ -1,4 +1,3 @@
-
 #ifndef CRITTER_H
 #define CRITTER_H
 
@@ -11,7 +10,8 @@ enum CritterType { SQUIRREL, WOLF, BEAR };
 class Critter : public Subject {
 public:
   Critter(int hlt_val, int spd_val, int str_val, int row_val, int col_val,
-          CritterType type_val, std::vector<std::pair<int, int>> path_val);
+          CritterType type_val, std::vector<std::pair<int, int>> path_val,
+          int val);
 
   virtual ~Critter() {}
 
@@ -22,6 +22,7 @@ public:
   int getStr();
   int getHealth();
   int getCID();
+  int getValue();
 
   int getPathIndex();
 
@@ -51,6 +52,7 @@ private:
   std::vector<std::pair<int, int>> path;
   CritterType type;
   int pathIndex;
+  int value; // The value of killing the creature.
 };
 
 // We create 3 subclasses of critter that have different types and different
@@ -59,19 +61,19 @@ class Squirrel : public Critter {
 
 public:
   Squirrel(std::vector<std::pair<int, int>> path)
-      : Critter(5, 2, 2, -1, -1, SQUIRREL, path) {}
+      : Critter(5, 2, 2, -1, -1, SQUIRREL, path, 50) {}
 };
 
 class Wolf : public Critter {
 public:
   Wolf(std::vector<std::pair<int, int>> path)
-      : Critter(8, 3, 4, -1, -1, WOLF, path) {}
+      : Critter(8, 3, 4, -1, -1, WOLF, path, 75) {}
 };
 
 class Bear : public Critter {
 public:
   Bear(std::vector<std::pair<int, int>> path)
-      : Critter(12, 5, 5, -1, -1, BEAR, path) {}
+      : Critter(12, 5, 5, -1, -1, BEAR, path, 100) {}
 };
 
 class CritterGenerator {

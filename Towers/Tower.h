@@ -58,8 +58,8 @@ public:
   void setRange(int range);
 
   virtual void levelUp();
-  virtual bool attack(std::vector<Critter *> &critters,
-                      int tick_count); // The tower attacks.
+  virtual bool attack(std::vector<Critter *> &critters, int tick_count,
+                      int *player_points); // The tower attacks.
 
 private:
   TowerType type;
@@ -81,7 +81,8 @@ class SniperTower : public Tower {
 public:
   SniperTower() : Tower(-1, -1, 150, 5, 3, 0.75, 3, SNIPER, 1) {}
   void levelUp() override;
-  bool attack(std::vector<Critter *> &critters, int tick_count) override;
+  bool attack(std::vector<Critter *> &critters, int tick_count,
+              int *player_points) override;
 };
 
 // This is the bomb tower class
@@ -93,7 +94,8 @@ public:
   int getSplash();
   void setSplash(int x);
   void levelUp() override;
-  bool attack(std::vector<Critter *> &critters, int tick_count) override;
+  bool attack(std::vector<Critter *> &critters, int tick_count,
+              int *player_points) override;
 
 private:
   int splash_area;
@@ -105,7 +107,8 @@ public:
   FreezingTower(int slow_rate_val)
       : Tower(-1, -1, 200, 5, 3, 0.75, 1, FREEZING, 1) {}
 
-  bool attack(std::vector<Critter *> &critters, int tick_count) override;
+  bool attack(std::vector<Critter *> &critters, int tick_count,
+              int *player_points) override;
   int getSlowRate();
   void setSlowRate(int x);
   void levelUp() override;

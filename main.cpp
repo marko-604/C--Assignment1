@@ -18,7 +18,7 @@
 #include <windows.h>
 #endif
 
-// Draws the legend in the top part of the side panel.
+// Draws the legend in the side panel (below the HUD).
 void DrawLegend(int startX, int startY) {
   int boxSize = 20;
   int spacing = 30; // vertical spacing between items
@@ -70,7 +70,6 @@ void DrawLegend(int startX, int startY) {
 }
 
 // Draws the observer output inside a fixed, scrollable region.
-// The region is clipped so text cannot overflow, and a scrollOffset is applied.
 void DrawObserverOutputScrollable(int startX, int startY, int panelWidth,
                                   int availableHeight,
                                   const std::vector<std::string> &messages,
@@ -139,30 +138,42 @@ int main() {
     std::vector<Critter *> critters;
     std::vector<std::pair<int, int>> critter_path = map->getPath();
 
-    // Side panel layout:
-    int legendY = 10;
+    // Define side panel layout:
+    // Reserve the top of the side panel for the HUD (player points and health).
+    int hudY = 10;
+    int hudFontSize = 20;
+    // HUD text will be drawn at the top-right (in the side panel).
+    // Then, legend will start below the HUD.
+    int hudHeight = hudFontSize + 10;
+
+    // Draw the HUD (player points and health).
+    // These are the fields for the player of the game.
+    int player_points = 1000;
+    int player_health = 10000;
+
+    // Legend area starts below the HUD.
+    int legendY = hudY + hudHeight + 10;
     int legendHeight = 12 * 30; // fixed height for legend area
+
+    // Observer output area starts below the legend.
     int observerOutputY = legendY + legendHeight + 20;
     int observerPanelWidth = sidePanelWidth - 20;
-    int observerPanelX = mapWidth + 10;
     int availableHeight = mapHeight - observerOutputY - 10;
 
     // Scroll offset for observer output.
     int scrollOffset = 0;
 
     while (!WindowShouldClose()) {
-      SetWindowFocused();
+      SetWindowFocused(); // Ensure the window stays focused
+
       // --- Update Scroll Offset via Mouse Wheel ---
       float wheelMove = GetMouseWheelMove(); // positive when scrolling up
-      scrollOffset -=
-          (int)(wheelMove * 20); // adjust sensitivity (20 pixels per notch)
+      scrollOffset -= static_cast<int>(
+          wheelMove * 20); // adjust sensitivity (20 pixels per notch)
       if (scrollOffset < 0)
         scrollOffset = 0;
-
-      // Calculate total text height.
       const int lineSpacing = 14 + 2;
       int totalTextHeight = messages.size() * lineSpacing;
-      // Clamp scrollOffset so that we don't scroll past the bottom.
       if (totalTextHeight > availableHeight) {
         int maxScroll = totalTextHeight - availableHeight;
         if (scrollOffset > maxScroll)
@@ -174,52 +185,64 @@ int main() {
       // --- Process Input for Map (only if mouse is in the map area) ---
       if (GetMouseX() < mapWidth && GetMouseY() < mapHeight) {
         if (IsKeyPressed(KEY_T)) {
-          Vector2 position = GetMousePosition();
-          Tower *t = new Tower();
-          TowerObserver *obs = new TowerObserver();
-          t->Attach(obs);
-          int col = position.x / map->tileSize;
-          int row = position.y / map->tileSize;
-          t->setX(row);
-          t->setY(col);
-          map->ToggleTower(t, row, col);
-          towers.push_back(t);
+          if (player_points >= 100) {
+            player_points -= 100;
+            Vector2 position = GetMousePosition();
+            Tower *t = new Tower();
+            TowerObserver *obs = new TowerObserver();
+            t->Attach(obs);
+            int col = position.x / map->tileSize;
+            int row = position.y / map->tileSize;
+            t->setX(row);
+            t->setY(col);
+            map->ToggleTower(t, row, col);
+            towers.push_back(t);
+          }
         }
         if (IsKeyPressed(KEY_N)) {
-          Vector2 position = GetMousePosition();
-          SniperTower *t = new SniperTower();
-          TowerObserver *obs = new TowerObserver();
-          t->Attach(obs);
-          int col = position.x / map->tileSize;
-          int row = position.y / map->tileSize;
-          t->setX(row);
-          t->setY(col);
-          map->ToggleTower(t, row, col);
-          towers.push_back(t);
+          if (player_points >= 150) {
+            player_points -= 150;
+            Vector2 position = GetMousePosition();
+            SniperTower *t = new SniperTower();
+            TowerObserver *obs = new TowerObserver();
+            t->Attach(obs);
+            int col = position.x / map->tileSize;
+            int row = position.y / map->tileSize;
+            t->setX(row);
+            t->setY(col);
+            map->ToggleTower(t, row, col);
+            towers.push_back(t);
+          }
         }
         if (IsKeyPressed(KEY_F)) {
-          Vector2 position = GetMousePosition();
-          FreezingTower *t = new FreezingTower(1);
-          TowerObserver *obs = new TowerObserver();
-          t->Attach(obs);
-          int col = position.x / map->tileSize;
-          int row = position.y / map->tileSize;
-          t->setX(row);
-          t->setY(col);
-          map->ToggleTower(t, row, col);
-          towers.push_back(t);
+          if (player_points >= 200) {
+            player_points -= 200;
+            Vector2 position = GetMousePosition();
+            FreezingTower *t = new FreezingTower(1);
+            TowerObserver *obs = new TowerObserver();
+            t->Attach(obs);
+            int col = position.x / map->tileSize;
+            int row = position.y / map->tileSize;
+            t->setX(row);
+            t->setY(col);
+            map->ToggleTower(t, row, col);
+            towers.push_back(t);
+          }
         }
         if (IsKeyPressed(KEY_B)) {
-          Vector2 position = GetMousePosition();
-          BombTower *t = new BombTower(1);
-          TowerObserver *obs = new TowerObserver();
-          t->Attach(obs);
-          int col = position.x / map->tileSize;
-          int row = position.y / map->tileSize;
-          t->setX(row);
-          t->setY(col);
-          map->ToggleTower(t, row, col);
-          towers.push_back(t);
+          if (player_points >= 200) {
+            player_points -= 200;
+            Vector2 position = GetMousePosition();
+            BombTower *t = new BombTower(1);
+            TowerObserver *obs = new TowerObserver();
+            t->Attach(obs);
+            int col = position.x / map->tileSize;
+            int row = position.y / map->tileSize;
+            t->setX(row);
+            t->setY(col);
+            map->ToggleTower(t, row, col);
+            towers.push_back(t);
+          }
         }
         if (IsKeyPressed(KEY_L)) {
           Vector2 position = GetMousePosition();
@@ -271,7 +294,7 @@ int main() {
 
       if (IsKeyPressed(KEY_A)) {
         for (Tower *t : towers) {
-          t->attack(critters, 0);
+          t->attack(critters, 0, &player_points);
         }
       }
       if (IsKeyPressed(KEY_M)) {
@@ -306,10 +329,19 @@ int main() {
       // Draw the side panel background.
       DrawRectangle(mapWidth, 0, sidePanelWidth, mapHeight, LIGHTGRAY);
 
-      // Draw the legend at the top of the side panel.
-      DrawLegend(mapWidth + 10, 10);
+      // Draw the HUD (player points and health) at the top of the side panel.
+      std::string hudText =
+          TextFormat("Points: %d   Health: %d", player_points, player_health);
+      DrawText(hudText.c_str(), mapWidth + 10, 10, 20, BLACK);
 
-      // Draw the scrollable observer output in the side panel.
+      // Draw the legend below the HUD.
+      int legendStartY = 10 + 20 + 10; // HUD (20px) + margin (10px)
+      DrawLegend(mapWidth + 10, legendStartY);
+
+      // Observer output area: start below the legend.
+      int legendHeight = 12 * 30; // adjust if needed
+      int observerOutputY = legendStartY + legendHeight + 20;
+      int availableHeight = mapHeight - observerOutputY - 10;
       DrawObserverOutputScrollable(mapWidth + 10, observerOutputY,
                                    sidePanelWidth - 20, availableHeight,
                                    messages, scrollOffset);
