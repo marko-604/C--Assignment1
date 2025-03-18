@@ -1,5 +1,7 @@
 #include "Critter.h"
 #include "../Maps/Map.h"
+#include <cstddef>
+#include <iostream>
 #include <utility>
 #include <vector>
 
@@ -58,6 +60,13 @@ void Critter::setStr(int s) {
 }
 
 void Critter::Update(Map &map, int tick_count) {
+
+  // How can we solve the problem from here?
+
+  if (this == NULL || this == nullptr) {
+    return;
+  }
+
   // Only move once every `speed` ticks
   if (tick_count % speed != 0) {
     return; // do nothing this tick
@@ -68,13 +77,13 @@ void Critter::Update(Map &map, int tick_count) {
     return;
   }
 
-  // 1) If we are already standing on a tile that exists in `path`,
-  //    let’s pop all tiles behind us so we continue from the correct index.
-  //    Because your path is reversed (entry is at path.back(), exit at
-  //    path.front()), we search from the back for a match on (row,col). If
-  //    found, we pop everything behind that match so that `path.back()` becomes
-  //    the tile we want to move *to* next.
+  // We place the critter along the path if it is not already on it.
+  if (row == -1 && col == -1) {
+    row = map.entryRow;
+    col = map.entryCol;
+  }
   TileType currentTile = map.grid[row][col];
+
   if (currentTile == PATH || currentTile == ENTRY) {
     int foundIndex = -1;
     for (int i = (int)path.size() - 1; i >= 0; i--) {
@@ -83,6 +92,7 @@ void Critter::Update(Map &map, int tick_count) {
         break;
       }
     }
+
     if (foundIndex != -1) {
       // Pop all elements beyond `foundIndex`, so the next tile to move onto
       // will be `path[foundIndex - 1]` (assuming foundIndex > 0).
@@ -91,6 +101,7 @@ void Critter::Update(Map &map, int tick_count) {
       }
     }
   }
+
   if (row == map.exitRow && col == map.exitCol) {
     return;
   }
@@ -109,7 +120,7 @@ void Critter::Update(Map &map, int tick_count) {
     col = new_tile.second;
 
     // Notify observers
-    Notify();
+    // Notify();
   }
 }
 
@@ -135,8 +146,8 @@ CritterGenerator::CritterGenerator() : level(1) {}
 // This will generate the critters based on the level of the critter generator.
 void CritterGenerator::generateCritters(
     std ::vector<std::pair<int, int>> path) {
-  for (int i = 0; i <= (level * 3); i++) {
-    if (i % 2 == 0)
+  for (int i = 0; i <= (level * 5); i++) {
+    if (i % 2 == 0 && i % 3 != 0 && i % 5 != 0)
       critters.push_back(new Squirrel(path));
     else if (i % 3 == 0)
       critters.push_back(new Wolf(path));
@@ -149,3 +160,6 @@ void CritterGenerator::levelUp(std::vector<std::pair<int, int>> path) {
   level += 1;
   generateCritters(path);
 }
+
+// We will change the generator so that it works as so, we generate the number
+// of critters based on a tikc just as in the original

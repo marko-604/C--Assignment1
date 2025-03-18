@@ -4,6 +4,7 @@
 #include "raylib.h"
 #include <iostream>
 #include <vector>
+
 class Map;
 class Critter;
 enum TowerType { REGULAR, SNIPER, BOMB, FREEZING };
@@ -59,7 +60,7 @@ public:
 
   virtual void levelUp();
   virtual bool attack(std::vector<Critter *> &critters, int tick_count,
-                      int *player_points); // The tower attacks.
+                      int *player_points, Map &gameMap); // The tower attacks.
 
 private:
   TowerType type;
@@ -82,7 +83,7 @@ public:
   SniperTower() : Tower(-1, -1, 150, 5, 3, 0.75, 3, SNIPER, 1) {}
   void levelUp() override;
   bool attack(std::vector<Critter *> &critters, int tick_count,
-              int *player_points) override;
+              int *player_points, Map &gameMap) override;
 };
 
 // This is the bomb tower class
@@ -95,7 +96,7 @@ public:
   void setSplash(int x);
   void levelUp() override;
   bool attack(std::vector<Critter *> &critters, int tick_count,
-              int *player_points) override;
+              int *player_points, Map &gameMap) override;
 
 private:
   int splash_area;
@@ -108,7 +109,7 @@ public:
       : Tower(-1, -1, 200, 5, 3, 0.75, 1, FREEZING, 1) {}
 
   bool attack(std::vector<Critter *> &critters, int tick_count,
-              int *player_points) override;
+              int *player_points, Map &gameMap) override;
   int getSlowRate();
   void setSlowRate(int x);
   void levelUp() override;

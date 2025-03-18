@@ -79,11 +79,11 @@ public:
 class CritterGenerator {
 private:
   int level;
-  std::vector<Critter *> critters;
 
 public:
   CritterGenerator();
 
+  std::vector<Critter *> critters;
   bool isEmpty();
   Critter *getCritter();
   void levelUp(std::vector<std::pair<int, int>> path);

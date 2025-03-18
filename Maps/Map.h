@@ -61,6 +61,10 @@ public:
   // Sets the exit point.
   void SetExit(int row, int col);
 
+  // This method will make it so that the cell coordiantes change from anything
+  // else to secnery.
+  void setToScenery(int row, int col);
+
   // Validates if there is a contiguous path from entry to exit.
   bool IsValidPath();
 

@@ -16,6 +16,12 @@ Map::~Map() {
   // Clean up if needed.
 }
 
+void Map::setToScenery(int row, int col) {
+  if (row < gridHeight && col < gridWidth) {
+    grid[row][col] = EMPTY;
+  }
+}
+
 void Map::Draw() {
   for (int row = 0; row < gridHeight; row++) {
     for (int col = 0; col < gridWidth; col++) {

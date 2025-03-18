@@ -1,6 +1,6 @@
 #include "Tower.h"
-
 #include "../Critters/Critter.h"
+#include "../Maps/Map.h"
 #include <cmath>
 #include <vector>
 
@@ -68,40 +68,52 @@ void Tower::setResale(int resale_val) {
   Notify();
 }
 
-// This function will be used to select and attack a critter that is in range.
 bool Tower::attack(std::vector<Critter *> &critters, int tick_count,
-                   int *player_points) {
+                   int *player_points, Map &gameMap) {
   if (tick_count % attack_rate == 0) {
-    for (Critter *p : critters) {
+    // Use an iterator-based loop to allow removal of elements.
+    for (auto it = critters.begin(); it != critters.end();) {
+      Critter *p = *it;
       int row = p->getRow();
       int col = p->getCol();
-
-      int curret_row = getX();
+      int current_row = getX();
       int current_col = getY();
 
-      int distance = sqrt((curret_row - row) * (curret_row - row) +
-                          (current_col - col) * (current_col - col));
+      int distance =
+          static_cast<int>(sqrt((current_row - row) * (current_row - row) +
+                                (current_col - col) * (current_col - col)));
 
       if (distance <= range) {
-        // we can attack the critter and lower it's health by the damage.
+        // Attack the critter
         p->setHealth(p->getHealth() - damage);
         std::cout << "Tower " << getTid() << " attacked critter..."
                   << std::endl;
 
+        // If critter is dead, update points, delete it, and remove it from the
+        // vector.
         if (p->getHealth() <= 0) {
           std::cout << "Critter eliminated!!" << std::endl;
+          gameMap.setToPath(p->getRow(), p->getCol());
+
           (*player_points) += p->getValue();
+          delete p; // free memory
+                    //
+          it = critters.erase(
+              it); // remove pointer from vector and update iterator
+        } else {
+          ++it;
         }
-        return true;
+        return true; // Attack only one critter per call
+      } else {
+        ++it;
       }
     }
   }
   return false;
-  // We first need to check if there is a critter in range of the attack.
 }
 
 bool SniperTower::attack(std::vector<Critter *> &critters, int tick_count,
-                         int *player_points) {
+                         int *player_points, Map &gameMap) {
   if (tick_count % getAttaRate() == 0) {
     for (Critter *p : critters) {
       int row = p->getRow();
@@ -121,6 +133,8 @@ bool SniperTower::attack(std::vector<Critter *> &critters, int tick_count,
         if (p->getHealth() <= 0) {
           std::cout << "Critter eliminated!!" << std::endl;
           (*player_points) += p->getValue();
+          // We also have to remove the critter from the vector and free the
+          // memory of the dead critter!
         }
         return true;
       }
@@ -134,7 +148,7 @@ int BombTower::getSplash() { return splash_area; }
 void BombTower::setSplash(int x) { splash_area = x; }
 
 bool BombTower::attack(std::vector<Critter *> &critters, int tick_count,
-                       int *player_points) {
+                       int *player_points, Map &gameMap) {
   if (tick_count % getAttaRate() == 0) {
     for (Critter *p : critters) {
       int row = p->getRow();
@@ -184,7 +198,7 @@ int FreezingTower::getSlowRate() { return slow_rate; }
 void FreezingTower::setSlowRate(int x) { slow_rate = x; }
 
 bool FreezingTower::attack(std::vector<Critter *> &critters, int tick_count,
-                           int *player_points) {
+                           int *player_points, Map &gameMap) {
   if (tick_count % getAttaRate()) {
     for (Critter *p : critters) {
       int row = p->getRow();
