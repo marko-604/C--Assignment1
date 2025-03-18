@@ -120,7 +120,7 @@ void Critter::Update(Map &map, int tick_count) {
     col = new_tile.second;
 
     // Notify observers
-    // Notify();
+    Notify();
   }
 }
 

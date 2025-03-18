@@ -144,6 +144,7 @@ int main() {
     // Player HUD values.
     int player_points = 1000;
     int player_health = 1000;
+    int max_ticks = 120; // 2minutes.
 
     // HUD is drawn at the top of the side panel.
     // Legend area starts below the HUD.
@@ -171,6 +172,9 @@ int main() {
         tickCount++; // increment global tick
         lastTick = currentTime;
 
+        if (tickCount >= max_ticks) {
+          break;
+        }
         // Update towers: each tower attempts an attack.
         for (Tower *t : towers) {
           t->attack(generator.critters, tickCount, &player_points, *map);
@@ -275,8 +279,8 @@ int main() {
           int row = position.y / map->tileSize;
           for (Tower *t : towers) {
             if (t->getX() == row && t->getY() == col) {
-              if (player_points >= t->getCost()) {
-                player_points -= t->getCost();
+              if (player_points >= t->getLevelUpCost()) {
+                player_points -= t->getLevelUpCost();
                 t->levelUp();
               }
             }
@@ -291,7 +295,7 @@ int main() {
         map->setToScenery(row, col);
 
         for (auto it = towers.begin(); it != towers.end();) {
-          player_points += (*it)->getCost();
+          player_points += (*it)->getResale();
           delete *it;
           it = towers.erase(it);
         }
