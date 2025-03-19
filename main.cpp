@@ -211,8 +211,10 @@ int main() {
         scrollOffset = 0;
       }
 
-      // --- Process Input for Map (only if mouse is in the map area) ---
+      // In this branch we will only be able to create a single tower, then we
+      // will change the behaviour of the tower with decorators.
       if (GetMouseX() < mapWidth && GetMouseY() < mapHeight) {
+
         if (IsKeyPressed(KEY_T)) {
           if (player_points >= 100) {
             player_points -= 100;
@@ -228,51 +230,7 @@ int main() {
             towers.push_back(t);
           }
         }
-        if (IsKeyPressed(KEY_N)) {
-          if (player_points >= 150) {
-            player_points -= 150;
-            Vector2 position = GetMousePosition();
-            SniperTower *t = new SniperTower();
-            TowerObserver *obs = new TowerObserver();
-            t->Attach(obs);
-            int col = position.x / map->tileSize;
-            int row = position.y / map->tileSize;
-            t->setX(row);
-            t->setY(col);
-            map->ToggleTower(t, row, col);
-            towers.push_back(t);
-          }
-        }
-        if (IsKeyPressed(KEY_F)) {
-          if (player_points >= 200) {
-            player_points -= 200;
-            Vector2 position = GetMousePosition();
-            FreezingTower *t = new FreezingTower(1);
-            TowerObserver *obs = new TowerObserver();
-            t->Attach(obs);
-            int col = position.x / map->tileSize;
-            int row = position.y / map->tileSize;
-            t->setX(row);
-            t->setY(col);
-            map->ToggleTower(t, row, col);
-            towers.push_back(t);
-          }
-        }
-        if (IsKeyPressed(KEY_B)) {
-          if (player_points >= 200) {
-            player_points -= 200;
-            Vector2 position = GetMousePosition();
-            BombTower *t = new BombTower(1);
-            TowerObserver *obs = new TowerObserver();
-            t->Attach(obs);
-            int col = position.x / map->tileSize;
-            int row = position.y / map->tileSize;
-            t->setX(row);
-            t->setY(col);
-            map->ToggleTower(t, row, col);
-            towers.push_back(t);
-          }
-        }
+
         if (IsKeyPressed(KEY_L)) {
           Vector2 position = GetMousePosition();
           int col = position.x / map->tileSize;

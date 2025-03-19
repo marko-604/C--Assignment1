@@ -70,9 +70,9 @@ public:
   void setHitRate(float hit_ratte_val);
   void setRange(int range);
 
-  virtual void levelUp();
-  virtual bool attack(std::vector<Critter *> &critters, int tick_count,
-                      int *player_points, Map &gameMap); // The tower attacks.
+  void levelUp();
+  bool attack(std::vector<Critter *> &critters, int tick_count,
+              int *player_points, Map &gameMap); // The tower attacks.
 
 private:
   TowerType type;
@@ -88,48 +88,6 @@ private:
   static int nextId;
   int level;
   int levelUpCost;
-};
-
-// Same as regular tower but more damage and greater range.
-class SniperTower : public Tower {
-public:
-  SniperTower() : Tower(-1, -1, 150, 5, 3, 0.75, 3, SNIPER, 1, 75, 75) {}
-  void levelUp() override;
-  bool attack(std::vector<Critter *> &critters, int tick_count,
-              int *player_points, Map &gameMap) override;
-};
-
-// This is the bomb tower class
-class BombTower : public Tower {
-public:
-  BombTower(int splash_area_val)
-      : Tower(-1, -1, 200, 4, 3, 1, 1, BOMB, 1, 100, 125),
-        splash_area(splash_area_val) {}
-
-  int getSplash();
-  void setSplash(int x);
-  void levelUp() override;
-  bool attack(std::vector<Critter *> &critters, int tick_count,
-              int *player_points, Map &gameMap) override;
-
-private:
-  int splash_area;
-};
-
-// This is the freezing tower
-class FreezingTower : public Tower {
-public:
-  FreezingTower(int slow_rate_val)
-      : Tower(-1, -1, 200, 5, 3, 0.75, 1, FREEZING, 1, 100, 125) {}
-
-  bool attack(std::vector<Critter *> &critters, int tick_count,
-              int *player_points, Map &gameMap) override;
-  int getSlowRate();
-  void setSlowRate(int x);
-  void levelUp() override;
-
-private:
-  int slow_rate;
 };
 
 #endif // !TOWERS_H
