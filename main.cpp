@@ -5,6 +5,10 @@
 #include "Observer/Subject.h"
 #include "Observer/TowerObserver.h"
 #include "Towers/Tower.h"
+#include "Towers/TowerDecorators/BombDecorator.h"
+#include "Towers/TowerDecorators/FreezingDecorator.h"
+#include "Towers/TowerDecorators/SniperDecorator.h"
+#include "Towers/TowerDecorators/TowerDecorator.h"
 #include "raylib.h"
 #include <algorithm>
 #include <iostream>
@@ -144,7 +148,7 @@ int main() {
     // Player HUD values.
     int player_points = 1000;
     int player_health = 1000;
-    int max_ticks = 120; // 2minutes.
+    int max_ticks = 120; // 2 minutes.
 
     // HUD is drawn at the top of the side panel.
     // Legend area starts below the HUD.
@@ -183,8 +187,7 @@ int main() {
         for (Critter *c : generator.critters) {
           if (c->getCol() == map->exitCol && c->getRow() == map->exitRow) {
             player_health -= c->getStr();
-            continue; // Skip we are at the end point so we do damage to the
-                      // player.
+            continue; // critter reached the end; damage the player.
           }
           c->Update(*map, tickCount);
           map->ToggleCritter(c, c->getRow(), c->getCol());
@@ -197,8 +200,7 @@ int main() {
 
       // --- Update Scroll Offset via Mouse Wheel ---
       float wheelMove = GetMouseWheelMove(); // positive when scrolling up
-      scrollOffset -= static_cast<int>(
-          wheelMove * 20); // adjust sensitivity (20 pixels per notch)
+      scrollOffset -= static_cast<int>(wheelMove * 20); // adjust sensitivity
       if (scrollOffset < 0)
         scrollOffset = 0;
       const int lineSpacing = 14 + 2;
@@ -211,47 +213,80 @@ int main() {
         scrollOffset = 0;
       }
 
-      // In this branch we will only be able to create a single tower, then we
-      // will change the behaviour of the tower with decorators.
+      // --- Tower Placement ---
+      // Mouse must be over the map.
       if (GetMouseX() < mapWidth && GetMouseY() < mapHeight) {
+        Vector2 position = GetMousePosition();
+        int col = position.x / map->tileSize;
+        int row = position.y / map->tileSize;
 
+        // Regular Tower (key T)
         if (IsKeyPressed(KEY_T)) {
           if (player_points >= 100) {
             player_points -= 100;
-            Vector2 position = GetMousePosition();
             Tower *t = new Tower();
             TowerObserver *obs = new TowerObserver();
             t->Attach(obs);
-            int col = position.x / map->tileSize;
-            int row = position.y / map->tileSize;
             t->setX(row);
             t->setY(col);
             map->ToggleTower(t, row, col);
             towers.push_back(t);
           }
         }
-
-        if (IsKeyPressed(KEY_L)) {
-          Vector2 position = GetMousePosition();
-          int col = position.x / map->tileSize;
-          int row = position.y / map->tileSize;
-          for (Tower *t : towers) {
-            if (t->getX() == row && t->getY() == col) {
-              if (player_points >= t->getLevelUpCost()) {
-                player_points -= t->getLevelUpCost();
-                t->levelUp();
-              }
-            }
+        // Freezing Tower (key F)
+        if (IsKeyPressed(KEY_F)) {
+          if (player_points >= 100) {
+            player_points -= 100;
+            Tower *base = new Tower();
+            // Wrap the base tower with a FreezingDecorator.
+            Tower *t = new FreezingDecorator(base, 0.5f);
+            TowerObserver *obs = new TowerObserver();
+            t->Attach(obs);
+            t->setX(row);
+            t->setY(col);
+            map->ToggleTower(t, row, col);
+            towers.push_back(t);
+          }
+        }
+        // Sniper Tower (key S)
+        if (IsKeyPressed(KEY_S)) {
+          if (player_points >= 100) {
+            player_points -= 100;
+            Tower *base = new Tower();
+            // Wrap the base tower with a SniperDecorator (adds +2 range and +10
+            // damage).
+            Tower *t = new SniperDecorator(base, 2, 10);
+            TowerObserver *obs = new TowerObserver();
+            t->Attach(obs);
+            t->setX(row);
+            t->setY(col);
+            map->ToggleTower(t, row, col);
+            towers.push_back(t);
+          }
+        }
+        // Bomb Tower (key B)
+        if (IsKeyPressed(KEY_B)) {
+          if (player_points >= 100) {
+            player_points -= 100;
+            Tower *base = new Tower();
+            // Wrap the base tower with a BombDecorator (splash radius 2, 50%
+            // damage).
+            Tower *t = new BombDecorator(base, 2, 0.5f);
+            TowerObserver *obs = new TowerObserver();
+            t->Attach(obs);
+            t->setX(row);
+            t->setY(col);
+            map->ToggleTower(t, row, col);
+            towers.push_back(t);
           }
         }
       }
+
       if (IsKeyPressed(KEY_X)) {
         Vector2 position = GetMousePosition();
         int col = position.x / map->tileSize;
         int row = position.y / map->tileSize;
-
         map->setToScenery(row, col);
-
         for (auto it = towers.begin(); it != towers.end();) {
           player_points += (*it)->getResale();
           delete *it;
@@ -295,7 +330,6 @@ int main() {
     std::cout << "INVALID MAP!!" << std::endl;
   }
 
-  // Here we will need to free any resources before the program terminates.
-
+  // Free any remaining resources here before termination.
   return 0;
 }

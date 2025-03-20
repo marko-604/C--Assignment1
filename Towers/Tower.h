@@ -1,5 +1,6 @@
 #ifndef TOWERS_H
 #define TOWERS_H
+
 #include "../Observer/Subject.h"
 #include "raylib.h"
 #include <iostream>
@@ -7,72 +8,61 @@
 
 class Map;
 class Critter;
+
 enum TowerType { REGULAR, SNIPER, BOMB, FREEZING };
-enum TowerStrategy {
-  WEAKEST,
-  CLOSEST,
-  STRONGEST,
-  HEALTHIEST,
-  LEASTHEALTHY
-}; // This will be the strategy that will be used by the towers in the game.
+enum TowerStrategy { WEAKEST, CLOSEST, STRONGEST, HEALTHIEST, LEASTHEALTHY };
 
-// A struct for the projectiles this never actually gets used but we will try
-// and incorporate later.
+// A struct for projectiles.
 struct Projectile {
-  float x, y;   // current position in tile or pixel coordinates
-  float vx, vy; // velocity (pixels/sec or tiles/sec)
-  float speed;  // how fast the projectile moves
-  float damage; // how much damage it deals
-  bool active;  // whether it's still flying
-
-  // Optionally store a color, or towerType so you can draw different colors
+  float x, y;   // current position
+  float vx, vy; // velocity
+  float speed;  // speed of movement
+  float damage; // damage dealt
+  bool active;  // active flag
   Color color;
-
-  // If you want to track a target or keep the direction locked
-  Critter *target; // or std::weak_ptr<Critter> if using shared_ptr
+  Critter *target; // target critter
 };
 
-// The Tower class
 class Tower : public Subject {
-
 public:
+  // Constructors
   Tower(int x_val, int y_val, int cost_val, int damage_val, int attack_rate_val,
         float hit_rate_val, int range_val, TowerType type_val, int level_val,
-        int level_up_cost_val, int resale_val)
-      : x(x_val), y(y_val), cost(cost_val), damage(damage_val),
-        attack_rate(attack_rate_val), hit_rate(hit_rate_val), range(range_val),
-        type(type_val), tid(nextId++), level(level_val),
-        levelUpCost(level_up_cost_val), resale(resale_val) {} // Incorrect order
+        int level_up_cost_val, int resale_val);
+  Tower();
 
-  // Constructor with no arguments.
-  Tower() : Tower(-1, -1, 100, 3, 3, 0.65, 1, REGULAR, 1, 50, 50) {}
+  // Virtual destructor is important for proper cleanup in derived classes.
+  virtual ~Tower();
 
-  int getTid();
-  int getX();
-  int getY();
-  int getCost();
-  int getDamage();
-  int getAttaRate();
-  float getHitRate();
-  int getRange();
-  int getResale();
-  int getLevel();
-  TowerType getType();
-  int getLevelUpCost();
+  // Virtual getters
+  virtual int getTid();
+  virtual int getX();
+  virtual int getY();
+  virtual int getCost();
+  virtual int getDamage();
+  virtual int getAttaRate();
+  virtual float getHitRate();
+  virtual int getRange();
+  virtual int getResale();
+  virtual int getLevel();
+  virtual TowerType getType();
+  virtual int getLevelUpCost();
 
-  void setLevel(int x);
-  void setX(int x_val);
-  void setY(int y_val);
-  void setCost(int cost_val);
-  void setResale(int resale_val);
-  void setDamage(int damage_val);
-  void setAttackRate(int attackRate);
-  void setHitRate(float hit_ratte_val);
-  void setRange(int range);
+  // Virtual setters
+  virtual void setLevel(int x);
+  virtual void setX(int x_val);
+  virtual void setY(int y_val);
+  virtual void setCost(int cost_val);
+  virtual void setResale(int resale_val);
+  virtual void setDamage(int damage_val);
+  virtual void setAttackRate(int attackRate);
+  virtual void setHitRate(float hit_rate_val);
+  virtual void setRange(int range);
 
-  void levelUp();
-  bool attack(std::vector<Critter *> &critters, int tick_count,
-              int *player_points, Map &gameMap); // The tower attacks.
+  // Virtual operations
+  virtual void levelUp();
+  virtual bool attack(std::vector<Critter *> &critters, int tick_count,
+                      int *player_points, Map &gameMap);
 
 private:
   TowerType type;
@@ -90,4 +80,4 @@ private:
   int levelUpCost;
 };
 
-#endif // !TOWERS_H
+#endif // TOWERS_H

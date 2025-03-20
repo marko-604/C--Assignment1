@@ -1,49 +1,46 @@
 #ifndef TOWER_DECORATOR_H
 #define TOWER_DECORATOR_H
 
-#include "Tower.h"
+#include "../Tower.h"
+#include <vector>
 
 class TowerDecorator : public Tower {
 protected:
-  Tower *decoratedTower; // Pointer to the wrapped Tower
+  Tower *baseTower; // The wrapped Tower instance.
 public:
-  TowerDecorator(Tower *tower) : decoratedTower(tower) {}
-  virtual ~TowerDecorator() { delete decoratedTower; }
+  // Constructor takes ownership of the passed Tower pointer.
+  TowerDecorator(Tower *tower);
+  virtual ~TowerDecorator();
 
-  // Forward non-virtual functions without override.
-  int getTid() { return decoratedTower->getTid(); }
-  int getX() { return decoratedTower->getX(); }
-  int getY() { return decoratedTower->getY(); }
-  int getCost() { return decoratedTower->getCost(); }
-  int getDamage() { return decoratedTower->getDamage(); }
-  int getAttaRate() { return decoratedTower->getAttaRate(); }
-  float getHitRate() { return decoratedTower->getHitRate(); }
-  int getRange() { return decoratedTower->getRange(); }
-  int getResale() { return decoratedTower->getResale(); }
-  int getLevel() { return decoratedTower->getLevel(); }
-  TowerType getType() { return decoratedTower->getType(); }
-  int getLevelUpCost() { return decoratedTower->getLevelUpCost(); }
+  // Forwarding virtual getters.
+  virtual int getTid() override;
+  virtual int getX() override;
+  virtual int getY() override;
+  virtual int getCost() override;
+  virtual int getDamage() override;
+  virtual int getAttaRate() override;
+  virtual float getHitRate() override;
+  virtual int getRange() override;
+  virtual int getResale() override;
+  virtual int getLevel() override;
+  virtual TowerType getType() override;
+  virtual int getLevelUpCost() override;
 
-  void setLevel(int x) { decoratedTower->setLevel(x); }
-  void setX(int x_val) { decoratedTower->setX(x_val); }
-  void setY(int y_val) { decoratedTower->setY(y_val); }
-  void setCost(int cost_val) { decoratedTower->setCost(cost_val); }
-  void setResale(int resale_val) { decoratedTower->setResale(resale_val); }
-  void setDamage(int dmg_val) { decoratedTower->setDamage(dmg_val); }
-  void setAttackRate(int attackRate) {
-    decoratedTower->setAttackRate(attackRate);
-  }
-  void setHitRate(float hit_rate_val) {
-    decoratedTower->setHitRate(hit_rate_val);
-  }
-  void setRange(int range_val) { decoratedTower->setRange(range_val); }
+  // Forwarding virtual setters.
+  virtual void setLevel(int lvl) override;
+  virtual void setX(int x_val) override;
+  virtual void setY(int y_val) override;
+  virtual void setCost(int cost_val) override;
+  virtual void setDamage(int dmg_val) override;
+  virtual void setAttackRate(int attackRate) override;
+  virtual void setHitRate(float hit_rate_val) override;
+  virtual void setRange(int range_val) override;
+  virtual void setResale(int resale_val) override;
 
-  // Forward virtual functions; these are declared virtual in Tower.
+  // Forwarding operations.
+  virtual void levelUp() override;
   virtual bool attack(std::vector<Critter *> &critters, int tick_count,
-                      int *player_points, Map &gameMap) override {
-    return decoratedTower->attack(critters, tick_count, player_points, gameMap);
-  }
-  virtual void levelUp() override { decoratedTower->levelUp(); }
+                      int *player_points, Map &gameMap) override;
 };
 
 #endif // TOWER_DECORATOR_H

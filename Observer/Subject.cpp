@@ -17,7 +17,6 @@ void Subject::DetachAll() {
 }
 
 void Subject::Notify() {
-  std::cout << "HERE" << std::endl;
   if (observers.empty())
     return;
   for (Observer *obs : observers) {
