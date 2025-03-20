@@ -2,10 +2,13 @@
 #define TOWERS_H
 
 #include "../Observer/Subject.h"
+#include "TowerStrategy/SelectionStrategy.h"
+#include "TowerStrategy/Strategies.h"
 #include "raylib.h"
 #include <iostream>
 #include <vector>
 
+// Forward declarations:
 class Map;
 class Critter;
 
@@ -25,16 +28,16 @@ struct Projectile {
 
 class Tower : public Subject {
 public:
-  // Constructors
+  // Constructors:
   Tower(int x_val, int y_val, int cost_val, int damage_val, int attack_rate_val,
         float hit_rate_val, int range_val, TowerType type_val, int level_val,
-        int level_up_cost_val, int resale_val);
-  Tower();
+        int level_up_cost_val, int resale_val, TargetSelectionStrategy *strat);
+  Tower(); // Default constructor
 
   // Virtual destructor is important for proper cleanup in derived classes.
   virtual ~Tower();
 
-  // Virtual getters
+  // Virtual getters:
   virtual int getTid();
   virtual int getX();
   virtual int getY();
@@ -48,7 +51,7 @@ public:
   virtual TowerType getType();
   virtual int getLevelUpCost();
 
-  // Virtual setters
+  // Virtual setters:
   virtual void setLevel(int x);
   virtual void setX(int x_val);
   virtual void setY(int y_val);
@@ -59,10 +62,14 @@ public:
   virtual void setHitRate(float hit_rate_val);
   virtual void setRange(int range);
 
-  // Virtual operations
+  // Virtual operations:
   virtual void levelUp();
   virtual bool attack(std::vector<Critter *> &critters, int tick_count,
                       int *player_points, Map &gameMap);
+
+  // Strategy management:
+  void setStrategy(TargetSelectionStrategy *strat);
+  TargetSelectionStrategy *getStrategy() const;
 
 private:
   TowerType type;
@@ -78,6 +85,9 @@ private:
   static int nextId;
   int level;
   int levelUpCost;
+
+  // The target selection strategy is stored as a pointer.
+  TargetSelectionStrategy *strategy;
 };
 
 #endif // TOWERS_H

@@ -21,6 +21,21 @@
 #include <windows.h>
 #endif
 
+// Helper: Update the color of the tile where a tower is placed,
+// based on the tower's decorator type.
+void updateTowerTileColor(Map *map, int row, int col, Tower *t) {
+  // Check type of tower using dynamic_cast.
+  if (dynamic_cast<FreezingDecorator *>(t) != nullptr) {
+    map->grid[row][col] = FREEZINGTOWER; // Freezing Tower color
+  } else if (dynamic_cast<SniperDecorator *>(t) != nullptr) {
+    map->grid[row][col] = SNIPERTOWER; // Sniper Tower color
+  } else if (dynamic_cast<BombDecorator *>(t) != nullptr) {
+    map->grid[row][col] = BOMBTOWER; // Bomb Tower color
+  } else {
+    map->grid[row][col] = REGULARTOWER; // Regular Tower color
+  }
+}
+
 // Draws the legend in the side panel (below the HUD).
 void DrawLegend(int startX, int startY) {
   int boxSize = 20;
@@ -213,16 +228,27 @@ int main() {
         scrollOffset = 0;
       }
 
-      // --- Tower Placement ---
+      // --- Tower Placement / Upgrade ---
       // Mouse must be over the map.
       if (GetMouseX() < mapWidth && GetMouseY() < mapHeight) {
         Vector2 position = GetMousePosition();
         int col = position.x / map->tileSize;
         int row = position.y / map->tileSize;
 
-        // Regular Tower (key T)
+        // Check if there is already a tower at this tile.
+        Tower *existingTower = nullptr;
+        int index = -1;
+        for (int i = 0; i < towers.size(); i++) {
+          if (towers[i]->getX() == row && towers[i]->getY() == col) {
+            existingTower = towers[i];
+            index = i;
+            break;
+          }
+        }
+
+        // Regular Tower (key T) — only place if there is no tower.
         if (IsKeyPressed(KEY_T)) {
-          if (player_points >= 100) {
+          if (existingTower == nullptr && player_points >= 100) {
             player_points -= 100;
             Tower *t = new Tower();
             TowerObserver *obs = new TowerObserver();
@@ -231,53 +257,81 @@ int main() {
             t->setY(col);
             map->ToggleTower(t, row, col);
             towers.push_back(t);
+            updateTowerTileColor(map, row, col, t);
           }
         }
-        // Freezing Tower (key F)
+        // Freezing Tower (key F) — upgrade if exists, else place new.
         if (IsKeyPressed(KEY_F)) {
           if (player_points >= 100) {
             player_points -= 100;
-            Tower *base = new Tower();
-            // Wrap the base tower with a FreezingDecorator.
-            Tower *t = new FreezingDecorator(base, 0.5f);
-            TowerObserver *obs = new TowerObserver();
-            t->Attach(obs);
-            t->setX(row);
-            t->setY(col);
-            map->ToggleTower(t, row, col);
-            towers.push_back(t);
+            if (existingTower != nullptr) {
+              // Upgrade: wrap the existing tower with a FreezingDecorator.
+              Tower *upgraded = new FreezingDecorator(existingTower, 0.5f);
+              TowerObserver *obs = new TowerObserver();
+              upgraded->Attach(obs);
+              towers[index] = upgraded;
+              map->ToggleTower(upgraded, row, col);
+              updateTowerTileColor(map, row, col, upgraded);
+            } else {
+              // No tower: place a new tower with freezing effect.
+              Tower *base = new Tower();
+              Tower *t = new FreezingDecorator(base, 0.5f);
+              TowerObserver *obs = new TowerObserver();
+              t->Attach(obs);
+              t->setX(row);
+              t->setY(col);
+              map->ToggleTower(t, row, col);
+              towers.push_back(t);
+              updateTowerTileColor(map, row, col, t);
+            }
           }
         }
-        // Sniper Tower (key S)
+        // Sniper Tower (key S) — upgrade if exists, else place new.
         if (IsKeyPressed(KEY_S)) {
           if (player_points >= 100) {
             player_points -= 100;
-            Tower *base = new Tower();
-            // Wrap the base tower with a SniperDecorator (adds +2 range and +10
-            // damage).
-            Tower *t = new SniperDecorator(base, 2, 10);
-            TowerObserver *obs = new TowerObserver();
-            t->Attach(obs);
-            t->setX(row);
-            t->setY(col);
-            map->ToggleTower(t, row, col);
-            towers.push_back(t);
+            if (existingTower != nullptr) {
+              Tower *upgraded = new SniperDecorator(existingTower, 2, 10);
+              TowerObserver *obs = new TowerObserver();
+              upgraded->Attach(obs);
+              towers[index] = upgraded;
+              map->ToggleTower(upgraded, row, col);
+              updateTowerTileColor(map, row, col, upgraded);
+            } else {
+              Tower *base = new Tower();
+              Tower *t = new SniperDecorator(base, 2, 10);
+              TowerObserver *obs = new TowerObserver();
+              t->Attach(obs);
+              t->setX(row);
+              t->setY(col);
+              map->ToggleTower(t, row, col);
+              towers.push_back(t);
+              updateTowerTileColor(map, row, col, t);
+            }
           }
         }
-        // Bomb Tower (key B)
+        // Bomb Tower (key B) — upgrade if exists, else place new.
         if (IsKeyPressed(KEY_B)) {
           if (player_points >= 100) {
             player_points -= 100;
-            Tower *base = new Tower();
-            // Wrap the base tower with a BombDecorator (splash radius 2, 50%
-            // damage).
-            Tower *t = new BombDecorator(base, 2, 0.5f);
-            TowerObserver *obs = new TowerObserver();
-            t->Attach(obs);
-            t->setX(row);
-            t->setY(col);
-            map->ToggleTower(t, row, col);
-            towers.push_back(t);
+            if (existingTower != nullptr) {
+              Tower *upgraded = new BombDecorator(existingTower, 2, 0.5f);
+              TowerObserver *obs = new TowerObserver();
+              upgraded->Attach(obs);
+              towers[index] = upgraded;
+              map->ToggleTower(upgraded, row, col);
+              updateTowerTileColor(map, row, col, upgraded);
+            } else {
+              Tower *base = new Tower();
+              Tower *t = new BombDecorator(base, 2, 0.5f);
+              TowerObserver *obs = new TowerObserver();
+              t->Attach(obs);
+              t->setX(row);
+              t->setY(col);
+              map->ToggleTower(t, row, col);
+              towers.push_back(t);
+              updateTowerTileColor(map, row, col, t);
+            }
           }
         }
       }
@@ -322,6 +376,21 @@ int main() {
       DrawObserverOutputScrollable(
           mapWidth + 10, observerOutputYFinal, sidePanelWidth - 20,
           availableHeightForObserver, messages, scrollOffset);
+
+      // --- Draw Upgrade Indicators ---
+      // For each tower, if it is decorated (upgraded), draw a small letter in
+      // the corner.
+      for (Tower *t : towers) {
+        int tileX = t->getY() * map->tileSize;
+        int tileY = t->getX() * map->tileSize;
+        if (dynamic_cast<FreezingDecorator *>(t) != nullptr) {
+          DrawText("F", tileX + map->tileSize - 15, tileY + 5, 20, BLACK);
+        } else if (dynamic_cast<SniperDecorator *>(t) != nullptr) {
+          DrawText("S", tileX + map->tileSize - 15, tileY + 5, 20, BLACK);
+        } else if (dynamic_cast<BombDecorator *>(t) != nullptr) {
+          DrawText("B", tileX + map->tileSize - 15, tileY + 5, 20, BLACK);
+        }
+      }
 
       EndDrawing();
     }

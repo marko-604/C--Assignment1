@@ -3,7 +3,7 @@
 
 #include "TowerDecorator.h"
 #include <vector>
-
+class SelectionStrategy;
 class BombDecorator : public TowerDecorator {
 private:
   int splashRadius;         // The radius (in grid units) for splash damage.

@@ -1,6 +1,7 @@
 #include "SniperDecorator.h"
 #include "../../Critters/Critter.h"
 #include "../../Maps/Map.h"
+#include "../TowerStrategy/Strategies.h" // Ensure this path is correct.
 #include <algorithm>
 #include <cmath>
 #include <iostream>
@@ -16,23 +17,38 @@ bool SniperDecorator::attack(std::vector<Critter *> &critters, int tick_count,
   if (tick_count % baseTower->getAttaRate() != 0)
     return false;
 
-  int towerX = baseTower->getX();
-  int towerY = baseTower->getY();
   int effectiveRange = baseTower->getRange() + extraRange;
-
-  // Choose target: for example, pick the farthest critter within effective
-  // range.
   Critter *target = nullptr;
-  int maxDistance = -1;
-  for (Critter *critter : critters) {
-    int row = critter->getRow();
-    int col = critter->getCol();
-    int dx = towerX - row;
-    int dy = towerY - col;
-    int distance = static_cast<int>(std::sqrt(dx * dx + dy * dy));
-    if (distance <= effectiveRange && distance > maxDistance) {
-      maxDistance = distance;
-      target = critter;
+
+  // Use the tower's target selection strategy if available.
+  if (baseTower->getStrategy() != nullptr) {
+    target = baseTower->getStrategy()->selectTarget(critters, baseTower);
+    // Verify that the strategy-selected target is within the effective range.
+    if (target != nullptr) {
+      int dx = baseTower->getX() - target->getRow();
+      int dy = baseTower->getY() - target->getCol();
+      int distance = static_cast<int>(std::sqrt(dx * dx + dy * dy));
+      if (distance > effectiveRange)
+        target = nullptr; // Ignore the target if it's out of range.
+    }
+  }
+
+  // Fallback: if no target was selected by the strategy, choose the farthest
+  // critter.
+  if (target == nullptr) {
+    int towerX = baseTower->getX();
+    int towerY = baseTower->getY();
+    int maxDistance = -1;
+    for (Critter *critter : critters) {
+      int row = critter->getRow();
+      int col = critter->getCol();
+      int dx = towerX - row;
+      int dy = towerY - col;
+      int distance = static_cast<int>(std::sqrt(dx * dx + dy * dy));
+      if (distance <= effectiveRange && distance > maxDistance) {
+        maxDistance = distance;
+        target = critter;
+      }
     }
   }
 
