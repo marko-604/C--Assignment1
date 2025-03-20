@@ -5,6 +5,7 @@
 // implemented.
 #include "FarthestStrategy.h"
 #include "HighestHealthStrategy.h"
+#include "LowestHealthStrategy.h"
 #include "SelectionStrategy.h"
 #include "StrongestStrategy.h"
 #include "WeakestStrategy.h"

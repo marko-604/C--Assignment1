@@ -9,6 +9,12 @@
 #include "Towers/TowerDecorators/FreezingDecorator.h"
 #include "Towers/TowerDecorators/SniperDecorator.h"
 #include "Towers/TowerDecorators/TowerDecorator.h"
+
+// Include the strategy headers.
+#include "Towers/TowerStrategy/HighestHealthStrategy.h"
+#include "Towers/TowerStrategy/LowestHealthStrategy.h"
+#include "Towers/TowerStrategy/Strategies.h"
+
 #include "raylib.h"
 #include <algorithm>
 #include <iostream>
@@ -22,17 +28,17 @@
 #endif
 
 // Helper: Update the color of the tile where a tower is placed,
-// based on the tower's decorator type.
+// based on the tower's decorator type. (Assumes FREEZINGTOWER, SNIPERTOWER,
+// BOMBTOWER, and REGULARTOWER are defined color constants.)
 void updateTowerTileColor(Map *map, int row, int col, Tower *t) {
-  // Check type of tower using dynamic_cast.
   if (dynamic_cast<FreezingDecorator *>(t) != nullptr) {
-    map->grid[row][col] = FREEZINGTOWER; // Freezing Tower color
+    map->grid[row][col] = FREEZINGTOWER;
   } else if (dynamic_cast<SniperDecorator *>(t) != nullptr) {
-    map->grid[row][col] = SNIPERTOWER; // Sniper Tower color
+    map->grid[row][col] = SNIPERTOWER;
   } else if (dynamic_cast<BombDecorator *>(t) != nullptr) {
-    map->grid[row][col] = BOMBTOWER; // Bomb Tower color
+    map->grid[row][col] = BOMBTOWER;
   } else {
-    map->grid[row][col] = REGULARTOWER; // Regular Tower color
+    map->grid[row][col] = REGULARTOWER;
   }
 }
 
@@ -93,24 +99,17 @@ void DrawObserverOutputScrollable(int startX, int startY, int panelWidth,
                                   const std::vector<std::string> &messages,
                                   int scrollOffset) {
   const int fontSize = 14;
-  const int lineSpacing = fontSize + 2; // spacing per line
+  const int lineSpacing = fontSize + 2;
 
-  // Draw a title above the scrolling region.
   DrawText("Observer Output:", startX, startY, fontSize, BLACK);
-
-  // Define the rectangle for the scrollable area (below the title).
   int regionY = startY + lineSpacing;
   int regionHeight = availableHeight - lineSpacing;
 
-  // Set scissor mode to clip drawing within the observer output region.
   BeginScissorMode(startX, regionY, panelWidth, regionHeight);
-
-  // Draw all messages with a vertical offset.
   for (size_t i = 0; i < messages.size(); i++) {
     int textY = regionY + i * lineSpacing - scrollOffset;
     DrawText(messages[i].c_str(), startX, textY, fontSize, BLACK);
   }
-
   EndScissorMode();
 }
 
@@ -121,136 +120,163 @@ int main() {
   std::cout << "Enter the number of cols: ";
   std::cin >> cols;
 
-  // Create the map. (Map(width, height, tileSize) where width = cols and height
-  // = rows)
+  // Create the map.
   Map *map = new Map(cols, rows, 80);
 
   // Create a shared messages vector for observer updates.
   std::vector<std::string> messages;
-  // Create and attach the MapObserver using a pointer to the messages vector.
   MapObserver *m_obs = new MapObserver(&messages);
   map->Attach(m_obs);
   bool isValidMap = map->RunEditor();
 
-  if (isValidMap) {
-    int mapWidth = map->gridWidth * map->tileSize;
-    int mapHeight = map->gridHeight * map->tileSize;
+  if (!isValidMap) {
+    std::cout << "INVALID MAP!!" << std::endl;
+    return 1;
+  }
 
-    // Define the side panel dimensions.
-    int sidePanelWidth = 300;
-    int screenWidth = mapWidth + sidePanelWidth;
-    int screenHeight = mapHeight;
+  int mapWidth = map->gridWidth * map->tileSize;
+  int mapHeight = map->gridHeight * map->tileSize;
+  int sidePanelWidth = 300;
+  int screenWidth = mapWidth + sidePanelWidth;
+  int screenHeight = mapHeight;
 
-    InitWindow(screenWidth, screenHeight, "Game");
-
+  InitWindow(screenWidth, screenHeight, "Game");
 #ifdef _WIN32
-    // Force the window to be focused on Windows.
-    HWND handle = GetWindowHandle();
-    SetForegroundWindow(handle);
+  HWND handle = GetWindowHandle();
+  SetForegroundWindow(handle);
 #endif
 
-    SetTargetFPS(60);
+  SetTargetFPS(60);
 
-    std::vector<Tower *> towers;
-    CritterGenerator generator;
-    std::vector<std::pair<int, int>> critter_path = map->getPath();
+  std::vector<Tower *> towers;
+  CritterGenerator generator;
+  std::vector<std::pair<int, int>> critter_path = map->getPath();
 
-    // Define side panel layout.
-    int hudY = 10;
-    int hudFontSize = 20;
-    int hudHeight = hudFontSize + 10;
+  int hudY = 10;
+  int hudFontSize = 20;
+  int hudHeight = hudFontSize + 10;
+  int player_points = 1000;
+  int player_health = 1000;
+  int max_ticks = 120; // 2 minutes
+  int legendStartY = hudY + hudHeight + 10;
+  int legendHeight = 12 * 30;
+  int observerOutputY = legendStartY + legendHeight + 20;
+  int observerPanelWidth = sidePanelWidth - 20;
+  int availableHeightForObserver = mapHeight - observerOutputY - 10;
+  int scrollOffset = 0;
+  double tickInterval = 1.0; // seconds
+  double lastTick = GetTime();
+  int tickCount = 0;
 
-    // Player HUD values.
-    int player_points = 1000;
-    int player_health = 1000;
-    int max_ticks = 120; // 2 minutes.
+  generator.levelUp(critter_path);
 
-    // HUD is drawn at the top of the side panel.
-    // Legend area starts below the HUD.
-    int legendStartY = hudY + hudHeight + 10;
-    int legendHeight = 12 * 30; // fixed height for legend area
+  while (!WindowShouldClose()) {
+    SetWindowFocused();
+    double currentTime = GetTime();
+    if (currentTime - lastTick >= tickInterval) {
+      tickCount++;
+      lastTick = currentTime;
+      if (tickCount >= max_ticks)
+        break;
 
-    // Observer output area starts below the legend.
-    int observerOutputY = legendStartY + legendHeight + 20;
-    int observerPanelWidth = sidePanelWidth - 20;
-    int availableHeightForObserver = mapHeight - observerOutputY - 10;
-    int scrollOffset = 0;
+      // Update towers.
+      for (Tower *t : towers) {
+        t->attack(generator.critters, tickCount, &player_points, *map);
+      }
+      // Update critters.
+      for (Critter *c : generator.critters) {
+        if (c->getCol() == map->exitCol && c->getRow() == map->exitRow) {
+          player_health -= c->getStr();
+          continue;
+        }
+        c->Update(*map, tickCount);
+        map->ToggleCritter(c, c->getRow(), c->getCol());
+      }
+      if (tickCount % 10 == 0) {
+        generator.levelUp(critter_path);
+      }
+    }
 
-    // Ticking system: tick interval of 1 second.
-    double tickInterval = 1.0; // in seconds
-    double lastTick = GetTime();
-    int tickCount = 0;
+    // Update scroll offset.
+    float wheelMove = GetMouseWheelMove();
+    scrollOffset -= static_cast<int>(wheelMove * 20);
+    if (scrollOffset < 0)
+      scrollOffset = 0;
+    const int lineSpacing = 14 + 2;
+    int totalTextHeight = messages.size() * lineSpacing;
+    if (totalTextHeight > availableHeightForObserver) {
+      int maxScroll = totalTextHeight - availableHeightForObserver;
+      if (scrollOffset > maxScroll)
+        scrollOffset = maxScroll;
+    } else {
+      scrollOffset = 0;
+    }
 
-    generator.levelUp(critter_path);
-    while (!WindowShouldClose()) {
-      SetWindowFocused(); // Ensure the window stays focused
+    // Tower Placement / Upgrade / Strategy Change.
+    if (GetMouseX() < mapWidth && GetMouseY() < mapHeight) {
+      Vector2 pos = GetMousePosition();
+      int col = pos.x / map->tileSize;
+      int row = pos.y / map->tileSize;
 
-      // --- Tick System ---
-      double currentTime = GetTime();
-      if (currentTime - lastTick >= tickInterval) {
-        tickCount++; // increment global tick
-        lastTick = currentTime;
-
-        if (tickCount >= max_ticks) {
+      // Check if there's a tower at this tile.
+      Tower *existingTower = nullptr;
+      int index = -1;
+      for (int i = 0; i < towers.size(); i++) {
+        if (towers[i]->getX() == row && towers[i]->getY() == col) {
+          existingTower = towers[i];
+          index = i;
           break;
         }
-        // Update towers: each tower attempts an attack.
-        for (Tower *t : towers) {
-          t->attack(generator.critters, tickCount, &player_points, *map);
-        }
-        // Update critters: move them according to the tick.
-        for (Critter *c : generator.critters) {
-          if (c->getCol() == map->exitCol && c->getRow() == map->exitRow) {
-            player_health -= c->getStr();
-            continue; // critter reached the end; damage the player.
-          }
-          c->Update(*map, tickCount);
-          map->ToggleCritter(c, c->getRow(), c->getCol());
-        }
+      }
 
-        if (tickCount % 10 == 0) {
-          generator.levelUp(critter_path);
+      // --- Strategy Change Section ---
+      // If a tower exists, allow strategy changes via keys 1-4.
+      if (existingTower != nullptr) {
+        if (IsKeyPressed(KEY_ONE)) {
+          existingTower->setStrategy(new LowestHealthTargetStrategy());
+          std::cout << "Tower at (" << row << "," << col
+                    << ") strategy changed to Lowest Health." << std::endl;
+        } else if (IsKeyPressed(KEY_TWO)) {
+          existingTower->setStrategy(new HighestHealthTargetStrategy());
+          std::cout << "Tower at (" << row << "," << col
+                    << ") strategy changed to Highest Health." << std::endl;
+        } else if (IsKeyPressed(KEY_THREE)) {
+          existingTower->setStrategy(new StrongestTargetStrategy());
+          std::cout << "Tower at (" << row << "," << col
+                    << ") strategy changed to Strongest." << std::endl;
         }
       }
 
-      // --- Update Scroll Offset via Mouse Wheel ---
-      float wheelMove = GetMouseWheelMove(); // positive when scrolling up
-      scrollOffset -= static_cast<int>(wheelMove * 20); // adjust sensitivity
-      if (scrollOffset < 0)
-        scrollOffset = 0;
-      const int lineSpacing = 14 + 2;
-      int totalTextHeight = messages.size() * lineSpacing;
-      if (totalTextHeight > availableHeightForObserver) {
-        int maxScroll = totalTextHeight - availableHeightForObserver;
-        if (scrollOffset > maxScroll)
-          scrollOffset = maxScroll;
-      } else {
-        scrollOffset = 0;
-      }
-
-      // --- Tower Placement / Upgrade ---
-      // Mouse must be over the map.
-      if (GetMouseX() < mapWidth && GetMouseY() < mapHeight) {
-        Vector2 position = GetMousePosition();
-        int col = position.x / map->tileSize;
-        int row = position.y / map->tileSize;
-
-        // Check if there is already a tower at this tile.
-        Tower *existingTower = nullptr;
-        int index = -1;
-        for (int i = 0; i < towers.size(); i++) {
-          if (towers[i]->getX() == row && towers[i]->getY() == col) {
-            existingTower = towers[i];
-            index = i;
-            break;
-          }
+      // --- Tower Placement / Upgrade for Different Tower Types ---
+      // Regular Tower (T): place only if no tower exists.
+      if (IsKeyPressed(KEY_T)) {
+        if (existingTower == nullptr && player_points >= 100) {
+          player_points -= 100;
+          Tower *t = new Tower();
+          // (Optionally set a default strategy here)
+          TowerObserver *obs = new TowerObserver();
+          t->Attach(obs);
+          t->setX(row);
+          t->setY(col);
+          map->ToggleTower(t, row, col);
+          towers.push_back(t);
+          updateTowerTileColor(map, row, col, t);
         }
-
-        // Regular Tower (key T) — only place if there is no tower.
-        if (IsKeyPressed(KEY_T)) {
-          if (existingTower == nullptr && player_points >= 100) {
-            player_points -= 100;
-            Tower *t = new Tower();
+      }
+      // Freezing Tower (F): upgrade if exists, else place new.
+      if (IsKeyPressed(KEY_F)) {
+        if (player_points >= 100) {
+          player_points -= 100;
+          if (existingTower != nullptr) {
+            Tower *upgraded = new FreezingDecorator(existingTower, 0.5f);
+            TowerObserver *obs = new TowerObserver();
+            upgraded->Attach(obs);
+            towers[index] = upgraded;
+            map->ToggleTower(upgraded, row, col);
+            updateTowerTileColor(map, row, col, upgraded);
+          } else {
+            Tower *base = new Tower();
+            Tower *t = new FreezingDecorator(base, 0.5f);
             TowerObserver *obs = new TowerObserver();
             t->Attach(obs);
             t->setX(row);
@@ -260,145 +286,113 @@ int main() {
             updateTowerTileColor(map, row, col, t);
           }
         }
-        // Freezing Tower (key F) — upgrade if exists, else place new.
-        if (IsKeyPressed(KEY_F)) {
-          if (player_points >= 100) {
-            player_points -= 100;
-            if (existingTower != nullptr) {
-              // Upgrade: wrap the existing tower with a FreezingDecorator.
-              Tower *upgraded = new FreezingDecorator(existingTower, 0.5f);
-              TowerObserver *obs = new TowerObserver();
-              upgraded->Attach(obs);
-              towers[index] = upgraded;
-              map->ToggleTower(upgraded, row, col);
-              updateTowerTileColor(map, row, col, upgraded);
-            } else {
-              // No tower: place a new tower with freezing effect.
-              Tower *base = new Tower();
-              Tower *t = new FreezingDecorator(base, 0.5f);
-              TowerObserver *obs = new TowerObserver();
-              t->Attach(obs);
-              t->setX(row);
-              t->setY(col);
-              map->ToggleTower(t, row, col);
-              towers.push_back(t);
-              updateTowerTileColor(map, row, col, t);
-            }
-          }
-        }
-        // Sniper Tower (key S) — upgrade if exists, else place new.
-        if (IsKeyPressed(KEY_S)) {
-          if (player_points >= 100) {
-            player_points -= 100;
-            if (existingTower != nullptr) {
-              Tower *upgraded = new SniperDecorator(existingTower, 2, 10);
-              TowerObserver *obs = new TowerObserver();
-              upgraded->Attach(obs);
-              towers[index] = upgraded;
-              map->ToggleTower(upgraded, row, col);
-              updateTowerTileColor(map, row, col, upgraded);
-            } else {
-              Tower *base = new Tower();
-              Tower *t = new SniperDecorator(base, 2, 10);
-              TowerObserver *obs = new TowerObserver();
-              t->Attach(obs);
-              t->setX(row);
-              t->setY(col);
-              map->ToggleTower(t, row, col);
-              towers.push_back(t);
-              updateTowerTileColor(map, row, col, t);
-            }
-          }
-        }
-        // Bomb Tower (key B) — upgrade if exists, else place new.
-        if (IsKeyPressed(KEY_B)) {
-          if (player_points >= 100) {
-            player_points -= 100;
-            if (existingTower != nullptr) {
-              Tower *upgraded = new BombDecorator(existingTower, 2, 0.5f);
-              TowerObserver *obs = new TowerObserver();
-              upgraded->Attach(obs);
-              towers[index] = upgraded;
-              map->ToggleTower(upgraded, row, col);
-              updateTowerTileColor(map, row, col, upgraded);
-            } else {
-              Tower *base = new Tower();
-              Tower *t = new BombDecorator(base, 2, 0.5f);
-              TowerObserver *obs = new TowerObserver();
-              t->Attach(obs);
-              t->setX(row);
-              t->setY(col);
-              map->ToggleTower(t, row, col);
-              towers.push_back(t);
-              updateTowerTileColor(map, row, col, t);
-            }
+      }
+      // Sniper Tower (S): upgrade if exists, else place new.
+      if (IsKeyPressed(KEY_S)) {
+        if (player_points >= 100) {
+          player_points -= 100;
+          if (existingTower != nullptr) {
+            Tower *upgraded = new SniperDecorator(existingTower, 2, 10);
+            TowerObserver *obs = new TowerObserver();
+            upgraded->Attach(obs);
+            towers[index] = upgraded;
+            map->ToggleTower(upgraded, row, col);
+            updateTowerTileColor(map, row, col, upgraded);
+          } else {
+            Tower *base = new Tower();
+            Tower *t = new SniperDecorator(base, 2, 10);
+            TowerObserver *obs = new TowerObserver();
+            t->Attach(obs);
+            t->setX(row);
+            t->setY(col);
+            map->ToggleTower(t, row, col);
+            towers.push_back(t);
+            updateTowerTileColor(map, row, col, t);
           }
         }
       }
-
-      if (IsKeyPressed(KEY_X)) {
-        Vector2 position = GetMousePosition();
-        int col = position.x / map->tileSize;
-        int row = position.y / map->tileSize;
-        map->setToScenery(row, col);
-        for (auto it = towers.begin(); it != towers.end();) {
-          player_points += (*it)->getResale();
-          delete *it;
-          it = towers.erase(it);
+      // Bomb Tower (B): upgrade if exists, else place new.
+      if (IsKeyPressed(KEY_B)) {
+        if (player_points >= 100) {
+          player_points -= 100;
+          if (existingTower != nullptr) {
+            Tower *upgraded = new BombDecorator(existingTower, 2, 0.5f);
+            TowerObserver *obs = new TowerObserver();
+            upgraded->Attach(obs);
+            towers[index] = upgraded;
+            map->ToggleTower(upgraded, row, col);
+            updateTowerTileColor(map, row, col, upgraded);
+          } else {
+            Tower *base = new Tower();
+            Tower *t = new BombDecorator(base, 2, 0.5f);
+            TowerObserver *obs = new TowerObserver();
+            t->Attach(obs);
+            t->setX(row);
+            t->setY(col);
+            map->ToggleTower(t, row, col);
+            towers.push_back(t);
+            updateTowerTileColor(map, row, col, t);
+          }
         }
       }
-      if (IsKeyPressed(KEY_Q)) {
-        break;
-      }
-
-      BeginDrawing();
-      ClearBackground(RAYWHITE);
-
-      // Draw the map in the left area.
-      map->Draw();
-
-      // Draw the side panel background.
-      DrawRectangle(mapWidth, 0, sidePanelWidth, mapHeight, LIGHTGRAY);
-
-      // Draw the HUD (player points and health) at the top of the side panel.
-      std::string hudText =
-          TextFormat("Points: %d   Health: %d", player_points, player_health);
-      DrawText(hudText.c_str(), mapWidth + 10, 10, 20, BLACK);
-
-      // Draw the legend below the HUD.
-      int legendStartY = 10 + 20 + 10;
-      DrawLegend(mapWidth + 10, legendStartY);
-
-      // Observer output area: start below the legend.
-      int innerLegendHeight = 12 * 30; // adjust if needed
-      int observerOutputYFinal = legendStartY + innerLegendHeight + 20;
-      int availableHeightForObserver = mapHeight - observerOutputYFinal - 10;
-      DrawObserverOutputScrollable(
-          mapWidth + 10, observerOutputYFinal, sidePanelWidth - 20,
-          availableHeightForObserver, messages, scrollOffset);
-
-      // --- Draw Upgrade Indicators ---
-      // For each tower, if it is decorated (upgraded), draw a small letter in
-      // the corner.
-      for (Tower *t : towers) {
-        int tileX = t->getY() * map->tileSize;
-        int tileY = t->getX() * map->tileSize;
-        if (dynamic_cast<FreezingDecorator *>(t) != nullptr) {
-          DrawText("F", tileX + map->tileSize - 15, tileY + 5, 20, BLACK);
-        } else if (dynamic_cast<SniperDecorator *>(t) != nullptr) {
-          DrawText("S", tileX + map->tileSize - 15, tileY + 5, 20, BLACK);
-        } else if (dynamic_cast<BombDecorator *>(t) != nullptr) {
-          DrawText("B", tileX + map->tileSize - 15, tileY + 5, 20, BLACK);
-        }
-      }
-
-      EndDrawing();
     }
-    CloseWindow();
-  } else {
-    std::cout << "INVALID MAP!!" << std::endl;
-  }
 
-  // Free any remaining resources here before termination.
+    if (IsKeyPressed(KEY_X)) {
+      Vector2 pos = GetMousePosition();
+      int col = pos.x / map->tileSize;
+      int row = pos.y / map->tileSize;
+      map->setToScenery(row, col);
+      for (auto it = towers.begin(); it != towers.end();) {
+        player_points += (*it)->getResale();
+        delete *it;
+        it = towers.erase(it);
+      }
+    }
+    if (IsKeyPressed(KEY_Q)) {
+      break;
+    }
+
+    BeginDrawing();
+    ClearBackground(RAYWHITE);
+
+    // Draw the map.
+    map->Draw();
+
+    // Draw the side panel.
+    DrawRectangle(mapWidth, 0, sidePanelWidth, mapHeight, LIGHTGRAY);
+
+    // Draw HUD.
+    std::string hudText =
+        TextFormat("Points: %d   Health: %d", player_points, player_health);
+    DrawText(hudText.c_str(), mapWidth + 10, 10, 20, BLACK);
+
+    // Draw the legend.
+    int legendStartY = 10 + 20 + 10;
+    DrawLegend(mapWidth + 10, legendStartY);
+
+    // Draw observer output.
+    int innerLegendHeight = 12 * 30;
+    int observerOutputYFinal = legendStartY + innerLegendHeight + 20;
+    int availableHeightForObserver = mapHeight - observerOutputYFinal - 10;
+    DrawObserverOutputScrollable(
+        mapWidth + 10, observerOutputYFinal, sidePanelWidth - 20,
+        availableHeightForObserver, messages, scrollOffset);
+
+    // Draw upgrade indicators on tower tiles.
+    for (Tower *t : towers) {
+      int tileX = t->getY() * map->tileSize;
+      int tileY = t->getX() * map->tileSize;
+      if (dynamic_cast<FreezingDecorator *>(t) != nullptr) {
+        DrawText("F", tileX + map->tileSize - 15, tileY + 5, 20, BLACK);
+      } else if (dynamic_cast<SniperDecorator *>(t) != nullptr) {
+        DrawText("S", tileX + map->tileSize - 15, tileY + 5, 20, BLACK);
+      } else if (dynamic_cast<BombDecorator *>(t) != nullptr) {
+        DrawText("B", tileX + map->tileSize - 15, tileY + 5, 20, BLACK);
+      }
+    }
+
+    EndDrawing();
+  }
+  CloseWindow();
   return 0;
 }
