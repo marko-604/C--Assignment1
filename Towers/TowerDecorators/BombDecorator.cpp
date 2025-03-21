@@ -4,6 +4,7 @@
 #include "../TowerStrategy/Strategies.h" // The interface for strategies.
 #include <algorithm>
 #include <cmath>
+#include <cstddef>
 #include <iostream>
 
 BombDecorator::BombDecorator(Tower *tower, int splashRadiusVal,
@@ -13,6 +14,9 @@ BombDecorator::BombDecorator(Tower *tower, int splashRadiusVal,
 
 bool BombDecorator::attack(std::vector<Critter *> &critters, int tick_count,
                            int *player_points, Map &gameMap) {
+  if (tick_count % baseTower->getAttaRate() != 0) {
+    return false;
+  }
   // Use the tower's strategy to select a target.
   Critter *primaryTarget = nullptr;
   if (baseTower->getStrategy() != nullptr) {
@@ -20,7 +24,9 @@ bool BombDecorator::attack(std::vector<Critter *> &critters, int tick_count,
   }
   // Fallback: if no strategy is set or no target found, try default selection.
   if (primaryTarget == nullptr) {
+    std::cout << "NO TARGETING STRATEGY!!\n";
     for (Critter *p : critters) {
+
       int row = p->getRow();
       int col = p->getCol();
       int current_row = baseTower->getX();
@@ -37,6 +43,7 @@ bool BombDecorator::attack(std::vector<Critter *> &critters, int tick_count,
 
   // If a primary target was selected, perform the attack.
   if (primaryTarget != nullptr) {
+    std::cout << "Targeting strategy acquired\n";
     // Apply primary damage.
     primaryTarget->setHealth(primaryTarget->getHealth() -
                              baseTower->getDamage());
@@ -46,21 +53,28 @@ bool BombDecorator::attack(std::vector<Critter *> &critters, int tick_count,
     // If primary target is eliminated, update map and award points.
     if (primaryTarget->getHealth() <= 0) {
       std::cout << "BombDecorator: Primary target eliminated!" << std::endl;
+      std::cout << "HERE3" << std::endl;
       int row = primaryTarget->getRow();
+      std::cout << "HERE3" << std::endl;
       int col = primaryTarget->getCol();
       if (row == gameMap.entryRow && col == gameMap.entryCol) {
         gameMap.grid[row][col] = ENTRY;
       } else if (row == gameMap.exitRow && col == gameMap.exitCol) {
         gameMap.grid[row][col] = EXIT;
       } else {
-        gameMap.grid[row][col] = PATH;
+        if (row != -1 && col != -1) {
+          gameMap.grid[row][col] = PATH;
+        }
       }
       *player_points += primaryTarget->getValue();
       // Remove the primary target from critters (ensure proper iteration in
       // your full code).
       auto it = std::find(critters.begin(), critters.end(), primaryTarget);
-      if (it != critters.end()) {
+      if (it != critters.end() && (*it) != nullptr || (*it) != NULL) {
+
+        std::cout << "HERE1" << std::endl;
         delete *it;
+        std::cout << "HERE2" << std::endl;
         critters.erase(it);
       }
     }
@@ -92,10 +106,13 @@ bool BombDecorator::attack(std::vector<Critter *> &critters, int tick_count,
           } else if (row == gameMap.exitRow && col == gameMap.exitCol) {
             gameMap.grid[row][col] = EXIT;
           } else {
-            gameMap.grid[row][col] = PATH;
+            if (row != -1 && col != -1)
+              gameMap.grid[row][col] = PATH;
           }
           *player_points += critter->getValue();
+          std::cout << "HERE1" << std::endl;
           delete critter;
+          std::cout << "HERE2" << std::endl;
           it = critters.erase(it);
           continue;
         }

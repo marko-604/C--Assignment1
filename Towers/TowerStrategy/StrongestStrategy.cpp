@@ -1,7 +1,7 @@
 
 #include "StrongestStrategy.h"
 #include "../../Critters/Critter.h"
-#include "../../Towers/Tower.h"
+#include "../Tower.h"
 #include <cmath>
 
 Critter *

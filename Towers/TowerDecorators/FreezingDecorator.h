@@ -10,7 +10,7 @@ private:
 public:
   FreezingDecorator(Tower *tower, float slowRateVal);
 
-  // Override attack to apply the freezing effect.
+  // We override attack fully, without calling baseTower->attack(...)
   virtual bool attack(std::vector<Critter *> &critters, int tick_count,
                       int *player_points, Map &gameMap) override;
 };

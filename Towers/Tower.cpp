@@ -78,7 +78,11 @@ void Tower::setResale(int resale_val) {
 }
 
 // Virtual operations.
-void Tower::levelUp() { std::cout << "Tower leveling up!" << std::endl; }
+void Tower::levelUp() {
+  damage += 1;
+  level += 1;
+  range += 1;
+}
 
 bool Tower::attack(std::vector<Critter *> &critters, int tick_count,
                    int *player_points, Map &gameMap) {

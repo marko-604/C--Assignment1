@@ -68,7 +68,8 @@ bool SniperDecorator::attack(std::vector<Critter *> &critters, int tick_count,
       } else if (row == gameMap.exitRow && col == gameMap.exitCol) {
         gameMap.grid[row][col] = EXIT;
       } else {
-        gameMap.grid[row][col] = PATH;
+        if (row != -1 && col != -1)
+          gameMap.grid[row][col] = PATH;
       }
       (*player_points) += target->getValue();
       auto it = std::find(critters.begin(), critters.end(), target);

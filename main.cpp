@@ -15,6 +15,7 @@
 #include "Towers/TowerStrategy/LowestHealthStrategy.h"
 #include "Towers/TowerStrategy/Strategies.h"
 
+#include "Towers/TowerStrategy/WeakestStrategy.h"
 #include "raylib.h"
 #include <algorithm>
 #include <iostream>
@@ -180,18 +181,21 @@ int main() {
         break;
 
       // Update towers.
-      for (Tower *t : towers) {
-        t->attack(generator.critters, tickCount, &player_points, *map);
-      }
       // Update critters.
       for (Critter *c : generator.critters) {
         if (c->getCol() == map->exitCol && c->getRow() == map->exitRow) {
           player_health -= c->getStr();
           continue;
         }
+
         c->Update(*map, tickCount);
         map->ToggleCritter(c, c->getRow(), c->getCol());
       }
+
+      for (Tower *t : towers) {
+        t->attack(generator.critters, tickCount, &player_points, *map);
+      }
+
       if (tickCount % 10 == 0) {
         generator.levelUp(critter_path);
       }
@@ -254,6 +258,8 @@ int main() {
           player_points -= 100;
           Tower *t = new Tower();
           // (Optionally set a default strategy here)
+          t->setStrategy(new WeakestTargetStrategy()); // Set a default strategy
+                                                       // of the weakest target.
           TowerObserver *obs = new TowerObserver();
           t->Attach(obs);
           t->setX(row);
@@ -343,9 +349,24 @@ int main() {
       int row = pos.y / map->tileSize;
       map->setToScenery(row, col);
       for (auto it = towers.begin(); it != towers.end();) {
-        player_points += (*it)->getResale();
-        delete *it;
-        it = towers.erase(it);
+        if (col == (*it)->getY() && row == (*it)->getX()) {
+          player_points += (*it)->getResale();
+          delete *it;
+          it = towers.erase(it);
+        }
+      }
+    }
+    if (IsKeyPressed(KEY_L)) {
+      Vector2 pos = GetMousePosition();
+      int col = pos.x / map->tileSize;
+      int row = pos.y / map->tileSize;
+
+      for (Tower *t : towers) {
+        if (t->getX() == row && t->getY() == col) {
+          t->levelUp();
+          std::cout << "Tower " << t->getTid() << " has been leveled up to "
+                    << t->getLevel() << std::endl;
+        }
       }
     }
     if (IsKeyPressed(KEY_Q)) {
