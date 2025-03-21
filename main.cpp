@@ -503,11 +503,16 @@ int main() {
       }
 
       // ADDED: Show the tower's level in the bottom-left corner of the tile
-      // For example, "L2" if level=2
       std::string levelText = "L" + std::to_string(t->getLevel());
-      // We'll place it near the bottom-left: tileX + 5, tileY + tileSize - 25
       DrawText(levelText.c_str(), tileX + 5, tileY + map->tileSize - 25, 20,
                BLACK);
+
+      // ADDED: Show the tower's level-up cost in the center of the tile
+      std::string costText = std::to_string(t->getLevelUpCost());
+      int textWidth = MeasureText(costText.c_str(), 20);
+      int centerX = tileX + (map->tileSize - textWidth) / 2;
+      int centerY = tileY + (map->tileSize - 20) / 2;
+      DrawText(costText.c_str(), centerX, centerY, 20, BLACK);
     }
 
     // ADDED: draw the bottom panel with tower stats

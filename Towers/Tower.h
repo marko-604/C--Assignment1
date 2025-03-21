@@ -53,6 +53,7 @@ public:
 
   // Virtual setters:
   virtual void setLevel(int x);
+  virtual void setLevelUpCost(int x);
   virtual void setX(int x_val);
   virtual void setY(int y_val);
   virtual void setCost(int cost_val);

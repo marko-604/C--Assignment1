@@ -4,7 +4,10 @@
 #include <cmath>
 #include <iostream>
 FreezingDecorator::FreezingDecorator(Tower *tower, float slowRateVal)
-    : TowerDecorator(tower), slowRate(slowRateVal) {}
+    : TowerDecorator(tower), slowRate(slowRateVal) {
+
+  setLevelUpCost(getLevelUpCost() * 1.5);
+}
 
 bool FreezingDecorator::attack(std::vector<Critter *> &critters, int tick_count,
                                int *player_points, Map &gameMap) {

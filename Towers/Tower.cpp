@@ -138,6 +138,7 @@ bool Tower::attack(std::vector<Critter *> &critters, int tick_count,
   return false;
 }
 
+void Tower::setLevelUpCost(int x) { levelUpCost = x; }
 // Strategy management:
 void Tower::setStrategy(TargetSelectionStrategy *strat) { strategy = strat; }
 

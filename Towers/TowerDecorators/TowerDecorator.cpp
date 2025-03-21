@@ -28,6 +28,8 @@ void TowerDecorator::setDamage(int dmg_val) { baseTower->setDamage(dmg_val); }
 void TowerDecorator::setAttackRate(int attackRate) {
   baseTower->setAttackRate(attackRate);
 }
+void TowerDecorator::setLevelUpCost(int x) { baseTower->setLevelUpCost(x); }
+
 void TowerDecorator::setHitRate(float hit_rate_val) {
   baseTower->setHitRate(hit_rate_val);
 }

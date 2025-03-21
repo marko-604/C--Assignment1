@@ -36,6 +36,7 @@ public:
   virtual void setHitRate(float hit_rate_val) override;
   virtual void setRange(int range_val) override;
   virtual void setResale(int resale_val) override;
+  virtual void setLevelUpCost(int x) override;
 
   // Forwarding operations.
   virtual void levelUp() override;

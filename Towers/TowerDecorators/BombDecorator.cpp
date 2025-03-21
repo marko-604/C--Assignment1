@@ -10,7 +10,9 @@
 BombDecorator::BombDecorator(Tower *tower, int splashRadiusVal,
                              float splashDamageFactorVal)
     : TowerDecorator(tower), splashRadius(splashRadiusVal),
-      splashDamageFactor(splashDamageFactorVal) {}
+      splashDamageFactor(splashDamageFactorVal) {
+  setLevelUpCost(getLevelUpCost() * 1.5);
+}
 
 bool BombDecorator::attack(std::vector<Critter *> &critters, int tick_count,
                            int *player_points, Map &gameMap) {

@@ -9,7 +9,10 @@
 SniperDecorator::SniperDecorator(Tower *tower, int extraRangeVal,
                                  int extraDamageVal)
     : TowerDecorator(tower), extraRange(extraRangeVal),
-      extraDamage(extraDamageVal) {}
+      extraDamage(extraDamageVal) {
+
+  setLevelUpCost(getLevelUpCost() * 1.25);
+}
 
 bool SniperDecorator::attack(std::vector<Critter *> &critters, int tick_count,
                              int *player_points, Map &gameMap) {
