@@ -115,17 +115,14 @@ void DrawObserverOutputScrollable(int startX, int startY, int panelWidth,
   EndScissorMode();
 }
 
-// -----------------------------------------------------------------------
-// ADDED: A small bottom panel to show each tower's strategy at all times
-// -----------------------------------------------------------------------
-static const int BOTTOM_PANEL_HEIGHT = 120; // How tall the bottom panel is
-static int strategyPanelScrollOffset = 0;   // offset for scrolling
+// ADDED: We'll show a small bottom panel that displays each tower's stats
+static const int BOTTOM_PANEL_HEIGHT = 120; // how tall the bottom area is
+static int bottomPanelScrollOffset = 0; // scroll offset for the bottom panel
 
-// ADDED: We define a helper function that returns the name of a strategy
-static std::string GetStrategyName(TargetSelectionStrategy *strat) {
+// ADDED: We define a helper that returns a string name for each strategy
+std::string StrategyName(TargetSelectionStrategy *strat) {
   if (!strat)
-    return "No Strategy";
-  // Check each known strategy type
+    return "None";
   if (dynamic_cast<LowestHealthTargetStrategy *>(strat))
     return "Lowest Health";
   if (dynamic_cast<HighestHealthTargetStrategy *>(strat))
@@ -136,36 +133,36 @@ static std::string GetStrategyName(TargetSelectionStrategy *strat) {
     return "Farthest";
   if (dynamic_cast<WeakestTargetStrategy *>(strat))
     return "Weakest";
-  // else fallback
   return "Unknown";
 }
 
-// ADDED: A function to build lines showing each tower's current strategy
-static std::vector<std::string>
-BuildTowerStrategyLines(const std::vector<Tower *> &towers) {
+// ADDED: build lines that describe each tower's stats
+std::vector<std::string> BuildTowerStats(const std::vector<Tower *> &towers) {
   std::vector<std::string> lines;
   for (auto *t : towers) {
     std::ostringstream oss;
-    oss << "Tower " << t->getTid()
-        << " Strategy: " << GetStrategyName(t->getStrategy());
+    oss << "Tower " << t->getTid() << " (Lv " << t->getLevel()
+        << "), DMG=" << t->getDamage() << ", Range=" << t->getRange()
+        << ", Strategy=" << StrategyName(t->getStrategy())
+        << ", Level= " << t->getLevel()
+        << ", LvlUpCost=" << t->getLevelUpCost();
+
     lines.push_back(oss.str());
   }
   return lines;
 }
 
-// ADDED: A function to draw the small bottom panel
-void DrawStrategyPanel(int startX, int startY, int width, int height,
-                       const std::vector<Tower *> &towers, int scrollOffset) {
+// ADDED: A function to draw the small bottom panel showing tower stats
+void DrawTowerStatsPanel(int startX, int startY, int width, int height,
+                         const std::vector<Tower *> &towers, int scrollOffset) {
   // background
   DrawRectangle(startX, startY, width, height, DARKGRAY);
-
   // title
-  DrawText("Towers' Current Strategy:", startX + 10, startY + 10, 20, BLACK);
+  DrawText("Tower Stats:", startX + 10, startY + 10, 20, BLACK);
 
-  // gather lines
-  auto lines = BuildTowerStrategyLines(towers);
+  // build lines for each tower
+  auto lines = BuildTowerStats(towers);
 
-  // scrolling region
   const int fontSize = 14;
   const int lineSpacing = fontSize + 2;
   int regionY = startY + 40;
@@ -177,7 +174,7 @@ void DrawStrategyPanel(int startX, int startY, int width, int height,
   }
   EndScissorMode();
 }
-// -----------------------------------------------------------------------
+// END ADDED
 
 int main() {
   int rows, cols;
@@ -204,7 +201,7 @@ int main() {
   int mapHeight = map->gridHeight * map->tileSize;
   int sidePanelWidth = 300;
 
-  // CHANGED: Increase total window height to make space for the bottom panel
+  // CHANGED: the total window height is mapHeight + BOTTOM_PANEL_HEIGHT
   int screenWidth = mapWidth + sidePanelWidth;
   int screenHeight = mapHeight + BOTTOM_PANEL_HEIGHT; // CHANGED
 
@@ -247,7 +244,8 @@ int main() {
       if (tickCount >= max_ticks)
         break;
 
-      // Update critters
+      // Update towers.
+      // Update critters.
       for (Critter *c : generator.critters) {
         if (c->getCol() == map->exitCol && c->getRow() == map->exitRow) {
           player_health -= c->getStr();
@@ -257,18 +255,16 @@ int main() {
         map->ToggleCritter(c, c->getRow(), c->getCol());
       }
 
-      // Update towers
       for (Tower *t : towers) {
         t->attack(generator.critters, tickCount, &player_points, *map);
       }
 
-      // Maybe spawn more critters
       if (tickCount % 10 == 0) {
         generator.levelUp(critter_path);
       }
     }
 
-    // Mouse wheel for the observer panel
+    // Update scroll offset for side panel
     float wheelMove = GetMouseWheelMove();
     scrollOffset -= static_cast<int>(wheelMove * 20);
     if (scrollOffset < 0)
@@ -285,28 +281,27 @@ int main() {
       }
     }
 
-    // ADDED: also update the bottom panel's scroll
-    strategyPanelScrollOffset -= (int)(wheelMove * 20);
-    if (strategyPanelScrollOffset < 0)
-      strategyPanelScrollOffset = 0;
+    // ADDED: also update the scroll for the bottom stats panel
+    bottomPanelScrollOffset -= (int)(wheelMove * 20);
+    if (bottomPanelScrollOffset < 0)
+      bottomPanelScrollOffset = 0;
     {
-      // We'll estimate lines: 14px font + 2 px spacing
+      // number of lines = number of towers
       const int fontSize = 14;
       const int lineSpacing = fontSize + 2;
-      // We display one line per tower
       int totalTextHeight = (int)towers.size() * lineSpacing;
-      int visibleHeight = BOTTOM_PANEL_HEIGHT - 40; // minus title
+      int visibleHeight = BOTTOM_PANEL_HEIGHT - 40; // minus panel title area
       if (totalTextHeight > visibleHeight) {
         int maxScroll = totalTextHeight - visibleHeight;
-        if (strategyPanelScrollOffset > maxScroll) {
-          strategyPanelScrollOffset = maxScroll;
+        if (bottomPanelScrollOffset > maxScroll) {
+          bottomPanelScrollOffset = maxScroll;
         }
       } else {
-        strategyPanelScrollOffset = 0;
+        bottomPanelScrollOffset = 0;
       }
     }
 
-    // Tower Placement / Upgrades
+    // Tower Placement / Upgrade / Strategy Change.
     if (GetMouseX() < mapWidth && GetMouseY() < mapHeight) {
       Vector2 pos = GetMousePosition();
       int col = pos.x / map->tileSize;
@@ -348,7 +343,7 @@ int main() {
         }
       }
 
-      // Place or upgrade towers
+      // Place / upgrade towers ...
       if (IsKeyPressed(KEY_T)) {
         if (!existingTower && player_points >= 100) {
           player_points -= 100;
@@ -506,14 +501,23 @@ int main() {
       } else if (dynamic_cast<BombDecorator *>(t) != nullptr) {
         DrawText("B", tileX + map->tileSize - 15, tileY + 5, 20, BLACK);
       }
+
+      // ADDED: Show the tower's level in the bottom-left corner of the tile
+      // For example, "L2" if level=2
+      std::string levelText = "L" + std::to_string(t->getLevel());
+      // We'll place it near the bottom-left: tileX + 5, tileY + tileSize - 25
+      DrawText(levelText.c_str(), tileX + 5, tileY + map->tileSize - 25, 20,
+               BLACK);
     }
 
-    // ADDED: Draw the bottom panel to show each tower's strategy
-    DrawStrategyPanel(0,
-                      mapHeight, // The bottom panel starts right below the map
-                      screenWidth, BOTTOM_PANEL_HEIGHT,
-                      towers, // pass the tower list
-                      strategyPanelScrollOffset);
+    // ADDED: draw the bottom panel with tower stats
+    DrawTowerStatsPanel(0,                      // startX
+                        mapHeight,              // startY => below the map
+                        screenWidth,            // full width
+                        BOTTOM_PANEL_HEIGHT,    // panel height
+                        towers,                 // pass the tower list
+                        bottomPanelScrollOffset // scroll offset
+    );
 
     EndDrawing();
   }

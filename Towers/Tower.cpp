@@ -81,7 +81,9 @@ void Tower::setResale(int resale_val) {
 void Tower::levelUp() {
   damage += 1;
   level += 1;
-  range += 1;
+  attack_rate -= 0.5;
+  levelUpCost = levelUpCost * 1.35; // We increase the cost of leveling up
+                                    // by 1.35 each time 35% more expensive
 }
 
 bool Tower::attack(std::vector<Critter *> &critters, int tick_count,
