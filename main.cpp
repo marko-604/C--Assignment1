@@ -11,6 +11,7 @@
 #include "Towers/TowerDecorators/TowerDecorator.h"
 
 // Include the strategy headers.
+#include "Towers/TowerStrategy/FarthestStrategy.h"
 #include "Towers/TowerStrategy/HighestHealthStrategy.h"
 #include "Towers/TowerStrategy/LowestHealthStrategy.h"
 #include "Towers/TowerStrategy/Strategies.h"
@@ -248,6 +249,16 @@ int main() {
           existingTower->setStrategy(new StrongestTargetStrategy());
           std::cout << "Tower at (" << row << "," << col
                     << ") strategy changed to Strongest." << std::endl;
+        } else if (IsKeyPressed(KEY_FOUR)) {
+          existingTower->setStrategy(new FarthestTargetStrategy());
+          std::cout << "Tower at (" << row << "," << col
+                    << ") strategy changed to Farthest critter." << std::endl;
+
+        } else if (IsKeyPressed(KEY_FIVE)) {
+          existingTower->setStrategy(new WeakestTargetStrategy());
+
+          std::cout << "Tower at (" << row << "," << col
+                    << ") strategy changed to Weakest critter." << std::endl;
         }
       }
 
@@ -353,7 +364,9 @@ int main() {
           player_points += (*it)->getResale();
           delete *it;
           it = towers.erase(it);
+          break;
         }
+        ++it;
       }
     }
     if (IsKeyPressed(KEY_L)) {

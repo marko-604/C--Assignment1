@@ -124,7 +124,8 @@ bool Tower::attack(std::vector<Critter *> &critters, int tick_count,
                    target->getCol() == gameMap.exitCol) {
           gameMap.grid[target->getRow()][target->getCol()] = EXIT;
         } else {
-          gameMap.grid[target->getRow()][target->getCol()] = PATH;
+          if (target->getRow() >= 0 && target->getCol() >= 0)
+            gameMap.grid[target->getRow()][target->getCol()] = PATH;
         }
         (*player_points) += target->getValue();
         // You would remove the critter from the vector here.
