@@ -156,7 +156,7 @@ std::vector<std::string> BuildTowerStats(const std::vector<Tower *> &towers) {
 void DrawTowerStatsPanel(int startX, int startY, int width, int height,
                          const std::vector<Tower *> &towers, int scrollOffset) {
   // background
-  DrawRectangle(startX, startY, width, height, DARKGRAY);
+  DrawRectangle(startX, startY, width, height, RAYWHITE);
   // title
   DrawText("Tower Stats:", startX + 10, startY + 10, 20, BLACK);
 
@@ -259,7 +259,7 @@ int main() {
         t->attack(generator.critters, tickCount, &player_points, *map);
       }
 
-      if (tickCount % 10 == 0) {
+      if (generator.critters.empty()) {
         generator.levelUp(critter_path);
       }
     }
@@ -494,6 +494,8 @@ int main() {
     for (Tower *t : towers) {
       int tileX = t->getY() * map->tileSize;
       int tileY = t->getX() * map->tileSize;
+
+      // Existing decorators
       if (dynamic_cast<FreezingDecorator *>(t) != nullptr) {
         DrawText("F", tileX + map->tileSize - 15, tileY + 5, 20, BLACK);
       } else if (dynamic_cast<SniperDecorator *>(t) != nullptr) {
@@ -513,6 +515,14 @@ int main() {
       int centerX = tileX + (map->tileSize - textWidth) / 2;
       int centerY = tileY + (map->tileSize - 20) / 2;
       DrawText(costText.c_str(), centerX, centerY, 20, BLACK);
+
+      // ADDED (Tower ID): Show the tower's ID in the bottom-right corner
+      std::string idText = std::to_string(t->getTid());
+      int idTextWidth = MeasureText(idText.c_str(), 20);
+      // We'll offset from right and bottom.
+      int bottomRightX = tileX + map->tileSize - idTextWidth - 5;
+      int bottomRightY = tileY + map->tileSize - 25;
+      DrawText(idText.c_str(), bottomRightX, bottomRightY, 20, BLACK);
     }
 
     // ADDED: draw the bottom panel with tower stats

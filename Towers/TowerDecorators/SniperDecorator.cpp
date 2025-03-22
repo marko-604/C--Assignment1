@@ -10,6 +10,7 @@ SniperDecorator::SniperDecorator(Tower *tower, int extraRangeVal,
                                  int extraDamageVal)
     : TowerDecorator(tower), extraRange(extraRangeVal),
       extraDamage(extraDamageVal) {
+  baseTower->setRange(baseTower->getRange() + 2);
 
   setLevelUpCost(getLevelUpCost() * 1.25);
 }
