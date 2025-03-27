@@ -326,6 +326,7 @@ int main() {
   double lastTick = GetTime();
   int tickCount = 0;
 
+  // Start the game with some critters already in the vector.
   generator.levelUp(critter_path);
 
   while (!WindowShouldClose()) {
@@ -334,8 +335,16 @@ int main() {
     if (currentTime - lastTick >= tickInterval) {
       tickCount++;
       lastTick = currentTime;
-      if (tickCount >= max_ticks)
+
+      if (tickCount >= max_ticks) {
+        std::cout << "Game Timer elapsed game over!" << std::endl;
         break;
+      }
+
+      if (player_health <= 0) {
+        std::cout << "GAME OVER YOU LOSE!" << std::endl;
+        break;
+      }
 
       // Update towers.
       // Update critters.
@@ -436,7 +445,6 @@ int main() {
         }
       }
 
-      // Place / upgrade towers ...
       if (IsKeyPressed(KEY_T)) {
 
         if (!existingTower && player_points >= 100 &&
@@ -454,7 +462,7 @@ int main() {
         }
       }
       if (IsKeyPressed(KEY_F)) {
-        if (player_points >= 100 && !map->grid[row][col] == PATH) {
+        if (player_points >= 100 && map->grid[row][col] != PATH) {
           player_points -= 100;
           if (existingTower) {
             Tower *upgraded = new FreezingDecorator(existingTower, 0.5f);
@@ -477,7 +485,7 @@ int main() {
         }
       }
       if (IsKeyPressed(KEY_S)) {
-        if (player_points >= 100 && !map->grid[row][col] == PATH) {
+        if (player_points >= 100 && map->grid[row][col] != PATH) {
           player_points -= 100;
           if (existingTower) {
             Tower *upgraded = new SniperDecorator(existingTower, 2, 10);
@@ -500,7 +508,7 @@ int main() {
         }
       }
       if (IsKeyPressed(KEY_B)) {
-        if (player_points >= 100 && !map->grid[row][col]) {
+        if (player_points >= 100 && map->grid[row][col] != PATH) {
           player_points -= 100;
           if (existingTower) {
             Tower *upgraded = new BombDecorator(existingTower, 2, 0.5f);
@@ -529,6 +537,9 @@ int main() {
       Vector2 pos = GetMousePosition();
       int col = pos.x / map->tileSize;
       int row = pos.y / map->tileSize;
+      if (map->grid[row][col] == PATH) {
+        continue;
+      }
       map->setToScenery(row, col);
       for (auto it = towers.begin(); it != towers.end();) {
         if (col == (*it)->getY() && row == (*it)->getX()) {
