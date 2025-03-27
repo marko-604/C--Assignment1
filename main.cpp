@@ -176,14 +176,107 @@ void DrawTowerStatsPanel(int startX, int startY, int width, int height,
 }
 // END ADDED
 
-int main() {
-  int rows, cols;
-  std::cout << "Enter the number of rows: ";
-  std::cin >> rows;
-  std::cout << "Enter the number of cols: ";
-  std::cin >> cols;
+static bool TextField(int x, int y, int width, int height, std::string &text) {
+  Rectangle box = {(float)x, (float)y, (float)width, (float)height};
+  DrawRectangleRec(box, LIGHTGRAY);
+  DrawText(text.c_str(), x + 4, y + 4, 20, BLACK);
 
-  // Create the map.
+  int key = GetCharPressed();
+  while (key > 0) {
+    if (key == KEY_BACKSPACE && !text.empty()) {
+      text.pop_back();
+    } else if (key >= 32 && key <= 126 && text.size() < 5) {
+      text.push_back((char)key);
+    }
+    key = GetCharPressed();
+  }
+  return false;
+}
+
+int main() {
+
+  int rows = 10, cols = 10;
+  std::string rowText = "10", colText = "10";
+  bool ready = false;
+  bool rowActive = false, colActive = false;
+  bool rowCleared = false, colCleared = false;
+
+  InitWindow(400, 200, "Configure Map");
+  SetTargetFPS(60);
+
+  while (!WindowShouldClose() && !ready) {
+    BeginDrawing();
+    ClearBackground(RAYWHITE);
+
+    DrawText("Enter map dimensions:", 20, 20, 20, BLACK);
+
+    // Rows textbox
+    DrawText("Rows:", 20, 60, 20, BLACK);
+    Rectangle rowBox{100, 55, 80, 30};
+    DrawRectangleRec(rowBox, rowActive ? LIGHTGRAY : GRAY);
+    DrawText(rowText.c_str(), rowBox.x + 4, rowBox.y + 4, 20, BLACK);
+
+    // Cols textbox
+    DrawText("Cols:", 200, 60, 20, BLACK);
+    Rectangle colBox{260, 55, 80, 30};
+    DrawRectangleRec(colBox, colActive ? LIGHTGRAY : GRAY);
+    DrawText(colText.c_str(), colBox.x + 4, colBox.y + 4, 20, BLACK);
+
+    // Handle clicks
+    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+      Vector2 mp = GetMousePosition();
+      bool clickedRow = CheckCollisionPointRec(mp, rowBox);
+      bool clickedCol = CheckCollisionPointRec(mp, colBox);
+
+      if (clickedRow) {
+        rowActive = true;
+        colActive = false;
+        if (!rowCleared) {
+          rowText.clear();
+          rowCleared = true;
+        }
+      } else if (clickedCol) {
+        colActive = true;
+        rowActive = false;
+        if (!colCleared) {
+          colText.clear();
+          colCleared = true;
+        }
+      } else {
+        rowActive = colActive = false;
+      }
+    }
+
+    // Keyboard input
+    int key = GetCharPressed();
+    while (key > 0) {
+      std::string *target =
+          rowActive ? &rowText : (colActive ? &colText : nullptr);
+      if (target) {
+        if (key == KEY_BACKSPACE && !target->empty())
+          target->pop_back();
+        else if (key >= 32 && key <= 126 && target->size() < 5)
+          target->push_back((char)key);
+      }
+      key = GetCharPressed();
+    }
+
+    // Start button
+    Rectangle startBtn{150, 120, 100, 40};
+    DrawRectangleRec(startBtn, GRAY);
+    DrawText("Start", 175, 128, 20, WHITE);
+    if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON) &&
+        CheckCollisionPointRec(GetMousePosition(), startBtn)) {
+      rows = std::atoi(rowText.c_str());
+      cols = std::atoi(colText.c_str());
+      if (rows > 0 && cols > 0)
+        ready = true;
+    }
+
+    EndDrawing();
+  }
+
+  CloseWindow();
   Map *map = new Map(cols, rows, 80);
 
   // Create a shared messages vector for observer updates.

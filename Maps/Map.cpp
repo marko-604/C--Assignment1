@@ -223,6 +223,7 @@ bool Map::RunEditor() {
   bool mapConfirmed = false;
 
   while (!WindowShouldClose() && !mapConfirmed) {
+    SetWindowFocused();
     // Handle input:
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
       Vector2 mousePos = GetMousePosition();
