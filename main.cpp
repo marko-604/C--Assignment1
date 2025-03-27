@@ -352,7 +352,7 @@ int main() {
         t->attack(generator.critters, tickCount, &player_points, *map);
       }
 
-      if (generator.critters.empty()) {
+      if (tickCount % 10 == 0) {
         generator.levelUp(critter_path);
       }
     }
@@ -438,7 +438,9 @@ int main() {
 
       // Place / upgrade towers ...
       if (IsKeyPressed(KEY_T)) {
-        if (!existingTower && player_points >= 100) {
+
+        if (!existingTower && player_points >= 100 &&
+            !(map->grid[row][col] == PATH)) {
           player_points -= 100;
           Tower *t = new Tower();
           t->setStrategy(new WeakestTargetStrategy());
@@ -452,7 +454,7 @@ int main() {
         }
       }
       if (IsKeyPressed(KEY_F)) {
-        if (player_points >= 100) {
+        if (player_points >= 100 && !map->grid[row][col] == PATH) {
           player_points -= 100;
           if (existingTower) {
             Tower *upgraded = new FreezingDecorator(existingTower, 0.5f);
@@ -475,7 +477,7 @@ int main() {
         }
       }
       if (IsKeyPressed(KEY_S)) {
-        if (player_points >= 100) {
+        if (player_points >= 100 && !map->grid[row][col] == PATH) {
           player_points -= 100;
           if (existingTower) {
             Tower *upgraded = new SniperDecorator(existingTower, 2, 10);
@@ -498,7 +500,7 @@ int main() {
         }
       }
       if (IsKeyPressed(KEY_B)) {
-        if (player_points >= 100) {
+        if (player_points >= 100 && !map->grid[row][col]) {
           player_points -= 100;
           if (existingTower) {
             Tower *upgraded = new BombDecorator(existingTower, 2, 0.5f);
@@ -547,6 +549,9 @@ int main() {
 
       for (Tower *t : towers) {
         if (t->getX() == row && t->getY() == col) {
+          if (player_points < t->getLevelUpCost())
+            break;
+          player_points -= t->getLevelUpCost();
           t->levelUp();
           std::cout << "Tower " << t->getTid() << " has been leveled up to "
                     << t->getLevel() << std::endl;
