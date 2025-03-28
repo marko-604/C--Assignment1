@@ -21,57 +21,50 @@ void Map::setToScenery(int row, int col) {
     grid[row][col] = EMPTY;
   }
 }
+// -------------------------------------------------------------------------------------new
+void Map::LoadTextures() {
+    textures[EMPTY] = LoadTexture("../textures/scenery.png");
+    textures[PATH] = LoadTexture("../textures/path.png");
+    textures[ENTRY] = LoadTexture("../textures/5.png");
+    textures[EXIT] = LoadTexture("../textures/7.png");
+    textures[FREEZINGTOWER] = LoadTexture("../textures/ice.png");
+    textures[SNIPERTOWER] = LoadTexture("../textures/sniper.png");
+    textures[BOMBTOWER] = LoadTexture("../textures/bomb.png");
+    textures[REGULARTOWER] = LoadTexture("../textures/sword.png");
+    textures[SQUIRRELCRITTER] = LoadTexture("../textures/squirrel.png");
+    textures[WOLFCRITTER] = LoadTexture("../textures/wolf.png");
+    textures[BEARCRITTER] = LoadTexture("../textures/bear.png");
+}
+
+void Map::UnloadTextures() {
+    for (auto &pair : textures) {
+        UnloadTexture(pair.second);
+    }
+    textures.clear();
+}
+
+// -------------------------------------------------------------------------------------new
 
 void Map::Draw() {
-  for (int row = 0; row < gridHeight; row++) {
-    for (int col = 0; col < gridWidth; col++) {
-      Rectangle tileRect = {col * (float)tileSize, row * (float)tileSize,
-                            (float)tileSize, (float)tileSize};
-      Color tileColor;
-      switch (grid[row][col]) {
-      case EMPTY:
-        tileColor = LIGHTGRAY;
-        break;
-      case PATH:
-        tileColor = GREEN;
-        break;
-      case ENTRY:
-        tileColor = BLUE;
-        break;
-      case EXIT:
-        tileColor = RED;
-        break;
-      case REGULARTOWER:
-        tileColor = YELLOW;
-        break;
-      case FREEZINGTOWER:
-        tileColor = GOLD;
-        break;
-      case SNIPERTOWER:
-        tileColor = ORANGE;
-        break;
-      case BOMBTOWER:
-        tileColor = PINK;
-        break;
-      case SQUIRRELCRITTER:
-        tileColor = BROWN;
-        break;
-      case WOLFCRITTER:
-        tileColor = PURPLE;
-        break;
-      case BEARCRITTER:
-        tileColor = BLACK;
-        break;
-      default:
-        tileColor = LIGHTGRAY;
-        break;
-      }
-      DrawRectangleRec(tileRect, tileColor);
-      DrawRectangleLines(tileRect.x, tileRect.y, tileRect.width,
-                         tileRect.height, DARKGRAY);
+    for (int row = 0; row < gridHeight; row++) {
+        for (int col = 0; col < gridWidth; col++) {
+            Rectangle tileRect = {
+                    col * (float)tileSize, row * (float)tileSize,
+                    (float)tileSize, (float)tileSize};
+
+            TileType type = grid[row][col];
+
+            if (textures.find(type) != textures.end()) {
+                DrawTexturePro(textures[type],
+                               {0, 0, (float)textures[type].width, (float)textures[type].height},
+                               tileRect, {0, 0}, 0.0f, WHITE);
+            } else {
+                DrawRectangleRec(tileRect, LIGHTGRAY);
+            }
+        }
     }
-  }
 }
+
 
 void Map::ToggleCritter(Critter *critter, int row, int col) {
   if (row < 0 || row >= gridHeight || col < 0 || col >= gridWidth) {
@@ -193,124 +186,101 @@ bool Map::IsValidPath() {
   return false;
 }
 
+
+//                          AUGMENTED FOR IMAGES ------------------------------------------------------------------------------
 bool Map::RunEditor() {
-  // Create a temporary window to get monitor resolution
-  InitWindow(100, 100, "Temp");
-  int monitorWidth = GetMonitorWidth(0);
-  int monitorHeight = GetMonitorHeight(0);
-  CloseWindow();
+    // Create a temporary window to get monitor resolution
+    InitWindow(100, 100, "Temp");
+    int monitorWidth = GetMonitorWidth(0);
+    int monitorHeight = GetMonitorHeight(0);
+    CloseWindow();
 
-  // Set desired window dimensions to 80% of the monitor resolution.
-  int desiredWidth = static_cast<int>(monitorWidth * 0.8);
-  int desiredHeight = static_cast<int>(monitorHeight * 0.8);
+    // Set desired window dimensions to 80% of the monitor resolution.
+    int desiredWidth = static_cast<int>(monitorWidth * 0.8);
+    int desiredHeight = static_cast<int>(monitorHeight * 0.8);
 
-  // Compute a tile size that makes the grid fit within the desired dimensions.
-  int computedTileSize = desiredWidth / gridWidth;
-  if (gridHeight * computedTileSize > desiredHeight) {
-    computedTileSize = desiredHeight / gridHeight;
-  }
-  if (computedTileSize < 1)
-    computedTileSize = 1; // Ensure tile size is at least 1 pixel.
-  tileSize = computedTileSize;
-
-  // Compute window size from grid dimensions and tile size.
-  int screenWidth = gridWidth * tileSize;
-  int screenHeight = gridHeight * tileSize;
-
-  // Now initialize the actual editor window.
-  InitWindow(screenWidth, screenHeight, "Map Editor");
-  SetTargetFPS(60);
-  bool mapConfirmed = false;
-
-  while (!WindowShouldClose() && !mapConfirmed) {
-    SetWindowFocused();
-    // Handle input:
-    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-      Vector2 mousePos = GetMousePosition();
-      int col = mousePos.x / tileSize;
-      int row = mousePos.y / tileSize;
-      TogglePath(row, col);
+    // Compute a tile size that makes the grid fit within the desired dimensions.
+    int computedTileSize = desiredWidth / gridWidth;
+    if (gridHeight * computedTileSize > desiredHeight) {
+        computedTileSize = desiredHeight / gridHeight;
     }
-    if (IsKeyPressed(KEY_E)) {
-      Vector2 mousePos = GetMousePosition();
-      int col = mousePos.x / tileSize;
-      int row = mousePos.y / tileSize;
-      SetEntry(row, col);
-    }
-    if (IsKeyPressed(KEY_X)) {
-      Vector2 mousePos = GetMousePosition();
-      int col = mousePos.x / tileSize;
-      int row = mousePos.y / tileSize;
-      SetExit(row, col);
-    }
-    if (IsKeyPressed(KEY_S)) {
-      if (IsValidPath())
-        mapConfirmed = true;
-    }
+    if (computedTileSize < 1)
+        computedTileSize = 1; // Ensure tile size is at least 1 pixel.
+    tileSize = computedTileSize;
 
-    BeginDrawing();
-    ClearBackground(RAYWHITE);
-    for (int row = 0; row < gridHeight; row++) {
-      for (int col = 0; col < gridWidth; col++) {
-        Rectangle tileRect = {col * (float)tileSize, row * (float)tileSize,
-                              (float)tileSize, (float)tileSize};
-        Color tileColor;
-        switch (grid[row][col]) {
-        case EMPTY:
-          tileColor = LIGHTGRAY;
-          break;
-        case PATH:
-          tileColor = GREEN;
-          break;
-        case ENTRY:
-          tileColor = BLUE;
-          break;
-        case EXIT:
-          tileColor = RED;
-          break;
-        case REGULARTOWER:
-          tileColor = YELLOW;
-          break;
-        case FREEZINGTOWER:
-          tileColor = GOLD;
-          break;
-        case SNIPERTOWER:
-          tileColor = ORANGE;
-          break;
-        case BOMBTOWER:
-          tileColor = PINK;
-          break;
-        case SQUIRRELCRITTER:
-          tileColor = BROWN;
-          break;
-        case WOLFCRITTER:
-          tileColor = PURPLE;
-          break;
-        case BEARCRITTER:
-          tileColor = BLACK;
-          break;
-        default:
-          tileColor = LIGHTGRAY;
-          break;
+    // Compute window size from grid dimensions and tile size.
+    int screenWidth = gridWidth * tileSize;
+    int screenHeight = gridHeight * tileSize;
+
+    // Now initialize the actual editor window.
+    InitWindow(screenWidth, screenHeight, "Map Editor");
+    SetTargetFPS(60);
+    bool mapConfirmed = false;
+
+    while (!WindowShouldClose() && !mapConfirmed) {
+        SetWindowFocused();
+        // Handle input:
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+            Vector2 mousePos = GetMousePosition();
+            int col = mousePos.x / tileSize;
+            int row = mousePos.y / tileSize;
+            TogglePath(row, col);
         }
-        DrawRectangleRec(tileRect, tileColor);
-        DrawRectangleLines(tileRect.x, tileRect.y, tileRect.width,
-                           tileRect.height, DARKGRAY);
-      }
+        if (IsKeyPressed(KEY_E)) {
+            Vector2 mousePos = GetMousePosition();
+            int col = mousePos.x / tileSize;
+            int row = mousePos.y / tileSize;
+            SetEntry(row, col);
+        }
+        if (IsKeyPressed(KEY_X)) {
+            Vector2 mousePos = GetMousePosition();
+            int col = mousePos.x / tileSize;
+            int row = mousePos.y / tileSize;
+            SetExit(row, col);
+        }
+        if (IsKeyPressed(KEY_S)) {
+            if (IsValidPath())
+                mapConfirmed = true;
+        }
+
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+
+        for (int row = 0; row < gridHeight; row++) {
+            for (int col = 0; col < gridWidth; col++) {
+                Rectangle tileRect = {col * (float)tileSize, row * (float)tileSize,
+                                      (float)tileSize, (float)tileSize};
+
+                TileType type = grid[row][col];
+
+                // If texture exists, draw it; otherwise, fallback to gray rectangle
+                if (textures.find(type) != textures.end()) {
+                    DrawTexturePro(textures[type],
+                                   {0, 0, (float)textures[type].width, (float)textures[type].height},
+                                   tileRect, {0, 0}, 0.0f, WHITE);
+                } else {
+                    DrawRectangleRec(tileRect, LIGHTGRAY);
+                }
+
+                // Draw grid lines
+                DrawRectangleLines(tileRect.x, tileRect.y, tileRect.width, tileRect.height, DARKGRAY);
+            }
+        }
+
+        // Display instructions
+        DrawText("Left Click: Toggle Path  |  E: Set Entry  |  X: Set Exit", 10, 10, 20, BLACK);
+        DrawText("Press S to start game (if path is valid)", 10, 40, 20, BLACK);
+
+        // Debug: show tile size on screen (remove this later if desired)
+        DrawText(TextFormat("Tile Size: %d", tileSize), 10, screenHeight - 30, 20, BLACK);
+
+        EndDrawing();
     }
-    DrawText("Left Click: Toggle Path  |  E: Set Entry  |  X: Set Exit", 10, 10,
-             20, BLACK);
-    DrawText("Press S to start game (if path is valid)", 10, 40, 20, BLACK);
 
-    // Debug: show tile size on screen (remove this later if desired)
-    DrawText(TextFormat("Tile Size: %d", tileSize), 10, screenHeight - 30, 20,
-             BLACK);
-    EndDrawing();
-  }
-
-  CloseWindow();
-  return mapConfirmed;
+    CloseWindow();
+    return mapConfirmed;
 }
+
 
 std::vector<std::pair<int, int>> Map::getPath() {
   // If entry/exit are not set, return an empty path
