@@ -71,6 +71,14 @@ public:
   // Runs the map editor interface.
   // Returns true if the user confirms a valid map.
   bool RunEditor();
+
+ // Texture map for tile types
+  std::unordered_map<TileType, Texture2D> textures;
+
+
+    void LoadTextures();
+    void UnloadTextures();
+
 };
 
 // This function will run the actual game later on we will place this function
