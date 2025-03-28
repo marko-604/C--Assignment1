@@ -23,17 +23,23 @@ void Map::setToScenery(int row, int col) {
 }
 // -------------------------------------------------------------------------------------new
 void Map::LoadTextures() {
-    textures[EMPTY] = LoadTexture("../textures/scenery.png");
-    textures[PATH] = LoadTexture("../textures/path.png");
-    textures[ENTRY] = LoadTexture("../textures/5.png");
-    textures[EXIT] = LoadTexture("../textures/7.png");
-    textures[FREEZINGTOWER] = LoadTexture("../textures/ice.png");
-    textures[SNIPERTOWER] = LoadTexture("../textures/sniper.png");
-    textures[BOMBTOWER] = LoadTexture("../textures/bomb.png");
-    textures[REGULARTOWER] = LoadTexture("../textures/sword.png");
-    textures[SQUIRRELCRITTER] = LoadTexture("../textures/squirrel.png");
-    textures[WOLFCRITTER] = LoadTexture("../textures/wolf.png");
-    textures[BEARCRITTER] = LoadTexture("../textures/bear.png");
+
+  Texture2D test = LoadTexture("assets/path.png");
+if (test.id == 0) {
+    std::cout << "Failed to load path.png!" << std::endl;
+}
+
+    textures[EMPTY] = LoadTexture("assets/scenery.png");
+    textures[PATH] = LoadTexture("assets/path.png");
+    textures[ENTRY] = LoadTexture("assets/5.png");
+    textures[EXIT] = LoadTexture("assets/7.png");
+    textures[FREEZINGTOWER] = LoadTexture("assets/ice.png");
+    textures[SNIPERTOWER] = LoadTexture("assets/sniper.png");
+    textures[BOMBTOWER] = LoadTexture("assets/bomb.png");
+    textures[REGULARTOWER] = LoadTexture("assets/sword.png");
+    textures[SQUIRRELCRITTER] = LoadTexture("assets/squirrel.png");
+    textures[WOLFCRITTER] = LoadTexture("assets/wolf.png");
+    textures[BEARCRITTER] = LoadTexture("assets/bear.png");
 }
 
 void Map::UnloadTextures() {
@@ -53,6 +59,8 @@ void Map::Draw() {
                     (float)tileSize, (float)tileSize};
 
             TileType type = grid[row][col];
+            std::cout << "Drawing tile at (" << row << ", " << col << ") of type: " << type << std::endl;
+
 
             if (textures.find(type) != textures.end()) {
                 DrawTexturePro(textures[type],
@@ -81,7 +89,7 @@ void Map::ToggleCritter(Critter *critter, int row, int col) {
     grid[row][col] = WOLFCRITTER;
   else
     grid[row][col] = BEARCRITTER;
-  Notify();
+  this->Notify();
 }
 
 void Map::setToPath(int row, int col) {
@@ -90,7 +98,7 @@ void Map::setToPath(int row, int col) {
     return;
 
   grid[row][col] = PATH;
-  Notify(); //------------------------------------------ADDED NOTIFY
+  this->Notify(); //------------------------------------------ADDED NOTIFY
 }
 
 void Map::ToggleTower(Tower *tower, int row, int col) {
@@ -113,7 +121,7 @@ void Map::ToggleTower(Tower *tower, int row, int col) {
 
   tower->setX(row);
   tower->setY(col);
-  Notify(); //------------------------------------------ADDED NOTIFY
+  this->Notify(); //------------------------------------------ADDED NOTIFY
 
   return;
 }
@@ -123,7 +131,14 @@ void Map::TogglePath(int row, int col) {
     if (grid[row][col] == ENTRY || grid[row][col] == EXIT)
       return;
     grid[row][col] = (grid[row][col] == EMPTY) ? PATH : EMPTY;
-    Notify(); //------------------------------------------ADDED NOTIFY
+
+    std::cout << "Toggled tile at (" << row << ", " << col << ") - now ";
+    if (grid[row][col] == PATH)
+      std::cout << "PATH" << std::endl;
+    else
+      std::cout << "EMPTY" << std::endl;
+
+    this->Notify(); //------------------------------------------ADDED NOTIFY
   }
 }
 
@@ -135,7 +150,7 @@ void Map::SetEntry(int row, int col) {
     grid[row][col] = ENTRY;
     entryRow = row;
     entryCol = col;
-    Notify(); //------------------------------------------ADDED NOTIFY
+    this->Notify(); //------------------------------------------ADDED NOTIFY
   }
 }
 
@@ -147,7 +162,7 @@ void Map::SetExit(int row, int col) {
     grid[row][col] = EXIT;
     exitRow = row;
     exitCol = col;
-    Notify(); //------------------------------------------ADDED NOTIFY
+    this->Notify(); //------------------------------------------ADDED NOTIFY
   }
 }
 
@@ -191,8 +206,10 @@ bool Map::IsValidPath() {
 bool Map::RunEditor() {
     // Create a temporary window to get monitor resolution
     InitWindow(100, 100, "Temp");
+    LoadTextures();
     int monitorWidth = GetMonitorWidth(0);
     int monitorHeight = GetMonitorHeight(0);
+    UnloadTextures();
     CloseWindow();
 
     // Set desired window dimensions to 80% of the monitor resolution.
@@ -224,6 +241,8 @@ bool Map::RunEditor() {
             Vector2 mousePos = GetMousePosition();
             int col = mousePos.x / tileSize;
             int row = mousePos.y / tileSize;
+            std::cout << "Mouse at: " << mousePos.x << ", " << mousePos.y << std::endl;
+
             TogglePath(row, col);
         }
         if (IsKeyPressed(KEY_E)) {

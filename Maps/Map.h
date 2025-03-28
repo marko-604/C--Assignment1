@@ -5,6 +5,7 @@
 #include "raylib.h"
 #include <utility>
 #include <vector>
+#include <unordered_map>
 
 class Critter;
 class Tower;

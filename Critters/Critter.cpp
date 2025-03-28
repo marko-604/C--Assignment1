@@ -63,9 +63,7 @@ void Critter::Update(Map &map, int tick_count) {
 
   // How can we solve the problem from here?
 
-  if (this == NULL || this == nullptr) {
-    return;
-  }
+  
 
   // Only move once every `speed` ticks
   if (tick_count % speed != 0) {
