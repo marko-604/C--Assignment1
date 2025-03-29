@@ -1,0 +1,88 @@
+\doxysection{Map\+Observer Class Reference}
+\hypertarget{class_map_observer}{}\label{class_map_observer}\index{MapObserver@{MapObserver}}
+
+
+Concrete observer that listens to updates from a \doxylink{class_subject}{Subject} (typically a \doxylink{class_map}{Map}).  
+
+
+
+
+{\ttfamily \#include $<$Map\+Observer.\+h$>$}
+
+Inheritance diagram for Map\+Observer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_map_observer}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_map_observer_a5f730cdd40c374cd4acbeb30621b4e62}{Map\+Observer}} (std\+::vector$<$ std\+::string $>$ \texorpdfstring{$\ast$}{*}m)
+\begin{DoxyCompactList}\small\item\em Construct a new \doxylink{class_map_observer}{Map\+Observer} object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_map_observer_a53113e69aa2b5eca077296ce0fd62a87}{Update}} (\mbox{\hyperlink{class_subject}{Subject}} \texorpdfstring{$\ast$}{*}subject) override
+\begin{DoxyCompactList}\small\item\em Handles updates from the subject. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_observer}{Observer}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual {\bfseries \texorpdfstring{$\sim$}{\string~}\+Observer} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor for safe polymorphic destruction. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_map_observer_a303ab146454f70938a1837d10d448ee2}\label{class_map_observer_a303ab146454f70938a1837d10d448ee2} 
+std\+::vector$<$ std\+::string $>$ \texorpdfstring{$\ast$}{*} {\bfseries messages}
+\begin{DoxyCompactList}\small\item\em Pointer to a shared vector where messages will be stored. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Concrete observer that listens to updates from a \doxylink{class_subject}{Subject} (typically a \doxylink{class_map}{Map}). 
+
+It logs update messages to a shared vector of strings. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_map_observer_a5f730cdd40c374cd4acbeb30621b4e62}\index{MapObserver@{MapObserver}!MapObserver@{MapObserver}}
+\index{MapObserver@{MapObserver}!MapObserver@{MapObserver}}
+\doxysubsubsection{\texorpdfstring{MapObserver()}{MapObserver()}}
+{\footnotesize\ttfamily \label{class_map_observer_a5f730cdd40c374cd4acbeb30621b4e62} 
+Map\+Observer\+::\+Map\+Observer (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::string $>$ \texorpdfstring{$\ast$}{*}}]{m}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct a new \doxylink{class_map_observer}{Map\+Observer} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m} & Pointer to a shared vector of messages used for logging. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_map_observer_a53113e69aa2b5eca077296ce0fd62a87}\index{MapObserver@{MapObserver}!Update@{Update}}
+\index{Update@{Update}!MapObserver@{MapObserver}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily \label{class_map_observer_a53113e69aa2b5eca077296ce0fd62a87} 
+void Map\+Observer\+::\+Update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_subject}{Subject}} \texorpdfstring{$\ast$}{*}}]{subject}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Handles updates from the subject. 
+
+This method is called whenever the observed subject changes.
+
+
+\begin{DoxyParams}{Parameters}
+{\em subject} & Pointer to the subject that triggered the update. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_observer_ab5e067280bf8e1f102853f65a62a726c}{Observer}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Observer/Map\+Observer.\+h\item 
+Observer/Map\+Observer.\+cpp\end{DoxyCompactItemize}

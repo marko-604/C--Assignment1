@@ -1,0 +1,15 @@
+digraph "Observer"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  compound=true
+  dir_ba92baaf72c88f15dbbb6c3d8c2c3d3d [label="Observer", fillcolor="#edf0f7", color="grey25", style="filled,bold", URL="dir_ba92baaf72c88f15dbbb6c3d8c2c3d3d.html",tooltip=""];
+  dir_506b5c9bf3759551b48aba174c18270b [label="Critters", fillcolor="#edf0f7", color="grey25", style="filled", URL="dir_506b5c9bf3759551b48aba174c18270b.html",tooltip=""];
+  dir_c9612996eadb82587e9f968de6b85eaf [label="Towers", fillcolor="#edf0f7", color="red", style="filled", URL="dir_c9612996eadb82587e9f968de6b85eaf.html",tooltip=""];
+  dir_c3eb2180f4e4aa97a7d760ab9d7024fb [label="Maps", fillcolor="#edf0f7", color="grey25", style="filled", URL="dir_c3eb2180f4e4aa97a7d760ab9d7024fb.html",tooltip=""];
+  dir_ba92baaf72c88f15dbbb6c3d8c2c3d3d->dir_506b5c9bf3759551b48aba174c18270b [headlabel="1", labeldistance=1.5 headhref="dir_000002_000000.html" href="dir_000002_000000.html" color="steelblue1" fontcolor="steelblue1"];
+  dir_ba92baaf72c88f15dbbb6c3d8c2c3d3d->dir_c3eb2180f4e4aa97a7d760ab9d7024fb [headlabel="1", labeldistance=1.5 headhref="dir_000002_000001.html" href="dir_000002_000001.html" color="steelblue1" fontcolor="steelblue1"];
+  dir_ba92baaf72c88f15dbbb6c3d8c2c3d3d->dir_c9612996eadb82587e9f968de6b85eaf [headlabel="1", labeldistance=1.5 headhref="dir_000002_000004.html" href="dir_000002_000004.html" color="steelblue1" fontcolor="steelblue1"];
+}

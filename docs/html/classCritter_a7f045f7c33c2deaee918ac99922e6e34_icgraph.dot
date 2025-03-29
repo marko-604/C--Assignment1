@@ -1,0 +1,15 @@
+digraph "Critter::Critter"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="RL";
+  Node1 [id="Node000001",label="Critter::Critter",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Construct a new Critter object."];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="Bear::Bear",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classBear.html#a772628d9ef4030b3289366d823b45349",tooltip="Construct a new Bear object."];
+  Node1 -> Node3 [id="edge2_Node000001_Node000003",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="Squirrel::Squirrel",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classSquirrel.html#a7c62fca2cc806f84fe0dbc99764b9242",tooltip="Construct a new Squirrel object."];
+  Node1 -> Node4 [id="edge3_Node000001_Node000004",dir="back",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="Wolf::Wolf",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classWolf.html#ac713d0438930c4101a87a8785321908d",tooltip="Construct a new Wolf object."];
+}

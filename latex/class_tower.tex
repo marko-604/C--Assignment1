@@ -1,0 +1,505 @@
+\doxysection{Tower Class Reference}
+\hypertarget{class_tower}{}\label{class_tower}\index{Tower@{Tower}}
+
+
+Represents a \doxylink{class_tower}{Tower} that can attack Critters using a specified strategy.  
+
+
+
+
+{\ttfamily \#include $<$Tower.\+h$>$}
+
+Inheritance diagram for Tower\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_tower}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_tower_af960c18212b14f3e69a11eb937e888b9}{Tower}} (int x\+\_\+val, int y\+\_\+val, int cost\+\_\+val, int damage\+\_\+val, int attack\+\_\+rate\+\_\+val, float hit\+\_\+rate\+\_\+val, int range\+\_\+val, Tower\+Type type\+\_\+val, int level\+\_\+val, int level\+\_\+up\+\_\+cost\+\_\+val, int resale\+\_\+val, Target\+Selection\+Strategy \texorpdfstring{$\ast$}{*}strat)
+\begin{DoxyCompactList}\small\item\em Construct a new \doxylink{class_tower}{Tower} object with full attributes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_tower_a1b785dc1e9fb979a10620ca183b5761d}{Tower}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_tower_a96972da33c287758c036c944eccdc5fe}{\texorpdfstring{$\sim$}{\string~}\+Tower}} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor for polymorphic cleanup. \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{class_tower_adef75c245c6a13b6456d6c56d79b9157}{get\+Tid}} ()
+\begin{DoxyCompactList}\small\item\em Get the unique \doxylink{class_tower}{Tower} ID. \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{class_tower_ae9af472605b9a5a36cb0b444380f59e6}{getX}} ()
+\begin{DoxyCompactList}\small\item\em Get the tower\textquotesingle{}s X coordinate on the grid. \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{class_tower_a157dec6c9b2d61273975029109bdba0f}{getY}} ()
+\begin{DoxyCompactList}\small\item\em Get the tower\textquotesingle{}s Y coordinate on the grid. \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{class_tower_a88a01f81805c2b77a5bbc4c9d4b89fb5}{get\+Cost}} ()
+\begin{DoxyCompactList}\small\item\em Get the tower\textquotesingle{}s initial placement cost. \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{class_tower_a5fffdf6ca205eaed08c72080cbd6f0c6}{get\+Damage}} ()
+\begin{DoxyCompactList}\small\item\em Get the damage value per attack. \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{class_tower_a66b837cdf87665334cb10d8fea6c028d}{get\+Atta\+Rate}} ()
+\begin{DoxyCompactList}\small\item\em Get the attack rate (ticks between attacks). \end{DoxyCompactList}\item 
+virtual float \mbox{\hyperlink{class_tower_a6d944f010e42e5a70416fca555f34d79}{get\+Hit\+Rate}} ()
+\begin{DoxyCompactList}\small\item\em Get the probability to hit (0.\+0 to 1.\+0). \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{class_tower_a6e107faa15743162a0cfb8c3042e2571}{get\+Range}} ()
+\begin{DoxyCompactList}\small\item\em Get the range of the tower\textquotesingle{}s attack. \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{class_tower_a870907acaa42ba9d207b1854478dac64}{get\+Resale}} ()
+\begin{DoxyCompactList}\small\item\em Get the resale value. \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{class_tower_ad1fe459e4a6e4a8a6976001ea53a06a7}{get\+Level}} ()
+\begin{DoxyCompactList}\small\item\em Get the tower\textquotesingle{}s current upgrade level. \end{DoxyCompactList}\item 
+virtual Tower\+Type \mbox{\hyperlink{class_tower_adb68f1d6e66a4f4bb31f1a480a660bfe}{get\+Type}} ()
+\begin{DoxyCompactList}\small\item\em Get the tower\textquotesingle{}s type (REGULAR, SNIPER, etc.). \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{class_tower_a04daf2efb52ebc28c0b2839e51910e26}{get\+Level\+Up\+Cost}} ()
+\begin{DoxyCompactList}\small\item\em Get the cost to upgrade to the next level. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_tower_a74ae6b53ede612e3c59293920b6c3419}{set\+Level}} (int x)
+\begin{DoxyCompactList}\small\item\em Set the tower\textquotesingle{}s level. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_tower_a41291102d209ad8cadddf02173a1526c}{set\+Level\+Up\+Cost}} (int x)
+\begin{DoxyCompactList}\small\item\em Set the cost to level up. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_tower_a69910a2147798137d67570ff69aad517}{setX}} (int x\+\_\+val)
+\begin{DoxyCompactList}\small\item\em Set the X coordinate of the tower. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_tower_a771d918c944927f98331eb521e77401e}{setY}} (int y\+\_\+val)
+\begin{DoxyCompactList}\small\item\em Set the Y coordinate of the tower. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_tower_ab05fea1f795b003eebbe42861d86ec0b}{set\+Cost}} (int cost\+\_\+val)
+\begin{DoxyCompactList}\small\item\em Set the tower\textquotesingle{}s cost. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_tower_afc05d8656dc1c0a2fa8aca738ee31081}{set\+Resale}} (int resale\+\_\+val)
+\begin{DoxyCompactList}\small\item\em Set the tower\textquotesingle{}s resale value. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_tower_a4393611408f7be18fa0338cf91be545c}{set\+Damage}} (int damage\+\_\+val)
+\begin{DoxyCompactList}\small\item\em Set the damage value. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_tower_a03c85b3012e0d0cb6b1f33ec2763acda}{set\+Attack\+Rate}} (int attack\+Rate)
+\begin{DoxyCompactList}\small\item\em Set the attack rate. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_tower_aa16187617d314fab7e9679a4963142f9}{set\+Hit\+Rate}} (float hit\+\_\+rate\+\_\+val)
+\begin{DoxyCompactList}\small\item\em Set the hit rate. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_tower_adc0cce29130f8b3c35f416f88eb097be}{set\+Range}} (int range)
+\begin{DoxyCompactList}\small\item\em Set the range value. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_tower_ad62d1a258c5503ee900269f7e9edf199}{level\+Up}} ()
+\begin{DoxyCompactList}\small\item\em Increase the tower\textquotesingle{}s level, typically improving stats. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_tower_aa56720bf8ce7244817d1fe5bc6cffc65}{attack}} (std\+::vector$<$ \mbox{\hyperlink{class_critter}{Critter}} \texorpdfstring{$\ast$}{*} $>$ \&critters, int tick\+\_\+count, int \texorpdfstring{$\ast$}{*}player\+\_\+points, \mbox{\hyperlink{class_map}{Map}} \&game\+Map)
+\begin{DoxyCompactList}\small\item\em Execute an attack on a list of critters if cooldown allows. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_tower_a0557f11304267f7944ac55f479f3fd97}{set\+Strategy}} (Target\+Selection\+Strategy \texorpdfstring{$\ast$}{*}strat)
+\begin{DoxyCompactList}\small\item\em Set a new target selection strategy for the tower. \end{DoxyCompactList}\item 
+Target\+Selection\+Strategy \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_tower_aba8de8b777416b1c29cad11df5591f02}{get\+Strategy}} () const
+\begin{DoxyCompactList}\small\item\em Get the current target selection strategy. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_subject}{Subject}}}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries Attach} (\mbox{\hyperlink{class_observer}{Observer}} \texorpdfstring{$\ast$}{*}obs)
+\item 
+void {\bfseries Detach} (\mbox{\hyperlink{class_observer}{Observer}} \texorpdfstring{$\ast$}{*}obs)
+\item 
+void {\bfseries Detach\+All} ()
+\item 
+void {\bfseries Notify} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_subject}{Subject}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_observer}{Observer}} \texorpdfstring{$\ast$}{*} $>$ {\bfseries observers}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a \doxylink{class_tower}{Tower} that can attack Critters using a specified strategy. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_tower_af960c18212b14f3e69a11eb937e888b9}\index{Tower@{Tower}!Tower@{Tower}}
+\index{Tower@{Tower}!Tower@{Tower}}
+\doxysubsubsection{\texorpdfstring{Tower()}{Tower()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_tower_af960c18212b14f3e69a11eb937e888b9} 
+Tower\+::\+Tower (\begin{DoxyParamCaption}\item[{int}]{x\+\_\+val}{, }\item[{int}]{y\+\_\+val}{, }\item[{int}]{cost\+\_\+val}{, }\item[{int}]{damage\+\_\+val}{, }\item[{int}]{attack\+\_\+rate\+\_\+val}{, }\item[{float}]{hit\+\_\+rate\+\_\+val}{, }\item[{int}]{range\+\_\+val}{, }\item[{Tower\+Type}]{type\+\_\+val}{, }\item[{int}]{level\+\_\+val}{, }\item[{int}]{level\+\_\+up\+\_\+cost\+\_\+val}{, }\item[{int}]{resale\+\_\+val}{, }\item[{Target\+Selection\+Strategy \texorpdfstring{$\ast$}{*}}]{strat}{}\end{DoxyParamCaption})}
+
+
+
+Construct a new \doxylink{class_tower}{Tower} object with full attributes. 
+
+Construct a new \doxylink{class_tower}{Tower} object with parameters.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x\+\_\+val} & X position on the map grid. \\
+\hline
+{\em y\+\_\+val} & Y position on the map grid. \\
+\hline
+{\em cost\+\_\+val} & Initial cost to place the tower. \\
+\hline
+{\em damage\+\_\+val} & Damage per attack. \\
+\hline
+{\em attack\+\_\+rate\+\_\+val} & Attack cooldown rate (ticks between attacks). \\
+\hline
+{\em hit\+\_\+rate\+\_\+val} & Probability to hit a target (0.\+0 to 1.\+0). \\
+\hline
+{\em range\+\_\+val} & Maximum attack range. \\
+\hline
+{\em type\+\_\+val} & Tower\+Type (e.\+g., REGULAR, SNIPER). \\
+\hline
+{\em level\+\_\+val} & Starting upgrade level. \\
+\hline
+{\em level\+\_\+up\+\_\+cost\+\_\+val} & Cost to upgrade. \\
+\hline
+{\em resale\+\_\+val} & Value returned when selling the tower. \\
+\hline
+{\em strat} & Pointer to the targeting strategy.\\
+\hline
+{\em x\+\_\+val} & X position. \\
+\hline
+{\em y\+\_\+val} & Y position. \\
+\hline
+{\em cost\+\_\+val} & Cost to place the tower. \\
+\hline
+{\em damage\+\_\+val} & Damage dealt per attack. \\
+\hline
+{\em attack\+\_\+rate\+\_\+val} & Number of ticks between attacks. \\
+\hline
+{\em hit\+\_\+rate\+\_\+val} & Hit probability (0.\+0 to 1.\+0). \\
+\hline
+{\em range\+\_\+val} & Attack range in tiles. \\
+\hline
+{\em type\+\_\+val} & Type of the tower (REGULAR, SNIPER, etc.). \\
+\hline
+{\em level\+\_\+val} & Initial level. \\
+\hline
+{\em level\+\_\+up\+\_\+cost\+\_\+val} & Cost to upgrade. \\
+\hline
+{\em resale\+\_\+val} & Value received when selling the tower. \\
+\hline
+{\em strat} & Target selection strategy. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_tower_a1b785dc1e9fb979a10620ca183b5761d}\index{Tower@{Tower}!Tower@{Tower}}
+\index{Tower@{Tower}!Tower@{Tower}}
+\doxysubsubsection{\texorpdfstring{Tower()}{Tower()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_tower_a1b785dc1e9fb979a10620ca183b5761d} 
+Tower\+::\+Tower (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Default constructor. 
+
+Default constructor for \doxylink{class_tower}{Tower} with safe default values. \Hypertarget{class_tower_a96972da33c287758c036c944eccdc5fe}\index{Tower@{Tower}!````~Tower@{\texorpdfstring{$\sim$}{\string~}Tower}}
+\index{````~Tower@{\texorpdfstring{$\sim$}{\string~}Tower}!Tower@{Tower}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Tower()}{\string~Tower()}}
+{\footnotesize\ttfamily \label{class_tower_a96972da33c287758c036c944eccdc5fe} 
+Tower\+::\texorpdfstring{$\sim$}{\string~}\+Tower (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Virtual destructor for polymorphic cleanup. 
+
+Virtual destructor. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_tower_aa56720bf8ce7244817d1fe5bc6cffc65}\index{Tower@{Tower}!attack@{attack}}
+\index{attack@{attack}!Tower@{Tower}}
+\doxysubsubsection{\texorpdfstring{attack()}{attack()}}
+{\footnotesize\ttfamily \label{class_tower_aa56720bf8ce7244817d1fe5bc6cffc65} 
+bool Tower\+::attack (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{class_critter}{Critter}} \texorpdfstring{$\ast$}{*} $>$ \&}]{critters}{, }\item[{int}]{tick\+\_\+count}{, }\item[{int \texorpdfstring{$\ast$}{*}}]{player\+\_\+points}{, }\item[{\mbox{\hyperlink{class_map}{Map}} \&}]{game\+Map}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Execute an attack on a list of critters if cooldown allows. 
+
+Attempts to attack a critter if it\textquotesingle{}s in range and cooldown allows.
+
+
+\begin{DoxyParams}{Parameters}
+{\em critters} & List of pointers to available targets. \\
+\hline
+{\em tick\+\_\+count} & Current game tick (used for cooldown). \\
+\hline
+{\em player\+\_\+points} & Pointer to player points (for reward updating). \\
+\hline
+{\em game\+Map} & Reference to the game map. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if an attack was made. 
+
+false otherwise.
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em critters} & Vector of critters on the map. \\
+\hline
+{\em tick\+\_\+count} & Current tick for timing. \\
+\hline
+{\em player\+\_\+points} & Pointer to player\textquotesingle{}s score to update if a critter is eliminated. \\
+\hline
+{\em game\+Map} & Reference to the map for updating tile states. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if an attack was performed. 
+
+false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_tower_a66b837cdf87665334cb10d8fea6c028d}\index{Tower@{Tower}!getAttaRate@{getAttaRate}}
+\index{getAttaRate@{getAttaRate}!Tower@{Tower}}
+\doxysubsubsection{\texorpdfstring{getAttaRate()}{getAttaRate()}}
+{\footnotesize\ttfamily \label{class_tower_a66b837cdf87665334cb10d8fea6c028d} 
+int Tower\+::get\+Atta\+Rate (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Get the attack rate (ticks between attacks). 
+
+Get attack rate (ticks). \Hypertarget{class_tower_a88a01f81805c2b77a5bbc4c9d4b89fb5}\index{Tower@{Tower}!getCost@{getCost}}
+\index{getCost@{getCost}!Tower@{Tower}}
+\doxysubsubsection{\texorpdfstring{getCost()}{getCost()}}
+{\footnotesize\ttfamily \label{class_tower_a88a01f81805c2b77a5bbc4c9d4b89fb5} 
+int Tower\+::get\+Cost (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Get the tower\textquotesingle{}s initial placement cost. 
+
+Get cost. \Hypertarget{class_tower_a5fffdf6ca205eaed08c72080cbd6f0c6}\index{Tower@{Tower}!getDamage@{getDamage}}
+\index{getDamage@{getDamage}!Tower@{Tower}}
+\doxysubsubsection{\texorpdfstring{getDamage()}{getDamage()}}
+{\footnotesize\ttfamily \label{class_tower_a5fffdf6ca205eaed08c72080cbd6f0c6} 
+int Tower\+::get\+Damage (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Get the damage value per attack. 
+
+Get damage per attack. \Hypertarget{class_tower_a6d944f010e42e5a70416fca555f34d79}\index{Tower@{Tower}!getHitRate@{getHitRate}}
+\index{getHitRate@{getHitRate}!Tower@{Tower}}
+\doxysubsubsection{\texorpdfstring{getHitRate()}{getHitRate()}}
+{\footnotesize\ttfamily \label{class_tower_a6d944f010e42e5a70416fca555f34d79} 
+float Tower\+::get\+Hit\+Rate (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Get the probability to hit (0.\+0 to 1.\+0). 
+
+Get hit probability. \Hypertarget{class_tower_ad1fe459e4a6e4a8a6976001ea53a06a7}\index{Tower@{Tower}!getLevel@{getLevel}}
+\index{getLevel@{getLevel}!Tower@{Tower}}
+\doxysubsubsection{\texorpdfstring{getLevel()}{getLevel()}}
+{\footnotesize\ttfamily \label{class_tower_ad1fe459e4a6e4a8a6976001ea53a06a7} 
+int Tower\+::get\+Level (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Get the tower\textquotesingle{}s current upgrade level. 
+
+Get current upgrade level. \Hypertarget{class_tower_a04daf2efb52ebc28c0b2839e51910e26}\index{Tower@{Tower}!getLevelUpCost@{getLevelUpCost}}
+\index{getLevelUpCost@{getLevelUpCost}!Tower@{Tower}}
+\doxysubsubsection{\texorpdfstring{getLevelUpCost()}{getLevelUpCost()}}
+{\footnotesize\ttfamily \label{class_tower_a04daf2efb52ebc28c0b2839e51910e26} 
+int Tower\+::get\+Level\+Up\+Cost (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Get the cost to upgrade to the next level. 
+
+Get upgrade cost. \Hypertarget{class_tower_a6e107faa15743162a0cfb8c3042e2571}\index{Tower@{Tower}!getRange@{getRange}}
+\index{getRange@{getRange}!Tower@{Tower}}
+\doxysubsubsection{\texorpdfstring{getRange()}{getRange()}}
+{\footnotesize\ttfamily \label{class_tower_a6e107faa15743162a0cfb8c3042e2571} 
+int Tower\+::get\+Range (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Get the range of the tower\textquotesingle{}s attack. 
+
+Get attack range. \Hypertarget{class_tower_a870907acaa42ba9d207b1854478dac64}\index{Tower@{Tower}!getResale@{getResale}}
+\index{getResale@{getResale}!Tower@{Tower}}
+\doxysubsubsection{\texorpdfstring{getResale()}{getResale()}}
+{\footnotesize\ttfamily \label{class_tower_a870907acaa42ba9d207b1854478dac64} 
+int Tower\+::get\+Resale (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Get the resale value. 
+
+Get resale value. \Hypertarget{class_tower_aba8de8b777416b1c29cad11df5591f02}\index{Tower@{Tower}!getStrategy@{getStrategy}}
+\index{getStrategy@{getStrategy}!Tower@{Tower}}
+\doxysubsubsection{\texorpdfstring{getStrategy()}{getStrategy()}}
+{\footnotesize\ttfamily \label{class_tower_aba8de8b777416b1c29cad11df5591f02} 
+Target\+Selection\+Strategy \texorpdfstring{$\ast$}{*} Tower\+::get\+Strategy (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get the current target selection strategy. 
+
+Get the current targeting strategy.
+
+\begin{DoxyReturn}{Returns}
+Target\+Selection\+Strategy\texorpdfstring{$\ast$}{*} Pointer to the strategy object.
+
+Target\+Selection\+Strategy\texorpdfstring{$\ast$}{*} 
+\end{DoxyReturn}
+\Hypertarget{class_tower_adef75c245c6a13b6456d6c56d79b9157}\index{Tower@{Tower}!getTid@{getTid}}
+\index{getTid@{getTid}!Tower@{Tower}}
+\doxysubsubsection{\texorpdfstring{getTid()}{getTid()}}
+{\footnotesize\ttfamily \label{class_tower_adef75c245c6a13b6456d6c56d79b9157} 
+int Tower\+::get\+Tid (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Get the unique \doxylink{class_tower}{Tower} ID. 
+
+Get tower ID. \Hypertarget{class_tower_adb68f1d6e66a4f4bb31f1a480a660bfe}\index{Tower@{Tower}!getType@{getType}}
+\index{getType@{getType}!Tower@{Tower}}
+\doxysubsubsection{\texorpdfstring{getType()}{getType()}}
+{\footnotesize\ttfamily \label{class_tower_adb68f1d6e66a4f4bb31f1a480a660bfe} 
+Tower\+Type Tower\+::get\+Type (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Get the tower\textquotesingle{}s type (REGULAR, SNIPER, etc.). 
+
+Get tower type. \Hypertarget{class_tower_ae9af472605b9a5a36cb0b444380f59e6}\index{Tower@{Tower}!getX@{getX}}
+\index{getX@{getX}!Tower@{Tower}}
+\doxysubsubsection{\texorpdfstring{getX()}{getX()}}
+{\footnotesize\ttfamily \label{class_tower_ae9af472605b9a5a36cb0b444380f59e6} 
+int Tower\+::getX (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Get the tower\textquotesingle{}s X coordinate on the grid. 
+
+Get X position. \Hypertarget{class_tower_a157dec6c9b2d61273975029109bdba0f}\index{Tower@{Tower}!getY@{getY}}
+\index{getY@{getY}!Tower@{Tower}}
+\doxysubsubsection{\texorpdfstring{getY()}{getY()}}
+{\footnotesize\ttfamily \label{class_tower_a157dec6c9b2d61273975029109bdba0f} 
+int Tower\+::getY (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Get the tower\textquotesingle{}s Y coordinate on the grid. 
+
+Get Y position. \Hypertarget{class_tower_ad62d1a258c5503ee900269f7e9edf199}\index{Tower@{Tower}!levelUp@{levelUp}}
+\index{levelUp@{levelUp}!Tower@{Tower}}
+\doxysubsubsection{\texorpdfstring{levelUp()}{levelUp()}}
+{\footnotesize\ttfamily \label{class_tower_ad62d1a258c5503ee900269f7e9edf199} 
+void Tower\+::level\+Up (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Increase the tower\textquotesingle{}s level, typically improving stats. 
+
+Upgrade the tower\textquotesingle{}s stats.
+
+Increases damage, reduces attack rate (faster attacks), and increases the cost for next level. \Hypertarget{class_tower_a03c85b3012e0d0cb6b1f33ec2763acda}\index{Tower@{Tower}!setAttackRate@{setAttackRate}}
+\index{setAttackRate@{setAttackRate}!Tower@{Tower}}
+\doxysubsubsection{\texorpdfstring{setAttackRate()}{setAttackRate()}}
+{\footnotesize\ttfamily \label{class_tower_a03c85b3012e0d0cb6b1f33ec2763acda} 
+void Tower\+::set\+Attack\+Rate (\begin{DoxyParamCaption}\item[{int}]{attack\+Rate}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Set the attack rate. 
+
+Set attack rate. \Hypertarget{class_tower_ab05fea1f795b003eebbe42861d86ec0b}\index{Tower@{Tower}!setCost@{setCost}}
+\index{setCost@{setCost}!Tower@{Tower}}
+\doxysubsubsection{\texorpdfstring{setCost()}{setCost()}}
+{\footnotesize\ttfamily \label{class_tower_ab05fea1f795b003eebbe42861d86ec0b} 
+void Tower\+::set\+Cost (\begin{DoxyParamCaption}\item[{int}]{cost\+\_\+val}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Set the tower\textquotesingle{}s cost. 
+
+Set cost. \Hypertarget{class_tower_a4393611408f7be18fa0338cf91be545c}\index{Tower@{Tower}!setDamage@{setDamage}}
+\index{setDamage@{setDamage}!Tower@{Tower}}
+\doxysubsubsection{\texorpdfstring{setDamage()}{setDamage()}}
+{\footnotesize\ttfamily \label{class_tower_a4393611408f7be18fa0338cf91be545c} 
+void Tower\+::set\+Damage (\begin{DoxyParamCaption}\item[{int}]{damage\+\_\+val}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Set the damage value. 
+
+Set damage value. \Hypertarget{class_tower_aa16187617d314fab7e9679a4963142f9}\index{Tower@{Tower}!setHitRate@{setHitRate}}
+\index{setHitRate@{setHitRate}!Tower@{Tower}}
+\doxysubsubsection{\texorpdfstring{setHitRate()}{setHitRate()}}
+{\footnotesize\ttfamily \label{class_tower_aa16187617d314fab7e9679a4963142f9} 
+void Tower\+::set\+Hit\+Rate (\begin{DoxyParamCaption}\item[{float}]{hit\+\_\+rate\+\_\+val}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Set the hit rate. 
+
+Set hit rate. \Hypertarget{class_tower_a74ae6b53ede612e3c59293920b6c3419}\index{Tower@{Tower}!setLevel@{setLevel}}
+\index{setLevel@{setLevel}!Tower@{Tower}}
+\doxysubsubsection{\texorpdfstring{setLevel()}{setLevel()}}
+{\footnotesize\ttfamily \label{class_tower_a74ae6b53ede612e3c59293920b6c3419} 
+void Tower\+::set\+Level (\begin{DoxyParamCaption}\item[{int}]{x}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Set the tower\textquotesingle{}s level. 
+
+Set level. \Hypertarget{class_tower_a41291102d209ad8cadddf02173a1526c}\index{Tower@{Tower}!setLevelUpCost@{setLevelUpCost}}
+\index{setLevelUpCost@{setLevelUpCost}!Tower@{Tower}}
+\doxysubsubsection{\texorpdfstring{setLevelUpCost()}{setLevelUpCost()}}
+{\footnotesize\ttfamily \label{class_tower_a41291102d209ad8cadddf02173a1526c} 
+void Tower\+::set\+Level\+Up\+Cost (\begin{DoxyParamCaption}\item[{int}]{x}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Set the cost to level up. 
+
+Set level-\/up cost. \Hypertarget{class_tower_adc0cce29130f8b3c35f416f88eb097be}\index{Tower@{Tower}!setRange@{setRange}}
+\index{setRange@{setRange}!Tower@{Tower}}
+\doxysubsubsection{\texorpdfstring{setRange()}{setRange()}}
+{\footnotesize\ttfamily \label{class_tower_adc0cce29130f8b3c35f416f88eb097be} 
+void Tower\+::set\+Range (\begin{DoxyParamCaption}\item[{int}]{range}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Set the range value. 
+
+Set range value. \Hypertarget{class_tower_afc05d8656dc1c0a2fa8aca738ee31081}\index{Tower@{Tower}!setResale@{setResale}}
+\index{setResale@{setResale}!Tower@{Tower}}
+\doxysubsubsection{\texorpdfstring{setResale()}{setResale()}}
+{\footnotesize\ttfamily \label{class_tower_afc05d8656dc1c0a2fa8aca738ee31081} 
+void Tower\+::set\+Resale (\begin{DoxyParamCaption}\item[{int}]{resale\+\_\+val}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Set the tower\textquotesingle{}s resale value. 
+
+Set resale value. \Hypertarget{class_tower_a0557f11304267f7944ac55f479f3fd97}\index{Tower@{Tower}!setStrategy@{setStrategy}}
+\index{setStrategy@{setStrategy}!Tower@{Tower}}
+\doxysubsubsection{\texorpdfstring{setStrategy()}{setStrategy()}}
+{\footnotesize\ttfamily \label{class_tower_a0557f11304267f7944ac55f479f3fd97} 
+void Tower\+::set\+Strategy (\begin{DoxyParamCaption}\item[{Target\+Selection\+Strategy \texorpdfstring{$\ast$}{*}}]{strat}{}\end{DoxyParamCaption})}
+
+
+
+Set a new target selection strategy for the tower. 
+
+Set the target selection strategy.
+
+
+\begin{DoxyParams}{Parameters}
+{\em strat} & Pointer to a new strategy object.\\
+\hline
+{\em strat} & Pointer to a Target\+Selection\+Strategy object. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_tower_a69910a2147798137d67570ff69aad517}\index{Tower@{Tower}!setX@{setX}}
+\index{setX@{setX}!Tower@{Tower}}
+\doxysubsubsection{\texorpdfstring{setX()}{setX()}}
+{\footnotesize\ttfamily \label{class_tower_a69910a2147798137d67570ff69aad517} 
+void Tower\+::setX (\begin{DoxyParamCaption}\item[{int}]{x\+\_\+val}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Set the X coordinate of the tower. 
+
+Set X position. \Hypertarget{class_tower_a771d918c944927f98331eb521e77401e}\index{Tower@{Tower}!setY@{setY}}
+\index{setY@{setY}!Tower@{Tower}}
+\doxysubsubsection{\texorpdfstring{setY()}{setY()}}
+{\footnotesize\ttfamily \label{class_tower_a771d918c944927f98331eb521e77401e} 
+void Tower\+::setY (\begin{DoxyParamCaption}\item[{int}]{y\+\_\+val}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Set the Y coordinate of the tower. 
+
+Set Y position. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Towers/Tower.\+h\item 
+Towers/Tower.\+cpp\end{DoxyCompactItemize}

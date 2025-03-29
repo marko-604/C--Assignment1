@@ -1,0 +1,62 @@
+\doxysection{Critter\+Observer Class Reference}
+\hypertarget{class_critter_observer}{}\label{class_critter_observer}\index{CritterObserver@{CritterObserver}}
+
+
+Concrete observer for monitoring updates to \doxylink{class_critter}{Critter} subjects.  
+
+
+
+
+{\ttfamily \#include $<$Critter\+Observer.\+h$>$}
+
+Inheritance diagram for Critter\+Observer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_critter_observer}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_critter_observer_ae0fd7934f912d8ab9c83a9c92b8772ad}{Update}} (\mbox{\hyperlink{class_subject}{Subject}} \texorpdfstring{$\ast$}{*}subject) override
+\begin{DoxyCompactList}\small\item\em Respond to updates from the observed subject. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_observer}{Observer}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual {\bfseries \texorpdfstring{$\sim$}{\string~}\+Observer} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor for safe polymorphic destruction. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Concrete observer for monitoring updates to \doxylink{class_critter}{Critter} subjects. 
+
+This observer reacts when a critter (or any \doxylink{class_subject}{Subject}) changes state. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_critter_observer_ae0fd7934f912d8ab9c83a9c92b8772ad}\index{CritterObserver@{CritterObserver}!Update@{Update}}
+\index{Update@{Update}!CritterObserver@{CritterObserver}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily \label{class_critter_observer_ae0fd7934f912d8ab9c83a9c92b8772ad} 
+void Critter\+Observer\+::\+Update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_subject}{Subject}} \texorpdfstring{$\ast$}{*}}]{subject}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Respond to updates from the observed subject. 
+
+This method is called whenever the \doxylink{class_subject}{Subject} notifies its observers of a change.
+
+
+\begin{DoxyParams}{Parameters}
+{\em subject} & Pointer to the subject that triggered the update. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{class_observer_ab5e067280bf8e1f102853f65a62a726c}{Observer}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Observer/Critter\+Observer.\+h\item 
+Observer/Critter\+Observer.\+cpp\end{DoxyCompactItemize}

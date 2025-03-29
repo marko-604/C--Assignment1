@@ -1,0 +1,19 @@
+digraph "Map::ToggleTower"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="Map::ToggleTower",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Toggle the presence of a tower on the given tile."];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="Tower::getType",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classTower.html#adb68f1d6e66a4f4bb31f1a480a660bfe",tooltip="Get the tower's type (REGULAR, SNIPER, etc.)."];
+  Node1 -> Node3 [id="edge2_Node000001_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="Subject::Notify",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classSubject.html#afdf01736ff099d286543b450d96215f1",tooltip=" "];
+  Node1 -> Node4 [id="edge3_Node000001_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="Tower::setX",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classTower.html#a69910a2147798137d67570ff69aad517",tooltip="Set the X coordinate of the tower."];
+  Node4 -> Node3 [id="edge4_Node000004_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node5 [id="edge5_Node000001_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="Tower::setY",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classTower.html#a771d918c944927f98331eb521e77401e",tooltip="Set the Y coordinate of the tower."];
+  Node5 -> Node3 [id="edge6_Node000005_Node000003",color="steelblue1",style="solid",tooltip=" "];
+}

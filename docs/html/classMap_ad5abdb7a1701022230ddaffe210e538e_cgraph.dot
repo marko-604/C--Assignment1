@@ -1,0 +1,23 @@
+digraph "Map::RunEditor"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="Map::RunEditor",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Run the map editor interface."];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="Map::Draw",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classMap.html#a0bdab1f7f4c26a682c5d2a3256ee19c4",tooltip="Draws the map grid and editor instructions on the screen."];
+  Node1 -> Node3 [id="edge2_Node000001_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="Map::IsValidPath",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classMap.html#a061d5c0c7617dc37234da52a4d69784d",tooltip="Check if the path from entry to exit is valid."];
+  Node1 -> Node4 [id="edge3_Node000001_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="Map::SetEntry",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classMap.html#a4b20aa17b8e5316cd2acc8a7c0a62200",tooltip="Set the tile at (row, col) as the entry point."];
+  Node4 -> Node5 [id="edge4_Node000004_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="Subject::Notify",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classSubject.html#afdf01736ff099d286543b450d96215f1",tooltip=" "];
+  Node1 -> Node6 [id="edge5_Node000001_Node000006",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="Map::SetExit",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classMap.html#a9e5ed98abb7c55cd06a7a3b585eed82f",tooltip="Set the tile at (row, col) as the exit point."];
+  Node6 -> Node5 [id="edge6_Node000006_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node7 [id="edge7_Node000001_Node000007",color="steelblue1",style="solid",tooltip=" "];
+  Node7 [id="Node000007",label="Map::TogglePath",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classMap.html#a6dde69e08b666c15b23e72c136e824a5",tooltip="Toggle a tile's type between EMPTY and PATH."];
+  Node7 -> Node5 [id="edge8_Node000007_Node000005",color="steelblue1",style="solid",tooltip=" "];
+}

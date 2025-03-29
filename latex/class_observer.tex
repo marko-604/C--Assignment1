@@ -1,0 +1,57 @@
+\doxysection{Observer Class Reference}
+\hypertarget{class_observer}{}\label{class_observer}\index{Observer@{Observer}}
+
+
+Interface for all observers in the \doxylink{class_observer}{Observer} pattern.  
+
+
+
+
+{\ttfamily \#include $<$Observer.\+h$>$}
+
+Inheritance diagram for Observer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_observer}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_observer_afcc6b67be6c386f2f3d2c363aa59cb47}\label{class_observer_afcc6b67be6c386f2f3d2c363aa59cb47} 
+virtual {\bfseries \texorpdfstring{$\sim$}{\string~}\+Observer} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor for safe polymorphic destruction. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_observer_ab5e067280bf8e1f102853f65a62a726c}{Update}} (\mbox{\hyperlink{class_subject}{Subject}} \texorpdfstring{$\ast$}{*}subject)=0
+\begin{DoxyCompactList}\small\item\em Method called by the \doxylink{class_subject}{Subject} when its state changes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interface for all observers in the \doxylink{class_observer}{Observer} pattern. 
+
+Classes that inherit from \doxylink{class_observer}{Observer} can be notified when a \doxylink{class_subject}{Subject} changes. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_observer_ab5e067280bf8e1f102853f65a62a726c}\index{Observer@{Observer}!Update@{Update}}
+\index{Update@{Update}!Observer@{Observer}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily \label{class_observer_ab5e067280bf8e1f102853f65a62a726c} 
+virtual void Observer\+::\+Update (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_subject}{Subject}} \texorpdfstring{$\ast$}{*}}]{subject}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Method called by the \doxylink{class_subject}{Subject} when its state changes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em subject} & Pointer to the \doxylink{class_subject}{Subject} that triggered the update. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_critter_observer_ae0fd7934f912d8ab9c83a9c92b8772ad}{Critter\+Observer}}, \mbox{\hyperlink{class_map_observer_a53113e69aa2b5eca077296ce0fd62a87}{Map\+Observer}}, and \mbox{\hyperlink{class_tower_observer_a14ede7468c49416543733d13bea828e3}{Tower\+Observer}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Observer/Observer.\+h\end{DoxyCompactItemize}

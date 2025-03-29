@@ -1,0 +1,388 @@
+\doxysection{Map Class Reference}
+\hypertarget{class_map}{}\label{class_map}\index{Map@{Map}}
+
+
+Represents the game map and its grid, including entry/exit points and towers.  
+
+
+
+
+{\ttfamily \#include $<$Map.\+h$>$}
+
+Inheritance diagram for Map\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_map}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_map_a20629c1af1be574bffb69076f85cd458}{Map}} (int width, int height, int \mbox{\hyperlink{class_map_ae686445a21a02aaf586633c5a69e8ff3}{tile\+Size}})
+\begin{DoxyCompactList}\small\item\em Constructor to initialize the map. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_map_aa403fbe09394ccf39747588f5168e3b2}{\texorpdfstring{$\sim$}{\string~}\+Map}} ()
+\begin{DoxyCompactList}\small\item\em Destructor for cleanup. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ \mbox{\hyperlink{class_map_abceb688c7884365d049ab82bef7771b0}{get\+Path}} ()
+\begin{DoxyCompactList}\small\item\em Get the path from entry to exit. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_map_a0bdab1f7f4c26a682c5d2a3256ee19c4}{Draw}} ()
+\begin{DoxyCompactList}\small\item\em Draws the map grid and editor instructions on the screen. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_map_ae7d663e71f32001429c58039bcb38a64}{set\+To\+Path}} (int row, int col)
+\begin{DoxyCompactList}\small\item\em Set a specific tile to PATH type. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_map_a77b3e531d910e14428dfd89f0e820534}{Toggle\+Tower}} (\mbox{\hyperlink{class_tower}{Tower}} \texorpdfstring{$\ast$}{*}tower, int row, int col)
+\begin{DoxyCompactList}\small\item\em Toggle the presence of a tower on the given tile. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_map_a7f12d2251dd0ef0045c442f82934f5ee}{Toggle\+Critter}} (\mbox{\hyperlink{class_critter}{Critter}} \texorpdfstring{$\ast$}{*}critter, int row, int col)
+\begin{DoxyCompactList}\small\item\em Toggle the presence of a critter on the given tile. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_map_a52ccf69799dc3574957ea0e54689e91b}{place\+Critter}} (\mbox{\hyperlink{class_critter}{Critter}} \&critter, int row, int col)
+\begin{DoxyCompactList}\small\item\em Place a critter on a specific tile. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_map_aea6b1c2d8448c6e84e1c28ece77f11f9}{Place\+Tower}} (\mbox{\hyperlink{class_tower}{Tower}} \&tower, int row, int col)
+\begin{DoxyCompactList}\small\item\em Place a tower on a specific tile. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_map_a6dde69e08b666c15b23e72c136e824a5}{Toggle\+Path}} (int row, int col)
+\begin{DoxyCompactList}\small\item\em Toggle a tile\textquotesingle{}s type between EMPTY and PATH. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_map_a4b20aa17b8e5316cd2acc8a7c0a62200}{Set\+Entry}} (int row, int col)
+\begin{DoxyCompactList}\small\item\em Set the tile at (row, col) as the entry point. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_map_a9e5ed98abb7c55cd06a7a3b585eed82f}{Set\+Exit}} (int row, int col)
+\begin{DoxyCompactList}\small\item\em Set the tile at (row, col) as the exit point. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_map_a10f0151a30b0d16f72cc4d6f43696592}{set\+To\+Scenery}} (int row, int col)
+\begin{DoxyCompactList}\small\item\em Set a tile to represent a scenery or non-\/interactive state. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_map_a061d5c0c7617dc37234da52a4d69784d}{Is\+Valid\+Path}} ()
+\begin{DoxyCompactList}\small\item\em Check if the path from entry to exit is valid. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_map_ad5abdb7a1701022230ddaffe210e538e}{Run\+Editor}} ()
+\begin{DoxyCompactList}\small\item\em Run the map editor interface. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_subject}{Subject}}}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries Attach} (\mbox{\hyperlink{class_observer}{Observer}} \texorpdfstring{$\ast$}{*}obs)
+\item 
+void {\bfseries Detach} (\mbox{\hyperlink{class_observer}{Observer}} \texorpdfstring{$\ast$}{*}obs)
+\item 
+void {\bfseries Detach\+All} ()
+\item 
+void {\bfseries Notify} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_map_a0b7aea473ba6d0effc872652efe91ce8}\label{class_map_a0b7aea473ba6d0effc872652efe91ce8} 
+int {\bfseries grid\+Width}
+\begin{DoxyCompactList}\small\item\em Width of the grid in number of tiles. \end{DoxyCompactList}\item 
+\Hypertarget{class_map_a9f1aaa7b1367667fb185b6a01e32a5df}\label{class_map_a9f1aaa7b1367667fb185b6a01e32a5df} 
+int {\bfseries grid\+Height}
+\begin{DoxyCompactList}\small\item\em Height of the grid in number of tiles. \end{DoxyCompactList}\item 
+\Hypertarget{class_map_ae686445a21a02aaf586633c5a69e8ff3}\label{class_map_ae686445a21a02aaf586633c5a69e8ff3} 
+int {\bfseries tile\+Size}
+\begin{DoxyCompactList}\small\item\em Size of each tile in pixels. \end{DoxyCompactList}\item 
+\Hypertarget{class_map_abd2a2365ca7b31bfd4a387071baa2421}\label{class_map_abd2a2365ca7b31bfd4a387071baa2421} 
+std\+::vector$<$ std\+::vector$<$ Tile\+Type $>$ $>$ {\bfseries grid}
+\begin{DoxyCompactList}\small\item\em 2D grid representing tile types. \end{DoxyCompactList}\item 
+\Hypertarget{class_map_ac2fe7080a1c6e1b1f3c0c3b4cdfef689}\label{class_map_ac2fe7080a1c6e1b1f3c0c3b4cdfef689} 
+int {\bfseries entry\+Row}
+\begin{DoxyCompactList}\small\item\em Row coordinate of the entry point. \end{DoxyCompactList}\item 
+\Hypertarget{class_map_a32762d172b288253e2925ac1b88e9008}\label{class_map_a32762d172b288253e2925ac1b88e9008} 
+int {\bfseries entry\+Col}
+\begin{DoxyCompactList}\small\item\em Column coordinate of the entry point. \end{DoxyCompactList}\item 
+\Hypertarget{class_map_a0def9a739b71d9b5ab8e5d8c9966d941}\label{class_map_a0def9a739b71d9b5ab8e5d8c9966d941} 
+int {\bfseries exit\+Row}
+\begin{DoxyCompactList}\small\item\em Row coordinate of the exit point. \end{DoxyCompactList}\item 
+\Hypertarget{class_map_af5424f12b1c05230b265de3abfc510e4}\label{class_map_af5424f12b1c05230b265de3abfc510e4} 
+int {\bfseries exit\+Col}
+\begin{DoxyCompactList}\small\item\em Column coordinate of the exit point. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_subject}{Subject}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_observer}{Observer}} \texorpdfstring{$\ast$}{*} $>$ {\bfseries observers}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents the game map and its grid, including entry/exit points and towers. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_map_a20629c1af1be574bffb69076f85cd458}\index{Map@{Map}!Map@{Map}}
+\index{Map@{Map}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{Map()}{Map()}}
+{\footnotesize\ttfamily \label{class_map_a20629c1af1be574bffb69076f85cd458} 
+Map\+::\+Map (\begin{DoxyParamCaption}\item[{int}]{width}{, }\item[{int}]{height}{, }\item[{int}]{tile\+Size}{}\end{DoxyParamCaption})}
+
+
+
+Constructor to initialize the map. 
+
+Constructs the map and initializes the grid and entry/exit to unset.
+
+
+\begin{DoxyParams}{Parameters}
+{\em width} & Width of the map grid. \\
+\hline
+{\em height} & Height of the map grid. \\
+\hline
+{\em tile\+Size} & Size of each tile (in pixels). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_map_aa403fbe09394ccf39747588f5168e3b2}\index{Map@{Map}!````~Map@{\texorpdfstring{$\sim$}{\string~}Map}}
+\index{````~Map@{\texorpdfstring{$\sim$}{\string~}Map}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Map()}{\string~Map()}}
+{\footnotesize\ttfamily \label{class_map_aa403fbe09394ccf39747588f5168e3b2} 
+Map\+::\texorpdfstring{$\sim$}{\string~}\+Map (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Destructor for cleanup. 
+
+Destructor for the \doxylink{class_map}{Map} class. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_map_a0bdab1f7f4c26a682c5d2a3256ee19c4}\index{Map@{Map}!Draw@{Draw}}
+\index{Draw@{Draw}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{Draw()}{Draw()}}
+{\footnotesize\ttfamily \label{class_map_a0bdab1f7f4c26a682c5d2a3256ee19c4} 
+void Map\+::\+Draw (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Draws the map grid and editor instructions on the screen. 
+
+Renders the grid and tiles on the screen using raylib. \Hypertarget{class_map_abceb688c7884365d049ab82bef7771b0}\index{Map@{Map}!getPath@{getPath}}
+\index{getPath@{getPath}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{getPath()}{getPath()}}
+{\footnotesize\ttfamily \label{class_map_abceb688c7884365d049ab82bef7771b0} 
+std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ Map\+::get\+Path (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Get the path from entry to exit. 
+
+Returns the path from entry to exit using BFS.
+
+\begin{DoxyReturn}{Returns}
+std\+::vector$<$std\+::pair$<$int, int$>$$>$ Vector of (row, col) coordinates.
+
+std\+::vector$<$std\+::pair$<$int, int$>$$>$ Path as a list of (row, col) coordinates. 
+\end{DoxyReturn}
+\Hypertarget{class_map_a061d5c0c7617dc37234da52a4d69784d}\index{Map@{Map}!IsValidPath@{IsValidPath}}
+\index{IsValidPath@{IsValidPath}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{IsValidPath()}{IsValidPath()}}
+{\footnotesize\ttfamily \label{class_map_a061d5c0c7617dc37234da52a4d69784d} 
+bool Map\+::\+Is\+Valid\+Path (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Check if the path from entry to exit is valid. 
+
+Checks whether there is a valid path from ENTRY to EXIT using BFS.
+
+\begin{DoxyReturn}{Returns}
+true if valid. 
+
+false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_map_a52ccf69799dc3574957ea0e54689e91b}\index{Map@{Map}!placeCritter@{placeCritter}}
+\index{placeCritter@{placeCritter}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{placeCritter()}{placeCritter()}}
+{\footnotesize\ttfamily \label{class_map_a52ccf69799dc3574957ea0e54689e91b} 
+bool Map\+::place\+Critter (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_critter}{Critter}} \&}]{critter}{, }\item[{int}]{row}{, }\item[{int}]{col}{}\end{DoxyParamCaption})}
+
+
+
+Place a critter on a specific tile. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em critter} & Reference to the critter. \\
+\hline
+{\em row} & Row index. \\
+\hline
+{\em col} & Column index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if placement was successful. 
+
+false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_map_aea6b1c2d8448c6e84e1c28ece77f11f9}\index{Map@{Map}!PlaceTower@{PlaceTower}}
+\index{PlaceTower@{PlaceTower}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{PlaceTower()}{PlaceTower()}}
+{\footnotesize\ttfamily \label{class_map_aea6b1c2d8448c6e84e1c28ece77f11f9} 
+bool Map\+::\+Place\+Tower (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_tower}{Tower}} \&}]{tower}{, }\item[{int}]{row}{, }\item[{int}]{col}{}\end{DoxyParamCaption})}
+
+
+
+Place a tower on a specific tile. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tower} & Reference to the tower. \\
+\hline
+{\em row} & Row index. \\
+\hline
+{\em col} & Column index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if placement was successful. 
+
+false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_map_ad5abdb7a1701022230ddaffe210e538e}\index{Map@{Map}!RunEditor@{RunEditor}}
+\index{RunEditor@{RunEditor}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{RunEditor()}{RunEditor()}}
+{\footnotesize\ttfamily \label{class_map_ad5abdb7a1701022230ddaffe210e538e} 
+bool Map\+::\+Run\+Editor (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Run the map editor interface. 
+
+Runs the interactive map editor.
+
+\begin{DoxyReturn}{Returns}
+true if user confirms and saves a valid map. 
+
+false otherwise (e.\+g., user exits or cancels).
+
+true if a valid map is confirmed. 
+\end{DoxyReturn}
+\Hypertarget{class_map_a4b20aa17b8e5316cd2acc8a7c0a62200}\index{Map@{Map}!SetEntry@{SetEntry}}
+\index{SetEntry@{SetEntry}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{SetEntry()}{SetEntry()}}
+{\footnotesize\ttfamily \label{class_map_a4b20aa17b8e5316cd2acc8a7c0a62200} 
+void Map\+::\+Set\+Entry (\begin{DoxyParamCaption}\item[{int}]{row}{, }\item[{int}]{col}{}\end{DoxyParamCaption})}
+
+
+
+Set the tile at (row, col) as the entry point. 
+
+Sets the tile as ENTRY and updates the internal entry coordinates.
+
+
+\begin{DoxyParams}{Parameters}
+{\em row} & Row index. \\
+\hline
+{\em col} & Column index. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_map_a9e5ed98abb7c55cd06a7a3b585eed82f}\index{Map@{Map}!SetExit@{SetExit}}
+\index{SetExit@{SetExit}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{SetExit()}{SetExit()}}
+{\footnotesize\ttfamily \label{class_map_a9e5ed98abb7c55cd06a7a3b585eed82f} 
+void Map\+::\+Set\+Exit (\begin{DoxyParamCaption}\item[{int}]{row}{, }\item[{int}]{col}{}\end{DoxyParamCaption})}
+
+
+
+Set the tile at (row, col) as the exit point. 
+
+Sets the tile as EXIT and updates the internal exit coordinates.
+
+
+\begin{DoxyParams}{Parameters}
+{\em row} & Row index. \\
+\hline
+{\em col} & Column index. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_map_ae7d663e71f32001429c58039bcb38a64}\index{Map@{Map}!setToPath@{setToPath}}
+\index{setToPath@{setToPath}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{setToPath()}{setToPath()}}
+{\footnotesize\ttfamily \label{class_map_ae7d663e71f32001429c58039bcb38a64} 
+void Map\+::set\+To\+Path (\begin{DoxyParamCaption}\item[{int}]{row}{, }\item[{int}]{col}{}\end{DoxyParamCaption})}
+
+
+
+Set a specific tile to PATH type. 
+
+Marks a tile as PATH.
+
+
+\begin{DoxyParams}{Parameters}
+{\em row} & Row index. \\
+\hline
+{\em col} & Column index. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_map_a10f0151a30b0d16f72cc4d6f43696592}\index{Map@{Map}!setToScenery@{setToScenery}}
+\index{setToScenery@{setToScenery}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{setToScenery()}{setToScenery()}}
+{\footnotesize\ttfamily \label{class_map_a10f0151a30b0d16f72cc4d6f43696592} 
+void Map\+::set\+To\+Scenery (\begin{DoxyParamCaption}\item[{int}]{row}{, }\item[{int}]{col}{}\end{DoxyParamCaption})}
+
+
+
+Set a tile to represent a scenery or non-\/interactive state. 
+
+Sets a tile back to EMPTY (scenery).
+
+
+\begin{DoxyParams}{Parameters}
+{\em row} & Row index. \\
+\hline
+{\em col} & Column index. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_map_a7f12d2251dd0ef0045c442f82934f5ee}\index{Map@{Map}!ToggleCritter@{ToggleCritter}}
+\index{ToggleCritter@{ToggleCritter}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{ToggleCritter()}{ToggleCritter()}}
+{\footnotesize\ttfamily \label{class_map_a7f12d2251dd0ef0045c442f82934f5ee} 
+void Map\+::\+Toggle\+Critter (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_critter}{Critter}} \texorpdfstring{$\ast$}{*}}]{critter}{, }\item[{int}]{row}{, }\item[{int}]{col}{}\end{DoxyParamCaption})}
+
+
+
+Toggle the presence of a critter on the given tile. 
+
+Places a critter on the specified tile.
+
+
+\begin{DoxyParams}{Parameters}
+{\em critter} & Pointer to the critter. \\
+\hline
+{\em row} & Row index. \\
+\hline
+{\em col} & Column index. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_map_a6dde69e08b666c15b23e72c136e824a5}\index{Map@{Map}!TogglePath@{TogglePath}}
+\index{TogglePath@{TogglePath}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{TogglePath()}{TogglePath()}}
+{\footnotesize\ttfamily \label{class_map_a6dde69e08b666c15b23e72c136e824a5} 
+void Map\+::\+Toggle\+Path (\begin{DoxyParamCaption}\item[{int}]{row}{, }\item[{int}]{col}{}\end{DoxyParamCaption})}
+
+
+
+Toggle a tile\textquotesingle{}s type between EMPTY and PATH. 
+
+Toggles a tile between EMPTY and PATH, unless it\textquotesingle{}s ENTRY or EXIT.
+
+
+\begin{DoxyParams}{Parameters}
+{\em row} & Row index. \\
+\hline
+{\em col} & Column index. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_map_a77b3e531d910e14428dfd89f0e820534}\index{Map@{Map}!ToggleTower@{ToggleTower}}
+\index{ToggleTower@{ToggleTower}!Map@{Map}}
+\doxysubsubsection{\texorpdfstring{ToggleTower()}{ToggleTower()}}
+{\footnotesize\ttfamily \label{class_map_a77b3e531d910e14428dfd89f0e820534} 
+void Map\+::\+Toggle\+Tower (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_tower}{Tower}} \texorpdfstring{$\ast$}{*}}]{tower}{, }\item[{int}]{row}{, }\item[{int}]{col}{}\end{DoxyParamCaption})}
+
+
+
+Toggle the presence of a tower on the given tile. 
+
+Places a tower on the map if the tile is empty.
+
+
+\begin{DoxyParams}{Parameters}
+{\em tower} & Pointer to the tower. \\
+\hline
+{\em row} & Row index. \\
+\hline
+{\em col} & Column index. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Maps/Map.\+h\item 
+Maps/Map.\+cpp\end{DoxyCompactItemize}

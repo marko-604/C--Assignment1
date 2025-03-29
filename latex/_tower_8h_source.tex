@@ -1,0 +1,113 @@
+\doxysection{Tower.\+h}
+\hypertarget{_tower_8h_source}{}\label{_tower_8h_source}\index{Towers/Tower.h@{Towers/Tower.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ TOWERS\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ TOWERS\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}../Observer/Subject.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}TowerStrategy/SelectionStrategy.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}TowerStrategy/Strategies.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}raylib.h"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ Forward\ declarations:}}
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_map}{Map}};}
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_critter}{Critter}};}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{enum}\ TowerType\ \{\ REGULAR,\ SNIPER,\ BOMB,\ FREEZING\ \};}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{enum}\ TowerStrategy\ \{\ WEAKEST,\ CLOSEST,\ STRONGEST,\ HEALTHIEST,\ LEASTHEALTHY\ \};}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_tower_af960c18212b14f3e69a11eb937e888b9}{Tower}}\ :\ \textcolor{keyword}{public}\ Subject\ \{}
+\DoxyCodeLine{00024\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00041\ \ \ \mbox{\hyperlink{class_tower_a1b785dc1e9fb979a10620ca183b5761d}{Tower}}(\textcolor{keywordtype}{int}\ x\_val,\ \textcolor{keywordtype}{int}\ y\_val,\ \textcolor{keywordtype}{int}\ cost\_val,\ \textcolor{keywordtype}{int}\ damage\_val,\ \textcolor{keywordtype}{int}\ attack\_rate\_val,}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ hit\_rate\_val,\ \textcolor{keywordtype}{int}\ range\_val,\ TowerType\ type\_val,\ \textcolor{keywordtype}{int}\ level\_val,}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ level\_up\_cost\_val,\ \textcolor{keywordtype}{int}\ resale\_val,\ TargetSelectionStrategy\ *strat);}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00046\ \ \ \mbox{\hyperlink{class_tower_a1b785dc1e9fb979a10620ca183b5761d}{Tower}}();}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00049\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_tower_a96972da33c287758c036c944eccdc5fe}{\string~Tower}}();}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ Getters\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00054\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_tower_adef75c245c6a13b6456d6c56d79b9157}{getTid}}();}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00057\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_tower_ae9af472605b9a5a36cb0b444380f59e6}{getX}}();}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00060\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_tower_a157dec6c9b2d61273975029109bdba0f}{getY}}();}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00063\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_tower_a88a01f81805c2b77a5bbc4c9d4b89fb5}{getCost}}();}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00066\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_tower_a5fffdf6ca205eaed08c72080cbd6f0c6}{getDamage}}();}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00069\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_tower_a66b837cdf87665334cb10d8fea6c028d}{getAttaRate}}();}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00072\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_tower_a6d944f010e42e5a70416fca555f34d79}{getHitRate}}();}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00075\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_tower_a6e107faa15743162a0cfb8c3042e2571}{getRange}}();}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00078\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_tower_a870907acaa42ba9d207b1854478dac64}{getResale}}();}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00081\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_tower_ad1fe459e4a6e4a8a6976001ea53a06a7}{getLevel}}();}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00084\ \ \ \textcolor{keyword}{virtual}\ TowerType\ \mbox{\hyperlink{class_tower_adb68f1d6e66a4f4bb31f1a480a660bfe}{getType}}();}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00087\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_tower_a04daf2efb52ebc28c0b2839e51910e26}{getLevelUpCost}}();}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ Setters\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00092\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tower_a74ae6b53ede612e3c59293920b6c3419}{setLevel}}(\textcolor{keywordtype}{int}\ x);}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00095\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tower_a41291102d209ad8cadddf02173a1526c}{setLevelUpCost}}(\textcolor{keywordtype}{int}\ x);}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00098\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tower_a69910a2147798137d67570ff69aad517}{setX}}(\textcolor{keywordtype}{int}\ x\_val);}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00101\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tower_a771d918c944927f98331eb521e77401e}{setY}}(\textcolor{keywordtype}{int}\ y\_val);}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00104\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tower_ab05fea1f795b003eebbe42861d86ec0b}{setCost}}(\textcolor{keywordtype}{int}\ cost\_val);}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00107\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tower_afc05d8656dc1c0a2fa8aca738ee31081}{setResale}}(\textcolor{keywordtype}{int}\ resale\_val);}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00110\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tower_a4393611408f7be18fa0338cf91be545c}{setDamage}}(\textcolor{keywordtype}{int}\ damage\_val);}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00113\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tower_a03c85b3012e0d0cb6b1f33ec2763acda}{setAttackRate}}(\textcolor{keywordtype}{int}\ attackRate);}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00116\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tower_aa16187617d314fab7e9679a4963142f9}{setHitRate}}(\textcolor{keywordtype}{float}\ hit\_rate\_val);}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00119\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tower_adc0cce29130f8b3c35f416f88eb097be}{setRange}}(\textcolor{keywordtype}{int}\ range);}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ Operations\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00126\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tower_ad62d1a258c5503ee900269f7e9edf199}{levelUp}}();}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00138\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_tower_aa56720bf8ce7244817d1fe5bc6cffc65}{attack}}(std::vector<Critter\ *>\ \&critters,\ \textcolor{keywordtype}{int}\ tick\_count,}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ *player\_points,\ \mbox{\hyperlink{class_map}{Map}}\ \&gameMap);}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00141\ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ Strategy\ Management\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00148\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tower_a0557f11304267f7944ac55f479f3fd97}{setStrategy}}(TargetSelectionStrategy\ *strat);}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00155\ \ \ TargetSelectionStrategy\ *\mbox{\hyperlink{class_tower_aba8de8b777416b1c29cad11df5591f02}{getStrategy}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00157\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00158\ \ \ TowerType\ type;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00159\ \ \ \textcolor{keywordtype}{int}\ x;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00160\ \ \ \textcolor{keywordtype}{int}\ y;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00161\ \ \ \textcolor{keywordtype}{int}\ cost;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00162\ \ \ \textcolor{keywordtype}{int}\ resale;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00163\ \ \ \textcolor{keywordtype}{int}\ damage;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00164\ \ \ \textcolor{keywordtype}{int}\ attack\_rate;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00165\ \ \ \textcolor{keywordtype}{float}\ hit\_rate;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00166\ \ \ \textcolor{keywordtype}{int}\ range;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00167\ \ \ \textcolor{keywordtype}{int}\ tid;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00168\ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ nextId;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00169\ \ \ \textcolor{keywordtype}{int}\ level;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00170\ \ \ \textcolor{keywordtype}{int}\ levelUpCost;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00171\ \ \ TargetSelectionStrategy\ *strategy;\ }
+\DoxyCodeLine{00172\ \};}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00174\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ TOWERS\_H}}
+
+\end{DoxyCode}

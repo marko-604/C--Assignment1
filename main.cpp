@@ -9,6 +9,7 @@
 #include "Towers/TowerDecorators/FreezingDecorator.h"
 #include "Towers/TowerDecorators/SniperDecorator.h"
 #include "Towers/TowerDecorators/TowerDecorator.h"
+#include "utilities/Projectiles.h"
 
 // Include the strategy headers.
 #include "Towers/TowerStrategy/FarthestStrategy.h"
@@ -279,7 +280,8 @@ int main() {
   CloseWindow();
   Map *map = new Map(cols, rows, 80);
 
-  // Create a shared messages vector for observer updates.
+  // std::vector<Projectiles> projetiles;
+  //  Create a shared messages vector for observer updates.
   std::vector<std::string> messages;
   MapObserver *m_obs = new MapObserver(&messages);
   map->Attach(m_obs);

@@ -1,0 +1,121 @@
+\doxysection{Critter\+Generator Class Reference}
+\hypertarget{class_critter_generator}{}\label{class_critter_generator}\index{CritterGenerator@{CritterGenerator}}
+
+
+Class responsible for generating Critters.  
+
+
+
+
+{\ttfamily \#include $<$Critter.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_critter_generator_adb54bb015c7c8bf4ecd4723f8e279dd5}{Critter\+Generator}} ()
+\begin{DoxyCompactList}\small\item\em Construct a new \doxylink{class_critter_generator}{Critter\+Generator} object. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_critter_generator_a54cd57eec1e3e14ee855f1cfd98a6a34}{is\+Empty}} ()
+\begin{DoxyCompactList}\small\item\em Check if the critter queue is empty. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_critter}{Critter}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_critter_generator_a68137fc0a1d11a40a757ad5715e7f11e}{get\+Critter}} ()
+\begin{DoxyCompactList}\small\item\em Get the next critter in the queue. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_critter_generator_a21f2cfea046b3e851dc5ce923f0ef114}{level\+Up}} (std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ path)
+\begin{DoxyCompactList}\small\item\em Increase the level and generate new critters. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_critter_generator_ad197b64281e10a16893e055b29c6ac2a}{generate\+Critters}} (std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$ path)
+\begin{DoxyCompactList}\small\item\em Generate a batch of critters based on the current level. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_critter_generator_abd6687157281eb98cebf422278013134}\label{class_critter_generator_abd6687157281eb98cebf422278013134} 
+std\+::vector$<$ \mbox{\hyperlink{class_critter}{Critter}} \texorpdfstring{$\ast$}{*} $>$ {\bfseries critters}
+\begin{DoxyCompactList}\small\item\em Queue of critters to be deployed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class responsible for generating Critters. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_critter_generator_adb54bb015c7c8bf4ecd4723f8e279dd5}\index{CritterGenerator@{CritterGenerator}!CritterGenerator@{CritterGenerator}}
+\index{CritterGenerator@{CritterGenerator}!CritterGenerator@{CritterGenerator}}
+\doxysubsubsection{\texorpdfstring{CritterGenerator()}{CritterGenerator()}}
+{\footnotesize\ttfamily \label{class_critter_generator_adb54bb015c7c8bf4ecd4723f8e279dd5} 
+Critter\+Generator\+::\+Critter\+Generator (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Construct a new \doxylink{class_critter_generator}{Critter\+Generator} object. 
+
+Construct a new \doxylink{class_critter}{Critter} Generator object. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_critter_generator_ad197b64281e10a16893e055b29c6ac2a}\index{CritterGenerator@{CritterGenerator}!generateCritters@{generateCritters}}
+\index{generateCritters@{generateCritters}!CritterGenerator@{CritterGenerator}}
+\doxysubsubsection{\texorpdfstring{generateCritters()}{generateCritters()}}
+{\footnotesize\ttfamily \label{class_critter_generator_ad197b64281e10a16893e055b29c6ac2a} 
+void Critter\+Generator\+::generate\+Critters (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$}]{path}{}\end{DoxyParamCaption})}
+
+
+
+Generate a batch of critters based on the current level. 
+
+Generate critters based on the current level.
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Path to assign to the generated critters.\\
+\hline
+{\em path} & The path that generated critters will follow. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_critter_generator_a68137fc0a1d11a40a757ad5715e7f11e}\index{CritterGenerator@{CritterGenerator}!getCritter@{getCritter}}
+\index{getCritter@{getCritter}!CritterGenerator@{CritterGenerator}}
+\doxysubsubsection{\texorpdfstring{getCritter()}{getCritter()}}
+{\footnotesize\ttfamily \label{class_critter_generator_a68137fc0a1d11a40a757ad5715e7f11e} 
+\mbox{\hyperlink{class_critter}{Critter}} \texorpdfstring{$\ast$}{*} Critter\+Generator\+::get\+Critter (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Get the next critter in the queue. 
+
+\begin{DoxyReturn}{Returns}
+Pointer to a \doxylink{class_critter}{Critter}. 
+\end{DoxyReturn}
+\Hypertarget{class_critter_generator_a54cd57eec1e3e14ee855f1cfd98a6a34}\index{CritterGenerator@{CritterGenerator}!isEmpty@{isEmpty}}
+\index{isEmpty@{isEmpty}!CritterGenerator@{CritterGenerator}}
+\doxysubsubsection{\texorpdfstring{isEmpty()}{isEmpty()}}
+{\footnotesize\ttfamily \label{class_critter_generator_a54cd57eec1e3e14ee855f1cfd98a6a34} 
+bool Critter\+Generator\+::is\+Empty (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Check if the critter queue is empty. 
+
+Check if there are any critters left to deploy.
+
+\begin{DoxyReturn}{Returns}
+true if empty, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_critter_generator_a21f2cfea046b3e851dc5ce923f0ef114}\index{CritterGenerator@{CritterGenerator}!levelUp@{levelUp}}
+\index{levelUp@{levelUp}!CritterGenerator@{CritterGenerator}}
+\doxysubsubsection{\texorpdfstring{levelUp()}{levelUp()}}
+{\footnotesize\ttfamily \label{class_critter_generator_a21f2cfea046b3e851dc5ce923f0ef114} 
+void Critter\+Generator\+::level\+Up (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::pair$<$ int, int $>$ $>$}]{path}{}\end{DoxyParamCaption})}
+
+
+
+Increase the level and generate new critters. 
+
+Increase the generator level and generate more critters.
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Path for the new critters.\\
+\hline
+{\em path} & The path to assign to newly generated critters. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Critters/Critter.\+h\item 
+Critters/Critter.\+cpp\end{DoxyCompactItemize}

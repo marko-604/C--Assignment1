@@ -8,72 +8,160 @@
 
 class Critter;
 class Tower;
-// Tile types for the grid.
+
+/// @brief Enumeration representing all possible tile types on the grid.
 enum TileType {
-  EMPTY,
-  PATH,
-  ENTRY,
-  EXIT,
-  FREEZINGTOWER,
-  SNIPERTOWER,
-  BOMBTOWER,
-  REGULARTOWER,
-  WOLFCRITTER,
-  SQUIRRELCRITTER,
-  BEARCRITTER
+  EMPTY,           ///< An empty tile.
+  PATH,            ///< A path tile (for critter movement).
+  ENTRY,           ///< Entry point for critters.
+  EXIT,            ///< Exit point for critters.
+  FREEZINGTOWER,   ///< A freezing tower is placed here.
+  SNIPERTOWER,     ///< A sniper tower is placed here.
+  BOMBTOWER,       ///< A bomb tower is placed here.
+  REGULARTOWER,    ///< A regular tower is placed here.
+  WOLFCRITTER,     ///< A wolf-type critter is occupying this tile.
+  SQUIRRELCRITTER, ///< A squirrel-type critter is occupying this tile.
+  BEARCRITTER      ///< A bear-type critter is occupying this tile.
 };
 
+/// @brief Represents the game map and its grid, including entry/exit points and towers.
 class Map : public Subject {
 public:
-  int gridWidth, gridHeight, tileSize;
-  std::vector<std::vector<TileType>> grid;
-  int entryRow, entryCol;
-  int exitRow, exitCol;
+  int gridWidth;    ///< Width of the grid in number of tiles.
+  int gridHeight;   ///< Height of the grid in number of tiles.
+  int tileSize;     ///< Size of each tile in pixels.
 
-  // This method will return a path that will be from the entry point to the
-  // exit point.
+  std::vector<std::vector<TileType>> grid; ///< 2D grid representing tile types.
+
+  int entryRow; ///< Row coordinate of the entry point.
+  int entryCol; ///< Column coordinate of the entry point.
+  int exitRow;  ///< Row coordinate of the exit point.
+  int exitCol;  ///< Column coordinate of the exit point.
+
+  /**
+   * @brief Constructor to initialize the map.
+   * 
+   * @param width Width of the map grid.
+   * @param height Height of the map grid.
+   * @param tileSize Size of each tile (in pixels).
+   */
+  Map(int width, int height, int tileSize);
+
+  /// @brief Destructor for cleanup.
+  ~Map();
+
+  /**
+   * @brief Get the path from entry to exit.
+   * 
+   * @return std::vector<std::pair<int, int>> Vector of (row, col) coordinates.
+   */
   std::vector<std::pair<int, int>> getPath();
 
-  // Constructor: initializes grid dimensions and sets entry/exit as unset.
-  Map(int width, int height, int tileSize);
-  ~Map(); // Destructor, if needed
-
-  // Draws the grid and instructions.
+  /// @brief Draws the map grid and editor instructions on the screen.
   void Draw();
 
+  /**
+   * @brief Set a specific tile to PATH type.
+   * 
+   * @param row Row index.
+   * @param col Column index.
+   */
   void setToPath(int row, int col);
 
+  /**
+   * @brief Toggle the presence of a tower on the given tile.
+   * 
+   * @param tower Pointer to the tower.
+   * @param row Row index.
+   * @param col Column index.
+   */
   void ToggleTower(Tower *tower, int row, int col);
+
+  /**
+   * @brief Toggle the presence of a critter on the given tile.
+   * 
+   * @param critter Pointer to the critter.
+   * @param row Row index.
+   * @param col Column index.
+   */
   void ToggleCritter(Critter *critter, int row, int col);
 
-  // Places a critter on the map
+  /**
+   * @brief Place a critter on a specific tile.
+   * 
+   * @param critter Reference to the critter.
+   * @param row Row index.
+   * @param col Column index.
+   * @return true if placement was successful.
+   * @return false otherwise.
+   */
   bool placeCritter(Critter &critter, int row, int col);
 
-  // Places a tower on the map.
+  /**
+   * @brief Place a tower on a specific tile.
+   * 
+   * @param tower Reference to the tower.
+   * @param row Row index.
+   * @param col Column index.
+   * @return true if placement was successful.
+   * @return false otherwise.
+   */
   bool PlaceTower(Tower &tower, int row, int col);
 
-  // Toggles a cell's state between empty and path.
+  /**
+   * @brief Toggle a tile's type between EMPTY and PATH.
+   * 
+   * @param row Row index.
+   * @param col Column index.
+   */
   void TogglePath(int row, int col);
 
-  // Sets the entry point.
+  /**
+   * @brief Set the tile at (row, col) as the entry point.
+   * 
+   * @param row Row index.
+   * @param col Column index.
+   */
   void SetEntry(int row, int col);
 
-  // Sets the exit point.
+  /**
+   * @brief Set the tile at (row, col) as the exit point.
+   * 
+   * @param row Row index.
+   * @param col Column index.
+   */
   void SetExit(int row, int col);
 
-  // This method will make it so that the cell coordiantes change from anything
-  // else to secnery.
+  /**
+   * @brief Set a tile to represent a scenery or non-interactive state.
+   * 
+   * @param row Row index.
+   * @param col Column index.
+   */
   void setToScenery(int row, int col);
 
-  // Validates if there is a contiguous path from entry to exit.
+  /**
+   * @brief Check if the path from entry to exit is valid.
+   * 
+   * @return true if valid.
+   * @return false otherwise.
+   */
   bool IsValidPath();
 
-  // Runs the map editor interface.
-  // Returns true if the user confirms a valid map.
+  /**
+   * @brief Run the map editor interface.
+   * 
+   * @return true if user confirms and saves a valid map.
+   * @return false otherwise (e.g., user exits or cancels).
+   */
   bool RunEditor();
 };
 
-// This function will run the actual game later on we will place this function
-// in the game master file for the implementation.
+/**
+ * @brief Function to run the game using the given map.
+ * 
+ * @param map Reference to a valid map.
+ */
 void RunGame(Map &map);
+
 #endif // MAP_H

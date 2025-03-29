@@ -1,0 +1,23 @@
+\doxysection{Map\+Observer.\+h}
+\hypertarget{_map_observer_8h_source}{}\label{_map_observer_8h_source}\index{Observer/MapObserver.h@{Observer/MapObserver.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ MAP\_OBSERVER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ MAP\_OBSERVER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}Observer.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_map_observer_a5f730cdd40c374cd4acbeb30621b4e62}{MapObserver}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_observer}{Observer}}\ \{}
+\DoxyCodeLine{00015\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ std::vector<std::string>\ *\mbox{\hyperlink{class_map_observer_a303ab146454f70938a1837d10d448ee2}{messages}};}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00024\ \ \ \mbox{\hyperlink{class_map_observer_a5f730cdd40c374cd4acbeb30621b4e62}{MapObserver}}(std::vector<std::string>\ *m)\ :\ \mbox{\hyperlink{class_map_observer_a303ab146454f70938a1837d10d448ee2}{messages}}(m)\ \{\}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00033\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_map_observer_a53113e69aa2b5eca077296ce0fd62a87}{Update}}(\mbox{\hyperlink{class_subject}{Subject}}\ *subject)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00034\ \};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ MAP\_OBSERVER\_H}}
+
+\end{DoxyCode}

@@ -1,0 +1,78 @@
+\doxysection{Map.\+h}
+\hypertarget{_map_8h_source}{}\label{_map_8h_source}\index{Maps/Map.h@{Maps/Map.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ MAP\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ MAP\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}../Observer/Subject.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}raylib.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <utility>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_critter}{Critter}};}
+\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_tower}{Tower}};}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{enum}\ TileType\ \{}
+\DoxyCodeLine{00014\ \ \ EMPTY,\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00015\ \ \ PATH,\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00016\ \ \ ENTRY,\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00017\ \ \ EXIT,\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00018\ \ \ FREEZINGTOWER,\ \ \ }
+\DoxyCodeLine{00019\ \ \ SNIPERTOWER,\ \ \ \ \ }
+\DoxyCodeLine{00020\ \ \ BOMBTOWER,\ \ \ \ \ \ \ }
+\DoxyCodeLine{00021\ \ \ REGULARTOWER,\ \ \ \ }
+\DoxyCodeLine{00022\ \ \ WOLFCRITTER,\ \ \ \ \ }
+\DoxyCodeLine{00023\ \ \ SQUIRRELCRITTER,\ }
+\DoxyCodeLine{00024\ \ \ BEARCRITTER\ \ \ \ \ \ }
+\DoxyCodeLine{00025\ \};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_map_a20629c1af1be574bffb69076f85cd458}{Map}}\ :\ \textcolor{keyword}{public}\ Subject\ \{}
+\DoxyCodeLine{00029\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00030\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_map_a0b7aea473ba6d0effc872652efe91ce8}{gridWidth}};\ \ \ \ }
+\DoxyCodeLine{00031\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_map_a9f1aaa7b1367667fb185b6a01e32a5df}{gridHeight}};\ \ \ }
+\DoxyCodeLine{00032\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_map_ae686445a21a02aaf586633c5a69e8ff3}{tileSize}};\ \ \ \ \ }
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ std::vector<std::vector<TileType>>\ \mbox{\hyperlink{class_map_abd2a2365ca7b31bfd4a387071baa2421}{grid}};\ }
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_map_ac2fe7080a1c6e1b1f3c0c3b4cdfef689}{entryRow}};\ }
+\DoxyCodeLine{00037\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_map_a32762d172b288253e2925ac1b88e9008}{entryCol}};\ }
+\DoxyCodeLine{00038\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_map_a0def9a739b71d9b5ab8e5d8c9966d941}{exitRow}};\ \ }
+\DoxyCodeLine{00039\ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_map_af5424f12b1c05230b265de3abfc510e4}{exitCol}};\ \ }
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00048\ \ \ \mbox{\hyperlink{class_map_a20629c1af1be574bffb69076f85cd458}{Map}}(\textcolor{keywordtype}{int}\ width,\ \textcolor{keywordtype}{int}\ height,\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_map_ae686445a21a02aaf586633c5a69e8ff3}{tileSize}});}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00051\ \ \ \mbox{\hyperlink{class_map_aa403fbe09394ccf39747588f5168e3b2}{\string~Map}}();}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00058\ \ \ std::vector<std::pair<int,\ int>>\ \mbox{\hyperlink{class_map_abceb688c7884365d049ab82bef7771b0}{getPath}}();}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00061\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_map_a0bdab1f7f4c26a682c5d2a3256ee19c4}{Draw}}();}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00069\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_map_ae7d663e71f32001429c58039bcb38a64}{setToPath}}(\textcolor{keywordtype}{int}\ row,\ \textcolor{keywordtype}{int}\ col);}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00078\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_map_a77b3e531d910e14428dfd89f0e820534}{ToggleTower}}(\mbox{\hyperlink{class_tower}{Tower}}\ *tower,\ \textcolor{keywordtype}{int}\ row,\ \textcolor{keywordtype}{int}\ col);}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00087\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_map_a7f12d2251dd0ef0045c442f82934f5ee}{ToggleCritter}}(\mbox{\hyperlink{class_critter}{Critter}}\ *critter,\ \textcolor{keywordtype}{int}\ row,\ \textcolor{keywordtype}{int}\ col);}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00098\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_map_a52ccf69799dc3574957ea0e54689e91b}{placeCritter}}(\mbox{\hyperlink{class_critter}{Critter}}\ \&critter,\ \textcolor{keywordtype}{int}\ row,\ \textcolor{keywordtype}{int}\ col);}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00109\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_map_aea6b1c2d8448c6e84e1c28ece77f11f9}{PlaceTower}}(\mbox{\hyperlink{class_tower}{Tower}}\ \&tower,\ \textcolor{keywordtype}{int}\ row,\ \textcolor{keywordtype}{int}\ col);}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00117\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_map_a6dde69e08b666c15b23e72c136e824a5}{TogglePath}}(\textcolor{keywordtype}{int}\ row,\ \textcolor{keywordtype}{int}\ col);}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00125\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_map_a4b20aa17b8e5316cd2acc8a7c0a62200}{SetEntry}}(\textcolor{keywordtype}{int}\ row,\ \textcolor{keywordtype}{int}\ col);}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00133\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_map_a9e5ed98abb7c55cd06a7a3b585eed82f}{SetExit}}(\textcolor{keywordtype}{int}\ row,\ \textcolor{keywordtype}{int}\ col);}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00141\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_map_a10f0151a30b0d16f72cc4d6f43696592}{setToScenery}}(\textcolor{keywordtype}{int}\ row,\ \textcolor{keywordtype}{int}\ col);}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00149\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_map_a061d5c0c7617dc37234da52a4d69784d}{IsValidPath}}();}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00157\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_map_ad5abdb7a1701022230ddaffe210e538e}{RunEditor}}();}
+\DoxyCodeLine{00158\ \};}
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00165\ \textcolor{keywordtype}{void}\ RunGame(\mbox{\hyperlink{class_map}{Map}}\ \&map);}
+\DoxyCodeLine{00166\ }
+\DoxyCodeLine{00167\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ MAP\_H}}
+
+\end{DoxyCode}

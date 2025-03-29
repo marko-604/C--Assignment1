@@ -2,19 +2,25 @@
 #ifndef OBSERVER_H
 #define OBSERVER_H
 
-// Forward-declare Subject to avoid circular includes
+/// @brief Forward declaration of Subject to avoid circular dependency.
 class Subject;
+
 /**
- * @brief The Observer interface.
+ * @brief Interface for all observers in the Observer pattern.
+ *
+ * Classes that inherit from Observer can be notified when a Subject changes.
  */
 class Observer {
 public:
+  /// @brief Virtual destructor for safe polymorphic destruction.
   virtual ~Observer() {}
+
   /**
-   * @brief Called by Subject whenever the subject changes.
-   * @param subject The subject that changed
+   * @brief Method called by the Subject when its state changes.
+   *
+   * @param subject Pointer to the Subject that triggered the update.
    */
   virtual void Update(Subject *subject) = 0;
 };
 
-#endif
+#endif // OBSERVER_H

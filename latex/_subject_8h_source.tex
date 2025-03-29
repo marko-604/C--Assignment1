@@ -1,0 +1,28 @@
+\doxysection{Subject.\+h}
+\hypertarget{_subject_8h_source}{}\label{_subject_8h_source}\index{Observer/Subject.h@{Observer/Subject.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ Subject.h}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#ifndef\ SUBJECT\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#define\ SUBJECT\_H}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}Observer.h"{}}\ \textcolor{comment}{//\ This\ is\ okay\ if\ Observer\ doesn't\ also\ include\ Subject}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }Subject\ \{}
+\DoxyCodeLine{00010\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00011\ \ \ std::vector<Observer\ *>\ observers;}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00014\ \ \ Subject()\ \{\}}
+\DoxyCodeLine{00015\ \ \ \textcolor{keyword}{virtual}\ \string~Subject()\ \{\}}
+\DoxyCodeLine{00016\ \ \ \textcolor{keywordtype}{void}\ Attach(\mbox{\hyperlink{class_observer}{Observer}}\ *obs);}
+\DoxyCodeLine{00017\ \ \ \textcolor{keywordtype}{void}\ Detach(\mbox{\hyperlink{class_observer}{Observer}}\ *obs);}
+\DoxyCodeLine{00018\ \ \ \textcolor{keywordtype}{void}\ DetachAll();}
+\DoxyCodeLine{00019\ \ \ \textcolor{keywordtype}{void}\ Notify();}
+\DoxyCodeLine{00020\ \};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}
