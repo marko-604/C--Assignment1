@@ -1,0 +1,65 @@
+\doxysection{Farthest\+Target\+Strategy Class Reference}
+\hypertarget{class_farthest_target_strategy}{}\label{class_farthest_target_strategy}\index{FarthestTargetStrategy@{FarthestTargetStrategy}}
+
+
+Strategy for selecting the farthest critter from the tower.  
+
+
+
+
+{\ttfamily \#include $<$Farthest\+Strategy.\+h$>$}
+
+Inheritance diagram for Farthest\+Target\+Strategy\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_farthest_target_strategy}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{class_critter}{Critter}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_farthest_target_strategy_a9230b4c3c3a6051aed5f5de2e04e4037}{select\+Target}} (const std\+::vector$<$ \mbox{\hyperlink{class_critter}{Critter}} \texorpdfstring{$\ast$}{*} $>$ \&critters, \mbox{\hyperlink{class_tower}{Tower}} \texorpdfstring{$\ast$}{*}tower) override
+\begin{DoxyCompactList}\small\item\em Selects the farthest critter from the given tower. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_target_selection_strategy}{Target\+Selection\+Strategy}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual {\bfseries \texorpdfstring{$\sim$}{\string~}\+Target\+Selection\+Strategy} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor for proper cleanup of derived classes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Strategy for selecting the farthest critter from the tower. 
+
+Implements the \doxylink{class_target_selection_strategy}{Target\+Selection\+Strategy} interface to choose the critter that is farthest along the path (or furthest in terms of distance). 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_farthest_target_strategy_a9230b4c3c3a6051aed5f5de2e04e4037}\index{FarthestTargetStrategy@{FarthestTargetStrategy}!selectTarget@{selectTarget}}
+\index{selectTarget@{selectTarget}!FarthestTargetStrategy@{FarthestTargetStrategy}}
+\doxysubsubsection{\texorpdfstring{selectTarget()}{selectTarget()}}
+{\footnotesize\ttfamily \label{class_farthest_target_strategy_a9230b4c3c3a6051aed5f5de2e04e4037} 
+\mbox{\hyperlink{class_critter}{Critter}} \texorpdfstring{$\ast$}{*} Farthest\+Target\+Strategy\+::select\+Target (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{class_critter}{Critter}} \texorpdfstring{$\ast$}{*} $>$ \&}]{critters}{, }\item[{\mbox{\hyperlink{class_tower}{Tower}} \texorpdfstring{$\ast$}{*}}]{tower}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Selects the farthest critter from the given tower. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em critters} & Vector of available critters. \\
+\hline
+{\em tower} & Pointer to the tower performing the selection. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the selected critter, or nullptr if none are in range. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{class_target_selection_strategy_a95710649e5751b3cc5959f33425b84d8}{Target\+Selection\+Strategy}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Towers/\+Tower\+Strategy/Farthest\+Strategy.\+h\item 
+Towers/\+Tower\+Strategy/Farthest\+Strategy.\+cpp\end{DoxyCompactItemize}

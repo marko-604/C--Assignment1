@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['grid_0',['grid',['../class_map.html#abd2a2365ca7b31bfd4a387071baa2421',1,'Map']]],
-  ['gridheight_1',['gridHeight',['../class_map.html#a9f1aaa7b1367667fb185b6a01e32a5df',1,'Map']]],
-  ['gridwidth_2',['gridWidth',['../class_map.html#a0b7aea473ba6d0effc872652efe91ce8',1,'Map']]]
+  ['entrycol_0',['entryCol',['../class_map.html#a32762d172b288253e2925ac1b88e9008',1,'Map']]],
+  ['entryrow_1',['entryRow',['../class_map.html#ac2fe7080a1c6e1b1f3c0c3b4cdfef689',1,'Map']]],
+  ['exitcol_2',['exitCol',['../class_map.html#af5424f12b1c05230b265de3abfc510e4',1,'Map']]],
+  ['exitrow_3',['exitRow',['../class_map.html#a0def9a739b71d9b5ab8e5d8c9966d941',1,'Map']]]
 ];

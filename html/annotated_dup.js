@@ -1,15 +1,26 @@
 var annotated_dup =
 [
     [ "Bear", "class_bear.html", "class_bear" ],
+    [ "BombDecorator", "class_bomb_decorator.html", "class_bomb_decorator" ],
     [ "Critter", "class_critter.html", "class_critter" ],
     [ "CritterGenerator", "class_critter_generator.html", "class_critter_generator" ],
     [ "CritterObserver", "class_critter_observer.html", "class_critter_observer" ],
+    [ "FarthestTargetStrategy", "class_farthest_target_strategy.html", "class_farthest_target_strategy" ],
+    [ "FreezingDecorator", "class_freezing_decorator.html", "class_freezing_decorator" ],
+    [ "HighestHealthTargetStrategy", "class_highest_health_target_strategy.html", "class_highest_health_target_strategy" ],
+    [ "LevelUpDecorator", "class_level_up_decorator.html", "class_level_up_decorator" ],
+    [ "LowestHealthTargetStrategy", "class_lowest_health_target_strategy.html", "class_lowest_health_target_strategy" ],
     [ "Map", "class_map.html", "class_map" ],
     [ "MapObserver", "class_map_observer.html", "class_map_observer" ],
     [ "Observer", "class_observer.html", "class_observer" ],
+    [ "SniperDecorator", "class_sniper_decorator.html", "class_sniper_decorator" ],
     [ "Squirrel", "class_squirrel.html", "class_squirrel" ],
+    [ "StrongestTargetStrategy", "class_strongest_target_strategy.html", "class_strongest_target_strategy" ],
     [ "Subject", "class_subject.html", null ],
+    [ "TargetSelectionStrategy", "class_target_selection_strategy.html", "class_target_selection_strategy" ],
     [ "Tower", "class_tower.html", "class_tower" ],
+    [ "TowerDecorator", "class_tower_decorator.html", "class_tower_decorator" ],
     [ "TowerObserver", "class_tower_observer.html", "class_tower_observer" ],
+    [ "WeakestTargetStrategy", "class_weakest_target_strategy.html", "class_weakest_target_strategy" ],
     [ "Wolf", "class_wolf.html", "class_wolf" ]
 ];

@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['map_0',['Map',['../class_map.html',1,'Map'],['../class_map.html#a20629c1af1be574bffb69076f85cd458',1,'Map::Map()']]],
-  ['mapobserver_1',['MapObserver',['../class_map_observer.html',1,'MapObserver'],['../class_map_observer.html#a5f730cdd40c374cd4acbeb30621b4e62',1,'MapObserver::MapObserver(std::vector&lt; std::string &gt; *m)']]],
-  ['messages_2',['messages',['../class_map_observer.html#a303ab146454f70938a1837d10d448ee2',1,'MapObserver']]],
-  ['move_3',['move',['../class_critter.html#aae78bb7da004cba98f10634cec28f6c4',1,'Critter']]]
+  ['isempty_0',['isEmpty',['../class_critter_generator.html#a54cd57eec1e3e14ee855f1cfd98a6a34',1,'CritterGenerator']]],
+  ['isvalidpath_1',['IsValidPath',['../class_map.html#a061d5c0c7617dc37234da52a4d69784d',1,'Map']]]
 ];

@@ -1,0 +1,149 @@
+\doxysection{Level\+Up\+Decorator Class Reference}
+\hypertarget{class_level_up_decorator}{}\label{class_level_up_decorator}\index{LevelUpDecorator@{LevelUpDecorator}}
+
+
+{\ttfamily \#include $<$Leveling\+Decorator.\+h$>$}
+
+Inheritance diagram for Level\+Up\+Decorator\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{class_level_up_decorator}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_level_up_decorator_ac7412e9003b43fce2498b26c445e0fae}{Level\+Up\+Decorator}} (\mbox{\hyperlink{class_tower}{Tower}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{class_tower_decorator_a63177b6e5df49f7635c26e35d44c6a0e}{base\+Tower}}, int levels\+To\+Gain=1)
+\item 
+virtual bool \mbox{\hyperlink{class_level_up_decorator_a6f684d9431d54b88c55cc202f2789808}{attack}} (std\+::vector$<$ \mbox{\hyperlink{class_critter}{Critter}} \texorpdfstring{$\ast$}{*} $>$ \&critters, int tick\+\_\+count, int \texorpdfstring{$\ast$}{*}player\+\_\+points, \mbox{\hyperlink{class_map}{Map}} \&game\+Map) override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_tower_decorator}{Tower\+Decorator}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_tower_decorator_a4de0b4daa8dc546009ffb1d86e664c4d}{Tower\+Decorator}} (\mbox{\hyperlink{class_tower}{Tower}} \texorpdfstring{$\ast$}{*}tower)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{class_tower_decorator}{Tower\+Decorator} that wraps a given tower. \end{DoxyCompactList}\item 
+virtual {\bfseries \texorpdfstring{$\sim$}{\string~}\+Tower\+Decorator} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor for proper cleanup. \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{class_tower_decorator_a7053d636a12caa0576b84c4f50c3961f}{get\+Tid}} () override
+\begin{DoxyCompactList}\small\item\em Get the unique \doxylink{class_tower}{Tower} ID.    \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{class_tower_decorator_a86130fed1a922b362b9fa06dd21aab27}{getX}} () override
+\begin{DoxyCompactList}\small\item\em Get the tower\textquotesingle{}s X coordinate on the grid.    \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{class_tower_decorator_adfc909e35b700c34c6dc588be9a3ee95}{getY}} () override
+\begin{DoxyCompactList}\small\item\em Get the tower\textquotesingle{}s Y coordinate on the grid.    \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{class_tower_decorator_a8c879b68af7e6c9adac1d18d95fb4d51}{get\+Cost}} () override
+\begin{DoxyCompactList}\small\item\em Get the tower\textquotesingle{}s initial placement cost.    \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{class_tower_decorator_a32c58f0b6e9ddd992dfe9b4e502b9494}{get\+Damage}} () override
+\begin{DoxyCompactList}\small\item\em Get the damage value per attack.    \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{class_tower_decorator_a67b20f7360bb97c3ccb619d24d5e64c1}{get\+Atta\+Rate}} () override
+\begin{DoxyCompactList}\small\item\em Get the attack rate (ticks between attacks).    \end{DoxyCompactList}\item 
+virtual float \mbox{\hyperlink{class_tower_decorator_a3a0ea71cd449bfcfe397555040397e9e}{get\+Hit\+Rate}} () override
+\begin{DoxyCompactList}\small\item\em Get the probability to hit (0.\+0 to 1.\+0).    \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{class_tower_decorator_a134aceb4c1f528b27f42ab3f5211b806}{get\+Range}} () override
+\begin{DoxyCompactList}\small\item\em Get the range of the tower\textquotesingle{}s attack.    \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{class_tower_decorator_adec8260ae3c9690d74ea174ac39df25d}{get\+Resale}} () override
+\begin{DoxyCompactList}\small\item\em Get the resale value.    \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{class_tower_decorator_adf73dc3f6a2980338e3a0938413e68fd}{get\+Level}} () override
+\begin{DoxyCompactList}\small\item\em Get the tower\textquotesingle{}s current upgrade level.    \end{DoxyCompactList}\item 
+virtual Tower\+Type \mbox{\hyperlink{class_tower_decorator_ab0afe3ed77b72090a23d33b07170e59d}{get\+Type}} () override
+\begin{DoxyCompactList}\small\item\em Get the tower\textquotesingle{}s type (REGULAR, SNIPER, etc.).    \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{class_tower_decorator_aa4b7d47a5dae389db01480c0d71bba9f}{get\+Level\+Up\+Cost}} () override
+\begin{DoxyCompactList}\small\item\em Get the cost to upgrade to the next level.    \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_tower_decorator_ac611a3bedc4ebc7aef6263d2d68ebfd3}{set\+Level}} (int lvl) override
+\begin{DoxyCompactList}\small\item\em Set the tower\textquotesingle{}s level.    \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_tower_decorator_a41207dace3f654247062532da81c6553}{setX}} (int x\+\_\+val) override
+\begin{DoxyCompactList}\small\item\em Set the X coordinate of the tower.    \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_tower_decorator_a4a4720aa7ea1094d6bf8ab7326273819}{setY}} (int y\+\_\+val) override
+\begin{DoxyCompactList}\small\item\em Set the Y coordinate of the tower.    \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_tower_decorator_ac8af9dc26b489ba5fe8e7fc5e195fe45}{set\+Cost}} (int cost\+\_\+val) override
+\begin{DoxyCompactList}\small\item\em Set the tower\textquotesingle{}s cost.    \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_tower_decorator_a41d86f7a0ec9ebc3f68ad1e4a50d817e}{set\+Damage}} (int dmg\+\_\+val) override
+\begin{DoxyCompactList}\small\item\em Set the damage value.    \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_tower_decorator_a20220fb9dc68b6777f0361cf2135e987}{set\+Attack\+Rate}} (int attack\+Rate) override
+\begin{DoxyCompactList}\small\item\em Set the attack rate.    \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_tower_decorator_a32634a7bfda9c42e72bbf8c63ed90eec}{set\+Hit\+Rate}} (float hit\+\_\+rate\+\_\+val) override
+\begin{DoxyCompactList}\small\item\em Set the hit rate.    \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_tower_decorator_a9fcba7e0c07c5c098dfdf81f8555cc4e}{set\+Range}} (int range\+\_\+val) override
+\begin{DoxyCompactList}\small\item\em Set the range value.    \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_tower_decorator_abff20448437936cf3fa3daba37fec603}{set\+Resale}} (int resale\+\_\+val) override
+\begin{DoxyCompactList}\small\item\em Set the tower\textquotesingle{}s resale value.    \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_tower_decorator_a1c7ea78acf29d478201de30d930fc3c3}{set\+Level\+Up\+Cost}} (int x) override
+\begin{DoxyCompactList}\small\item\em Set the cost to level up.    \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_tower_decorator_a2aa2689c0517ca3fab9d437df34f9c81}{level\+Up}} () override
+\begin{DoxyCompactList}\small\item\em Increase the tower\textquotesingle{}s level, typically improving stats.    \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_tower}{Tower}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_tower_af960c18212b14f3e69a11eb937e888b9}{Tower}} (int x\+\_\+val, int y\+\_\+val, int cost\+\_\+val, int damage\+\_\+val, int attack\+\_\+rate\+\_\+val, float hit\+\_\+rate\+\_\+val, int range\+\_\+val, Tower\+Type type\+\_\+val, int level\+\_\+val, int level\+\_\+up\+\_\+cost\+\_\+val, int resale\+\_\+val, \mbox{\hyperlink{class_target_selection_strategy}{Target\+Selection\+Strategy}} \texorpdfstring{$\ast$}{*}strat)
+\begin{DoxyCompactList}\small\item\em Construct a new \doxylink{class_tower}{Tower} object with full attributes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_tower_a1b785dc1e9fb979a10620ca183b5761d}{Tower}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_tower_a96972da33c287758c036c944eccdc5fe}{\texorpdfstring{$\sim$}{\string~}\+Tower}} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor for polymorphic cleanup. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_tower_a0557f11304267f7944ac55f479f3fd97}{set\+Strategy}} (\mbox{\hyperlink{class_target_selection_strategy}{Target\+Selection\+Strategy}} \texorpdfstring{$\ast$}{*}strat)
+\begin{DoxyCompactList}\small\item\em Set a new target selection strategy for the tower. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_target_selection_strategy}{Target\+Selection\+Strategy}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_tower_aba8de8b777416b1c29cad11df5591f02}{get\+Strategy}} () const
+\begin{DoxyCompactList}\small\item\em Get the current target selection strategy. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_subject}{Subject}}}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries Attach} (\mbox{\hyperlink{class_observer}{Observer}} \texorpdfstring{$\ast$}{*}obs)
+\item 
+void {\bfseries Detach} (\mbox{\hyperlink{class_observer}{Observer}} \texorpdfstring{$\ast$}{*}obs)
+\item 
+void {\bfseries Detach\+All} ()
+\item 
+void {\bfseries Notify} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_tower_decorator}{Tower\+Decorator}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_tower}{Tower}} \texorpdfstring{$\ast$}{*} {\bfseries base\+Tower}
+\begin{DoxyCompactList}\small\item\em The wrapped \doxylink{class_tower}{Tower} instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_subject}{Subject}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_observer}{Observer}} \texorpdfstring{$\ast$}{*} $>$ {\bfseries observers}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A decorator that levels up the tower once (or multiple times) right after creation. Afterwards, it behaves like the wrapped tower. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_level_up_decorator_ac7412e9003b43fce2498b26c445e0fae}\index{LevelUpDecorator@{LevelUpDecorator}!LevelUpDecorator@{LevelUpDecorator}}
+\index{LevelUpDecorator@{LevelUpDecorator}!LevelUpDecorator@{LevelUpDecorator}}
+\doxysubsubsection{\texorpdfstring{LevelUpDecorator()}{LevelUpDecorator()}}
+{\footnotesize\ttfamily \label{class_level_up_decorator_ac7412e9003b43fce2498b26c445e0fae} 
+Level\+Up\+Decorator\+::\+Level\+Up\+Decorator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_tower}{Tower}} \texorpdfstring{$\ast$}{*}}]{base\+Tower}{, }\item[{int}]{levels\+To\+Gain}{ = {\ttfamily 1}}\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em base\+Tower} & The tower to decorate. \\
+\hline
+{\em levels\+To\+Gain} & How many times to call \doxylink{class_tower_decorator_a2aa2689c0517ca3fab9d437df34f9c81}{level\+Up()} on the wrapped tower. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_level_up_decorator_a6f684d9431d54b88c55cc202f2789808}\index{LevelUpDecorator@{LevelUpDecorator}!attack@{attack}}
+\index{attack@{attack}!LevelUpDecorator@{LevelUpDecorator}}
+\doxysubsubsection{\texorpdfstring{attack()}{attack()}}
+{\footnotesize\ttfamily \label{class_level_up_decorator_a6f684d9431d54b88c55cc202f2789808} 
+bool Level\+Up\+Decorator\+::attack (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{class_critter}{Critter}} \texorpdfstring{$\ast$}{*} $>$ \&}]{critters}{, }\item[{int}]{tick\+\_\+count}{, }\item[{int \texorpdfstring{$\ast$}{*}}]{player\+\_\+points}{, }\item[{\mbox{\hyperlink{class_map}{Map}} \&}]{game\+Map}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Attack override\+:
+\begin{DoxyItemize}
+\item On the first call, level up the base tower \textquotesingle{}levels\+To\+Gain\textquotesingle{} times (one-\/time).
+\item Then delegate the rest of the logic to the base tower as usual. 
+\end{DoxyItemize}
+
+Reimplemented from \mbox{\hyperlink{class_tower_decorator_a972f287505090f7d73824738c28aaf0d}{Tower\+Decorator}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Towers/\+Tower\+Decorators/Leveling\+Decorator.\+h\item 
+Towers/\+Tower\+Decorators/Leveling\+Decorator.\+cpp\end{DoxyCompactItemize}

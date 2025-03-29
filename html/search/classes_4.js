@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['squirrel_0',['Squirrel',['../class_squirrel.html',1,'']]],
-  ['subject_1',['Subject',['../class_subject.html',1,'']]]
+  ['levelupdecorator_0',['LevelUpDecorator',['../class_level_up_decorator.html',1,'']]],
+  ['lowesthealthtargetstrategy_1',['LowestHealthTargetStrategy',['../class_lowest_health_target_strategy.html',1,'']]]
 ];

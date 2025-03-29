@@ -43,7 +43,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"_critter_8h_source.html"
+"_bomb_decorator_8h_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

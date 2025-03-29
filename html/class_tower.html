@@ -119,13 +119,18 @@ Inheritance diagram for Tower:</div>
  <div class="center">
   <img src="class_tower.png" usemap="#Tower_map" alt=""/>
   <map id="Tower_map" name="Tower_map">
-<area href="class_subject.html" alt="Subject" shape="rect" coords="0,0,54,24"/>
+<area href="class_subject.html" alt="Subject" shape="rect" coords="193,0,312,24"/>
+<area href="class_tower_decorator.html" title="Abstract decorator class for towers." alt="TowerDecorator" shape="rect" coords="193,112,312,136"/>
+<area href="class_bomb_decorator.html" title="A decorator that adds splash damage to a tower." alt="BombDecorator" shape="rect" coords="0,168,119,192"/>
+<area href="class_freezing_decorator.html" title="A decorator that adds a freezing effect to a tower." alt="FreezingDecorator" shape="rect" coords="129,168,248,192"/>
+<area href="class_level_up_decorator.html" alt="LevelUpDecorator" shape="rect" coords="258,168,377,192"/>
+<area href="class_sniper_decorator.html" title="A decorator that enhances a tower with sniper abilities." alt="SniperDecorator" shape="rect" coords="387,168,506,192"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:af960c18212b14f3e69a11eb937e888b9" id="r_af960c18212b14f3e69a11eb937e888b9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af960c18212b14f3e69a11eb937e888b9">Tower</a> (int x_val, int y_val, int cost_val, int damage_val, int attack_rate_val, float hit_rate_val, int range_val, TowerType type_val, int level_val, int level_up_cost_val, int resale_val, TargetSelectionStrategy *strat)</td></tr>
+<tr class="memitem:af960c18212b14f3e69a11eb937e888b9" id="r_af960c18212b14f3e69a11eb937e888b9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af960c18212b14f3e69a11eb937e888b9">Tower</a> (int x_val, int y_val, int cost_val, int damage_val, int attack_rate_val, float hit_rate_val, int range_val, TowerType type_val, int level_val, int level_up_cost_val, int resale_val, <a class="el" href="class_target_selection_strategy.html">TargetSelectionStrategy</a> *strat)</td></tr>
 <tr class="memdesc:af960c18212b14f3e69a11eb937e888b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="class_tower.html" title="Represents a Tower that can attack Critters using a specified strategy.">Tower</a> object with full attributes.  <br /></td></tr>
 <tr class="separator:af960c18212b14f3e69a11eb937e888b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1b785dc1e9fb979a10620ca183b5761d" id="r_a1b785dc1e9fb979a10620ca183b5761d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1b785dc1e9fb979a10620ca183b5761d">Tower</a> ()</td></tr>
@@ -206,10 +211,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa56720bf8ce7244817d1fe5bc6cffc65" id="r_aa56720bf8ce7244817d1fe5bc6cffc65"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa56720bf8ce7244817d1fe5bc6cffc65">attack</a> (std::vector&lt; <a class="el" href="class_critter.html">Critter</a> * &gt; &amp;critters, int tick_count, int *player_points, <a class="el" href="class_map.html">Map</a> &amp;gameMap)</td></tr>
 <tr class="memdesc:aa56720bf8ce7244817d1fe5bc6cffc65"><td class="mdescLeft">&#160;</td><td class="mdescRight">Execute an attack on a list of critters if cooldown allows.  <br /></td></tr>
 <tr class="separator:aa56720bf8ce7244817d1fe5bc6cffc65"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0557f11304267f7944ac55f479f3fd97" id="r_a0557f11304267f7944ac55f479f3fd97"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0557f11304267f7944ac55f479f3fd97">setStrategy</a> (TargetSelectionStrategy *strat)</td></tr>
+<tr class="memitem:a0557f11304267f7944ac55f479f3fd97" id="r_a0557f11304267f7944ac55f479f3fd97"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0557f11304267f7944ac55f479f3fd97">setStrategy</a> (<a class="el" href="class_target_selection_strategy.html">TargetSelectionStrategy</a> *strat)</td></tr>
 <tr class="memdesc:a0557f11304267f7944ac55f479f3fd97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set a new target selection strategy for the tower.  <br /></td></tr>
 <tr class="separator:a0557f11304267f7944ac55f479f3fd97"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aba8de8b777416b1c29cad11df5591f02" id="r_aba8de8b777416b1c29cad11df5591f02"><td class="memItemLeft" align="right" valign="top">TargetSelectionStrategy *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aba8de8b777416b1c29cad11df5591f02">getStrategy</a> () const</td></tr>
+<tr class="memitem:aba8de8b777416b1c29cad11df5591f02" id="r_aba8de8b777416b1c29cad11df5591f02"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_target_selection_strategy.html">TargetSelectionStrategy</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aba8de8b777416b1c29cad11df5591f02">getStrategy</a> () const</td></tr>
 <tr class="memdesc:aba8de8b777416b1c29cad11df5591f02"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current target selection strategy.  <br /></td></tr>
 <tr class="separator:aba8de8b777416b1c29cad11df5591f02"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_subject"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_class_subject')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_subject.html">Subject</a></td></tr>
@@ -300,7 +305,7 @@ std::vector&lt; <a class="el" href="class_observer.html">Observer</a> * &gt;&#16
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">TargetSelectionStrategy *</td>          <td class="paramname"><span class="paramname"><em>strat</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="class_target_selection_strategy.html">TargetSelectionStrategy</a> *</td>          <td class="paramname"><span class="paramname"><em>strat</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -452,6 +457,8 @@ false otherwise.</dd></dl>
 <dd>
 false otherwise. </dd></dl>
 
+<p>Reimplemented in <a class="el" href="class_bomb_decorator.html#ad1fa295199ef6902db2bdfe26ba2b473">BombDecorator</a>, <a class="el" href="class_freezing_decorator.html#a0812dd73016ab33eb3f42d8cec64c979">FreezingDecorator</a>, <a class="el" href="class_level_up_decorator.html#a6f684d9431d54b88c55cc202f2789808">LevelUpDecorator</a>, <a class="el" href="class_sniper_decorator.html#a5fab58ba619b7153b49a12c2fba05fb0">SniperDecorator</a>, and <a class="el" href="class_tower_decorator.html#a972f287505090f7d73824738c28aaf0d">TowerDecorator</a>.</p>
+
 </div>
 </div>
 <a id="a66b837cdf87665334cb10d8fea6c028d" name="a66b837cdf87665334cb10d8fea6c028d"></a>
@@ -479,6 +486,8 @@ false otherwise. </dd></dl>
 
 <p>Get the attack rate (ticks between attacks). </p>
 <p>Get attack rate (ticks). </p>
+
+<p>Reimplemented in <a class="el" href="class_tower_decorator.html#a67b20f7360bb97c3ccb619d24d5e64c1">TowerDecorator</a>.</p>
 
 </div>
 </div>
@@ -508,6 +517,8 @@ false otherwise. </dd></dl>
 <p>Get the tower's initial placement cost. </p>
 <p>Get cost. </p>
 
+<p>Reimplemented in <a class="el" href="class_tower_decorator.html#a8c879b68af7e6c9adac1d18d95fb4d51">TowerDecorator</a>.</p>
+
 </div>
 </div>
 <a id="a5fffdf6ca205eaed08c72080cbd6f0c6" name="a5fffdf6ca205eaed08c72080cbd6f0c6"></a>
@@ -535,6 +546,8 @@ false otherwise. </dd></dl>
 
 <p>Get the damage value per attack. </p>
 <p>Get damage per attack. </p>
+
+<p>Reimplemented in <a class="el" href="class_tower_decorator.html#a32c58f0b6e9ddd992dfe9b4e502b9494">TowerDecorator</a>.</p>
 
 </div>
 </div>
@@ -564,6 +577,8 @@ false otherwise. </dd></dl>
 <p>Get the probability to hit (0.0 to 1.0). </p>
 <p>Get hit probability. </p>
 
+<p>Reimplemented in <a class="el" href="class_tower_decorator.html#a3a0ea71cd449bfcfe397555040397e9e">TowerDecorator</a>.</p>
+
 </div>
 </div>
 <a id="ad1fe459e4a6e4a8a6976001ea53a06a7" name="ad1fe459e4a6e4a8a6976001ea53a06a7"></a>
@@ -591,6 +606,8 @@ false otherwise. </dd></dl>
 
 <p>Get the tower's current upgrade level. </p>
 <p>Get current upgrade level. </p>
+
+<p>Reimplemented in <a class="el" href="class_tower_decorator.html#adf73dc3f6a2980338e3a0938413e68fd">TowerDecorator</a>.</p>
 
 </div>
 </div>
@@ -620,6 +637,8 @@ false otherwise. </dd></dl>
 <p>Get the cost to upgrade to the next level. </p>
 <p>Get upgrade cost. </p>
 
+<p>Reimplemented in <a class="el" href="class_tower_decorator.html#aa4b7d47a5dae389db01480c0d71bba9f">TowerDecorator</a>.</p>
+
 </div>
 </div>
 <a id="a6e107faa15743162a0cfb8c3042e2571" name="a6e107faa15743162a0cfb8c3042e2571"></a>
@@ -647,6 +666,8 @@ false otherwise. </dd></dl>
 
 <p>Get the range of the tower's attack. </p>
 <p>Get attack range. </p>
+
+<p>Reimplemented in <a class="el" href="class_tower_decorator.html#a134aceb4c1f528b27f42ab3f5211b806">TowerDecorator</a>.</p>
 
 </div>
 </div>
@@ -676,6 +697,8 @@ false otherwise. </dd></dl>
 <p>Get the resale value. </p>
 <p>Get resale value. </p>
 
+<p>Reimplemented in <a class="el" href="class_tower_decorator.html#adec8260ae3c9690d74ea174ac39df25d">TowerDecorator</a>.</p>
+
 </div>
 </div>
 <a id="aba8de8b777416b1c29cad11df5591f02" name="aba8de8b777416b1c29cad11df5591f02"></a>
@@ -685,7 +708,7 @@ false otherwise. </dd></dl>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">TargetSelectionStrategy * Tower::getStrategy </td>
+          <td class="memname"><a class="el" href="class_target_selection_strategy.html">TargetSelectionStrategy</a> * Tower::getStrategy </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -727,6 +750,8 @@ TargetSelectionStrategy* </dd></dl>
 <p>Get the unique <a class="el" href="class_tower.html" title="Represents a Tower that can attack Critters using a specified strategy.">Tower</a> ID. </p>
 <p>Get tower ID. </p>
 
+<p>Reimplemented in <a class="el" href="class_tower_decorator.html#a7053d636a12caa0576b84c4f50c3961f">TowerDecorator</a>.</p>
+
 </div>
 </div>
 <a id="adb68f1d6e66a4f4bb31f1a480a660bfe" name="adb68f1d6e66a4f4bb31f1a480a660bfe"></a>
@@ -754,6 +779,8 @@ TargetSelectionStrategy* </dd></dl>
 
 <p>Get the tower's type (REGULAR, SNIPER, etc.). </p>
 <p>Get tower type. </p>
+
+<p>Reimplemented in <a class="el" href="class_tower_decorator.html#ab0afe3ed77b72090a23d33b07170e59d">TowerDecorator</a>.</p>
 
 </div>
 </div>
@@ -783,6 +810,8 @@ TargetSelectionStrategy* </dd></dl>
 <p>Get the tower's X coordinate on the grid. </p>
 <p>Get X position. </p>
 
+<p>Reimplemented in <a class="el" href="class_tower_decorator.html#a86130fed1a922b362b9fa06dd21aab27">TowerDecorator</a>.</p>
+
 </div>
 </div>
 <a id="a157dec6c9b2d61273975029109bdba0f" name="a157dec6c9b2d61273975029109bdba0f"></a>
@@ -810,6 +839,8 @@ TargetSelectionStrategy* </dd></dl>
 
 <p>Get the tower's Y coordinate on the grid. </p>
 <p>Get Y position. </p>
+
+<p>Reimplemented in <a class="el" href="class_tower_decorator.html#adfc909e35b700c34c6dc588be9a3ee95">TowerDecorator</a>.</p>
 
 </div>
 </div>
@@ -840,6 +871,8 @@ TargetSelectionStrategy* </dd></dl>
 <p>Upgrade the tower's stats.</p>
 <p>Increases damage, reduces attack rate (faster attacks), and increases the cost for next level. </p>
 
+<p>Reimplemented in <a class="el" href="class_tower_decorator.html#a2aa2689c0517ca3fab9d437df34f9c81">TowerDecorator</a>.</p>
+
 </div>
 </div>
 <a id="a03c85b3012e0d0cb6b1f33ec2763acda" name="a03c85b3012e0d0cb6b1f33ec2763acda"></a>
@@ -867,6 +900,8 @@ TargetSelectionStrategy* </dd></dl>
 
 <p>Set the attack rate. </p>
 <p>Set attack rate. </p>
+
+<p>Reimplemented in <a class="el" href="class_tower_decorator.html#a20220fb9dc68b6777f0361cf2135e987">TowerDecorator</a>.</p>
 
 </div>
 </div>
@@ -896,6 +931,8 @@ TargetSelectionStrategy* </dd></dl>
 <p>Set the tower's cost. </p>
 <p>Set cost. </p>
 
+<p>Reimplemented in <a class="el" href="class_tower_decorator.html#ac8af9dc26b489ba5fe8e7fc5e195fe45">TowerDecorator</a>.</p>
+
 </div>
 </div>
 <a id="a4393611408f7be18fa0338cf91be545c" name="a4393611408f7be18fa0338cf91be545c"></a>
@@ -923,6 +960,8 @@ TargetSelectionStrategy* </dd></dl>
 
 <p>Set the damage value. </p>
 <p>Set damage value. </p>
+
+<p>Reimplemented in <a class="el" href="class_tower_decorator.html#a41d86f7a0ec9ebc3f68ad1e4a50d817e">TowerDecorator</a>.</p>
 
 </div>
 </div>
@@ -952,6 +991,8 @@ TargetSelectionStrategy* </dd></dl>
 <p>Set the hit rate. </p>
 <p>Set hit rate. </p>
 
+<p>Reimplemented in <a class="el" href="class_tower_decorator.html#a32634a7bfda9c42e72bbf8c63ed90eec">TowerDecorator</a>.</p>
+
 </div>
 </div>
 <a id="a74ae6b53ede612e3c59293920b6c3419" name="a74ae6b53ede612e3c59293920b6c3419"></a>
@@ -979,6 +1020,8 @@ TargetSelectionStrategy* </dd></dl>
 
 <p>Set the tower's level. </p>
 <p>Set level. </p>
+
+<p>Reimplemented in <a class="el" href="class_tower_decorator.html#ac611a3bedc4ebc7aef6263d2d68ebfd3">TowerDecorator</a>.</p>
 
 </div>
 </div>
@@ -1008,6 +1051,8 @@ TargetSelectionStrategy* </dd></dl>
 <p>Set the cost to level up. </p>
 <p>Set level-up cost. </p>
 
+<p>Reimplemented in <a class="el" href="class_tower_decorator.html#a1c7ea78acf29d478201de30d930fc3c3">TowerDecorator</a>.</p>
+
 </div>
 </div>
 <a id="adc0cce29130f8b3c35f416f88eb097be" name="adc0cce29130f8b3c35f416f88eb097be"></a>
@@ -1035,6 +1080,8 @@ TargetSelectionStrategy* </dd></dl>
 
 <p>Set the range value. </p>
 <p>Set range value. </p>
+
+<p>Reimplemented in <a class="el" href="class_tower_decorator.html#a9fcba7e0c07c5c098dfdf81f8555cc4e">TowerDecorator</a>.</p>
 
 </div>
 </div>
@@ -1064,6 +1111,8 @@ TargetSelectionStrategy* </dd></dl>
 <p>Set the tower's resale value. </p>
 <p>Set resale value. </p>
 
+<p>Reimplemented in <a class="el" href="class_tower_decorator.html#abff20448437936cf3fa3daba37fec603">TowerDecorator</a>.</p>
+
 </div>
 </div>
 <a id="a0557f11304267f7944ac55f479f3fd97" name="a0557f11304267f7944ac55f479f3fd97"></a>
@@ -1075,7 +1124,7 @@ TargetSelectionStrategy* </dd></dl>
         <tr>
           <td class="memname">void Tower::setStrategy </td>
           <td>(</td>
-          <td class="paramtype">TargetSelectionStrategy *</td>          <td class="paramname"><span class="paramname"><em>strat</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_target_selection_strategy.html">TargetSelectionStrategy</a> *</td>          <td class="paramname"><span class="paramname"><em>strat</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1086,7 +1135,7 @@ TargetSelectionStrategy* </dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">strat</td><td>Pointer to a new strategy object.</td></tr>
-    <tr><td class="paramname">strat</td><td>Pointer to a TargetSelectionStrategy object. </td></tr>
+    <tr><td class="paramname">strat</td><td>Pointer to a <a class="el" href="class_target_selection_strategy.html" title="Abstract base class for tower target selection strategies.">TargetSelectionStrategy</a> object. </td></tr>
   </table>
   </dd>
 </dl>
@@ -1119,6 +1168,8 @@ TargetSelectionStrategy* </dd></dl>
 <p>Set the X coordinate of the tower. </p>
 <p>Set X position. </p>
 
+<p>Reimplemented in <a class="el" href="class_tower_decorator.html#a41207dace3f654247062532da81c6553">TowerDecorator</a>.</p>
+
 </div>
 </div>
 <a id="a771d918c944927f98331eb521e77401e" name="a771d918c944927f98331eb521e77401e"></a>
@@ -1146,6 +1197,8 @@ TargetSelectionStrategy* </dd></dl>
 
 <p>Set the Y coordinate of the tower. </p>
 <p>Set Y position. </p>
+
+<p>Reimplemented in <a class="el" href="class_tower_decorator.html#a4a4720aa7ea1094d6bf8ab7326273819">TowerDecorator</a>.</p>
 
 </div>
 </div>

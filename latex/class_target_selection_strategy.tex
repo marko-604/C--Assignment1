@@ -1,0 +1,62 @@
+\doxysection{Target\+Selection\+Strategy Class Reference}
+\hypertarget{class_target_selection_strategy}{}\label{class_target_selection_strategy}\index{TargetSelectionStrategy@{TargetSelectionStrategy}}
+
+
+Abstract base class for tower target selection strategies.  
+
+
+
+
+{\ttfamily \#include $<$Selection\+Strategy.\+h$>$}
+
+Inheritance diagram for Target\+Selection\+Strategy\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.237569cm]{class_target_selection_strategy}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{class_critter}{Critter}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_target_selection_strategy_a95710649e5751b3cc5959f33425b84d8}{select\+Target}} (const std\+::vector$<$ \mbox{\hyperlink{class_critter}{Critter}} \texorpdfstring{$\ast$}{*} $>$ \&critters, \mbox{\hyperlink{class_tower}{Tower}} \texorpdfstring{$\ast$}{*}tower)=0
+\begin{DoxyCompactList}\small\item\em Select a target from the list of critters based on the strategy. \end{DoxyCompactList}\item 
+\Hypertarget{class_target_selection_strategy_a8c75b7efa3391a8615377af13681d65a}\label{class_target_selection_strategy_a8c75b7efa3391a8615377af13681d65a} 
+virtual {\bfseries \texorpdfstring{$\sim$}{\string~}\+Target\+Selection\+Strategy} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor for proper cleanup of derived classes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Abstract base class for tower target selection strategies. 
+
+Provides an interface for selecting a single target from a list of critters based on a specific strategy (e.\+g., weakest, closest, farthest). 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_target_selection_strategy_a95710649e5751b3cc5959f33425b84d8}\index{TargetSelectionStrategy@{TargetSelectionStrategy}!selectTarget@{selectTarget}}
+\index{selectTarget@{selectTarget}!TargetSelectionStrategy@{TargetSelectionStrategy}}
+\doxysubsubsection{\texorpdfstring{selectTarget()}{selectTarget()}}
+{\footnotesize\ttfamily \label{class_target_selection_strategy_a95710649e5751b3cc5959f33425b84d8} 
+virtual \mbox{\hyperlink{class_critter}{Critter}} \texorpdfstring{$\ast$}{*} Target\+Selection\+Strategy\+::select\+Target (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{class_critter}{Critter}} \texorpdfstring{$\ast$}{*} $>$ \&}]{critters}{, }\item[{\mbox{\hyperlink{class_tower}{Tower}} \texorpdfstring{$\ast$}{*}}]{tower}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Select a target from the list of critters based on the strategy. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em critters} & Vector of available critters. \\
+\hline
+{\em tower} & Pointer to the tower performing the selection. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the selected critter, or nullptr if no valid target. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{class_farthest_target_strategy_a9230b4c3c3a6051aed5f5de2e04e4037}{Farthest\+Target\+Strategy}}, \mbox{\hyperlink{class_highest_health_target_strategy_ae75cf7c07186ec7d520a218108c95d2a}{Highest\+Health\+Target\+Strategy}}, \mbox{\hyperlink{class_lowest_health_target_strategy_ae03f112e53c8cf289c1c37b6993e0bf2}{Lowest\+Health\+Target\+Strategy}}, \mbox{\hyperlink{class_strongest_target_strategy_a6cea27f4b0fb11e8b8d57b64540185c0}{Strongest\+Target\+Strategy}}, and \mbox{\hyperlink{class_weakest_target_strategy_a20095602bc4fbb41cf591b812524b32d}{Weakest\+Target\+Strategy}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Towers/\+Tower\+Strategy/Selection\+Strategy.\+h\end{DoxyCompactItemize}

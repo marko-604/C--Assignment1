@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['observer_0',['Observer',['../class_observer.html',1,'']]]
+  ['highesthealthtargetstrategy_0',['HighestHealthTargetStrategy',['../class_highest_health_target_strategy.html',1,'']]]
 ];

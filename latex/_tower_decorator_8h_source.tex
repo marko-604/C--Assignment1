@@ -1,0 +1,78 @@
+\doxysection{Tower\+Decorator.\+h}
+\hypertarget{_tower_decorator_8h_source}{}\label{_tower_decorator_8h_source}\index{Towers/TowerDecorators/TowerDecorator.h@{Towers/TowerDecorators/TowerDecorator.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ TOWER\_DECORATOR\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ TOWER\_DECORATOR\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}../Tower.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_tower_decorator_a4de0b4daa8dc546009ffb1d86e664c4d}{TowerDecorator}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_tower_af960c18212b14f3e69a11eb937e888b9}{Tower}}\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00015\ \ \ \mbox{\hyperlink{class_tower_af960c18212b14f3e69a11eb937e888b9}{Tower}}\ *\mbox{\hyperlink{class_tower_decorator_a63177b6e5df49f7635c26e35d44c6a0e}{baseTower}};\ }
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00023\ \ \ \mbox{\hyperlink{class_tower_decorator_a4de0b4daa8dc546009ffb1d86e664c4d}{TowerDecorator}}(\mbox{\hyperlink{class_tower_af960c18212b14f3e69a11eb937e888b9}{Tower}}\ *tower);}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00026\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_tower_decorator_af8428d707238cc3eaeabfea3cc77c763}{\string~TowerDecorator}}();}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ Forwarding\ virtual\ getters\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00031\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_tower_decorator_a7053d636a12caa0576b84c4f50c3961f}{getTid}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00034\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_tower_decorator_a86130fed1a922b362b9fa06dd21aab27}{getX}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00037\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_tower_decorator_adfc909e35b700c34c6dc588be9a3ee95}{getY}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00040\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_tower_decorator_a8c879b68af7e6c9adac1d18d95fb4d51}{getCost}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00043\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_tower_decorator_a32c58f0b6e9ddd992dfe9b4e502b9494}{getDamage}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00046\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_tower_decorator_a67b20f7360bb97c3ccb619d24d5e64c1}{getAttaRate}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00049\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_tower_decorator_a3a0ea71cd449bfcfe397555040397e9e}{getHitRate}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00052\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_tower_decorator_a134aceb4c1f528b27f42ab3f5211b806}{getRange}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00055\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_tower_decorator_adec8260ae3c9690d74ea174ac39df25d}{getResale}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00058\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_tower_decorator_adf73dc3f6a2980338e3a0938413e68fd}{getLevel}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00061\ \ \ \textcolor{keyword}{virtual}\ TowerType\ \mbox{\hyperlink{class_tower_decorator_ab0afe3ed77b72090a23d33b07170e59d}{getType}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00064\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_tower_decorator_aa4b7d47a5dae389db01480c0d71bba9f}{getLevelUpCost}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ Forwarding\ virtual\ setters\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00069\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tower_decorator_ac611a3bedc4ebc7aef6263d2d68ebfd3}{setLevel}}(\textcolor{keywordtype}{int}\ lvl)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00072\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tower_decorator_a41207dace3f654247062532da81c6553}{setX}}(\textcolor{keywordtype}{int}\ x\_val)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00075\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tower_decorator_a4a4720aa7ea1094d6bf8ab7326273819}{setY}}(\textcolor{keywordtype}{int}\ y\_val)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00078\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tower_decorator_ac8af9dc26b489ba5fe8e7fc5e195fe45}{setCost}}(\textcolor{keywordtype}{int}\ cost\_val)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00081\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tower_decorator_a41d86f7a0ec9ebc3f68ad1e4a50d817e}{setDamage}}(\textcolor{keywordtype}{int}\ dmg\_val)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00084\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tower_decorator_a20220fb9dc68b6777f0361cf2135e987}{setAttackRate}}(\textcolor{keywordtype}{int}\ attackRate)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00087\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tower_decorator_a32634a7bfda9c42e72bbf8c63ed90eec}{setHitRate}}(\textcolor{keywordtype}{float}\ hit\_rate\_val)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00090\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tower_decorator_a9fcba7e0c07c5c098dfdf81f8555cc4e}{setRange}}(\textcolor{keywordtype}{int}\ range\_val)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00093\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tower_decorator_abff20448437936cf3fa3daba37fec603}{setResale}}(\textcolor{keywordtype}{int}\ resale\_val)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00096\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tower_decorator_a1c7ea78acf29d478201de30d930fc3c3}{setLevelUpCost}}(\textcolor{keywordtype}{int}\ x)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \ \ \textcolor{comment}{//\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\ Forwarding\ operations\ -\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00101\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_tower_decorator_a2aa2689c0517ca3fab9d437df34f9c81}{levelUp}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00113\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_tower_decorator_a972f287505090f7d73824738c28aaf0d}{attack}}(std::vector<Critter\ *>\ \&critters,\ \textcolor{keywordtype}{int}\ tick\_count,}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ *player\_points,\ \mbox{\hyperlink{class_map}{Map}}\ \&gameMap)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00115\ \};}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ TOWER\_DECORATOR\_H}}
+
+\end{DoxyCode}

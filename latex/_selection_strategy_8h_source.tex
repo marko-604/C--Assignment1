@@ -1,0 +1,25 @@
+\doxysection{Selection\+Strategy.\+h}
+\hypertarget{_selection_strategy_8h_source}{}\label{_selection_strategy_8h_source}\index{Towers/TowerStrategy/SelectionStrategy.h@{Towers/TowerStrategy/SelectionStrategy.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ TargetSelectionStrategy.h}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#ifndef\ SELECTION\_STRATEGY\_H}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#define\ SELECTION\_STRATEGY\_H}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_tower}{Tower}};}
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_critter}{Critter}};}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_target_selection_strategy}{TargetSelectionStrategy}}\ \{}
+\DoxyCodeLine{00018\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00026\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_critter}{Critter}}\ *\mbox{\hyperlink{class_target_selection_strategy_a95710649e5751b3cc5959f33425b84d8}{selectTarget}}(\textcolor{keyword}{const}\ std::vector<Critter\ *>\ \&critters,}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_tower}{Tower}}\ *tower)\ =\ 0;}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00030\ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_target_selection_strategy_a8c75b7efa3391a8615377af13681d65a}{\string~TargetSelectionStrategy}}()\ \{\}}
+\DoxyCodeLine{00031\ \};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ TARGET\_SELECTION\_STRATEGY\_H}}
+
+\end{DoxyCode}

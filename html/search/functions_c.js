@@ -1,4 +1,9 @@
 var searchData=
 [
-  ['update_0',['Update',['../class_critter.html#aca0c4e1549e36a4a1c5053fa093dce18',1,'Critter::Update()'],['../class_critter_observer.html#ae0fd7934f912d8ab9c83a9c92b8772ad',1,'CritterObserver::Update()'],['../class_map_observer.html#a53113e69aa2b5eca077296ce0fd62a87',1,'MapObserver::Update()'],['../class_observer.html#ab5e067280bf8e1f102853f65a62a726c',1,'Observer::Update()'],['../class_tower_observer.html#a14ede7468c49416543733d13bea828e3',1,'TowerObserver::Update()']]]
+  ['togglecritter_0',['ToggleCritter',['../class_map.html#a7f12d2251dd0ef0045c442f82934f5ee',1,'Map']]],
+  ['togglepath_1',['TogglePath',['../class_map.html#a6dde69e08b666c15b23e72c136e824a5',1,'Map']]],
+  ['toggletower_2',['ToggleTower',['../class_map.html#a77b3e531d910e14428dfd89f0e820534',1,'Map']]],
+  ['tower_3',['Tower',['../class_tower.html#af960c18212b14f3e69a11eb937e888b9',1,'Tower::Tower(int x_val, int y_val, int cost_val, int damage_val, int attack_rate_val, float hit_rate_val, int range_val, TowerType type_val, int level_val, int level_up_cost_val, int resale_val, TargetSelectionStrategy *strat)'],['../class_tower.html#a1b785dc1e9fb979a10620ca183b5761d',1,'Tower::Tower()']]],
+  ['towerdecorator_4',['TowerDecorator',['../class_tower_decorator.html#a4de0b4daa8dc546009ffb1d86e664c4d',1,'TowerDecorator']]],
+  ['towerobserver_5',['TowerObserver',['../class_tower_observer.html#a934f8e7b6f61d8d306231f3eae4cda5e',1,'TowerObserver']]]
 ];

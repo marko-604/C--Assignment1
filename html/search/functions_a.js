@@ -1,25 +1,4 @@
 var searchData=
 [
-  ['setattackrate_0',['setAttackRate',['../class_tower.html#a03c85b3012e0d0cb6b1f33ec2763acda',1,'Tower']]],
-  ['setcol_1',['setCol',['../class_critter.html#acaef1bf78bb2d96388ba783003f8e97b',1,'Critter']]],
-  ['setcost_2',['setCost',['../class_tower.html#ab05fea1f795b003eebbe42861d86ec0b',1,'Tower']]],
-  ['setdamage_3',['setDamage',['../class_tower.html#a4393611408f7be18fa0338cf91be545c',1,'Tower']]],
-  ['setentry_4',['SetEntry',['../class_map.html#a4b20aa17b8e5316cd2acc8a7c0a62200',1,'Map']]],
-  ['setexit_5',['SetExit',['../class_map.html#a9e5ed98abb7c55cd06a7a3b585eed82f',1,'Map']]],
-  ['sethealth_6',['setHealth',['../class_critter.html#affca3821a91b4836b790c9e8e0c09b3c',1,'Critter']]],
-  ['sethitrate_7',['setHitRate',['../class_tower.html#aa16187617d314fab7e9679a4963142f9',1,'Tower']]],
-  ['setlevel_8',['setLevel',['../class_tower.html#a74ae6b53ede612e3c59293920b6c3419',1,'Tower']]],
-  ['setlevelupcost_9',['setLevelUpCost',['../class_tower.html#a41291102d209ad8cadddf02173a1526c',1,'Tower']]],
-  ['setpath_10',['setPath',['../class_critter.html#ae3e02f4e4a81d7bcaf11736bfe84bfd4',1,'Critter']]],
-  ['setrange_11',['setRange',['../class_tower.html#adc0cce29130f8b3c35f416f88eb097be',1,'Tower']]],
-  ['setresale_12',['setResale',['../class_tower.html#afc05d8656dc1c0a2fa8aca738ee31081',1,'Tower']]],
-  ['setrow_13',['setRow',['../class_critter.html#af1a5863a9485468438ce050446f6052c',1,'Critter']]],
-  ['setspeed_14',['setSpeed',['../class_critter.html#aef4ec4cbc8c4755aec3f42e5cc155eb9',1,'Critter']]],
-  ['setstr_15',['setStr',['../class_critter.html#ad4b3f0d38cb748b90612cc1fbdf8d0a0',1,'Critter']]],
-  ['setstrategy_16',['setStrategy',['../class_tower.html#a0557f11304267f7944ac55f479f3fd97',1,'Tower']]],
-  ['settopath_17',['setToPath',['../class_map.html#ae7d663e71f32001429c58039bcb38a64',1,'Map']]],
-  ['settoscenery_18',['setToScenery',['../class_map.html#a10f0151a30b0d16f72cc4d6f43696592',1,'Map']]],
-  ['setx_19',['setX',['../class_tower.html#a69910a2147798137d67570ff69aad517',1,'Tower']]],
-  ['sety_20',['setY',['../class_tower.html#a771d918c944927f98331eb521e77401e',1,'Tower']]],
-  ['squirrel_21',['Squirrel',['../class_squirrel.html#a7c62fca2cc806f84fe0dbc99764b9242',1,'Squirrel']]]
+  ['runeditor_0',['RunEditor',['../class_map.html#ad5abdb7a1701022230ddaffe210e538e',1,'Map']]]
 ];

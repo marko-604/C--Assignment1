@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['_7ecritter_0',['~Critter',['../class_critter.html#aa923c19cdc302c7bf10a038983e801c1',1,'Critter']]],
-  ['_7emap_1',['~Map',['../class_map.html#aa403fbe09394ccf39747588f5168e3b2',1,'Map']]],
-  ['_7eobserver_2',['~Observer',['../class_observer.html#afcc6b67be6c386f2f3d2c363aa59cb47',1,'Observer']]],
-  ['_7etower_3',['~Tower',['../class_tower.html#a96972da33c287758c036c944eccdc5fe',1,'Tower']]]
+  ['update_0',['Update',['../class_critter.html#aca0c4e1549e36a4a1c5053fa093dce18',1,'Critter::Update()'],['../class_critter_observer.html#ae0fd7934f912d8ab9c83a9c92b8772ad',1,'CritterObserver::Update()'],['../class_map_observer.html#a53113e69aa2b5eca077296ce0fd62a87',1,'MapObserver::Update()'],['../class_observer.html#ab5e067280bf8e1f102853f65a62a726c',1,'Observer::Update()'],['../class_tower_observer.html#a14ede7468c49416543733d13bea828e3',1,'TowerObserver::Update()']]]
 ];

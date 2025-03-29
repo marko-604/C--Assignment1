@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['levelup_0',['levelUp',['../class_tower.html#ad62d1a258c5503ee900269f7e9edf199',1,'Tower::levelUp()'],['../class_critter_generator.html#a21f2cfea046b3e851dc5ce923f0ef114',1,'CritterGenerator::levelUp()']]]
+  ['isempty_0',['isEmpty',['../class_critter_generator.html#a54cd57eec1e3e14ee855f1cfd98a6a34',1,'CritterGenerator']]],
+  ['isvalidpath_1',['IsValidPath',['../class_map.html#a061d5c0c7617dc37234da52a4d69784d',1,'Map']]]
 ];

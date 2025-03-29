@@ -1,0 +1,28 @@
+\doxysection{Bomb\+Decorator.\+h}
+\hypertarget{_bomb_decorator_8h_source}{}\label{_bomb_decorator_8h_source}\index{Towers/TowerDecorators/BombDecorator.h@{Towers/TowerDecorators/BombDecorator.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#ifndef\ BOMB\_DECORATOR\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#define\ BOMB\_DECORATOR\_H}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}TowerDecorator.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{class\ }SelectionStrategy;}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_bomb_decorator_a61ebb4dc733c4ea959488e7d55bb807d}{BombDecorator}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_tower_decorator_a4de0b4daa8dc546009ffb1d86e664c4d}{TowerDecorator}}\ \{}
+\DoxyCodeLine{00017\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00018\ \ \ \textcolor{keywordtype}{int}\ splashRadius;\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00019\ \ \ \textcolor{keywordtype}{float}\ splashDamageFactor;\ }
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00031\ \ \ \mbox{\hyperlink{class_bomb_decorator_a61ebb4dc733c4ea959488e7d55bb807d}{BombDecorator}}(\mbox{\hyperlink{class_tower_af960c18212b14f3e69a11eb937e888b9}{Tower}}\ *tower,\ \textcolor{keywordtype}{int}\ splashRadiusVal,\ \textcolor{keywordtype}{float}\ splashDamageFactorVal);}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00046\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_bomb_decorator_ad1fa295199ef6902db2bdfe26ba2b473}{attack}}(std::vector<Critter\ *>\ \&critters,\ \textcolor{keywordtype}{int}\ tick\_count,}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ *player\_points,\ \mbox{\hyperlink{class_map}{Map}}\ \&gameMap)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00048\ \};}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ BOMB\_DECORATOR\_H}}
+
+\end{DoxyCode}

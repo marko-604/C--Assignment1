@@ -1,0 +1,24 @@
+\doxysection{Freezing\+Decorator.\+h}
+\hypertarget{_freezing_decorator_8h_source}{}\label{_freezing_decorator_8h_source}\index{Towers/TowerDecorators/FreezingDecorator.h@{Towers/TowerDecorators/FreezingDecorator.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ FREEZING\_DECORATOR\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ FREEZING\_DECORATOR\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}TowerDecorator.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_freezing_decorator_ab1f8c6bb469e931545acdae0c1a94237}{FreezingDecorator}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_tower_decorator_a4de0b4daa8dc546009ffb1d86e664c4d}{TowerDecorator}}\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00015\ \ \ \textcolor{keywordtype}{float}\ slowRate;\ }
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \mbox{\hyperlink{class_freezing_decorator_ab1f8c6bb469e931545acdae0c1a94237}{FreezingDecorator}}(\mbox{\hyperlink{class_tower_af960c18212b14f3e69a11eb937e888b9}{Tower}}\ *tower,\ \textcolor{keywordtype}{float}\ slowRateVal);}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00041\ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_freezing_decorator_a0812dd73016ab33eb3f42d8cec64c979}{attack}}(std::vector<Critter\ *>\ \&critters,\ \textcolor{keywordtype}{int}\ tick\_count,}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ *player\_points,\ \mbox{\hyperlink{class_map}{Map}}\ \&gameMap)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00043\ \};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ FREEZING\_DECORATOR\_H}}
+
+\end{DoxyCode}

@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['map_0',['Map',['../class_map.html#a20629c1af1be574bffb69076f85cd458',1,'Map']]],
-  ['mapobserver_1',['MapObserver',['../class_map_observer.html#a5f730cdd40c374cd4acbeb30621b4e62',1,'MapObserver']]],
-  ['move_2',['move',['../class_critter.html#aae78bb7da004cba98f10634cec28f6c4',1,'Critter']]]
+  ['levelup_0',['levelUp',['../class_tower.html#ad62d1a258c5503ee900269f7e9edf199',1,'Tower::levelUp()'],['../class_critter_generator.html#a21f2cfea046b3e851dc5ce923f0ef114',1,'CritterGenerator::levelUp()'],['../class_tower_decorator.html#a2aa2689c0517ca3fab9d437df34f9c81',1,'TowerDecorator::levelUp()']]],
+  ['levelupdecorator_1',['LevelUpDecorator',['../class_level_up_decorator.html#ac7412e9003b43fce2498b26c445e0fae',1,'LevelUpDecorator']]]
 ];
