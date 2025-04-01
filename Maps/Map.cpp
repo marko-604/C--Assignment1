@@ -33,12 +33,15 @@ void Map::setToScenery(int row, int col) {
 /**
  * @brief Renders the grid and tiles on the screen using raylib.
  */
+
 void Map::Draw() {
   for (int row = 0; row < gridHeight; row++) {
     for (int col = 0; col < gridWidth; col++) {
       Rectangle tileRect = {col * (float)tileSize, row * (float)tileSize,
                             (float)tileSize, (float)tileSize};
       Color tileColor;
+      bool isCritter = false;
+
       switch (grid[row][col]) {
       case EMPTY:
         tileColor = LIGHTGRAY;
@@ -66,24 +69,44 @@ void Map::Draw() {
         break;
       case SQUIRRELCRITTER:
         tileColor = BROWN;
+        isCritter = true;
         break;
       case WOLFCRITTER:
         tileColor = PURPLE;
+        isCritter = true;
         break;
       case BEARCRITTER:
         tileColor = BLACK;
+        isCritter = true;
         break;
       default:
         tileColor = LIGHTGRAY;
         break;
       }
-      DrawRectangleRec(tileRect, tileColor);
+
+      if (isCritter) {
+        // Draw the full tile as green (like a path).
+        DrawRectangleRec(tileRect, GREEN);
+
+        // Compute a centered rectangle that is half the tile size.
+        float critterSize = tileSize / 2.0f;
+        Rectangle critterRect = {tileRect.x + (tileSize - critterSize) / 2,
+                                 tileRect.y + (tileSize - critterSize) / 2,
+                                 critterSize, critterSize};
+
+        // Draw the critter with its designated color.
+        DrawRectangleRec(critterRect, tileColor);
+      } else {
+        // For non-critter cells, draw the entire tile normally.
+        DrawRectangleRec(tileRect, tileColor);
+      }
+
+      // Draw the grid lines.
       DrawRectangleLines(tileRect.x, tileRect.y, tileRect.width,
                          tileRect.height, DARKGRAY);
     }
   }
 }
-
 /**
  * @brief Places a critter on the specified tile.
  */
