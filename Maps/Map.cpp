@@ -224,7 +224,9 @@ bool Map::IsValidPath() {
  *
  * @return true if a valid map is confirmed.
  */
+
 bool Map::RunEditor() {
+  // Get monitor dimensions using a temporary window.
   InitWindow(100, 100, "Temp");
   int monitorWidth = GetMonitorWidth(0);
   int monitorHeight = GetMonitorHeight(0);
@@ -247,6 +249,9 @@ bool Map::RunEditor() {
   InitWindow(screenWidth, screenHeight, "Map Editor");
   SetTargetFPS(60);
   bool mapConfirmed = false;
+
+  // This timer will control how long the invalid map overlay is shown.
+  float invalidOverlayTime = 0.0f;
 
   while (!WindowShouldClose() && !mapConfirmed) {
     SetWindowFocused();
@@ -272,23 +277,47 @@ bool Map::RunEditor() {
     if (IsKeyPressed(KEY_S)) {
       if (IsValidPath())
         mapConfirmed = true;
+      else
+        // Set the overlay to be shown for 2 seconds.
+        invalidOverlayTime = 2.0f;
+    }
+
+    // Decrease the timer if the invalid overlay is active.
+    if (invalidOverlayTime > 0.0f) {
+      invalidOverlayTime -= GetFrameTime();
     }
 
     BeginDrawing();
     ClearBackground(RAYWHITE);
-    Draw();
+    Draw(); // Draw your map grid and other elements.
+
     DrawText("Left Click: Toggle Path  |  E: Set Entry  |  X: Set Exit", 10, 10,
              20, BLACK);
     DrawText("Press S to start game (if path is valid)", 10, 40, 20, BLACK);
     DrawText(TextFormat("Tile Size: %d", tileSize), 10, screenHeight - 30, 20,
              BLACK);
+
+    // If the map is invalid and the timer is active, draw the overlay.
+    if (invalidOverlayTime > 0.0f) {
+      int overlayWidth = screenWidth / 2;
+      int overlayHeight = screenHeight / 5;
+      int overlayX = (screenWidth - overlayWidth) / 2;
+      int overlayY = (screenHeight - overlayHeight) / 2;
+
+      // Draw a semi-transparent red rectangle.
+      DrawRectangle(overlayX, overlayY, overlayWidth, overlayHeight,
+                    Fade(RED, 0.5f));
+
+      // Draw the invalid map message.
+      DrawText("Invalid Map", overlayX + 20, overlayY + overlayHeight / 2 - 10,
+               20, WHITE);
+    }
     EndDrawing();
   }
 
   CloseWindow();
   return mapConfirmed;
 }
-
 /**
  * @brief Returns the path from entry to exit using BFS.
  *
