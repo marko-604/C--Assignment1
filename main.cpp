@@ -454,7 +454,7 @@ int main() {
       // Place regular tower (T)
       if (IsKeyPressed(KEY_T)) {
         if (!existingTower && player_points >= 100 &&
-            !(map->grid[row][col] == PATH)) {
+            (map->grid[row][col] == EMPTY)) {
           player_points -= 100;
           Tower *t = new Tower();
           t->setStrategy(new WeakestTargetStrategy());
@@ -470,7 +470,7 @@ int main() {
 
       // Place or upgrade to freezing (F)
       if (IsKeyPressed(KEY_F)) {
-        if (player_points >= 100 && map->grid[row][col] != PATH) {
+        if (player_points >= 100 && map->grid[row][col] == EMPTY) {
           player_points -= 100;
           if (existingTower) {
             Tower *upgraded = new FreezingDecorator(existingTower, 0.5f);
@@ -496,7 +496,7 @@ int main() {
 
       // Place or upgrade to sniper (S)
       if (IsKeyPressed(KEY_S)) {
-        if (player_points >= 100 && map->grid[row][col] != PATH) {
+        if (player_points >= 100 && map->grid[row][col] == EMPTY) {
           player_points -= 100;
           if (existingTower) {
             Tower *upgraded = new SniperDecorator(existingTower, 2, 10);
@@ -522,7 +522,7 @@ int main() {
 
       // Place or upgrade to bomb (B)
       if (IsKeyPressed(KEY_B)) {
-        if (player_points >= 100 && map->grid[row][col] != PATH) {
+        if (player_points >= 100 && map->grid[row][col] == EMPTY) {
           player_points -= 100;
           if (existingTower) {
             Tower *upgraded = new BombDecorator(existingTower, 2, 0.5f);
