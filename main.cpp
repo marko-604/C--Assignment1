@@ -733,21 +733,21 @@ int main() {
     }
   
     // draw critter health above them
-      for (Critter *c : generator.critters) {
+    //  for (Critter *c : generator.critters) {
 
           // critter position
-          Vector2 pos = {
-                  static_cast<float>(c->getCol() * map->tileSize),
-                  static_cast<float>(c->getRow() * map->tileSize)
-          };
-          char healthText[10];
-          snprintf(healthText, sizeof(healthText), "%d", c->getHealth());
-          int fontSize = 30;
-          int offset = 1;
+      //    Vector2 pos = {
+       //           static_cast<float>(c->getCol() * map->tileSize),
+       //           static_cast<float>(c->getRow() * map->tileSize)
+         // };
+         // char healthText[10];
+          //snprintf(healthText, sizeof(healthText), "%d", c->getHealth());
+         // int fontSize = 30;
+         // int offset = 1;
           //  bold
-          DrawText(healthText, pos.x + map->tileSize / 4 + offset, pos.y - 20 + offset, fontSize, ORANGE);
-          DrawText(healthText, pos.x + map->tileSize / 4, pos.y - 20, fontSize, RED);  
-      }
+       //   DrawText(healthText, pos.x + map->tileSize / 4 + offset, pos.y - 20 + offset, fontSize, ORANGE);
+     //     DrawText(healthText, pos.x + map->tileSize / 4, pos.y - 20, fontSize, RED);  
+     // }
 
     // Draw the bottom panel with tower stats
     DrawTowerStatsPanel(0,                      // startX
