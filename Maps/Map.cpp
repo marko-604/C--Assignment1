@@ -4,6 +4,8 @@
 #include <queue>
 #include <utility>
 #include <vector>
+#include <fstream>  
+#include <iostream> 
 
 /**
  * @brief Constructs the map and initializes the grid and entry/exit to unset.
@@ -107,6 +109,48 @@ void Map::Draw() {
     }
   }
 }
+
+
+/**
+ * @brief Loads a map layout from a text file and updates the grid accordingly.
+*/
+bool Map::LoadFromFile(const std::string &filename) {
+  std::ifstream in(filename);
+  if (!in.is_open()) return false;
+
+  for (int i = 0; i < gridHeight; ++i) {
+      std::string line;
+      std::getline(in, line);
+
+      // Loop through each column (character) of the row.
+  for (int j = 0; j < gridWidth && j < (int)line.size(); ++j) {
+          char c = line[j];
+          switch (c) {
+              case '.': grid[i][j] = EMPTY; break;
+              case 'P': grid[i][j] = PATH; break;
+              case 'E': 
+                  grid[i][j] = ENTRY;
+                  entryRow = i;
+                  entryCol = j;
+                  break;
+              case 'X': 
+                  grid[i][j] = EXIT;
+                  exitRow = i;
+                  exitCol = j;
+                  break;
+              default:
+                  grid[i][j] = EMPTY; 
+          }
+      }
+  }
+
+  return true;
+}
+
+
+
+
+
 /**
  * @brief Places a critter on the specified tile.
  */
@@ -341,6 +385,38 @@ bool Map::RunEditor() {
   CloseWindow();
   return mapConfirmed;
 }
+
+
+/**
+ * @brief Draws a miniature visual preview of a map from a file.
+ */
+
+void DrawMiniMapPreview(const std::string &filename, int x, int y, int tileSize) {
+  std::ifstream inFile(filename);
+  if (!inFile) {
+      std::cerr << "Failed to open map file: " << filename << std::endl;
+      return;
+  }
+
+  std::string line;
+  int row = 0;
+  while (std::getline(inFile, line)) {
+      for (int col = 0; col < (int)line.length(); ++col) {
+          char ch = line[col];
+          Color color = LIGHTGRAY;
+
+          // Determine color based on character
+          if (ch == 'P') color = GREEN;   // Path
+          else if (ch == 'E') color = BLUE;  // Entry
+          else if (ch == 'X') color = RED;   // Exit
+          else if (ch == '.') color = LIGHTGRAY; // Empty
+
+          DrawRectangle(x + col * tileSize, y + row * tileSize, tileSize, tileSize, color);
+      }
+      row++;
+  }
+}
+
 /**
  * @brief Returns the path from entry to exit using BFS.
  *

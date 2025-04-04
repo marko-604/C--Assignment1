@@ -197,8 +197,11 @@ int main() {
   bool ready = false;
   bool rowActive = false, colActive = false;
   bool rowCleared = false, colCleared = false;
+  bool usingPreset = false;
+  Map *map= nullptr;
 
-  InitWindow(400, 200, "Configure Map");
+
+  InitWindow(800, 400, "Configure Map");
   SetTargetFPS(60);
 
   while (!WindowShouldClose() && !ready) {
@@ -258,30 +261,90 @@ int main() {
       key = GetCharPressed();
     }
 
-    // Start button
-    Rectangle startBtn{150, 120, 100, 40};
-    DrawRectangleRec(startBtn, GRAY);
-    DrawText("Start", 175, 128, 20, WHITE);
-    if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON) &&
-        CheckCollisionPointRec(GetMousePosition(), startBtn)) {
-      rows = std::atoi(rowText.c_str());
-      cols = std::atoi(colText.c_str());
-      if (rows > 0 && cols > 0)
-        ready = true;
-    }
-
-    EndDrawing();
+     DrawText("Choose a preset map below,", 20, 90, 18, BLACK);
+     DrawText("or press Start to create your own.", 20, 110, 18, BLACK);
+     Rectangle startBtn{150, 140, 100, 40};
+     Rectangle preset1Btn{20, 200, 100, 60};
+     Rectangle preset2Btn{150, 200, 100, 60};
+     Rectangle preset3Btn{280, 200, 100, 60};
+     
+     // Start button
+     DrawRectangleRec(startBtn, GRAY);
+     const char* buttonText = "Start";
+     int fontSize = 20;
+     int textWidth = MeasureText(buttonText, fontSize);
+     int textX = startBtn.x + (startBtn.width - textWidth) / 2;
+     int textY = startBtn.y + (startBtn.height - fontSize) / 2;
+     
+     DrawText(buttonText, textX, textY, fontSize, WHITE);     
+ 
+     // Preset 1
+     DrawRectangleRec(preset1Btn, DARKGRAY);
+     DrawMiniMapPreview("Maps/Presets/map1.txt", preset1Btn.x + 10, preset1Btn.y + 10, 14);
+ 
+     // Preset 2
+     DrawRectangleRec(preset2Btn, DARKGRAY);
+     DrawMiniMapPreview("Maps/Presets/map2.txt", preset2Btn.x + 10, preset2Btn.y + 10, 14);
+ 
+     // Preset 3
+     DrawRectangleRec(preset3Btn, DARKGRAY);
+     DrawMiniMapPreview("Maps/Presets/map3.txt", preset3Btn.x + 10, preset3Btn.y + 10, 14);
+ 
+     // Mouse click handling
+     if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON)) {
+         Vector2 mouse = GetMousePosition();
+         if (CheckCollisionPointRec(mouse, startBtn)) {
+          rows = std::atoi(rowText.c_str());
+          cols = std::atoi(colText.c_str());
+          if (rows > 0 && cols > 0) {
+              ready = true;
+              usingPreset = false; // Custom dimensions, open editor later
+          }
+      }
+      else if (CheckCollisionPointRec(mouse, preset1Btn)) {
+          rows = 5; cols = 7;
+          rowText = "5"; colText = "5";
+          ready = true;
+          usingPreset = true;
+      
+          map = new Map(cols, rows, 80);
+          map->LoadFromFile("Maps/Presets/map1.txt");
+      }
+      else if (CheckCollisionPointRec(mouse, preset2Btn)) {
+          rows = 8; cols = 8;
+          rowText = "8"; colText = "8";
+          ready = true;
+          usingPreset = true;
+      
+          map = new Map(cols, rows, 80);
+          map->LoadFromFile("Maps/Presets/map2.txt");
+      }
+      else if (CheckCollisionPointRec(mouse, preset3Btn)) {
+          rows = 6; cols = 10;
+          rowText = "10"; colText = "10";
+          ready = true;
+          usingPreset = true;
+      
+          map = new Map(cols, rows, 80);
+          map->LoadFromFile("Maps/Presets/map3.txt");
+      }
+     }
+     EndDrawing();
   }
 
-  CloseWindow();
-  Map *map = new Map(cols, rows, 80);
 
+  CloseWindow();
+  if (!map) {
+    map = new Map(cols, rows, 80);
+}
   // Create a shared messages vector for observer updates.
   std::vector<std::string> messages;
   MapObserver *m_obs = new MapObserver(&messages);
   map->Attach(m_obs);
-  bool isValidMap = map->RunEditor();
-
+  bool isValidMap = true;
+  if (!usingPreset) {
+    isValidMap = map->RunEditor(); // Allow user to draw path
+  }
   if (!isValidMap) {
     std::cout << "INVALID MAP!!" << std::endl;
     return 1;

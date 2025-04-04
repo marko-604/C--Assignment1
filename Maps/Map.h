@@ -155,6 +155,15 @@ public:
    * @return false otherwise (e.g., user exits or cancels).
    */
   bool RunEditor();
+
+/**
+ * @brief Loads a map from a text file and updates the internal grid.
+ *
+ * @param filename Path to the map text file.
+ * @return true if the file was successfully loaded, false otherwise.
+ */
+  bool LoadFromFile(const std::string &filename);
+
 };
 
 /**
@@ -163,5 +172,17 @@ public:
  * @param map Reference to a valid map.
  */
 void RunGame(Map &map);
+
+
+/**
+ * @brief Renders a miniature preview of a map from a file at a given position.
+ *
+ * @param filename Path to the map file.
+ * @param x X-coordinate to draw the preview.
+ * @param y Y-coordinate to draw the preview.
+ * @param tileSize Size of each tile in the preview.
+ */
+void DrawMiniMapPreview(const std::string &filename, int x, int y, int tileSize);
+
 
 #endif // MAP_H
