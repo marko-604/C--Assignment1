@@ -174,22 +174,22 @@ void DrawTowerStatsPanel(int startX, int startY, int width, int height,
 }
 // END ADDED
 
-static bool TextField(int x, int y, int width, int height, std::string &text) {
-  Rectangle box = {(float)x, (float)y, (float)width, (float)height};
-  DrawRectangleRec(box, LIGHTGRAY);
-  DrawText(text.c_str(), x + 4, y + 4, 20, BLACK);
+//static bool TextField(int x, int y, int width, int height, std::string &text) {
+//  Rectangle box = {(float)x, (float)y, (float)width, (float)height};
+//  DrawRectangleRec(box, LIGHTGRAY);
+//  DrawText(text.c_str(), x + 4, y + 4, 20, BLACK);
 
-  int key = GetCharPressed();
-  while (key > 0) {
-    if (key == KEY_BACKSPACE && !text.empty()) {
-      text.pop_back();
-    } else if (key >= 32 && key <= 126 && text.size() < 5) {
-      text.push_back((char)key);
-    }
-    key = GetCharPressed();
-  }
-  return false;
-}
+//  int key = GetCharPressed();
+//  while (key > 0) {
+//    if (key == KEY_BACKSPACE && !text.empty()) {
+//      text.pop_back();
+//    } else if (key >= 32 && key <= 126 && text.size() < 5) {
+//      text.push_back((char)key);
+//    }
+//    key = GetCharPressed();
+//  }
+//  return false;
+//}
 
 int main() {
   int rows = 10, cols = 10;
@@ -316,7 +316,7 @@ int main() {
   int legendStartY = hudY + hudHeight + 10;
   int legendHeight = 12 * 30;
   int observerOutputY = legendStartY + legendHeight + 20;
-  int observerPanelWidth = sidePanelWidth - 20;
+  //int observerPanelWidth = sidePanelWidth - 20;
   int availableHeightForObserver = mapHeight - observerOutputY - 10;
   int scrollOffset = 0;
   double tickInterval = 1.0; // seconds
@@ -668,29 +668,24 @@ int main() {
       int bottomRightY = tileY + map->tileSize - 25;
       DrawText(idText.c_str(), bottomRightX, bottomRightY, 20, BLACK);
     }
-    /*
-     // Loop through all critters and draw their health above them ------
-       for (Critter *c : generator.critters) {
+  
+    // draw critter health above them
+      for (Critter *c : generator.critters) {
 
-           // critter position
-           Vector2 pos = {c->getCol() * map->tileSize, c->getRow() *
-     map->tileSize};
+          // critter position
+          Vector2 pos = {
+                  static_cast<float>(c->getCol() * map->tileSize),
+                  static_cast<float>(c->getRow() * map->tileSize)
+          };
+          char healthText[10];
+          snprintf(healthText, sizeof(healthText), "%d", c->getHealth());
+          int fontSize = 30;
+          int offset = 1;
+          //  bold
+          DrawText(healthText, pos.x + map->tileSize / 4 + offset, pos.y - 20 + offset, fontSize, ORANGE);
+          DrawText(healthText, pos.x + map->tileSize / 4, pos.y - 20, fontSize, RED);  
+      }
 
-
-           char healthText[10];
-           snprintf(healthText, sizeof(healthText), "%d", c->getHealth()); //
-     Get current health as string
-
-
-           int fontSize = 30;
-           int offset = 1;
-
-           //bold by drawing the text 2 times with slight offset
-           DrawText(healthText, pos.x + map->tileSize / 4 + offset, pos.y - 20 +
-     offset, fontSize, RED); DrawText(healthText, pos.x + map->tileSize / 4,
-     pos.y - 20, fontSize, RED);
-       }
- */
     // Draw the bottom panel with tower stats
     DrawTowerStatsPanel(0,                      // startX
                         mapHeight,              // startY => below the map
